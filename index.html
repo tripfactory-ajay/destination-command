@@ -1,1 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Destination Command | TripFactory ORN</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:#0f1117;color:#fff;min-height:100vh}
+.header{background:#0f1117;border-bottom:1px solid #1e2130;padding:18px 40px;display:flex;align-items:center;gap:16px}
+.logo-badge{background:#fff;color:#0f1117;font-weight:800;font-size:13px;padding:6px 12px;border-radius:6px;letter-spacing:0.5px}
+.header-title h1{font-size:18px;font-weight:700;color:#fff}
+.header-title p{font-size:12px;color:#6b7280;margin-top:2px}
+.hero{padding:60px 40px 40px;text-align:center;max-width:900px;margin:0 auto}
+.hero-eyebrow{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#6b7280;margin-bottom:16px}
+.hero h2{font-size:42px;font-weight:800;line-height:1.15;color:#fff;margin-bottom:16px}
+.hero h2 span{background:linear-gradient(90deg,#f59e0b,#ef4444,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p{font-size:15px;color:#9ca3af;line-height:1.7;max-width:600px;margin:0 auto 32px}
+.stats-row{display:flex;justify-content:center;gap:40px;margin-bottom:60px;flex-wrap:wrap}
+.stat{text-align:center}
+.stat .n{font-size:28px;font-weight:800;color:#fff}
+.stat .l{font-size:11px;color:#6b7280;margin-top:3px;font-weight:500;text-transform:uppercase;letter-spacing:0.5px}
+.section-label{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#6b7280;text-align:center;margin-bottom:24px}
+.destinations-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:20px;padding:0 40px 60px;max-width:1300px;margin:0 auto}
+.dest-card{border-radius:16px;overflow:hidden;cursor:pointer;transition:transform 0.2s,box-shadow 0.2s;position:relative;text-decoration:none;display:block}
+.dest-card:hover{transform:translateY(-4px);box-shadow:0 20px 40px rgba(0,0,0,0.4)}
+.dest-card-bg{height:200px;position:relative;overflow:hidden}
+.dest-card-gradient{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.7) 100%)}
+.dest-card-emoji{position:absolute;top:16px;right:16px;font-size:32px}
+.dest-card-flag{position:absolute;top:16px;left:16px;font-size:24px}
+.dest-card-body{padding:20px;background:#1a1d2e;border:1px solid #2a2d3e;border-top:0}
+.dest-card-name{font-size:20px;font-weight:800;color:#fff;margin-bottom:4px}
+.dest-card-tagline{font-size:12px;color:#9ca3af;margin-bottom:14px;line-height:1.5}
+.dest-card-stats{display:flex;gap:16px;margin-bottom:14px}
+.dest-stat{text-align:center}
+.dest-stat .n{font-size:16px;font-weight:700}
+.dest-stat .l{font-size:10px;color:#6b7280;margin-top:1px}
+.dest-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px}
+.dest-tag{font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px}
+.dest-cta{display:flex;align-items:center;justify-content:space-between}
+.dest-btn{padding:9px 18px;border-radius:8px;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:700;cursor:pointer;border:none;transition:all 0.2s;display:inline-flex;align-items:center;gap:6px}
+.dest-status{font-size:11px;font-weight:600;padding:4px 10px;border-radius:20px}
 
+/* UAE card */
+.card-uae .dest-card-bg{background:linear-gradient(135deg,#cc0000,#8b0000)}
+.card-uae .dest-card-name{color:#fff}
+.card-uae .dest-stat .n{color:#ef4444}
+.card-uae .dest-tag{background:rgba(204,0,0,0.15);color:#fca5a5;border:1px solid rgba(204,0,0,0.3)}
+.card-uae .dest-btn{background:#cc0000;color:#fff}
+.card-uae .dest-btn:hover{background:#a80000}
+.card-uae .dest-status{background:rgba(204,0,0,0.15);color:#fca5a5;border:1px solid rgba(204,0,0,0.3)}
+
+/* Thailand card */
+.card-thailand .dest-card-bg{background:linear-gradient(135deg,#1a6b3f,#0f4a2b)}
+.card-thailand .dest-stat .n{color:#4ade80}
+.card-thailand .dest-tag{background:rgba(26,107,63,0.2);color:#86efac;border:1px solid rgba(26,107,63,0.4)}
+.card-thailand .dest-btn{background:#1a6b3f;color:#fff}
+.card-thailand .dest-btn:hover{background:#0f4a2b}
+.card-thailand .dest-status{background:rgba(26,107,63,0.15);color:#86efac;border:1px solid rgba(26,107,63,0.3)}
+
+/* Bali card */
+.card-bali .dest-card-bg{background:linear-gradient(135deg,#7c3aed,#5b21b6)}
+.card-bali .dest-stat .n{color:#c4b5fd}
+.card-bali .dest-tag{background:rgba(124,58,237,0.2);color:#ddd6fe;border:1px solid rgba(124,58,237,0.4)}
+.card-bali .dest-btn{background:#7c3aed;color:#fff}
+.card-bali .dest-btn:hover{background:#5b21b6}
+.card-bali .dest-status{background:rgba(124,58,237,0.15);color:#ddd6fe;border:1px solid rgba(124,58,237,0.3)}
+
+/* Coming soon card */
+.card-coming .dest-card-bg{background:linear-gradient(135deg,#1e2130,#2a2d3e)}
+.card-coming .dest-stat .n{color:#6b7280}
+.card-coming .dest-tag{background:rgba(255,255,255,0.05);color:#6b7280;border:1px solid rgba(255,255,255,0.1)}
+.card-coming .dest-btn{background:#2a2d3e;color:#6b7280;cursor:default}
+.card-coming .dest-status{background:rgba(255,255,255,0.05);color:#6b7280;border:1px solid rgba(255,255,255,0.1)}
+.card-coming .dest-card-name{color:#6b7280}
+.card-coming .dest-card-tagline{color:#4b5563}
+
+.coming-badge{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:8px 16px;font-size:12px;font-weight:700;color:#6b7280;white-space:nowrap;backdrop-filter:blur(4px)}
+
+.footer{border-top:1px solid #1e2130;padding:24px 40px;text-align:center}
+.footer p{font-size:12px;color:#4b5563}
+@media(max-width:600px){
+  .hero{padding:40px 20px 30px}
+  .hero h2{font-size:28px}
+  .destinations-grid{padding:0 20px 40px;grid-template-columns:1fr}
+  .header{padding:14px 20px}
+  .stats-row{gap:24px}
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <span class="logo-badge">ORN</span>
+  <div class="header-title">
+    <h1>Destination Command</h1>
+    <p>TripFactory Product Team · Hotel Contracting Intelligence · Internal Use Only</p>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="hero-eyebrow">Hotel Contracting Intelligence Platform</div>
+  <h2>Contract smarter.<br><span>Close faster.</span></h2>
+  <p>Real-time hotel data, crisis rates, contact logs, flight intelligence, and action plans — one platform for every destination TripFactory targets.</p>
+  <div class="stats-row">
+    <div class="stat"><div class="n">122+</div><div class="l">Target Hotels</div></div>
+    <div class="stat"><div class="n">3</div><div class="l">Active Markets</div></div>
+    <div class="stat"><div class="n">55–65%</div><div class="l">Average Rate Saving</div></div>
+    <div class="stat"><div class="n">8,000+</div><div class="l">ORN Agent Network</div></div>
+  </div>
+</div>
+
+<div style="max-width:1300px;margin:0 auto;padding:0 40px 16px">
+  <div class="section-label">Active Destinations</div>
+</div>
+
+<div class="destinations-grid">
+
+  <!-- UAE -->
+  <a href="uae.html" class="dest-card card-uae">
+    <div class="dest-card-bg">
+      <div class="dest-card-gradient"></div>
+      <div class="dest-card-flag">🇦🇪</div>
+      <div class="dest-card-emoji">🏙️</div>
+    </div>
+    <div class="dest-card-body">
+      <div class="dest-card-name">UAE — Dubai & Abu Dhabi</div>
+      <div class="dest-card-tagline">Crisis market opportunity. Hotel occupancy at multi-year lows. Deep discounts available now for Indian operators who move fast.</div>
+      <div class="dest-card-stats">
+        <div class="dest-stat"><div class="n" style="color:#ef4444">60</div><div class="l">Target Hotels</div></div>
+        <div class="dest-stat"><div class="n" style="color:#ef4444">55–62%</div><div class="l">Rate Saving</div></div>
+        <div class="dest-stat"><div class="n" style="color:#ef4444">2</div><div class="l">Cities</div></div>
+      </div>
+      <div class="dest-tags">
+        <span class="dest-tag">Crisis Market</span>
+        <span class="dest-tag">MICE</span>
+        <span class="dest-tag">Luxury FIT</span>
+        <span class="dest-tag">Groups</span>
+      </div>
+      <div class="dest-cta">
+        <button class="dest-btn">Open Playbook →</button>
+        <span class="dest-status">🔴 Act Now</span>
+      </div>
+    </div>
+  </a>
+
+  <!-- Thailand -->
+  <a href="thailand.html" class="dest-card card-thailand">
+    <div class="dest-card-bg">
+      <div class="dest-card-gradient"></div>
+      <div class="dest-card-flag">🇹🇭</div>
+      <div class="dest-card-emoji">🏖️</div>
+    </div>
+    <div class="dest-card-body">
+      <div class="dest-card-name">Thailand — 4 Destinations</div>
+      <div class="dest-card-tagline">Visa-free since Nov 2024. +40% Indian arrivals. 2.3M visitors projected. Bangkok, Phuket, Krabi, Koh Samui.</div>
+      <div class="dest-card-stats">
+        <div class="dest-stat"><div class="n" style="color:#4ade80">52</div><div class="l">Target Hotels</div></div>
+        <div class="dest-stat"><div class="n" style="color:#4ade80">49–62%</div><div class="l">Rate Saving</div></div>
+        <div class="dest-stat"><div class="n" style="color:#4ade80">4</div><div class="l">Cities</div></div>
+      </div>
+      <div class="dest-tags">
+        <span class="dest-tag">Opportunity Market</span>
+        <span class="dest-tag">Honeymoon</span>
+        <span class="dest-tag">Visa-Free</span>
+        <span class="dest-tag">MICE</span>
+      </div>
+      <div class="dest-cta">
+        <button class="dest-btn">Open Playbook →</button>
+        <span class="dest-status">🟢 High Priority</span>
+      </div>
+    </div>
+  </a>
+
+  <!-- Bali -->
+  <a href="bali.html" class="dest-card card-bali">
+    <div class="dest-card-bg">
+      <div class="dest-card-gradient"></div>
+      <div class="dest-card-flag">🇮🇩</div>
+      <div class="dest-card-emoji">🌿</div>
+    </div>
+    <div class="dest-card-body">
+      <div class="dest-card-name">Bali — 4 Areas</div>
+      <div class="dest-card-tagline">India's #1 long-haul honeymoon destination. Direct flights from Mumbai, Delhi, Bengaluru. Rupiah at historic low.</div>
+      <div class="dest-card-stats">
+        <div class="dest-stat"><div class="n" style="color:#c4b5fd">35</div><div class="l">Target Hotels</div></div>
+        <div class="dest-stat"><div class="n" style="color:#c4b5fd">50–63%</div><div class="l">Rate Saving</div></div>
+        <div class="dest-stat"><div class="n" style="color:#c4b5fd">4</div><div class="l">Areas</div></div>
+      </div>
+      <div class="dest-tags">
+        <span class="dest-tag">Honeymoon #1</span>
+        <span class="dest-tag">Luxury Villas</span>
+        <span class="dest-tag">Wellness</span>
+        <span class="dest-tag">Direct Flights</span>
+      </div>
+      <div class="dest-cta">
+        <button class="dest-btn">Open Playbook →</button>
+        <span class="dest-status">💜 High Priority</span>
+      </div>
+    </div>
+  </a>
+
+  <!-- Maldives (Coming Soon) -->
+  <div class="dest-card card-coming" style="cursor:default">
+    <div class="dest-card-bg">
+      <div class="dest-card-gradient"></div>
+      <div class="dest-card-flag" style="opacity:0.3">🇲🇻</div>
+      <div class="dest-card-emoji" style="opacity:0.3">🐠</div>
+      <div class="coming-badge">Coming Soon</div>
+    </div>
+    <div class="dest-card-body">
+      <div class="dest-card-name">Maldives</div>
+      <div class="dest-card-tagline">Water villas, overwater bungalows, Indian luxury honeymoon market. Next destination in pipeline.</div>
+      <div class="dest-card-stats">
+        <div class="dest-stat"><div class="n">~25</div><div class="l">Target Resorts</div></div>
+        <div class="dest-stat"><div class="n">Q3 2026</div><div class="l">Target Launch</div></div>
+      </div>
+      <div class="dest-tags">
+        <span class="dest-tag">Honeymoon</span>
+        <span class="dest-tag">Ultra-Luxury</span>
+        <span class="dest-tag">Water Villas</span>
+      </div>
+      <div class="dest-cta">
+        <button class="dest-btn">In Pipeline</button>
+        <span class="dest-status">⏳ Coming Soon</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Vietnam (Coming Soon) -->
+  <div class="dest-card card-coming" style="cursor:default">
+    <div class="dest-card-bg">
+      <div class="dest-card-gradient"></div>
+      <div class="dest-card-flag" style="opacity:0.3">🇻🇳</div>
+      <div class="dest-card-emoji" style="opacity:0.3">🏮</div>
+      <div class="coming-badge">Coming Soon</div>
+    </div>
+    <div class="dest-card-body">
+      <div class="dest-card-name">Vietnam</div>
+      <div class="dest-card-tagline">Ha Long Bay, Da Nang, Hoi An. Emerging Indian market with strong e-visa access and competitive pricing.</div>
+      <div class="dest-card-stats">
+        <div class="dest-stat"><div class="n">~30</div><div class="l">Target Hotels</div></div>
+        <div class="dest-stat"><div class="n">Q4 2026</div><div class="l">Target Launch</div></div>
+      </div>
+      <div class="dest-tags">
+        <span class="dest-tag">Emerging Market</span>
+        <span class="dest-tag">Heritage</span>
+        <span class="dest-tag">Beach</span>
+      </div>
+      <div class="dest-cta">
+        <button class="dest-btn">In Pipeline</button>
+        <span class="dest-status">⏳ Coming Soon</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Europe (Coming Soon) -->
+  <div class="dest-card card-coming" style="cursor:default">
+    <div class="dest-card-bg">
+      <div class="dest-card-gradient"></div>
+      <div class="dest-card-flag" style="opacity:0.3">🇪🇺</div>
+      <div class="dest-card-emoji" style="opacity:0.3">🗼</div>
+      <div class="coming-badge">Coming Soon</div>
+    </div>
+    <div class="dest-card-body">
+      <div class="dest-card-name">Europe Multi-City</div>
+      <div class="dest-card-tagline">Paris, London, Amsterdam, Switzerland. Premium Indian FIT and group travel with high-margin packages.</div>
+      <div class="dest-card-stats">
+        <div class="dest-stat"><div class="n">~40</div><div class="l">Target Hotels</div></div>
+        <div class="dest-stat"><div class="n">Q1 2027</div><div class="l">Target Launch</div></div>
+      </div>
+      <div class="dest-tags">
+        <span class="dest-tag">Premium FIT</span>
+        <span class="dest-tag">Groups</span>
+        <span class="dest-tag">Multi-City</span>
+      </div>
+      <div class="dest-cta">
+        <button class="dest-btn">In Pipeline</button>
+        <span class="dest-status">⏳ Coming Soon</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer class="footer">
+  <p>TripFactory / ORN Product Team · Destination Command · Internal Use Only · April 2026</p>
+</footer>
+
+</body>
+</html>

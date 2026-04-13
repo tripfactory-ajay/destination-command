@@ -1,1 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UAE Hotel Contracting Intelligence | TripFactory ORN</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:#fdf5f5;color:#1a1a1a;font-size:14px;line-height:1.5}
+.site-header{position:sticky;top:0;z-index:100;background:#fff;border-bottom:2px solid #cc0000;box-shadow:0 2px 8px rgba(0,0,0,0.08)}
+.header-inner{max-width:1400px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.logo-badge{background:#cc0000;color:#fff;font-weight:800;font-size:13px;padding:6px 12px;border-radius:6px;letter-spacing:0.5px}
+.header-title{flex:1;min-width:200px}
+.header-title h1{font-size:16px;font-weight:700;color:#1a1a1a;line-height:1.2}
+.header-title p{font-size:12px;color:#6b7280}
+.header-meta{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.dest-dropdown{padding:6px 10px;border:1.5px solid #cc0000;border-radius:6px;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:600;color:#cc0000;background:#fff;cursor:pointer;outline:none}
+.status-pill{background:#fef2f2;color:#cc0000;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;border:1px solid #fca5a5}
+.urgency-pill{background:#fef3cd;color:#92400e;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;border:1px solid #f59e0b}
+.tab-nav{background:#fff;border-bottom:1px solid #e5e7eb;position:sticky;top:69px;z-index:99}
+.tab-nav-inner{max-width:1400px;margin:0 auto;padding:0 20px;display:flex;overflow-x:auto;scrollbar-width:none;gap:2px}
+.tab-nav-inner::-webkit-scrollbar{display:none}
+.tab-btn{padding:12px 18px;border:none;background:none;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:600;color:#6b7280;cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap;transition:all 0.2s}
+.tab-btn:hover{color:#cc0000;background:#fdf5f5}
+.tab-btn.active{color:#cc0000;border-bottom-color:#cc0000}
+.main{max-width:1400px;margin:0 auto;padding:24px 20px}
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+.card{background:#fff;border-radius:10px;padding:20px;margin-bottom:16px;border:1px solid #e5e7eb;box-shadow:0 1px 3px rgba(0,0,0,0.06)}
+.card-header{display:flex;align-items:flex-start;gap:12px;margin-bottom:16px}
+.card-icon{font-size:24px;line-height:1}
+.card-title{font-size:16px;font-weight:700;color:#1a1a1a}
+.card-subtitle{font-size:12px;color:#6b7280;margin-top:2px}
+.alert{padding:14px 16px;border-radius:8px;margin-bottom:16px;border-left:4px solid}
+.alert-red{background:#fef2f2;border-color:#cc0000;color:#7f1d1d}
+.alert-warning{background:#fffbeb;border-color:#f59e0b;color:#78350f}
+.alert-info{background:#eff6ff;border-color:#3b82f6;color:#1e3a8a}
+.alert-success{background:#f0fdf4;border-color:#16a34a;color:#14532d}
+.alert strong{font-weight:700}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:20px}
+.stat-card{background:#fff;border:1px solid #e5e7eb;border-radius:8px;padding:16px;text-align:center}
+.stat-card .num{font-size:26px;font-weight:800;color:#cc0000;line-height:1}
+.stat-card .lbl{font-size:11px;color:#6b7280;margin-top:4px;font-weight:500}
+.stat-card .sub{font-size:10px;color:#9ca3af;margin-top:2px}
+.table-controls{display:flex;gap:10px;margin-bottom:12px;flex-wrap:wrap;align-items:center}
+.search-input{padding:8px 12px;border:1.5px solid #e5e7eb;border-radius:6px;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;flex:1;min-width:180px;outline:none}
+.search-input:focus{border-color:#cc0000;box-shadow:0 0 0 2px rgba(204,0,0,0.12)}
+.filter-select{padding:8px 10px;border:1.5px solid #e5e7eb;border-radius:6px;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;background:#fff;outline:none;cursor:pointer}
+.filter-select:focus{border-color:#cc0000}
+.table-wrap{overflow-x:auto;border-radius:8px;border:1px solid #e5e7eb}
+table{width:100%;border-collapse:collapse;background:#fff}
+thead th{background:#fdf5f5;padding:10px 12px;text-align:left;font-size:11px;font-weight:700;color:#374151;text-transform:uppercase;letter-spacing:0.5px;border-bottom:2px solid #e5e7eb;white-space:nowrap}
+tbody td{padding:10px 12px;border-bottom:1px solid #f3f4f6;font-size:13px;vertical-align:top}
+tbody tr:hover{background:#fdf5f5}
+tbody tr:last-child td{border-bottom:none}
+.badge{display:inline-block;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:700;white-space:nowrap}
+.badge-red{background:#fee2e2;color:#991b1b}
+.badge-green{background:#dcfce7;color:#166534}
+.badge-yellow{background:#fef9c3;color:#854d0e}
+.badge-blue{background:#dbeafe;color:#1e40af}
+.badge-gray{background:#f3f4f6;color:#374151}
+.badge-orange{background:#ffedd5;color:#9a3412}
+.tier1{background:#fef3c7;color:#92400e;border:1px solid #f59e0b}
+.tier2{background:#fee2e2;color:#991b1b;border:1px solid #fca5a5}
+.tier3{background:#f0fdf4;color:#166534;border:1px solid #4ade80}
+.modal-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:1000;align-items:center;justify-content:center}
+.modal-overlay.open{display:flex}
+.modal{background:#fff;border-radius:12px;padding:24px;width:90%;max-width:500px;max-height:90vh;overflow-y:auto}
+.modal-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px}
+.modal-title{font-size:16px;font-weight:700}
+.modal-close{background:none;border:none;font-size:20px;cursor:pointer;color:#6b7280;line-height:1;padding:0}
+.form-group{margin-bottom:14px}
+.form-label{display:block;font-size:12px;font-weight:600;color:#374151;margin-bottom:5px}
+.form-control{width:100%;padding:9px 12px;border:1.5px solid #e5e7eb;border-radius:6px;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;outline:none}
+.form-control:focus{border-color:#cc0000;box-shadow:0 0 0 2px rgba(204,0,0,0.12)}
+.btn{padding:9px 18px;border-radius:6px;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;border:none;transition:all 0.2s}
+.btn-primary{background:#cc0000;color:#fff}
+.btn-primary:hover{background:#a80000}
+.btn-outline{background:#fff;color:#cc0000;border:1.5px solid #cc0000}
+.btn-outline:hover{background:#fef2f2}
+.btn-sm{padding:5px 12px;font-size:12px}
+.log-entry{background:#fdf5f5;border-radius:6px;padding:10px 12px;margin-top:8px;border-left:3px solid #cc0000}
+.log-entry .log-date{font-size:11px;color:#6b7280;font-weight:600}
+.log-entry .log-text{font-size:12px;color:#374151;margin-top:3px}
+.crisis-banner{background:linear-gradient(135deg,#cc0000,#991b1b);color:#fff;border-radius:12px;padding:24px;margin-bottom:24px}
+.crisis-banner h2{font-size:20px;font-weight:800;margin-bottom:8px}
+.crisis-banner p{font-size:13px;opacity:0.9;line-height:1.6}
+.crisis-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:12px;margin-top:16px}
+.crisis-stat{text-align:center;background:rgba(255,255,255,0.15);border-radius:8px;padding:12px}
+.crisis-stat .n{font-size:22px;font-weight:800}
+.crisis-stat .l{font-size:11px;opacity:0.85;margin-top:2px}
+.offers-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.offer-card{background:#fff;border-radius:10px;border:1px solid #e5e7eb;overflow:hidden;transition:box-shadow 0.2s}
+.offer-card:hover{box-shadow:0 4px 16px rgba(204,0,0,0.12)}
+.offer-header{background:#cc0000;color:#fff;padding:14px 16px}
+.offer-hotel{font-size:14px;font-weight:700}
+.offer-dest{font-size:11px;opacity:0.8;margin-top:2px}
+.offer-body{padding:14px 16px}
+.offer-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.offer-label{font-size:11px;color:#6b7280;font-weight:600}
+.offer-value{font-size:13px;font-weight:600;color:#1a1a1a}
+.offer-rate{font-size:20px;font-weight:800;color:#cc0000}
+.offer-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:10px}
+.chain-card{background:#fff;border-radius:10px;border:1px solid #e5e7eb;padding:18px;margin-bottom:14px}
+.chain-name{font-size:15px;font-weight:700;color:#1a1a1a;margin-bottom:4px}
+.chain-properties{font-size:12px;color:#6b7280;margin-bottom:10px}
+.chain-strategy{font-size:13px;color:#374151;line-height:1.6;margin-bottom:10px}
+.contact-template{background:#fdf5f5;border-radius:6px;padding:12px;border-left:3px solid #cc0000;font-size:12px;color:#374151;line-height:1.7;white-space:pre-wrap;font-family:'Plus Jakarta Sans',sans-serif}
+.copy-btn{margin-top:8px;padding:5px 12px;background:#fef2f2;color:#cc0000;border:1px solid #fca5a5;border-radius:4px;font-size:11px;font-weight:600;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif}
+.copy-btn:hover{background:#fee2e2}
+.timeline{position:relative;padding-left:28px}
+.timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:#fecaca}
+.timeline-item{position:relative;margin-bottom:20px}
+.timeline-item::before{content:'';position:absolute;left:-24px;top:4px;width:12px;height:12px;border-radius:50%;background:#cc0000;border:2px solid #fff;box-shadow:0 0 0 2px #cc0000}
+.timeline-item.future::before{background:#fff;border-color:#cc0000}
+.timeline-item .period{font-size:11px;font-weight:700;color:#cc0000;text-transform:uppercase;letter-spacing:0.5px}
+.timeline-item .action{font-size:13px;color:#1a1a1a;margin-top:2px;font-weight:500}
+.timeline-item .detail{font-size:12px;color:#6b7280;margin-top:3px}
+.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+@media(max-width:600px){.stats-grid{grid-template-columns:repeat(2,1fr)}.main{padding:16px 12px}}
+</style>
+</head>
+<body>
 
+<header class="site-header">
+  <div class="header-inner">
+    <span class="logo-badge">ORN</span>
+    <div class="header-title">
+      <h1>🇦🇪 UAE Hotel Contracting Intelligence</h1>
+      <p>TripFactory Product Team · Internal Use Only · Updated April 2026</p>
+    </div>
+    <div class="header-meta">
+      <select class="dest-dropdown" onchange="navigateDest(this.value)">
+        <option value="">🌍 Switch Destination</option>
+        <option value="index.html">🏠 Command Hub</option>
+        <option value="" selected>🇦🇪 UAE (Current)</option>
+        <option value="thailand.html">🇹🇭 Thailand</option>
+        <option value="bali.html">🇮🇩 Bali</option>
+      </select>
+      <span class="status-pill">🔴 Crisis Market</span>
+      <span class="urgency-pill">⚡ Act Now</span>
+    </div>
+  </div>
+</header>
+
+<nav class="tab-nav">
+  <div class="tab-nav-inner">
+    <button class="tab-btn active" onclick="showTab('briefing',this)">📋 Briefing</button>
+    <button class="tab-btn" onclick="showTab('hotels',this)">🏨 Hotels (60)</button>
+    <button class="tab-btn" onclick="showTab('flights',this)">✈️ Flights</button>
+    <button class="tab-btn" onclick="showTab('offers',this)">💰 Live Offers</button>
+    <button class="tab-btn" onclick="showTab('groups',this)">🏢 Hotel Groups</button>
+    <button class="tab-btn" onclick="showTab('action',this)">📅 Action Plan</button>
+  </div>
+</nav>
+
+<main class="main">
+
+<!-- TAB: BRIEFING -->
+<div id="tab-briefing" class="tab-panel active">
+  <div class="crisis-banner">
+    <h2>🇦🇪 UAE: Crisis = Opportunity for Indian Operators</h2>
+    <p>UAE hotel occupancy is at multi-year lows due to regional geopolitical uncertainty, reduced European/Russian travel, and post-Expo hangover. Dubai and Abu Dhabi hotels are actively discounting 55–65% off rack rates to fill rooms with Indian FIT and MICE business. This is the best UAE contracting window in 10 years — but only for operators who move in the next 90 days.</p>
+    <div class="crisis-stats">
+      <div class="crisis-stat"><div class="n">55–65%</div><div class="l">Off rack rates</div></div>
+      <div class="crisis-stat"><div class="n">60</div><div class="l">Target hotels</div></div>
+      <div class="crisis-stat"><div class="n">Multi-year</div><div class="l">Occupancy lows</div></div>
+      <div class="crisis-stat"><div class="n">90 days</div><div class="l">Contracting window</div></div>
+      <div class="crisis-stat"><div class="n">2</div><div class="l">Emirates: DXB + AUH</div></div>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div>
+      <div class="card">
+        <div class="card-header"><span class="card-icon">🚨</span><div><div class="card-title">The Crisis Context</div><div class="card-subtitle">Why UAE hotels are desperate for Indian volume right now</div></div></div>
+        <div class="alert alert-red"><strong>Occupancy crisis:</strong> Dubai hotels are running at 58–65% occupancy, down from 80%+ in 2022–23. Revenue per room has dropped 25–30% year-on-year. GMs have budget to discount heavily.</div>
+        <div class="alert alert-warning" style="margin-bottom:10px"><strong>European/Russian gap:</strong> Traditional UAE source markets (Russia, UK, Germany) have dropped sharply. Hotels are actively reorienting to Indian sub-continent which is their fastest-growing segment.</div>
+        <div class="alert alert-info"><strong>Indian MICE boom:</strong> Corporate India is choosing Dubai over Singapore and Bangkok for incentive trips due to direct flights, Expo legacy venues, and no visa friction. First-mover operators capture preferred allotment.</div>
+      </div>
+      <div class="card">
+        <div class="card-header"><span class="card-icon">📋</span><div><div class="card-title">Must-Have Contract Terms</div><div class="card-subtitle">Non-negotiables for every UAE hotel contract</div></div></div>
+        <ul style="padding-left:18px;line-height:2.1;font-size:13px;color:#374151">
+          <li><strong>Net rates</strong> — minimum 25% margin FIT, 30% MICE/groups</li>
+          <li><strong>No-deposit allotment</strong> — 5 rooms min for peak dates (Nov–Mar)</li>
+          <li><strong>Free cancellation</strong> — 7 days FIT, 14 days groups</li>
+          <li><strong>Indian meal plan</strong> — buffet with Indian section or à la carte</li>
+          <li><strong>Halal food</strong> — already standard; confirm Indian vegetarian options</li>
+          <li><strong>Early check-in / late check-out</strong> complimentary for ORN bookings</li>
+          <li><strong>Hindi-speaking</strong> front desk or dedicated ORN contact</li>
+          <li><strong>Group rates</strong> — 1 FOC per 15 paying pax minimum</li>
+          <li><strong>MICE rates</strong> — include AV, coffee breaks, group transfer</li>
+          <li><strong>Overriding commission</strong> — 3% quarterly above 100 room-nights</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="card">
+        <div class="card-header"><span class="card-icon">✨</span><div><div class="card-title">Value-Adds to Demand</div><div class="card-subtitle">What to ask for in every UAE negotiation</div></div></div>
+        <ul style="padding-left:18px;line-height:2.1;font-size:13px;color:#374151">
+          <li>🌆 Burj Khalifa view room upgrade at net rate for ORN packages</li>
+          <li>🚌 Airport transfer included (Dubai Airport is 15 mins — low cost for hotel)</li>
+          <li>🍽️ Daily breakfast included in net rate (standard ask, usually granted)</li>
+          <li>🏊 Beach/pool access for non-beach hotels (partner hotel arrangements)</li>
+          <li>🛁 Honeymoon setup — rose petals, amenity, Burj view at no extra cost</li>
+          <li>🎡 Dubai Attractions voucher — Frame, Museum of Future, Ain Dubai</li>
+          <li>🛍️ Mall of Emirates voucher (AED 100+) for luxury packages</li>
+          <li>💼 MICE: dedicated Indian coordinator, Halal + Indian menu for gala dinner</li>
+          <li>🌙 Desert safari inclusion for group packages (cost ~AED 150/pax)</li>
+          <li>📸 Photographer for MICE awards/gala nights at hotel rate</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-header"><span class="card-icon">📊</span><div><div class="card-title">Key Traveller Segments</div><div class="card-subtitle">Indian traveller profiles for UAE</div></div></div>
+        <div style="display:grid;gap:8px">
+          <div style="background:#fdf5f5;border-radius:8px;padding:12px;border-left:3px solid #cc0000"><div style="font-weight:700;font-size:13px;color:#cc0000">🏢 MICE/Corporate Groups (20–200 pax)</div><div style="font-size:12px;color:#374151;margin-top:3px">Dubai: incentive trips, conferences, gala dinners. Budget $150–300/night. Need venues, F&B, transfers. Book 3–6 months ahead.</div></div>
+          <div style="background:#fffbeb;border-radius:8px;padding:12px;border-left:3px solid #f59e0b"><div style="font-weight:700;font-size:13px;color:#92400e">👨‍👩‍👧 Family Holidays (4–8 pax)</div><div style="font-size:12px;color:#374151;margin-top:3px">Theme parks (IMG Worlds, Legoland), malls, beach. Budget ₹80K–1.5L/person. Need connecting rooms, Indian food, kid activities.</div></div>
+          <div style="background:#eff6ff;border-radius:8px;padding:12px;border-left:3px solid #3b82f6"><div style="font-weight:700;font-size:13px;color:#1e40af">💍 Luxury Honeymoon Couples</div><div style="font-size:12px;color:#374151;margin-top:3px">Burj Al Arab, Atlantis, Armani. Budget ₹2–5L. Seek Burj views, beach, fine dining, desert romance. Pre-book 2–3 months ahead.</div></div>
+          <div style="background:#f0fdf4;border-radius:8px;padding:12px;border-left:3px solid #16a34a"><div style="font-weight:700;font-size:13px;color:#14532d">🛍️ Shopping + Leisure FIT</div><div style="font-size:12px;color:#374151;margin-top:3px">Mid-market couples and friends. Budget ₹50–80K. Dubai Mall, Gold Souk, desert safari, Dhow cruise. Short stays (3–4 nights).</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TAB: HOTELS -->
+<div id="tab-hotels" class="tab-panel">
+  <div class="stats-grid">
+    <div class="stat-card"><div class="num">60</div><div class="lbl">Target Hotels</div><div class="sub">2 emirates</div></div>
+    <div class="stat-card"><div class="num">38</div><div class="lbl">Dubai</div><div class="sub">MICE + leisure</div></div>
+    <div class="stat-card"><div class="num">22</div><div class="lbl">Abu Dhabi</div><div class="sub">Luxury + F1</div></div>
+    <div class="stat-card"><div class="num">55–65%</div><div class="lbl">Avg Rate Saving</div><div class="sub">vs rack rate</div></div>
+    <div class="stat-card"><div class="num" id="contracted-count">0</div><div class="lbl">Contracted</div><div class="sub" style="color:#dc2626">Start now!</div></div>
+  </div>
+  <div class="card" style="padding:16px">
+    <div class="table-controls">
+      <input type="text" class="search-input" id="hotel-search" placeholder="🔍 Search hotel name..." oninput="filterHotels()">
+      <select class="filter-select" id="filter-dest" onchange="filterHotels()">
+        <option value="">All Emirates</option>
+        <option value="Dubai">Dubai</option>
+        <option value="Abu Dhabi">Abu Dhabi</option>
+      </select>
+      <select class="filter-select" id="filter-tier" onchange="filterHotels()">
+        <option value="">All Tiers</option>
+        <option value="Tier 1">Tier 1 (Luxury)</option>
+        <option value="Tier 2">Tier 2 (Upscale)</option>
+        <option value="Tier 3">Tier 3 (Mid)</option>
+      </select>
+      <select class="filter-select" id="filter-status" onchange="filterHotels()">
+        <option value="">All Status</option>
+        <option value="Not Started">Not Started</option>
+        <option value="In Progress">In Progress</option>
+        <option value="Contracted">Contracted</option>
+      </select>
+      <span id="hotel-count" style="font-size:12px;color:#6b7280;white-space:nowrap">Showing 60 hotels</span>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Hotel Name</th><th>Emirate</th><th>Area</th><th>Tier</th><th>Stars</th><th>Crisis Rate</th><th>Normal Rate</th><th>Saving</th><th>Indian Meals</th><th>Status</th><th>Action</th></tr></thead>
+        <tbody id="hotel-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- TAB: FLIGHTS -->
+<div id="tab-flights" class="tab-panel">
+  <div class="alert alert-success"><strong>✈️ Exceptional connectivity:</strong> UAE has the best India flight connectivity of any international destination. 15+ Indian cities have direct flights to Dubai (DXB) or Abu Dhabi (AUH). IndiGo, Air India, Emirates, and flydubai together operate 50+ weekly frequencies.</div>
+  <div class="stats-grid">
+    <div class="stat-card"><div class="num">15+</div><div class="lbl">Indian Cities</div><div class="sub">Direct to UAE</div></div>
+    <div class="stat-card"><div class="num">50+</div><div class="lbl">Weekly Flights</div><div class="sub">India–UAE</div></div>
+    <div class="stat-card"><div class="num">~3h</div><div class="lbl">Flight Time</div><div class="sub">Mumbai/Delhi to DXB</div></div>
+    <div class="stat-card"><div class="num">₹7,000</div><div class="lbl">From Fare (OW)</div><div class="sub">Low-season flydubai</div></div>
+  </div>
+  <div class="card" style="margin-top:16px">
+    <div class="table-controls">
+      <input type="text" class="search-input" id="flight-search" placeholder="🔍 Search city or airline..." oninput="filterFlights()">
+      <select class="filter-select" id="filter-airline" onchange="filterFlights()">
+        <option value="">All Airlines</option>
+        <option value="IndiGo">IndiGo</option>
+        <option value="Air India">Air India</option>
+        <option value="Emirates">Emirates</option>
+        <option value="flydubai">flydubai</option>
+        <option value="Air Arabia">Air Arabia</option>
+        <option value="Etihad">Etihad</option>
+      </select>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Indian City</th><th>Destination</th><th>Airlines</th><th>Frequency</th><th>Avg Fare (OW)</th><th>Flight Time</th><th>Status</th><th>Notes</th></tr></thead>
+        <tbody id="flight-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+  <div class="grid-2" style="margin-top:16px">
+    <div class="alert alert-info"><strong>MICE packages</strong> — Emirates Business Class upgrades for group leaders (10+ pax) are negotiable directly with Emirates GSO India. Ask for group fares — typically 10–15% below published fare for 10+ seats booked together.</div>
+    <div class="alert alert-warning"><strong>Peak season flights</strong> (Nov–Mar) sell out 60–90 days ahead. Pre-block seats with IndiGo/Air India group desk for Diwali, Christmas, and New Year packages as soon as hotel contracts are signed.</div>
+  </div>
+</div>
+
+<!-- TAB: OFFERS -->
+<div id="tab-offers" class="tab-panel">
+  <div class="alert alert-red"><strong>🚨 Crisis rates — strictly time-limited.</strong> These discounts exist because of the occupancy crisis. Hotels will pull these rates as soon as occupancy recovers. Valid Apr–Sep 2026 (shoulder season window).</div>
+  <div class="table-controls">
+    <input type="text" class="search-input" id="offer-search" placeholder="🔍 Search offers..." oninput="filterOffers()">
+    <select class="filter-select" id="filter-offer-dest" onchange="filterOffers()">
+      <option value="">All Emirates</option>
+      <option value="Dubai">Dubai</option>
+      <option value="Abu Dhabi">Abu Dhabi</option>
+    </select>
+    <select class="filter-select" id="filter-offer-type" onchange="filterOffers()">
+      <option value="">All Types</option>
+      <option value="MICE">MICE</option>
+      <option value="FIT">FIT</option>
+      <option value="Group">Group</option>
+      <option value="Honeymoon">Honeymoon</option>
+    </select>
+  </div>
+  <div class="offers-grid" id="offers-grid" style="margin-top:16px"></div>
+</div>
+
+<!-- TAB: HOTEL GROUPS -->
+<div id="tab-groups" class="tab-panel">
+  <div class="alert alert-info"><strong>Strategy:</strong> UAE is dominated by 5 major chains controlling 70% of 5-star inventory. One regional director relationship unlocks 8–20 properties simultaneously. Always start with the chain, not the property.</div>
+  <div id="groups-container"></div>
+</div>
+
+<!-- TAB: ACTION PLAN -->
+<div id="tab-action" class="tab-panel">
+  <div class="crisis-banner" style="margin-bottom:24px">
+    <h2>📅 18-Month UAE Contracting Roadmap</h2>
+    <p>The crisis window is now. UAE hotels need Indian volume urgently — this gives ORN unusual pricing power. Move in the next 90 days to lock in crisis rates before the market recovers.</p>
+  </div>
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title" style="margin-bottom:16px;font-size:15px">🚀 Phase 1: Crisis Window (Now → Jul 2026)</div>
+      <div class="timeline">
+        <div class="timeline-item"><div class="period">Week 1–2 · April 2026</div><div class="action">Outreach to all 5 major chains simultaneously</div><div class="detail">Marriott, Accor, IHG, Hilton, Jumeirah. One call per chain unlocks 10–20 UAE properties. Target: 5 chain calls in week 1.</div></div>
+        <div class="timeline-item"><div class="period">Week 3–4 · April 2026</div><div class="action">Dubai Tier 1 priority — iconic MICE properties</div><div class="detail">Burj Al Arab, Atlantis The Palm, Armani Hotel, Address Downtown, Four Seasons DIFC. These are the anchor hotels for MICE and luxury FIT.</div></div>
+        <div class="timeline-item"><div class="period">Week 5–6 · May 2026</div><div class="action">Dubai Tier 2 blitz — JBR and Downtown (15 hotels)</div><div class="detail">Marriott JBR, Hilton Dubai JBR, Sofitel Downtown, Pullman DT, Crowne Plaza Festival City. High-volume mid-market hotels.</div></div>
+        <div class="timeline-item"><div class="period">Week 7–8 · May 2026</div><div class="action">Abu Dhabi contracting — Yas Island + Corniche</div><div class="detail">Emirates Palace, St Regis Saadiyat, W Abu Dhabi Yas, Ferrari World partner hotels. Abu Dhabi MICE is underserved vs Dubai.</div></div>
+        <div class="timeline-item future"><div class="period">June–July 2026</div><div class="action">Rate-load, package build, agent activation</div><div class="detail">Load contracted rates into system. Build 10 UAE packages (Dubai city break, Abu Dhabi F1 package, desert romance, MICE boilerplate). Train 100 ORN agents.</div></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title" style="margin-bottom:16px;font-size:15px">📈 Phase 2: Peak Season + Scale (Aug 2026 → Sep 2027)</div>
+      <div class="timeline">
+        <div class="timeline-item future"><div class="period">Aug–Sep 2026</div><div class="action">Pre-block peak season allotment</div><div class="detail">Pre-block Oct–Mar rooms across 20 contracted properties. UAE peak season (Indian winter) requires allotment confirmed 6 months ahead.</div></div>
+        <div class="timeline-item future"><div class="period">Oct–Nov 2026</div><div class="action">Diwali + winter packages launch</div><div class="detail">Indian festive season in Dubai — New Year's Eve, Burj Khalifa fireworks packages. Premium pricing 2–3x. Target 200 room-nights.</div></div>
+        <div class="timeline-item future"><div class="period">Dec 2026</div><div class="action">Abu Dhabi Formula 1 Grand Prix packages</div><div class="detail">F1 Abu Dhabi Nov/Dec 2026 — premium packages with race tickets + hotel. Target HNI Indian audience. ₹3–8L per couple packages.</div></div>
+        <div class="timeline-item future"><div class="period">Jan–Mar 2027</div><div class="action">Peak occupancy review + renegotiation</div><div class="detail">Review volume vs contract thresholds. Renegotiate top 10 hotels with data. Add Dubai Creek Harbour and new openings to portfolio.</div></div>
+        <div class="timeline-item future"><div class="period">Apr–Sep 2027</div><div class="action">Scale: Tier 3 + Sharjah/RAK expansion</div><div class="detail">Add 20 Tier 3 properties for budget FIT. Expand to Sharjah (Indian community hub) and Ras Al Khaimah (adventure + beach).</div></div>
+      </div>
+      <div style="background:#fdf5f5;border-radius:8px;padding:16px;margin-top:16px">
+        <div style="font-weight:700;font-size:14px;margin-bottom:12px">🎯 KPIs to Track</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:12px">
+          <div style="background:#fff;padding:10px;border-radius:6px;text-align:center"><div style="font-size:18px;font-weight:800;color:#cc0000">60</div><div style="color:#6b7280">Hotels to contract</div></div>
+          <div style="background:#fff;padding:10px;border-radius:6px;text-align:center"><div style="font-size:18px;font-weight:800;color:#cc0000">₹3Cr</div><div style="color:#6b7280">Month 1 booking target</div></div>
+          <div style="background:#fff;padding:10px;border-radius:6px;text-align:center"><div style="font-size:18px;font-weight:800;color:#cc0000">25%+</div><div style="color:#6b7280">Minimum net margin</div></div>
+          <div style="background:#fff;padding:10px;border-radius:6px;text-align:center"><div style="font-size:18px;font-weight:800;color:#cc0000">10</div><div style="color:#6b7280">Signature packages</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<!-- CONTACT MODAL -->
+<div class="modal-overlay" id="contact-modal">
+  <div class="modal">
+    <div class="modal-header">
+      <div><div class="modal-title" id="modal-hotel-name">Log Contact</div><div style="font-size:12px;color:#6b7280;margin-top:2px" id="modal-hotel-dest"></div></div>
+      <button class="modal-close" onclick="closeModal()">×</button>
+    </div>
+    <div class="form-group"><label class="form-label">Contact Person Name</label><input type="text" class="form-control" id="contact-name" placeholder="e.g. Ahmed Al Rashid — Sales Manager"></div>
+    <div class="form-group"><label class="form-label">Email Address</label><input type="email" class="form-control" id="contact-email" placeholder="sales@hotel.com"></div>
+    <div class="form-group"><label class="form-label">Phone / WhatsApp</label><input type="text" class="form-control" id="contact-phone" placeholder="+971 4 XXX XXXX"></div>
+    <div class="form-group"><label class="form-label">Status</label>
+      <select class="form-control" id="contact-status">
+        <option value="Not Started">Not Started</option>
+        <option value="In Progress">In Progress — First Contact Made</option>
+        <option value="In Progress">In Progress — Rates Requested</option>
+        <option value="In Progress">In Progress — Contract Under Review</option>
+        <option value="Contracted">Contracted ✅</option>
+      </select>
+    </div>
+    <div class="form-group"><label class="form-label">Notes / Log Entry</label><textarea class="form-control" id="contact-notes" rows="3" placeholder="What was discussed? Next steps?"></textarea></div>
+    <div style="display:flex;gap:10px;justify-content:flex-end">
+      <button class="btn btn-outline" onclick="closeModal()">Cancel</button>
+      <button class="btn btn-primary" onclick="saveContact()">💾 Save Log</button>
+    </div>
+    <div id="contact-history" style="margin-top:16px"></div>
+  </div>
+</div>
+
+<script>
+const HOTELS=[
+  // DUBAI TIER 1 (12)
+  {name:"Burj Al Arab Jumeirah",dest:"Dubai",area:"Jumeirah",tier:"Tier 1",stars:"7",crisis:"$550",normal:"$1,400",saving:"61%",meals:"Yes",status:"Not Started",chain:"Jumeirah"},
+  {name:"Atlantis The Palm",dest:"Dubai",area:"Palm Jumeirah",tier:"Tier 1",stars:"5",crisis:"$280",normal:"$700",saving:"60%",meals:"Yes",status:"Not Started",chain:"Atlantis"},
+  {name:"Armani Hotel Dubai",dest:"Dubai",area:"Downtown",tier:"Tier 1",stars:"5",crisis:"$320",normal:"$820",saving:"61%",meals:"Yes",status:"Not Started",chain:"Armani"},
+  {name:"Four Seasons Resort Dubai",dest:"Dubai",area:"Jumeirah",tier:"Tier 1",stars:"5",crisis:"$290",normal:"$720",saving:"60%",meals:"Yes",status:"Not Started",chain:"Four Seasons"},
+  {name:"Address Downtown Dubai",dest:"Dubai",area:"Downtown",tier:"Tier 1",stars:"5",crisis:"$260",normal:"$640",saving:"59%",meals:"Yes",status:"Not Started",chain:"Emaar"},
+  {name:"The St Regis Dubai",dest:"Dubai",area:"Al Habtoor City",tier:"Tier 1",stars:"5",crisis:"$240",normal:"$580",saving:"59%",meals:"Yes",status:"Not Started",chain:"Marriott"},
+  {name:"Mandarin Oriental Jumeira",dest:"Dubai",area:"Jumeirah",tier:"Tier 1",stars:"5",crisis:"$270",normal:"$660",saving:"59%",meals:"Yes",status:"Not Started",chain:"Mandarin Oriental"},
+  {name:"The Ritz-Carlton DIFC",dest:"Dubai",area:"DIFC",tier:"Tier 1",stars:"5",crisis:"$250",normal:"$620",saving:"60%",meals:"Yes",status:"Not Started",chain:"Marriott"},
+  {name:"One&Only The Palm",dest:"Dubai",area:"Palm Jumeirah",tier:"Tier 1",stars:"5",crisis:"$380",normal:"$950",saving:"60%",meals:"Yes",status:"Not Started",chain:"One&Only"},
+  {name:"Jumeirah Al Naseem",dest:"Dubai",area:"Jumeirah",tier:"Tier 1",stars:"5",crisis:"$220",normal:"$540",saving:"59%",meals:"Yes",status:"Not Started",chain:"Jumeirah"},
+  {name:"Park Hyatt Dubai",dest:"Dubai",area:"Deira",tier:"Tier 1",stars:"5",crisis:"$200",normal:"$490",saving:"59%",meals:"Yes",status:"Not Started",chain:"Hyatt"},
+  {name:"Raffles Dubai",dest:"Dubai",area:"Wafi",tier:"Tier 1",stars:"5",crisis:"$210",normal:"$510",saving:"59%",meals:"Yes",status:"Not Started",chain:"Accor"},
+  // DUBAI TIER 2 (16)
+  {name:"Marriott Resort Palm Jumeirah",dest:"Dubai",area:"Palm Jumeirah",tier:"Tier 2",stars:"5",crisis:"$160",normal:"$360",saving:"56%",meals:"Yes",status:"Not Started",chain:"Marriott"},
+  {name:"Hilton Dubai Jumeirah",dest:"Dubai",area:"JBR",tier:"Tier 2",stars:"5",crisis:"$145",normal:"$320",saving:"55%",meals:"Yes",status:"Not Started",chain:"Hilton"},
+  {name:"Sofitel Dubai Downtown",dest:"Dubai",area:"Downtown",tier:"Tier 2",stars:"5",crisis:"$150",normal:"$330",saving:"55%",meals:"Yes",status:"Not Started",chain:"Accor"},
+  {name:"Pullman Dubai Downtown",dest:"Dubai",area:"Downtown",tier:"Tier 2",stars:"5",crisis:"$130",normal:"$280",saving:"54%",meals:"Yes",status:"Not Started",chain:"Accor"},
+  {name:"Crowne Plaza Festival City",dest:"Dubai",area:"Festival City",tier:"Tier 2",stars:"5",crisis:"$120",normal:"$260",saving:"54%",meals:"Yes",status:"Not Started",chain:"IHG"},
+  {name:"InterContinental Dubai Marina",dest:"Dubai",area:"Dubai Marina",tier:"Tier 2",stars:"5",crisis:"$135",normal:"$295",saving:"54%",meals:"Yes",status:"Not Started",chain:"IHG"},
+  {name:"Westin Dubai Mina Seyahi",dest:"Dubai",area:"JBR",tier:"Tier 2",stars:"5",crisis:"$140",normal:"$310",saving:"55%",meals:"Yes",status:"Not Started",chain:"Marriott"},
+  {name:"Le Meridien Mina Seyahi",dest:"Dubai",area:"JBR",tier:"Tier 2",stars:"5",crisis:"$125",normal:"$270",saving:"54%",meals:"Yes",status:"Not Started",chain:"Marriott"},
+  {name:"Sheraton Grand Dubai",dest:"Dubai",area:"Deira",tier:"Tier 2",stars:"5",crisis:"$110",normal:"$240",saving:"54%",meals:"Yes",status:"Not Started",chain:"Marriott"},
+  {name:"JW Marriott Marquis Dubai",dest:"Dubai",area:"Business Bay",tier:"Tier 2",stars:"5",crisis:"$155",normal:"$340",saving:"54%",meals:"Yes",status:"Not Started",chain:"Marriott"},
+  {name:"Hyatt Regency Dubai Creek",dest:"Dubai",area:"Deira",tier:"Tier 2",stars:"5",crisis:"$115",normal:"$250",saving:"54%",meals:"Yes",status:"Not Started",chain:"Hyatt"},
+  {name:"DoubleTree by Hilton JBR",dest:"Dubai",area:"JBR",tier:"Tier 2",stars:"4",crisis:"$100",normal:"$215",saving:"53%",meals:"Yes",status:"Not Started",chain:"Hilton"},
+  {name:"Radisson Blu Hotel DWTC",dest:"Dubai",area:"Trade Centre",tier:"Tier 2",stars:"5",crisis:"$105",normal:"$225",saving:"53%",meals:"Yes",status:"Not Started",chain:"Radisson"},
+  {name:"Movenpick Hotel Jumeirah Lakes",dest:"Dubai",area:"JLT",tier:"Tier 2",stars:"5",crisis:"$95",normal:"$200",saving:"53%",meals:"Yes",status:"Not Started",chain:"Accor"},
+  {name:"Novotel World Trade Centre",dest:"Dubai",area:"Trade Centre",tier:"Tier 2",stars:"4",crisis:"$85",normal:"$180",saving:"53%",meals:"Yes",status:"Not Started",chain:"Accor"},
+  {name:"Millennium Plaza Downtown",dest:"Dubai",area:"Downtown",tier:"Tier 2",stars:"5",crisis:"$110",normal:"$235",saving:"53%",meals:"Yes",status:"Not Started",chain:"Millennium"},
+  // DUBAI TIER 3 (10)
+  {name:"ibis Styles Dubai Airport",dest:"Dubai",area:"Airport",tier:"Tier 3",stars:"3",crisis:"$45",normal:"$90",saving:"50%",meals:"Yes",status:"Not Started",chain:"Accor"},
+  {name:"Premier Inn Dubai Airport",dest:"Dubai",area:"Airport",tier:"Tier 3",stars:"3",crisis:"$48",normal:"$95",saving:"49%",meals:"Yes",status:"Not Started",chain:"Premier Inn"},
+  {name:"Rove Downtown Dubai",dest:"Dubai",area:"Downtown",tier:"Tier 3",stars:"3",crisis:"$65",normal:"$130",saving:"50%",meals:"No",status:"Not Started",chain:"Emaar"},
+  {name:"Citymax Hotel Bur Dubai",dest:"Dubai",area:"Bur Dubai",tier:"Tier 3",stars:"3",crisis:"$52",normal:"$105",saving:"50%",meals:"Yes",status:"Not Started",chain:"Citymax"},
+  {name:"Golden Tulip Al Barsha",dest:"Dubai",area:"Al Barsha",tier:"Tier 3",stars:"4",crisis:"$70",normal:"$145",saving:"52%",meals:"Yes",status:"Not Started",chain:"Golden Tulip"},
+  {name:"Ramada by Wyndham Deira",dest:"Dubai",area:"Deira",tier:"Tier 3",stars:"4",crisis:"$60",normal:"$120",saving:"50%",meals:"Yes",status:"Not Started",chain:"Wyndham"},
+  {name:"Copthorne Hotel Dubai",dest:"Dubai",area:"Trade Centre",tier:"Tier 3",stars:"4",crisis:"$68",normal:"$138",saving:"51%",meals:"Yes",status:"Not Started",chain:"Millennium"},
+  {name:"Fortune Grand Hotel",dest:"Dubai",area:"Deira",tier:"Tier 3",stars:"4",crisis:"$55",normal:"$110",saving:"50%",meals:"Yes",status:"Not Started",chain:"Fortune"},
+  {name:"Dubai Inn Hotel Apartments",dest:"Dubai",area:"Bur Dubai",tier:"Tier 3",stars:"3",crisis:"$42",normal:"$85",saving:"51%",meals:"Yes",status:"Not Started",chain:"Independent"},
+  {name:"Signature Hotel Al Barsha",dest:"Dubai",area:"Al Barsha",tier:"Tier 3",stars:"4",crisis:"$58",normal:"$118",saving:"51%",meals:"Yes",status:"Not Started",chain:"Independent"},
+  // ABU DHABI TIER 1 (8)
+  {name:"Emirates Palace Mandarin Oriental",dest:"Abu Dhabi",area:"Corniche",tier:"Tier 1",stars:"5",crisis:"$380",normal:"$950",saving:"60%",meals:"Yes",status:"Not Started",chain:"Mandarin Oriental"},
+  {name:"St Regis Saadiyat Island",dest:"Abu Dhabi",area:"Saadiyat",tier:"Tier 1",stars:"5",crisis:"$280",normal:"$700",saving:"60%",meals:"Yes",status:"Not Started",chain:"Marriott"},
+  {name:"Four Seasons Hotel Abu Dhabi",dest:"Abu Dhabi",area:"Al Maryah",tier:"Tier 1",stars:"5",crisis:"$260",normal:"$640",saving:"59%",meals:"Yes",status:"Not Started",chain:"Four Seasons"},
+  {name:"Jumeirah at Saadiyat Island",dest:"Abu Dhabi",area:"Saadiyat",tier:"Tier 1",stars:"5",crisis:"$290",normal:"$720",saving:"60%",meals:"Yes",status:"Not Started",chain:"Jumeirah"},
+  {name:"Rosewood Abu Dhabi",dest:"Abu Dhabi",area:"Al Maryah",tier:"Tier 1",stars:"5",crisis:"$240",normal:"$590",saving:"59%",meals:"Yes",status:"Not Started",chain:"Rosewood"},
+  {name:"W Abu Dhabi Yas Island",dest:"Abu Dhabi",area:"Yas Island",tier:"Tier 1",stars:"5",crisis:"$220",normal:"$540",saving:"59%",meals:"Yes",status:"Not Started",chain:"Marriott"},
+  {name:"Yas Viceroy Abu Dhabi",dest:"Abu Dhabi",area:"Yas Island",tier:"Tier 1",stars:"5",crisis:"$200",normal:"$490",saving:"59%",meals:"Yes",status:"Not Started",chain:"Viceroy"},
+  {name:"Anantara Eastern Mangroves",dest:"Abu Dhabi",area:"Eastern Mangroves",tier:"Tier 1",stars:"5",crisis:"$210",normal:"$510",saving:"59%",meals:"Yes",status:"Not Started",chain:"Anantara"},
+  // ABU DHABI TIER 2 (9)
+  {name:"Hilton Abu Dhabi Yas Island",dest:"Abu Dhabi",area:"Yas Island",tier:"Tier 2",stars:"5",crisis:"$140",normal:"$300",saving:"53%",meals:"Yes",status:"Not Started",chain:"Hilton"},
+  {name:"Radisson Blu Abu Dhabi Yas",dest:"Abu Dhabi",area:"Yas Island",tier:"Tier 2",stars:"5",crisis:"$120",normal:"$255",saving:"53%",meals:"Yes",status:"Not Started",chain:"Radisson"},
+  {name:"Marriott Hotel Al Forsan",dest:"Abu Dhabi",area:"Khalifa City",tier:"Tier 2",stars:"5",crisis:"$130",normal:"$280",saving:"54%",meals:"Yes",status:"Not Started",chain:"Marriott"},
+  {name:"Crowne Plaza Abu Dhabi",dest:"Abu Dhabi",area:"Hamdan Street",tier:"Tier 2",stars:"5",crisis:"$110",normal:"$235",saving:"53%",meals:"Yes",status:"Not Started",chain:"IHG"},
+  {name:"Le Meridien Abu Dhabi",dest:"Abu Dhabi",area:"Tourist Club",tier:"Tier 2",stars:"5",crisis:"$105",normal:"$225",saving:"53%",meals:"Yes",status:"Not Started",chain:"Marriott"},
+  {name:"Sofitel Abu Dhabi Corniche",dest:"Abu Dhabi",area:"Corniche",tier:"Tier 2",stars:"5",crisis:"$115",normal:"$245",saving:"53%",meals:"Yes",status:"Not Started",chain:"Accor"},
+  {name:"Grand Hyatt Abu Dhabi",dest:"Abu Dhabi",area:"Al Raha Beach",tier:"Tier 2",stars:"5",crisis:"$125",normal:"$268",saving:"53%",meals:"Yes",status:"Not Started",chain:"Hyatt"},
+  {name:"Beach Rotana Abu Dhabi",dest:"Abu Dhabi",area:"Tourist Club",tier:"Tier 2",stars:"5",crisis:"$118",normal:"$252",saving:"53%",meals:"Yes",status:"Not Started",chain:"Rotana"},
+  {name:"Yas Island Rotana",dest:"Abu Dhabi",area:"Yas Island",tier:"Tier 2",stars:"4",crisis:"$95",normal:"$200",saving:"53%",meals:"Yes",status:"Not Started",chain:"Rotana"},
+  // ABU DHABI TIER 3 (5)
+  {name:"Premier Inn Abu Dhabi Capital Centre",dest:"Abu Dhabi",area:"Capital Centre",tier:"Tier 3",stars:"3",crisis:"$55",normal:"$110",saving:"50%",meals:"Yes",status:"Not Started",chain:"Premier Inn"},
+  {name:"Centro Capital Centre",dest:"Abu Dhabi",area:"Capital Centre",tier:"Tier 3",stars:"4",crisis:"$62",normal:"$125",saving:"50%",meals:"Yes",status:"Not Started",chain:"Rotana"},
+  {name:"ibis Abu Dhabi Gate",dest:"Abu Dhabi",area:"Airport",tier:"Tier 3",stars:"3",crisis:"$48",normal:"$95",saving:"49%",meals:"Yes",status:"Not Started",chain:"Accor"},
+  {name:"Tulip Inn Abu Dhabi",dest:"Abu Dhabi",area:"Hamdan Street",tier:"Tier 3",stars:"3",crisis:"$45",normal:"$90",saving:"50%",meals:"Yes",status:"Not Started",chain:"Golden Tulip"},
+  {name:"Media One Hotel Abu Dhabi",dest:"Abu Dhabi",area:"Reem Island",tier:"Tier 3",stars:"4",crisis:"$68",normal:"$138",saving:"51%",meals:"No",status:"Not Started",chain:"Independent"},
+];
+
+const FLIGHTS=[
+  {city:"Delhi",dest:"Dubai (DXB)",airlines:"IndiGo, Air India, Emirates, SpiceJet",freq:"8–10x daily",fare:"₹7,000–15,000",time:"3h 30m",status:"Active",notes:"Best India–UAE route. Emirates premium option for MICE groups."},
+  {city:"Mumbai",dest:"Dubai (DXB)",airlines:"IndiGo, Air India, Emirates, flydubai",freq:"8–10x daily",fare:"₹6,500–14,000",time:"3h",status:"Active",notes:"Largest India–UAE route by volume. Cheapest fares."},
+  {city:"Bengaluru",dest:"Dubai (DXB)",airlines:"IndiGo, Air India, Emirates",freq:"4–5x daily",fare:"₹7,000–14,000",time:"4h",status:"Active",notes:"Strong IT corporate travel + leisure."},
+  {city:"Chennai",dest:"Dubai (DXB)",airlines:"IndiGo, Air India, flydubai",freq:"3–4x daily",fare:"₹6,500–13,000",time:"3h 30m",status:"Active",notes:"Strong NRI diaspora + leisure segment."},
+  {city:"Hyderabad",dest:"Dubai (DXB)",airlines:"IndiGo, Air India, flydubai",freq:"3–4x daily",fare:"₹7,000–14,000",time:"3h 40m",status:"Active",notes:"Growing IT MICE market from Hyderabad."},
+  {city:"Kolkata",dest:"Dubai (DXB)",airlines:"IndiGo, Air India",freq:"2x daily",fare:"₹8,000–15,000",time:"4h 30m",status:"Active",notes:"Strong business travel segment."},
+  {city:"Ahmedabad",dest:"Dubai (DXB)",airlines:"IndiGo, Air India, flydubai",freq:"2–3x daily",fare:"₹7,500–14,500",time:"3h 20m",status:"Active",notes:"Very high family and business travel demand."},
+  {city:"Kochi",dest:"Dubai (DXB)",airlines:"IndiGo, Air India, Emirates, Air Arabia",freq:"4–5x daily",fare:"₹6,000–12,000",time:"3h 30m",status:"Active",notes:"Large NRI Kerala diaspora — highest per-capita UAE travellers."},
+  {city:"Delhi",dest:"Abu Dhabi (AUH)",airlines:"Air India, Etihad, IndiGo",freq:"3–4x daily",fare:"₹8,000–16,000",time:"3h 40m",status:"Active",notes:"Etihad premium option for Abu Dhabi packages."},
+  {city:"Mumbai",dest:"Abu Dhabi (AUH)",airlines:"Air India, Etihad, Air Arabia",freq:"3x daily",fare:"₹7,500–15,000",time:"3h 10m",status:"Active",notes:"Lead with Abu Dhabi for F1 packages from Mumbai."},
+  {city:"Pune",dest:"Dubai (DXB)",airlines:"IndiGo, Air Arabia",freq:"1–2x daily",fare:"₹8,000–15,000",time:"3h 45m",status:"Active",notes:"Growing market; corporate and leisure."},
+  {city:"Amritsar",dest:"Dubai (DXB)",airlines:"IndiGo, Air Arabia",freq:"Daily",fare:"₹7,500–14,000",time:"4h",status:"Active",notes:"Strong NRI diaspora — high per-trip spending."},
+];
+
+const OFFERS=[
+  {hotel:"Burj Al Arab Jumeirah",dest:"Dubai",type:"Honeymoon",rate:"$520/night",saving:"63% off rack",validity:"Apr–Sep 2026",capacity:"2 pax",includes:"All meals, butler, helicopter transfer, spa, Burj view suite",tags:["Honeymoon","Ultra-Luxury","Dubai"]},
+  {hotel:"Atlantis The Palm",dest:"Dubai",type:"Group",rate:"$260/night",saving:"63% off rack",validity:"Apr–Sep 2026",capacity:"20–200 pax",includes:"Breakfast, Aquaventure access, meeting room, Indian buffet",tags:["Group","MICE","Dubai"]},
+  {hotel:"Armani Hotel Dubai",dest:"Dubai",type:"MICE",rate:"$300/night",saving:"63% off rack",validity:"Apr–Aug 2026",capacity:"10–100 pax",includes:"Breakfast, Burj Khalifa view, meeting room, gala dinner discount",tags:["MICE","Luxury","Downtown"]},
+  {hotel:"Address Downtown Dubai",dest:"Dubai",type:"FIT",rate:"$240/night",saving:"63% off rack",validity:"May–Sep 2026",capacity:"2–20 pax",includes:"Breakfast, Burj Khalifa view, pool, Indian food",tags:["FIT","Luxury","Downtown"]},
+  {hotel:"JW Marriott Marquis Dubai",dest:"Dubai",type:"MICE",rate:"$140/night",saving:"59% off rack",validity:"Apr–Sep 2026",capacity:"20–500 pax",includes:"Breakfast, 2hr meeting room, Indian buffet, group transfers",tags:["MICE","Dubai","Marriott"]},
+  {hotel:"Hilton Dubai Jumeirah",dest:"Dubai",type:"Group",rate:"$130/night",saving:"59% off rack",validity:"May–Sep 2026",capacity:"15–80 pax",includes:"Breakfast, beachfront, 1 FOC per 15, Indian food",tags:["Group","JBR","Beach"]},
+  {hotel:"Sofitel Dubai Downtown",dest:"Dubai",type:"FIT",rate:"$135/night",saving:"59% off rack",validity:"Apr–Sep 2026",capacity:"2–30 pax",includes:"Breakfast, pool, Indian veg menu, late checkout",tags:["FIT","Dubai","Accor"]},
+  {hotel:"Emirates Palace Mandarin Oriental",dest:"Abu Dhabi",type:"Honeymoon",rate:"$350/night",saving:"63% off rack",validity:"Apr–Sep 2026",capacity:"2 pax",includes:"All meals, butler, beach access, spa, gold cappuccino experience",tags:["Honeymoon","Ultra-Luxury","Abu Dhabi"]},
+  {hotel:"St Regis Saadiyat Island",dest:"Abu Dhabi",type:"MICE",rate:"$255/night",saving:"64% off rack",validity:"Apr–Aug 2026",capacity:"20–200 pax",includes:"Breakfast, private beach, conference facilities, gala dinner",tags:["MICE","Abu Dhabi","Luxury"]},
+  {hotel:"W Abu Dhabi Yas Island",dest:"Abu Dhabi",type:"Group",rate:"$200/night",saving:"63% off rack",validity:"May–Sep 2026",capacity:"15–100 pax",includes:"Breakfast, Yas Marina Circuit access, pool, Indian food",tags:["Group","Yas Island","F1"]},
+  {hotel:"Anantara Eastern Mangroves",dest:"Abu Dhabi",type:"FIT",rate:"$190/night",saving:"63% off rack",validity:"Apr–Sep 2026",capacity:"2–15 pax",includes:"Breakfast, kayak, mangrove tour, spa credit AED 200",tags:["FIT","Abu Dhabi","Wellness"]},
+  {hotel:"Radisson Blu Abu Dhabi Yas",dest:"Abu Dhabi",type:"Group",rate:"$108/night",saving:"58% off rack",validity:"May–Sep 2026",capacity:"20–80 pax",includes:"Breakfast, Yas access, 1 FOC per 15, Indian buffet on request",tags:["Group","Yas Island","Budget"]},
+];
+
+const GROUPS=[
+  {name:"Marriott International (UAE)",logo:"🔷",props:"UAE: 25+ properties. Key: St Regis Dubai, JW Marquis, Ritz-Carlton DIFC, St Regis Abu Dhabi, W Yas Island, Westin JBR, Sheraton, Le Meridien, Marriott Palm.",contact:"Area Director of Sales — South Asia: uae.sales@marriott.com | GSO India Mumbai: +91 22 XXXX XXXX",strategy:"Marriott is the single largest chain in UAE with properties at every price point. One Preferred Operator Agreement covers 25+ properties. Lead with JW Marquis for MICE (Dubai's largest hotel ballroom), St Regis for luxury FIT, and Courtyard/Moxy for budget groups. Ask for Bonvoy Group Benefits — points accrual for Indian corporate clients is a strong differentiator.",template:`Dear [Name] at Marriott International UAE,
+
+I'm from TripFactory/ORN — India's leading B2B travel platform with 8,000+ active agents.
+
+UAE hotel occupancy is at multi-year lows and we are seeing strong Indian demand that we are ready to place immediately. Marriott's UAE portfolio is central to our strategy across all price segments.
+
+We would like to explore a UAE Preferred Operator Agreement covering:
+• MICE rates — JW Marriott Marquis Dubai for 50–500 pax events
+• Luxury FIT rates — St Regis Dubai and Abu Dhabi for honeymoon/HNI
+• Group rates — Westin, Sheraton, Le Meridien for 15–80 pax groups
+• Budget segment — Courtyard/Moxy properties
+
+Target: 3,000+ room-nights in Year 1. Can we set up a call this week?
+
+Best regards,
+[Name] | [Phone]`},
+  {name:"Jumeirah Group",logo:"🌴",props:"UAE: 10 properties. Key: Burj Al Arab, Madinat Jumeirah, Jumeirah Al Qasr, Jumeirah Zabeel Saray (Palm), Jumeirah Saadiyat Island Abu Dhabi.",contact:"Director of Sales — India & South Asia: india@jumeirah.com | Dubai HQ: +971 4 366 6000",strategy:"Jumeirah is the most iconic UAE hotel group globally. The Burj Al Arab and Madinat Jumeirah are aspirational for Indian HNI and honeymoon travellers. One Jumeirah relationship covers 5 of the most desirable UAE addresses. They have a dedicated India Sales Manager — go direct. Push for Indian cultural experiences (Eid, Diwali events) as part of the India package.",template:`Dear [Name] at Jumeirah Group,
+
+I'm reaching out from TripFactory/ORN — India's top premium travel platform.
+
+Jumeirah properties — particularly Burj Al Arab and Madinat — are the most aspirational UAE hotels for Indian HNI travellers. With UAE rates at multi-year lows, this is the ideal moment to build a serious India programme together.
+
+We would like to discuss:
+• Preferred Indian operator rates across the Jumeirah portfolio
+• Burj Al Arab — dedicated HNI honeymoon and anniversary package for ORN
+• Madinat Jumeirah — group and incentive rates (50–200 pax)
+• Jumeirah Abu Dhabi — for combined Dubai + Abu Dhabi itineraries
+
+We are ready to commit to a minimum volume. Can we meet in Dubai or speak this week?
+
+Best regards,
+[Name] | [Phone]`},
+  {name:"Accor (UAE)",logo:"🟡",props:"UAE: 30+ properties. Key: Raffles Dubai, Sofitel Downtown, Sofitel Abu Dhabi Corniche, Pullman DT, Novotel, Movenpick, ibis. Covers luxury to budget.",contact:"VP Commercial — India & South Asia: india.sales@accor.com | Dubai HQ: +971 4 XXX XXXX",strategy:"Accor's breadth in UAE is unmatched — from Raffles at the luxury end to ibis for budget groups. One Accor agreement covers every price segment ORN needs. Particularly strong for MICE with Pullman and Sofitel. Raffles Dubai is an underrated luxury option with better rates than Jumeirah/Marriott equivalents. Lead with the volume argument — ORN's 8,000 agents can fill Accor's mid-market properties fast.",template:`Dear [Name] at Accor UAE,
+
+Greetings from TripFactory/ORN — India's largest B2B travel platform (8,000+ agents).
+
+Accor's UAE portfolio is uniquely positioned to cover every segment of our Indian clientele — from ibis for budget FIT to Raffles and Sofitel for luxury. This is exactly the kind of partnership we are looking to build as we accelerate our UAE contracting.
+
+We would like to explore an India Master Agreement covering Accor UAE, targeting:
+• Luxury: Raffles Dubai, Sofitel Downtown, Sofitel Abu Dhabi
+• Upscale: Pullman, Movenpick (MICE focus)
+• Budget: Novotel, ibis (group FIT and student travel)
+
+Volume target: 2,000+ room-nights in Year 1. Can we speak this week?
+
+Best regards,
+[Name] | [Phone]`},
+  {name:"IHG (UAE)",logo:"🔵",props:"UAE: 15+ properties. Key: InterContinental Dubai Marina, Crowne Plaza Festival City, Crowne Plaza Abu Dhabi, Holiday Inn Dubai, voco Dubai.",contact:"Area Director of Sales — South Asia: uae.sales@ihg.com | Dubai office: +971 4 XXX XXXX",strategy:"IHG's strongest UAE assets are their Crowne Plaza properties for MICE (Festival City has excellent conference facilities directly linked to a mall and airport) and InterContinental Dubai Marina for upscale FIT. IHG Rewards is popular with Indian business travellers. Lead with MICE — Crowne Plaza Festival City is one of the best MICE venues in Dubai for 50–500 pax events at competitive rates.",template:`Dear [Name] at IHG UAE,
+
+I'm writing from TripFactory/ORN — India's leading B2B travel platform.
+
+IHG's UAE portfolio is particularly strong for MICE, and Indian corporate MICE to Dubai is one of the fastest-growing segments we handle. Crowne Plaza Festival City and InterContinental Dubai Marina are top requests from our corporate clients.
+
+We would like to explore:
+• MICE rates at Crowne Plaza Festival City for 50–500 pax events
+• FIT rates at InterContinental Dubai Marina
+• Group rates across Holiday Inn and voco properties for mid-market FIT
+
+Target: 1,500+ room-nights in Year 1. Available for a call this week?
+
+Best regards,
+[Name] | [Phone]`},
+  {name:"Rotana Hotels (UAE)",logo:"🌙",props:"UAE: 20+ properties across Dubai, Abu Dhabi, Sharjah, RAK. Key: Beach Rotana Abu Dhabi, Yas Island Rotana, Rose Rayhaan Dubai, Centro properties.",contact:"VP Sales & Marketing — India: india@rotana.com | Abu Dhabi HQ: +971 2 697 0000",strategy:"Rotana is the largest UAE-headquartered chain and has a strong track record with Indian clients. Their Centro brand (budget) is ideal for Indian group travel. Beach Rotana Abu Dhabi is a top pick for Indian families. Rotana's Indulgence package is specifically designed for Indian guests with Indian food, Hindi-speaking staff, and airport transfers. Use this as a selling point with ORN agents.",template:`Dear [Name] at Rotana Hotels,
+
+Greetings from TripFactory/ORN — India's top B2B platform.
+
+Rotana's understanding of the Indian traveller is unmatched among UAE chains, and your Indulgence package is exactly what our agents want to sell. With UAE occupancy at multi-year lows, we see an opportunity to drive serious Indian volume through the ORN network.
+
+We would like to discuss:
+• A preferred operator agreement across the Rotana UAE portfolio
+• Beach Rotana Abu Dhabi — family and honeymoon FIT rates
+• Centro properties — group and budget FIT rates
+• Rose Rayhaan / Park Rotana Dubai — mid-market MICE
+
+Target: 2,000+ room-nights in Year 1. Can we speak this week?
+
+Best regards,
+[Name] | [Phone]`},
+];
+
+// ---- RENDER ----
+function renderHotels(data){
+  const tb=document.getElementById('hotel-tbody');
+  tb.innerHTML='';
+  data.forEach(h=>{
+    const stored=getContacts(h.name);
+    const ls=stored.length?stored[stored.length-1].status:h.status;
+    const tc=h.tier==='Tier 1'?'tier1':h.tier==='Tier 2'?'tier2':'tier3';
+    const sc=ls==='Contracted'?'badge-green':ls.includes('Progress')?'badge-yellow':'badge-gray';
+    tb.innerHTML+=`<tr>
+      <td><strong style="font-size:13px">${h.name}</strong><br><span style="font-size:11px;color:#6b7280">${h.chain}</span></td>
+      <td>${h.dest}</td>
+      <td style="font-size:12px;color:#6b7280">${h.area}</td>
+      <td><span class="badge ${tc}">${h.tier}</span></td>
+      <td>${h.stars}★</td>
+      <td style="color:#cc0000;font-weight:700">${h.crisis}/night</td>
+      <td style="color:#9ca3af;text-decoration:line-through">${h.normal}</td>
+      <td><span class="badge badge-green">${h.saving} off</span></td>
+      <td>${h.meals==='Yes'?'<span class="badge badge-green">✓ Yes</span>':'<span class="badge badge-gray">No</span>'}</td>
+      <td><span class="badge ${sc}">${ls}</span></td>
+      <td><button class="btn btn-outline btn-sm" onclick='openModal(${JSON.stringify(h)})'>📝 Log</button></td>
+    </tr>`;
+  });
+  document.getElementById('hotel-count').textContent=`Showing ${data.length} hotels`;
+  const cc=HOTELS.filter(h=>{const s=getContacts(h.name);return s.length&&s[s.length-1].status==='Contracted';}).length;
+  document.getElementById('contracted-count').textContent=cc;
+}
+function filterHotels(){
+  const s=document.getElementById('hotel-search').value.toLowerCase();
+  const d=document.getElementById('filter-dest').value;
+  const t=document.getElementById('filter-tier').value;
+  const st=document.getElementById('filter-status').value;
+  renderHotels(HOTELS.filter(h=>{
+    const ls=(()=>{const c=getContacts(h.name);return c.length?c[c.length-1].status:h.status;})();
+    return(!s||h.name.toLowerCase().includes(s))&&(!d||h.dest===d)&&(!t||h.tier===t)&&(!st||ls.includes(st));
+  }));
+}
+function renderFlights(data){
+  const tb=document.getElementById('flight-tbody');
+  tb.innerHTML='';
+  data.forEach(f=>{
+    tb.innerHTML+=`<tr><td><strong>${f.city}</strong></td><td>${f.dest}</td><td style="font-size:12px">${f.airlines}</td><td>${f.freq}</td><td style="color:#cc0000;font-weight:600">${f.fare}</td><td>${f.time}</td><td><span class="badge badge-green">${f.status}</span></td><td style="font-size:11px;color:#6b7280">${f.notes}</td></tr>`;
+  });
+}
+function filterFlights(){
+  const s=document.getElementById('flight-search').value.toLowerCase();
+  const a=document.getElementById('filter-airline').value;
+  renderFlights(FLIGHTS.filter(f=>(!s||f.city.toLowerCase().includes(s)||f.airlines.toLowerCase().includes(s)||f.dest.toLowerCase().includes(s))&&(!a||f.airlines.includes(a))));
+}
+function renderOffers(data){
+  const g=document.getElementById('offers-grid');
+  g.innerHTML=data.length?data.map(o=>`<div class="offer-card"><div class="offer-header"><div class="offer-hotel">${o.hotel}</div><div class="offer-dest">📍 ${o.dest} · ${o.type}</div></div><div class="offer-body"><div class="offer-row"><span class="offer-label">Net Rate</span><span class="offer-rate">${o.rate}</span></div><div class="offer-row"><span class="offer-label">Saving vs rack</span><span class="offer-value" style="color:#cc0000">${o.saving}</span></div><div class="offer-row"><span class="offer-label">Valid</span><span class="offer-value" style="font-size:12px">${o.validity}</span></div><div class="offer-row"><span class="offer-label">Capacity</span><span class="offer-value" style="font-size:12px">${o.capacity}</span></div><div style="font-size:11px;color:#6b7280;margin:8px 0;border-top:1px solid #f3f4f6;padding-top:8px"><strong>Includes:</strong> ${o.includes}</div><div class="offer-tags">${o.tags.map(t=>`<span class="badge badge-orange">${t}</span>`).join('')}</div></div></div>`).join(''):'<div style="color:#6b7280;padding:20px;grid-column:1/-1">No offers match your filters.</div>';
+}
+function filterOffers(){
+  const s=document.getElementById('offer-search').value.toLowerCase();
+  const d=document.getElementById('filter-offer-dest').value;
+  const t=document.getElementById('filter-offer-type').value;
+  renderOffers(OFFERS.filter(o=>(!s||o.hotel.toLowerCase().includes(s)||o.tags.join(' ').toLowerCase().includes(s))&&(!d||o.dest===d)&&(!t||o.type===t)));
+}
+function renderGroups(){
+  document.getElementById('groups-container').innerHTML=GROUPS.map(g=>`<div class="chain-card"><div class="chain-name">${g.logo} ${g.name}</div><div class="chain-properties">${g.props}</div><div style="font-size:12px;color:#cc0000;margin-bottom:10px">📞 ${g.contact}</div><div class="chain-strategy">${g.strategy}</div><div style="font-size:12px;font-weight:600;color:#374151;margin-bottom:6px">📧 Opening Message Template:</div><div class="contact-template">${g.template}</div><button class="copy-btn" onclick="copyTpl(this)">📋 Copy Template</button></div>`).join('');
+}
+let currentHotel='';
+function openModal(h){currentHotel=h.name;document.getElementById('modal-hotel-name').textContent=h.name;document.getElementById('modal-hotel-dest').textContent=`📍 ${h.dest} · ${h.area} · ${h.tier}`;['contact-name','contact-email','contact-phone','contact-notes'].forEach(id=>document.getElementById(id).value='');loadHistory();document.getElementById('contact-modal').classList.add('open');}
+function closeModal(){document.getElementById('contact-modal').classList.remove('open');}
+function saveContact(){const entry={ts:new Date().toLocaleString(),name:document.getElementById('contact-name').value,email:document.getElementById('contact-email').value,phone:document.getElementById('contact-phone').value,status:document.getElementById('contact-status').value,notes:document.getElementById('contact-notes').value};const k='orn_uae_'+currentHotel;const arr=JSON.parse(localStorage.getItem(k)||'[]');arr.push(entry);localStorage.setItem(k,JSON.stringify(arr));loadHistory();filterHotels();document.getElementById('contact-notes').value='';}
+function loadHistory(){const arr=getContacts(currentHotel);const d=document.getElementById('contact-history');d.innerHTML=arr.length?'<div style="font-size:12px;font-weight:600;color:#374151;margin-bottom:8px">📋 Contact History:</div>'+arr.slice().reverse().map(e=>`<div class="log-entry"><div class="log-date">${e.ts} · <strong>${e.status}</strong>${e.name?' · '+e.name:''}</div>${e.email?`<div class="log-text">✉️ ${e.email}${e.phone?' · 📞 '+e.phone:''}</div>`:''}${e.notes?`<div class="log-text">📝 ${e.notes}</div>`:''}</div>`).join(''):'';}
+function getContacts(n){return JSON.parse(localStorage.getItem('orn_uae_'+n)||'[]');}
+document.getElementById('contact-modal').addEventListener('click',function(e){if(e.target===this)closeModal();});
+function showTab(id,btn){document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));document.getElementById('tab-'+id).classList.add('active');btn.classList.add('active');}
+function navigateDest(url){if(url&&url!=='#'&&!url.startsWith('#'))window.location.href=url;}
+function copyTpl(btn){const t=btn.closest('.chain-card').querySelector('.contact-template').textContent;navigator.clipboard.writeText(t).then(()=>{btn.textContent='✅ Copied!';setTimeout(()=>btn.textContent='📋 Copy Template',2000);});}
+renderHotels(HOTELS);renderFlights(FLIGHTS);renderOffers(OFFERS);renderGroups();
+</script>
+</body>
+</html>

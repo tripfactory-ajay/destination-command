@@ -134,7 +134,7 @@ tbody tr:last-child td{border-bottom:none}
     <div class="header-meta">
       <select class="dest-dropdown" onchange="navigateDest(this.value)">
         <option value="">🌍 Switch Destination</option>
-        <option value="https://tripfactory-ajay.github.io/destination-uae/">🇦🇪 UAE</option>
+        <option value="uae.html">🇦🇪 UAE</option>
         <option value="" selected>🇹🇭 Thailand (Current)</option>
         <option value="bali-contracting.html">🇮🇩 Bali</option>
       </select>
@@ -694,7 +694,7 @@ function showTab(id,btn){
   document.getElementById('tab-'+id).classList.add('active');
   btn.classList.add('active');
 }
-function navigateDest(url){if(url&&url!=='#'&&!url.startsWith('#'))window.open(url,'_blank');}
+function navigateDest(url){if(url&&url!=='#'&&!url.startsWith('#'))window.location.href=url;}
 function copyTpl(btn){
   const t=btn.closest('.chain-card').querySelector('.contact-template').textContent;
   navigator.clipboard.writeText(t).then(()=>{btn.textContent='✅ Copied!';setTimeout(()=>btn.textContent='📋 Copy Template',2000);});
