@@ -1,1 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thailand Hotel Contracting Intelligence | TripFactory ORN</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:#f0f7f3;color:#1a1a1a;font-size:14px;line-height:1.5}
+a{color:#1a6b3f}
+.site-header{position:sticky;top:0;z-index:100;background:#fff;border-bottom:2px solid #1a6b3f;box-shadow:0 2px 8px rgba(0,0,0,0.08)}
+.header-inner{max-width:1400px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.logo-badge{background:#1a6b3f;color:#fff;font-weight:800;font-size:13px;padding:6px 12px;border-radius:6px;letter-spacing:0.5px}
+.header-title{flex:1;min-width:200px}
+.header-title h1{font-size:16px;font-weight:700;color:#1a1a1a;line-height:1.2}
+.header-title p{font-size:12px;color:#6b7280}
+.header-meta{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.dest-dropdown{padding:6px 10px;border:1.5px solid #1a6b3f;border-radius:6px;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:600;color:#1a6b3f;background:#fff;cursor:pointer;outline:none}
+.status-pill{background:#e8f5ee;color:#1a6b3f;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;border:1px solid #a7d4b8}
+.urgency-pill{background:#fef3cd;color:#92400e;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;border:1px solid #f59e0b}
+.tab-nav{background:#fff;border-bottom:1px solid #e5e7eb;position:sticky;top:69px;z-index:99}
+.tab-nav-inner{max-width:1400px;margin:0 auto;padding:0 20px;display:flex;overflow-x:auto;scrollbar-width:none;gap:2px}
+.tab-nav-inner::-webkit-scrollbar{display:none}
+.tab-btn{padding:12px 18px;border:none;background:none;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:600;color:#6b7280;cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap;transition:all 0.2s}
+.tab-btn:hover{color:#1a6b3f;background:#f0f7f3}
+.tab-btn.active{color:#1a6b3f;border-bottom-color:#1a6b3f}
+.main{max-width:1400px;margin:0 auto;padding:24px 20px}
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+.card{background:#fff;border-radius:10px;padding:20px;margin-bottom:16px;border:1px solid #e5e7eb;box-shadow:0 1px 3px rgba(0,0,0,0.06)}
+.card-header{display:flex;align-items:flex-start;gap:12px;margin-bottom:16px}
+.card-icon{font-size:24px;line-height:1}
+.card-title{font-size:16px;font-weight:700;color:#1a1a1a}
+.card-subtitle{font-size:12px;color:#6b7280;margin-top:2px}
+.alert{padding:14px 16px;border-radius:8px;margin-bottom:16px;border-left:4px solid}
+.alert-success{background:#e8f5ee;border-color:#1a6b3f;color:#0f4a2b}
+.alert-warning{background:#fffbeb;border-color:#f59e0b;color:#78350f}
+.alert-danger{background:#fef2f2;border-color:#dc2626;color:#7f1d1d}
+.alert-info{background:#eff6ff;border-color:#3b82f6;color:#1e3a8a}
+.alert strong{font-weight:700}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:20px}
+.stat-card{background:#fff;border:1px solid #e5e7eb;border-radius:8px;padding:16px;text-align:center}
+.stat-card .num{font-size:26px;font-weight:800;color:#1a6b3f;line-height:1}
+.stat-card .lbl{font-size:11px;color:#6b7280;margin-top:4px;font-weight:500}
+.stat-card .sub{font-size:10px;color:#9ca3af;margin-top:2px}
+.table-controls{display:flex;gap:10px;margin-bottom:12px;flex-wrap:wrap;align-items:center}
+.search-input{padding:8px 12px;border:1.5px solid #e5e7eb;border-radius:6px;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;flex:1;min-width:180px;outline:none}
+.search-input:focus{border-color:#1a6b3f;box-shadow:0 0 0 2px rgba(26,107,63,0.15)}
+.filter-select{padding:8px 10px;border:1.5px solid #e5e7eb;border-radius:6px;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;background:#fff;outline:none;cursor:pointer}
+.filter-select:focus{border-color:#1a6b3f}
+.table-wrap{overflow-x:auto;border-radius:8px;border:1px solid #e5e7eb}
+table{width:100%;border-collapse:collapse;background:#fff}
+thead th{background:#f8faf9;padding:10px 12px;text-align:left;font-size:11px;font-weight:700;color:#374151;text-transform:uppercase;letter-spacing:0.5px;border-bottom:2px solid #e5e7eb;white-space:nowrap}
+tbody td{padding:10px 12px;border-bottom:1px solid #f3f4f6;font-size:13px;vertical-align:top}
+tbody tr:hover{background:#f8faf9}
+tbody tr:last-child td{border-bottom:none}
+.badge{display:inline-block;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:700;white-space:nowrap}
+.badge-green{background:#dcfce7;color:#166534}
+.badge-yellow{background:#fef9c3;color:#854d0e}
+.badge-red{background:#fee2e2;color:#991b1b}
+.badge-blue{background:#dbeafe;color:#1e40af}
+.badge-gray{background:#f3f4f6;color:#374151}
+.badge-teal{background:#ccfbf1;color:#0f766e}
+.tier1{background:#fef3c7;color:#92400e;border:1px solid #f59e0b}
+.tier2{background:#e0f2fe;color:#075985;border:1px solid #38bdf8}
+.tier3{background:#f0fdf4;color:#166534;border:1px solid #4ade80}
+.modal-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:1000;align-items:center;justify-content:center}
+.modal-overlay.open{display:flex}
+.modal{background:#fff;border-radius:12px;padding:24px;width:90%;max-width:500px;max-height:90vh;overflow-y:auto;position:relative}
+.modal-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px}
+.modal-title{font-size:16px;font-weight:700}
+.modal-close{background:none;border:none;font-size:20px;cursor:pointer;color:#6b7280;line-height:1;padding:0}
+.form-group{margin-bottom:14px}
+.form-label{display:block;font-size:12px;font-weight:600;color:#374151;margin-bottom:5px}
+.form-control{width:100%;padding:9px 12px;border:1.5px solid #e5e7eb;border-radius:6px;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;outline:none}
+.form-control:focus{border-color:#1a6b3f;box-shadow:0 0 0 2px rgba(26,107,63,0.15)}
+.btn{padding:9px 18px;border-radius:6px;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;border:none;transition:all 0.2s}
+.btn-primary{background:#1a6b3f;color:#fff}
+.btn-primary:hover{background:#0f4a2b}
+.btn-outline{background:#fff;color:#1a6b3f;border:1.5px solid #1a6b3f}
+.btn-outline:hover{background:#e8f5ee}
+.btn-sm{padding:5px 12px;font-size:12px}
+.log-entry{background:#f8faf9;border-radius:6px;padding:10px 12px;margin-top:8px;border-left:3px solid #1a6b3f}
+.log-entry .log-date{font-size:11px;color:#6b7280;font-weight:600}
+.log-entry .log-text{font-size:12px;color:#374151;margin-top:3px}
+.opp-banner{background:linear-gradient(135deg,#1a6b3f,#2d8a56);color:#fff;border-radius:12px;padding:24px;margin-bottom:24px}
+.opp-banner h2{font-size:20px;font-weight:800;margin-bottom:8px}
+.opp-banner p{font-size:13px;opacity:0.9;line-height:1.6}
+.opp-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:12px;margin-top:16px}
+.opp-stat{text-align:center;background:rgba(255,255,255,0.15);border-radius:8px;padding:12px}
+.opp-stat .n{font-size:22px;font-weight:800}
+.opp-stat .l{font-size:11px;opacity:0.85;margin-top:2px}
+.offers-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.offer-card{background:#fff;border-radius:10px;border:1px solid #e5e7eb;overflow:hidden;transition:box-shadow 0.2s}
+.offer-card:hover{box-shadow:0 4px 16px rgba(0,0,0,0.1)}
+.offer-header{background:#1a6b3f;color:#fff;padding:14px 16px}
+.offer-hotel{font-size:14px;font-weight:700}
+.offer-dest{font-size:11px;opacity:0.8;margin-top:2px}
+.offer-body{padding:14px 16px}
+.offer-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.offer-label{font-size:11px;color:#6b7280;font-weight:600}
+.offer-value{font-size:13px;font-weight:600;color:#1a1a1a}
+.offer-rate{font-size:20px;font-weight:800;color:#1a6b3f}
+.offer-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:10px}
+.chain-card{background:#fff;border-radius:10px;border:1px solid #e5e7eb;padding:18px;margin-bottom:14px}
+.chain-name{font-size:15px;font-weight:700;color:#1a1a1a;margin-bottom:4px}
+.chain-properties{font-size:12px;color:#6b7280;margin-bottom:10px}
+.chain-strategy{font-size:13px;color:#374151;line-height:1.6;margin-bottom:10px}
+.contact-template{background:#f8faf9;border-radius:6px;padding:12px;border-left:3px solid #1a6b3f;font-size:12px;color:#374151;line-height:1.7;white-space:pre-wrap;font-family:'Plus Jakarta Sans',sans-serif}
+.copy-btn{margin-top:8px;padding:5px 12px;background:#e8f5ee;color:#1a6b3f;border:1px solid #a7d4b8;border-radius:4px;font-size:11px;font-weight:600;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif}
+.copy-btn:hover{background:#d1f0de}
+.timeline{position:relative;padding-left:28px}
+.timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:#d1fae5}
+.timeline-item{position:relative;margin-bottom:20px}
+.timeline-item::before{content:'';position:absolute;left:-24px;top:4px;width:12px;height:12px;border-radius:50%;background:#1a6b3f;border:2px solid #fff;box-shadow:0 0 0 2px #1a6b3f}
+.timeline-item.future::before{background:#fff;border-color:#1a6b3f}
+.timeline-item .period{font-size:11px;font-weight:700;color:#1a6b3f;text-transform:uppercase;letter-spacing:0.5px}
+.timeline-item .action{font-size:13px;color:#1a1a1a;margin-top:2px;font-weight:500}
+.timeline-item .detail{font-size:12px;color:#6b7280;margin-top:3px}
+.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+@media(max-width:600px){.stats-grid{grid-template-columns:repeat(2,1fr)}.main{padding:16px 12px}}
+</style>
+</head>
+<body>
 
+<header class="site-header">
+  <div class="header-inner">
+    <span class="logo-badge">ORN</span>
+    <div class="header-title">
+      <h1>🇹🇭 Thailand Hotel Contracting Intelligence</h1>
+      <p>TripFactory Product Team · Internal Use Only · Updated April 2026</p>
+    </div>
+    <div class="header-meta">
+      <select class="dest-dropdown" onchange="navigateDest(this.value)">
+        <option value="">🌍 Switch Destination</option>
+        <option value="https://tripfactory-ajay.github.io/destination-uae/">🇦🇪 UAE</option>
+        <option value="" selected>🇹🇭 Thailand (Current)</option>
+        <option value="bali-contracting.html">🇮🇩 Bali</option>
+      </select>
+      <span class="status-pill">🚀 Opportunity Market</span>
+      <span class="urgency-pill">⚡ Act Now</span>
+    </div>
+  </div>
+</header>
+
+<nav class="tab-nav">
+  <div class="tab-nav-inner">
+    <button class="tab-btn active" onclick="showTab('briefing',this)">📋 Briefing</button>
+    <button class="tab-btn" onclick="showTab('hotels',this)">🏨 Hotels (52)</button>
+    <button class="tab-btn" onclick="showTab('flights',this)">✈️ Flights</button>
+    <button class="tab-btn" onclick="showTab('offers',this)">💰 Live Offers</button>
+    <button class="tab-btn" onclick="showTab('groups',this)">🏢 Hotel Groups</button>
+    <button class="tab-btn" onclick="showTab('action',this)">📅 Action Plan</button>
+  </div>
+</nav>
+
+<main class="main">
+
+<!-- TAB: BRIEFING -->
+<div id="tab-briefing" class="tab-panel active">
+  <div class="opp-banner">
+    <h2>🇹🇭 Thailand: India's Fastest-Growing Outbound Market</h2>
+    <p>India went visa-free for Thailand in November 2024, triggering a +40% surge in Indian arrivals. With 2.3M Indian visitors projected for 2026 and direct flights from 12 Indian cities, Thailand is the #1 opportunity market for TripFactory. Hotels are offering crisis-level rates to capture Indian FIT and group business — but only to operators who move first.</p>
+    <div class="opp-stats">
+      <div class="opp-stat"><div class="n">+40%</div><div class="l">Indian arrivals YoY</div></div>
+      <div class="opp-stat"><div class="n">2.3M</div><div class="l">Indian visitors 2026</div></div>
+      <div class="opp-stat"><div class="n">Visa-Free</div><div class="l">Since Nov 2024</div></div>
+      <div class="opp-stat"><div class="n">12</div><div class="l">Direct India routes</div></div>
+      <div class="opp-stat"><div class="n">52</div><div class="l">Target hotels</div></div>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div>
+      <div class="card">
+        <div class="card-header"><span class="card-icon">🎯</span><div><div class="card-title">Why Act Now</div><div class="card-subtitle">The contracting window is open — for a limited time</div></div></div>
+        <div class="alert alert-success"><strong>Visa-free travel</strong> since Nov 2024 has unleashed pent-up Indian demand. Hotels are actively seeking Indian operators who can deliver volume.</div>
+        <div class="alert alert-warning" style="margin-bottom:10px"><strong>Q4 2026 peak</strong> (Oct–Dec) is when Indian honeymoon and family travel peaks. Contracts need to be in place by July to guarantee allotments.</div>
+        <div class="alert alert-info"><strong>Competitor gap:</strong> MakeMyTrip and Thomas Cook are targeting the same hotels. First-mover operators get better rates, preferred allotment, and co-marketing budget.</div>
+      </div>
+      <div class="card">
+        <div class="card-header"><span class="card-icon">📋</span><div><div class="card-title">Must-Have Contract Terms</div><div class="card-subtitle">Non-negotiables for every Thailand hotel contract</div></div></div>
+        <ul style="padding-left:18px;line-height:2.1;font-size:13px;color:#374151">
+          <li><strong>Net rates</strong> — minimum 25% margin FIT, 30% groups</li>
+          <li><strong>No-deposit allotment</strong> — 5 rooms min for peak dates</li>
+          <li><strong>Free cancellation</strong> — 7 days FIT, 14 days groups</li>
+          <li><strong>Indian meal plan</strong> — buffet with Indian section or à la carte</li>
+          <li><strong>Early check-in / late check-out</strong> complimentary for ORN</li>
+          <li><strong>Jain/vegetarian meals</strong> available on 24h notice</li>
+          <li><strong>English + Hindi-speaking</strong> front desk contact</li>
+          <li><strong>Group rates</strong> — 1 FOC per 15 paying pax minimum</li>
+          <li><strong>Overriding commission</strong> — 3% quarterly above 100 room-nights</li>
+          <li><strong>Rate parity</strong> — ORN rates not undercut on OTAs</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="card">
+        <div class="card-header"><span class="card-icon">✨</span><div><div class="card-title">Value-Adds to Demand</div><div class="card-subtitle">What to ask for in every negotiation</div></div></div>
+        <ul style="padding-left:18px;line-height:2.1;font-size:13px;color:#374151">
+          <li>🌹 Honeymoon: rose petal turndown, sparkling wine, late checkout</li>
+          <li>🏊 Pool villa upgrade at net rate for honeymoon bookings</li>
+          <li>🚌 Airport transfer inclusion or discounted rate</li>
+          <li>🍽️ Daily breakfast included in net rate</li>
+          <li>🎂 Complimentary birthday/anniversary cake on request</li>
+          <li>📸 Photography session (30 min) for honeymoon packages</li>
+          <li>🌊 Snorkelling/kayak equipment complimentary (beach resorts)</li>
+          <li>🛁 Bathtub setup for anniversary/honeymoon rooms</li>
+          <li>💻 Co-branding in hotel newsletter to Indian corporate clients</li>
+          <li>🎯 Priority waitlist access during sold-out peak periods</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-header"><span class="card-icon">📊</span><div><div class="card-title">Key Traveller Segments</div><div class="card-subtitle">Indian traveller profiles for Thailand</div></div></div>
+        <div style="display:grid;gap:8px">
+          <div style="background:#f0f7f3;border-radius:8px;padding:12px;border-left:3px solid #1a6b3f"><div style="font-weight:700;font-size:13px;color:#1a6b3f">🌹 Honeymoon Couples</div><div style="font-size:12px;color:#374151;margin-top:3px">Phuket, Krabi, Koh Samui. ₹1.5–3L budget. Pool villas, spa, romance. Book 3–6 months ahead.</div></div>
+          <div style="background:#fffbeb;border-radius:8px;padding:12px;border-left:3px solid #f59e0b"><div style="font-weight:700;font-size:13px;color:#92400e">👨‍👩‍👧 Family Groups (4–8 pax)</div><div style="font-size:12px;color:#374151;margin-top:3px">Bangkok, Phuket. ₹80K–1.5L/person. Family rooms, Indian food, kids activities.</div></div>
+          <div style="background:#eff6ff;border-radius:8px;padding:12px;border-left:3px solid #3b82f6"><div style="font-weight:700;font-size:13px;color:#1e40af">🏢 MICE/Corporate Groups</div><div style="font-size:12px;color:#374151;margin-top:3px">Bangkok. 20–100 pax. Conference facilities, gala dinner, team activities.</div></div>
+          <div style="background:#fdf4ff;border-radius:8px;padding:12px;border-left:3px solid #a855f7"><div style="font-weight:700;font-size:13px;color:#6b21a8">👫 Young Couples/Friends</div><div style="font-size:12px;color:#374151;margin-top:3px">Bangkok, Phuket. ₹50–80K. Party-friendly, rooftop bars, nightlife, flexibility.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TAB: HOTELS -->
+<div id="tab-hotels" class="tab-panel">
+  <div class="stats-grid">
+    <div class="stat-card"><div class="num">52</div><div class="lbl">Target Hotels</div><div class="sub">4 destinations</div></div>
+    <div class="stat-card"><div class="num">18</div><div class="lbl">Bangkok</div><div class="sub">Business + leisure</div></div>
+    <div class="stat-card"><div class="num">16</div><div class="lbl">Phuket</div><div class="sub">Beach + luxury</div></div>
+    <div class="stat-card"><div class="num">10</div><div class="lbl">Krabi</div><div class="sub">Nature + romance</div></div>
+    <div class="stat-card"><div class="num">8</div><div class="lbl">Koh Samui</div><div class="sub">Honeymoon + spa</div></div>
+    <div class="stat-card"><div class="num" id="contracted-count">0</div><div class="lbl">Contracted</div><div class="sub" style="color:#dc2626">Start now!</div></div>
+  </div>
+  <div class="card" style="padding:16px">
+    <div class="table-controls">
+      <input type="text" class="search-input" id="hotel-search" placeholder="🔍 Search hotel name..." oninput="filterHotels()">
+      <select class="filter-select" id="filter-dest" onchange="filterHotels()">
+        <option value="">All Destinations</option>
+        <option value="Bangkok">Bangkok</option>
+        <option value="Phuket">Phuket</option>
+        <option value="Krabi">Krabi</option>
+        <option value="Koh Samui">Koh Samui</option>
+      </select>
+      <select class="filter-select" id="filter-tier" onchange="filterHotels()">
+        <option value="">All Tiers</option>
+        <option value="Tier 1">Tier 1 (Luxury)</option>
+        <option value="Tier 2">Tier 2 (Upscale)</option>
+        <option value="Tier 3">Tier 3 (Mid)</option>
+      </select>
+      <select class="filter-select" id="filter-status" onchange="filterHotels()">
+        <option value="">All Status</option>
+        <option value="Not Started">Not Started</option>
+        <option value="In Progress">In Progress</option>
+        <option value="Contracted">Contracted</option>
+      </select>
+      <span id="hotel-count" style="font-size:12px;color:#6b7280;white-space:nowrap">Showing 52 hotels</span>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Hotel Name</th><th>Destination</th><th>Tier</th><th>Stars</th><th>Crisis Rate</th><th>Normal Rate</th><th>Saving</th><th>Indian Meals</th><th>Status</th><th>Action</th></tr></thead>
+        <tbody id="hotel-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- TAB: FLIGHTS -->
+<div id="tab-flights" class="tab-panel">
+  <div class="alert alert-success"><strong>🛫 12 Indian cities</strong> now have direct or connecting routes to Bangkok (BKK) and Phuket (HKT). Flight connectivity is the #1 driver of the India–Thailand demand boom.</div>
+  <div class="stats-grid">
+    <div class="stat-card"><div class="num">12</div><div class="lbl">Indian Cities</div><div class="sub">With Thailand routes</div></div>
+    <div class="stat-card"><div class="num">8</div><div class="lbl">Airlines</div><div class="sub">Serving India–Thailand</div></div>
+    <div class="stat-card"><div class="num">~3h</div><div class="lbl">Shortest Flight</div><div class="sub">Kolkata to Bangkok</div></div>
+    <div class="stat-card"><div class="num">₹8,000</div><div class="lbl">From Fare (OW)</div><div class="sub">Low-season average</div></div>
+  </div>
+  <div class="card" style="margin-top:16px">
+    <div class="table-controls">
+      <input type="text" class="search-input" id="flight-search" placeholder="🔍 Search city or airline..." oninput="filterFlights()">
+      <select class="filter-select" id="filter-airline" onchange="filterFlights()">
+        <option value="">All Airlines</option>
+        <option value="IndiGo">IndiGo</option>
+        <option value="Air India">Air India</option>
+        <option value="Thai Airways">Thai Airways</option>
+        <option value="AirAsia">AirAsia</option>
+        <option value="Bangkok Airways">Bangkok Airways</option>
+      </select>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Indian City</th><th>Destination</th><th>Airlines</th><th>Frequency</th><th>Avg Fare (OW)</th><th>Flight Time</th><th>Status</th><th>Notes</th></tr></thead>
+        <tbody id="flight-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+  <div class="grid-2" style="margin-top:16px">
+    <div class="alert alert-info"><strong>Bangkok packages</strong> — Lead with Delhi, Mumbai, Bengaluru (daily direct IndiGo). Bundle IndiGo Group fares for 10+ pax (8–12% discount on group bookings).</div>
+    <div class="alert alert-warning"><strong>Krabi & Koh Samui</strong> — No direct flights from India. All connect via BKK. Factor in ₹4–6K connection cost per person in package pricing.</div>
+  </div>
+</div>
+
+<!-- TAB: OFFERS -->
+<div id="tab-offers" class="tab-panel">
+  <div class="alert alert-warning"><strong>⏰ Shoulder season crisis rates</strong> — Hotels actively seeking Indian operator partnerships. Rates indicative; confirm on contracting call. Valid Apr–Sep 2026.</div>
+  <div class="table-controls">
+    <input type="text" class="search-input" id="offer-search" placeholder="🔍 Search offers..." oninput="filterOffers()">
+    <select class="filter-select" id="filter-offer-dest" onchange="filterOffers()">
+      <option value="">All Destinations</option>
+      <option value="Bangkok">Bangkok</option>
+      <option value="Phuket">Phuket</option>
+      <option value="Krabi">Krabi</option>
+      <option value="Koh Samui">Koh Samui</option>
+    </select>
+    <select class="filter-select" id="filter-offer-type" onchange="filterOffers()">
+      <option value="">All Types</option>
+      <option value="FIT">FIT</option>
+      <option value="Group">Group</option>
+      <option value="Honeymoon">Honeymoon</option>
+      <option value="MICE">MICE</option>
+    </select>
+  </div>
+  <div class="offers-grid" id="offers-grid" style="margin-top:16px"></div>
+</div>
+
+<!-- TAB: HOTEL GROUPS -->
+<div id="tab-groups" class="tab-panel">
+  <div class="alert alert-info"><strong>Strategy:</strong> One chain-level relationship unlocks 8–15 properties simultaneously. Prioritise chain deals over property-by-property contracting.</div>
+  <div id="groups-container"></div>
+</div>
+
+<!-- TAB: ACTION PLAN -->
+<div id="tab-action" class="tab-panel">
+  <div class="opp-banner" style="margin-bottom:24px">
+    <h2>📅 18-Month Thailand Contracting Roadmap</h2>
+    <p>From first outreach to full deployment. Weeks 1–8 are critical: the shoulder season window (May–Sep 2026) is when hotels offer the deepest discounts to fill rooms before Indian peak season begins.</p>
+  </div>
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title" style="margin-bottom:16px;font-size:15px">🚀 Phase 1: Rapid Contracting (Now → Aug 2026)</div>
+      <div class="timeline">
+        <div class="timeline-item"><div class="period">Week 1–2 · April 2026</div><div class="action">Warm outreach to all 4 major chains</div><div class="detail">Centara, Dusit, Anantara, Marriott Thailand. Target: 4 chain-level calls confirmed.</div></div>
+        <div class="timeline-item"><div class="period">Week 3–4 · April 2026</div><div class="action">Priority contracting — Bangkok Tier 1 (6 hotels)</div><div class="detail">Mandarin Oriental, Peninsula, Capella, Rosewood, Park Hyatt, Four Seasons. Anchor hotels for MICE and luxury FIT.</div></div>
+        <div class="timeline-item"><div class="period">Week 5–6 · May 2026</div><div class="action">Phuket beach resort blitz — Tier 1 & 2 (10 hotels)</div><div class="detail">Amanpuri, Trisara, Keemala, Banyan Tree, Anantara Mai Khao, Rosewood Phuket. Allotment needed by June 1.</div></div>
+        <div class="timeline-item"><div class="period">Week 7–8 · May 2026</div><div class="action">Krabi + Koh Samui specialist resorts</div><div class="detail">Rayavadee, Pimalai, Four Seasons Koh Samui, Samui Tongsai Bay. Target 15 properties.</div></div>
+        <div class="timeline-item future"><div class="period">June–July 2026</div><div class="action">Rate-load, package build, agent training</div><div class="detail">Load contracted rates into TripFactory system. Build 8 signature Thailand packages. Train top 50 ORN agents.</div></div>
+        <div class="timeline-item future"><div class="period">August 2026</div><div class="action">Go-to-market: Thailand campaign launch</div><div class="detail">Digital ads targeting Indian tier-2 cities. Email blast to ORN B2B network. Target ₹2Cr bookings in first 30 days.</div></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title" style="margin-bottom:16px;font-size:15px">📈 Phase 2: Scale & Optimise (Sep 2026 → Sep 2027)</div>
+      <div class="timeline">
+        <div class="timeline-item future"><div class="period">Sep–Oct 2026</div><div class="action">Peak season activation — Indian festive travel</div><div class="detail">Diwali and Navratri packages. Pre-block rooms across 20 contracted properties. Sell-out target: 500 room-nights.</div></div>
+        <div class="timeline-item future"><div class="period">Nov–Dec 2026</div><div class="action">New Year's Eve packages — premium pricing</div><div class="detail">Rooftop NYE Bangkok. Beach bonfire Phuket. Package at 2x margin. Target 100 pax across 3 signature events.</div></div>
+        <div class="timeline-item future"><div class="period">Jan–Mar 2027</div><div class="action">Renegotiate top performers, add Tier 3</div><div class="detail">Renegotiate top 10 hotels with volume data. Add 15 Tier 3 properties for budget FIT (₹30–50K packages).</div></div>
+        <div class="timeline-item future"><div class="period">Apr–Jun 2027</div><div class="action">Expand to Chiang Mai + Pattaya</div><div class="detail">Contract 10 properties in Chiang Mai (culture, wellness) and Pattaya (family/budget).</div></div>
+        <div class="timeline-item future"><div class="period">Jul–Sep 2027</div><div class="action">Annual review + 2027 strategy</div><div class="detail">Review portfolio performance. Set 2028 targets: 100 contracted properties, ₹25Cr annual bookings (2027).</div></div>
+      </div>
+      <div style="background:#f0f7f3;border-radius:8px;padding:16px;margin-top:16px">
+        <div style="font-weight:700;font-size:14px;margin-bottom:12px;color:#1a1a1a">🎯 KPIs to Track</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:12px">
+          <div style="background:#fff;padding:10px;border-radius:6px;text-align:center"><div style="font-size:18px;font-weight:800;color:#1a6b3f">52</div><div style="color:#6b7280">Hotels to contract</div></div>
+          <div style="background:#fff;padding:10px;border-radius:6px;text-align:center"><div style="font-size:18px;font-weight:800;color:#1a6b3f">₹2Cr</div><div style="color:#6b7280">Month 1 booking target</div></div>
+          <div style="background:#fff;padding:10px;border-radius:6px;text-align:center"><div style="font-size:18px;font-weight:800;color:#1a6b3f">25%+</div><div style="color:#6b7280">Minimum net margin</div></div>
+          <div style="background:#fff;padding:10px;border-radius:6px;text-align:center"><div style="font-size:18px;font-weight:800;color:#1a6b3f">8</div><div style="color:#6b7280">Signature packages</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<!-- CONTACT MODAL -->
+<div class="modal-overlay" id="contact-modal">
+  <div class="modal">
+    <div class="modal-header">
+      <div><div class="modal-title" id="modal-hotel-name">Log Contact</div><div style="font-size:12px;color:#6b7280;margin-top:2px" id="modal-hotel-dest"></div></div>
+      <button class="modal-close" onclick="closeModal()">×</button>
+    </div>
+    <div class="form-group"><label class="form-label">Contact Person Name</label><input type="text" class="form-control" id="contact-name" placeholder="e.g. Khun Somchai — Sales Manager"></div>
+    <div class="form-group"><label class="form-label">Email Address</label><input type="email" class="form-control" id="contact-email" placeholder="sales@hotel.com"></div>
+    <div class="form-group"><label class="form-label">Phone / WhatsApp</label><input type="text" class="form-control" id="contact-phone" placeholder="+66 2 XXX XXXX"></div>
+    <div class="form-group"><label class="form-label">Status</label>
+      <select class="form-control" id="contact-status">
+        <option value="Not Started">Not Started</option>
+        <option value="In Progress">In Progress — First Contact Made</option>
+        <option value="In Progress">In Progress — Rates Requested</option>
+        <option value="In Progress">In Progress — Contract Under Review</option>
+        <option value="Contracted">Contracted ✅</option>
+      </select>
+    </div>
+    <div class="form-group"><label class="form-label">Notes / Log Entry</label><textarea class="form-control" id="contact-notes" rows="3" placeholder="What was discussed? Next steps?"></textarea></div>
+    <div style="display:flex;gap:10px;justify-content:flex-end">
+      <button class="btn btn-outline" onclick="closeModal()">Cancel</button>
+      <button class="btn btn-primary" onclick="saveContact()">💾 Save Log</button>
+    </div>
+    <div id="contact-history" style="margin-top:16px"></div>
+  </div>
+</div>
+
+<script>
+const HOTELS=[
+  {name:"Mandarin Oriental Bangkok",dest:"Bangkok",tier:"Tier 1",stars:"5",crisis:"$180",normal:"$420",saving:"57%",meals:"Yes",status:"Not Started",chain:"Mandarin Oriental"},
+  {name:"The Peninsula Bangkok",dest:"Bangkok",tier:"Tier 1",stars:"5",crisis:"$160",normal:"$380",saving:"58%",meals:"On Request",status:"Not Started",chain:"Peninsula"},
+  {name:"Capella Bangkok",dest:"Bangkok",tier:"Tier 1",stars:"5",crisis:"$220",normal:"$550",saving:"60%",meals:"On Request",status:"Not Started",chain:"Independent"},
+  {name:"Rosewood Bangkok",dest:"Bangkok",tier:"Tier 1",stars:"5",crisis:"$195",normal:"$480",saving:"59%",meals:"Yes",status:"Not Started",chain:"Rosewood"},
+  {name:"Park Hyatt Bangkok",dest:"Bangkok",tier:"Tier 1",stars:"5",crisis:"$185",normal:"$450",saving:"59%",meals:"Yes",status:"Not Started",chain:"Hyatt"},
+  {name:"Four Seasons Bangkok",dest:"Bangkok",tier:"Tier 1",stars:"5",crisis:"$210",normal:"$520",saving:"60%",meals:"Yes",status:"Not Started",chain:"Four Seasons"},
+  {name:"Banyan Tree Bangkok",dest:"Bangkok",tier:"Tier 1",stars:"5",crisis:"$145",normal:"$320",saving:"55%",meals:"Yes",status:"Not Started",chain:"Banyan Tree"},
+  {name:"Anantara Siam Bangkok",dest:"Bangkok",tier:"Tier 1",stars:"5",crisis:"$140",normal:"$300",saving:"53%",meals:"Yes",status:"Not Started",chain:"Anantara"},
+  {name:"Centara Grand CentralWorld",dest:"Bangkok",tier:"Tier 2",stars:"5",crisis:"$95",normal:"$200",saving:"53%",meals:"Yes",status:"Not Started",chain:"Centara"},
+  {name:"Dusit Thani Bangkok",dest:"Bangkok",tier:"Tier 2",stars:"5",crisis:"$90",normal:"$190",saving:"53%",meals:"Yes",status:"Not Started",chain:"Dusit"},
+  {name:"The Okura Prestige Bangkok",dest:"Bangkok",tier:"Tier 2",stars:"5",crisis:"$110",normal:"$240",saving:"54%",meals:"Yes",status:"Not Started",chain:"Okura"},
+  {name:"Pullman Bangkok Hotel G",dest:"Bangkok",tier:"Tier 2",stars:"5",crisis:"$80",normal:"$160",saving:"50%",meals:"Yes",status:"Not Started",chain:"Accor"},
+  {name:"Marriott Marquis Queen's Park",dest:"Bangkok",tier:"Tier 2",stars:"5",crisis:"$120",normal:"$260",saving:"54%",meals:"Yes",status:"Not Started",chain:"Marriott"},
+  {name:"Novotel Bangkok Platinum",dest:"Bangkok",tier:"Tier 2",stars:"4",crisis:"$65",normal:"$130",saving:"50%",meals:"Yes",status:"Not Started",chain:"Accor"},
+  {name:"Chatrium Hotel Riverside",dest:"Bangkok",tier:"Tier 3",stars:"5",crisis:"$70",normal:"$150",saving:"53%",meals:"Yes",status:"Not Started",chain:"Chatrium"},
+  {name:"Amari Watergate Bangkok",dest:"Bangkok",tier:"Tier 3",stars:"4",crisis:"$60",normal:"$120",saving:"50%",meals:"Yes",status:"Not Started",chain:"Onyx"},
+  {name:"Radisson Blu Plaza Bangkok",dest:"Bangkok",tier:"Tier 3",stars:"5",crisis:"$75",normal:"$155",saving:"52%",meals:"Yes",status:"Not Started",chain:"Radisson"},
+  {name:"Ibis Styles Bangkok Silom",dest:"Bangkok",tier:"Tier 3",stars:"3",crisis:"$38",normal:"$75",saving:"49%",meals:"No",status:"Not Started",chain:"Accor"},
+  {name:"Amanpuri Phuket",dest:"Phuket",tier:"Tier 1",stars:"5",crisis:"$450",normal:"$1,100",saving:"59%",meals:"On Request",status:"Not Started",chain:"Aman"},
+  {name:"Trisara Phuket",dest:"Phuket",tier:"Tier 1",stars:"5",crisis:"$380",normal:"$900",saving:"58%",meals:"On Request",status:"Not Started",chain:"Independent"},
+  {name:"Keemala Phuket",dest:"Phuket",tier:"Tier 1",stars:"5",crisis:"$320",normal:"$780",saving:"59%",meals:"Yes",status:"Not Started",chain:"Independent"},
+  {name:"Rosewood Phuket",dest:"Phuket",tier:"Tier 1",stars:"5",crisis:"$290",normal:"$700",saving:"59%",meals:"Yes",status:"Not Started",chain:"Rosewood"},
+  {name:"Anantara Mai Khao Phuket",dest:"Phuket",tier:"Tier 1",stars:"5",crisis:"$260",normal:"$600",saving:"57%",meals:"Yes",status:"Not Started",chain:"Anantara"},
+  {name:"Banyan Tree Phuket",dest:"Phuket",tier:"Tier 1",stars:"5",crisis:"$240",normal:"$560",saving:"57%",meals:"Yes",status:"Not Started",chain:"Banyan Tree"},
+  {name:"Four Seasons Phuket",dest:"Phuket",tier:"Tier 1",stars:"5",crisis:"$280",normal:"$650",saving:"57%",meals:"Yes",status:"Not Started",chain:"Four Seasons"},
+  {name:"Sri Panwa Phuket",dest:"Phuket",tier:"Tier 2",stars:"5",crisis:"$180",normal:"$400",saving:"55%",meals:"Yes",status:"Not Started",chain:"Independent"},
+  {name:"Paresa Resort Phuket",dest:"Phuket",tier:"Tier 2",stars:"5",crisis:"$160",normal:"$360",saving:"56%",meals:"Yes",status:"Not Started",chain:"Independent"},
+  {name:"Centara Grand Beach Phuket",dest:"Phuket",tier:"Tier 2",stars:"5",crisis:"$130",normal:"$280",saving:"54%",meals:"Yes",status:"Not Started",chain:"Centara"},
+  {name:"JW Marriott Phuket",dest:"Phuket",tier:"Tier 2",stars:"5",crisis:"$140",normal:"$300",saving:"53%",meals:"Yes",status:"Not Started",chain:"Marriott"},
+  {name:"The Nai Harn Phuket",dest:"Phuket",tier:"Tier 2",stars:"5",crisis:"$120",normal:"$260",saving:"54%",meals:"Yes",status:"Not Started",chain:"Independent"},
+  {name:"Pullman Phuket Arcadia",dest:"Phuket",tier:"Tier 3",stars:"5",crisis:"$85",normal:"$180",saving:"53%",meals:"Yes",status:"Not Started",chain:"Accor"},
+  {name:"Novotel Phuket Kamala",dest:"Phuket",tier:"Tier 3",stars:"4",crisis:"$65",normal:"$135",saving:"52%",meals:"Yes",status:"Not Started",chain:"Accor"},
+  {name:"Katathani Phuket",dest:"Phuket",tier:"Tier 3",stars:"5",crisis:"$90",normal:"$190",saving:"53%",meals:"Yes",status:"Not Started",chain:"Independent"},
+  {name:"Amari Phuket",dest:"Phuket",tier:"Tier 3",stars:"4",crisis:"$70",normal:"$145",saving:"52%",meals:"Yes",status:"Not Started",chain:"Onyx"},
+  {name:"Rayavadee Krabi",dest:"Krabi",tier:"Tier 1",stars:"5",crisis:"$280",normal:"$680",saving:"59%",meals:"Yes",status:"Not Started",chain:"Independent"},
+  {name:"Pimalai Resort Koh Lanta",dest:"Krabi",tier:"Tier 1",stars:"5",crisis:"$220",normal:"$520",saving:"58%",meals:"Yes",status:"Not Started",chain:"Independent"},
+  {name:"Anantara Si Kao Resort",dest:"Krabi",tier:"Tier 1",stars:"5",crisis:"$190",normal:"$440",saving:"57%",meals:"Yes",status:"Not Started",chain:"Anantara"},
+  {name:"The Tubkaak Krabi",dest:"Krabi",tier:"Tier 2",stars:"5",crisis:"$130",normal:"$280",saving:"54%",meals:"Yes",status:"Not Started",chain:"Independent"},
+  {name:"Beyond Resort Krabi",dest:"Krabi",tier:"Tier 2",stars:"4",crisis:"$110",normal:"$230",saving:"52%",meals:"Yes",status:"Not Started",chain:"Independent"},
+  {name:"Centara Grand Beach Krabi",dest:"Krabi",tier:"Tier 2",stars:"5",crisis:"$120",normal:"$260",saving:"54%",meals:"Yes",status:"Not Started",chain:"Centara"},
+  {name:"Holiday Inn Resort Krabi",dest:"Krabi",tier:"Tier 2",stars:"4",crisis:"$90",normal:"$190",saving:"53%",meals:"Yes",status:"Not Started",chain:"IHG"},
+  {name:"Ao Nang Cliff Beach Resort",dest:"Krabi",tier:"Tier 3",stars:"4",crisis:"$65",normal:"$135",saving:"52%",meals:"Yes",status:"Not Started",chain:"Independent"},
+  {name:"Bhu Nga Thani Krabi",dest:"Krabi",tier:"Tier 3",stars:"4",crisis:"$55",normal:"$115",saving:"52%",meals:"Yes",status:"Not Started",chain:"Independent"},
+  {name:"Krabi Resort",dest:"Krabi",tier:"Tier 3",stars:"3",crisis:"$42",normal:"$90",saving:"53%",meals:"No",status:"Not Started",chain:"Independent"},
+  {name:"Four Seasons Koh Samui",dest:"Koh Samui",tier:"Tier 1",stars:"5",crisis:"$350",normal:"$850",saving:"59%",meals:"Yes",status:"Not Started",chain:"Four Seasons"},
+  {name:"Samui Tongsai Bay",dest:"Koh Samui",tier:"Tier 1",stars:"5",crisis:"$260",normal:"$620",saving:"58%",meals:"Yes",status:"Not Started",chain:"Independent"},
+  {name:"Kamalaya Koh Samui",dest:"Koh Samui",tier:"Tier 1",stars:"5",crisis:"$280",normal:"$660",saving:"58%",meals:"Yes",status:"Not Started",chain:"Independent"},
+  {name:"Banyan Tree Samui",dest:"Koh Samui",tier:"Tier 1",stars:"5",crisis:"$240",normal:"$560",saving:"57%",meals:"Yes",status:"Not Started",chain:"Banyan Tree"},
+  {name:"InterContinental Koh Samui",dest:"Koh Samui",tier:"Tier 2",stars:"5",crisis:"$160",normal:"$350",saving:"54%",meals:"Yes",status:"Not Started",chain:"IHG"},
+  {name:"Centara Villas Samui",dest:"Koh Samui",tier:"Tier 2",stars:"4",crisis:"$110",normal:"$240",saving:"54%",meals:"Yes",status:"Not Started",chain:"Centara"},
+  {name:"Samui Palm Beach Resort",dest:"Koh Samui",tier:"Tier 3",stars:"4",crisis:"$70",normal:"$145",saving:"52%",meals:"Yes",status:"Not Started",chain:"Independent"},
+  {name:"New Star Beach Samui",dest:"Koh Samui",tier:"Tier 3",stars:"3",crisis:"$45",normal:"$95",saving:"53%",meals:"No",status:"Not Started",chain:"Independent"},
+];
+
+const FLIGHTS=[
+  {city:"Delhi",dest:"Bangkok (BKK)",airlines:"IndiGo, Air India, Thai Airways",freq:"3–4x daily",fare:"₹10,000–18,000",time:"4h 30m",status:"Active",notes:"Best connectivity; IndiGo dominates"},
+  {city:"Mumbai",dest:"Bangkok (BKK)",airlines:"IndiGo, Air India, Thai Airways",freq:"2–3x daily",fare:"₹9,500–17,000",time:"3h 45m",status:"Active",notes:"Strong honeymoon demand"},
+  {city:"Bengaluru",dest:"Bangkok (BKK)",airlines:"IndiGo, AirAsia, Thai Airways",freq:"2x daily",fare:"₹8,000–15,000",time:"3h 30m",status:"Active",notes:"IT crowd; weekend breaks"},
+  {city:"Chennai",dest:"Bangkok (BKK)",airlines:"IndiGo, Thai Airways",freq:"1–2x daily",fare:"₹7,500–14,000",time:"2h 50m",status:"Active",notes:"Shortest flight; group demand"},
+  {city:"Kolkata",dest:"Bangkok (BKK)",airlines:"IndiGo, Air India",freq:"1x daily",fare:"₹8,500–14,000",time:"2h 20m",status:"Active",notes:"Closest Indian city to BKK"},
+  {city:"Hyderabad",dest:"Bangkok (BKK)",airlines:"IndiGo",freq:"1x daily",fare:"₹9,000–16,000",time:"3h 40m",status:"Active",notes:"Corporate & IT sector travel"},
+  {city:"Ahmedabad",dest:"Bangkok (BKK)",airlines:"IndiGo",freq:"4x weekly",fare:"₹10,500–18,000",time:"4h 50m",status:"Active",notes:"High family group demand"},
+  {city:"Pune",dest:"Bangkok (BKK)",airlines:"IndiGo",freq:"3x weekly",fare:"₹10,000–17,000",time:"4h",status:"Active",notes:"Growing leisure market"},
+  {city:"Cochin",dest:"Bangkok (BKK)",airlines:"Air India, IndiGo",freq:"3x weekly",fare:"₹9,000–15,000",time:"3h 20m",status:"Active",notes:"Strong NRI & honeymoon segment"},
+  {city:"Delhi",dest:"Phuket (HKT)",airlines:"IndiGo (seasonal), Bangkok Airways via BKK",freq:"3–4x weekly",fare:"₹15,000–28,000",time:"6h 30m",status:"Active",notes:"Direct IndiGo seasonal; BA codeshare year-round"},
+  {city:"Mumbai",dest:"Phuket (HKT)",airlines:"IndiGo (seasonal), Bangkok Airways via BKK",freq:"3x weekly",fare:"₹13,000–25,000",time:"5h 45m",status:"Active",notes:"Strong honeymoon Mumbai→Phuket"},
+  {city:"Bengaluru",dest:"Phuket (HKT)",airlines:"AirAsia (via KL), Bangkok Airways (via BKK)",freq:"2–3x weekly",fare:"₹12,000–22,000",time:"6h",status:"Active",notes:"IT professionals beach breaks"},
+];
+
+const OFFERS=[
+  {hotel:"Mandarin Oriental Bangkok",dest:"Bangkok",type:"MICE",rate:"$170/night",saving:"60% off rack",validity:"May–Aug 2026",capacity:"1–200 pax",includes:"Breakfast, 1hr meeting room, airport transfer",tags:["MICE","Luxury","Bangkok"]},
+  {hotel:"Banyan Tree Bangkok",dest:"Bangkok",type:"Honeymoon",rate:"$135/night",saving:"58% off rack",validity:"Apr–Sep 2026",capacity:"2 pax",includes:"Daily breakfast, $100 spa credit, late checkout",tags:["Honeymoon","Luxury","Bangkok"]},
+  {hotel:"Centara Grand CentralWorld",dest:"Bangkok",type:"FIT",rate:"$88/night",saving:"56% off rack",validity:"May–Oct 2026",capacity:"1–50 pax",includes:"Breakfast, Indian buffet nightly",tags:["FIT","Bangkok","Indian Food"]},
+  {hotel:"Dusit Thani Bangkok",dest:"Bangkok",type:"Group",rate:"$82/night",saving:"57% off rack",validity:"Jun–Sep 2026",capacity:"15–80 pax",includes:"Breakfast, 1 FOC per 15, Indian food available",tags:["Group","Bangkok","Volume"]},
+  {hotel:"Amanpuri Phuket",dest:"Phuket",type:"Honeymoon",rate:"$420/night",saving:"62% off rack",validity:"May–Sep 2026",capacity:"2 pax",includes:"All meals, spa, speedboat transfer, villa upgrade",tags:["Honeymoon","Ultra-Luxury","Phuket"]},
+  {hotel:"Keemala Phuket",dest:"Phuket",type:"Honeymoon",rate:"$295/night",saving:"62% off rack",validity:"Apr–Aug 2026",capacity:"2 pax",includes:"Breakfast, honeymoon setup, photography session",tags:["Honeymoon","Luxury","Phuket"]},
+  {hotel:"Banyan Tree Phuket",dest:"Phuket",type:"FIT",rate:"$220/night",saving:"61% off rack",validity:"May–Oct 2026",capacity:"2–10 pax",includes:"Breakfast, pool villa, Indian food on request",tags:["FIT","Luxury","Phuket"]},
+  {hotel:"Centara Grand Phuket",dest:"Phuket",type:"Group",rate:"$118/night",saving:"58% off rack",validity:"May–Sep 2026",capacity:"20–100 pax",includes:"Breakfast, Indian buffet, group airport transfer",tags:["Group","Phuket","Indian Food"]},
+  {hotel:"Rayavadee Krabi",dest:"Krabi",type:"Honeymoon",rate:"$260/night",saving:"62% off rack",validity:"Apr–Sep 2026",capacity:"2 pax",includes:"All meals, snorkelling, kayak, romantic setup",tags:["Honeymoon","Luxury","Krabi"]},
+  {hotel:"Pimalai Koh Lanta",dest:"Krabi",type:"FIT",rate:"$200/night",saving:"62% off rack",validity:"May–Sep 2026",capacity:"2–8 pax",includes:"Breakfast, water sports, nature tours",tags:["FIT","Krabi","Nature"]},
+  {hotel:"Four Seasons Koh Samui",dest:"Koh Samui",type:"Honeymoon",rate:"$320/night",saving:"62% off rack",validity:"Apr–Sep 2026",capacity:"2 pax",includes:"Breakfast, villa, spa, photography, romance setup",tags:["Honeymoon","Ultra-Luxury","Koh Samui"]},
+  {hotel:"Banyan Tree Samui",dest:"Koh Samui",type:"Honeymoon",rate:"$220/night",saving:"61% off rack",validity:"May–Sep 2026",capacity:"2 pax",includes:"Breakfast, sunset cruise, spa treatment",tags:["Honeymoon","Luxury","Koh Samui"]},
+  {hotel:"InterContinental Koh Samui",dest:"Koh Samui",type:"FIT",rate:"$145/night",saving:"59% off rack",validity:"May–Aug 2026",capacity:"2–20 pax",includes:"Breakfast, beach club, Indian food on request",tags:["FIT","Koh Samui","IHG"]},
+];
+
+const GROUPS=[
+  {name:"Centara Hotels & Resorts",logo:"🏨",props:"30+ Thailand properties: Bangkok, Phuket, Krabi, Koh Samui, Hua Hin",contact:"Regional Sales Director — India Market: sales-india@centarahotelsresorts.com | +66 2 769 1234",strategy:"Centara is the most India-ready chain in Thailand. Their Dine Around programme means Indian food is standard at all properties. One chain deal covers 8 target properties. Push for a Master Agreement. Volume bonus kicks in at 500 room-nights/quarter.",template:`Dear [Name] at Centara Hotels,
+
+My name is [Your Name] from TripFactory/ORN — India's top B2B travel platform with 8,000+ active travel agents.
+
+Following India's visa-free access to Thailand (Nov 2024), we are seeing a 40%+ surge in Indian demand. We are building our Thailand portfolio urgently and Centara is our first-choice chain partner.
+
+We would like to explore a Master Agreement covering Bangkok, Phuket, Krabi, and Koh Samui, targeting:
+• 2,000+ room-nights in Year 1
+• FIT net rates + group rates + MICE packages
+• Indian meal plan inclusion as standard
+
+Could we schedule a 30-minute call this week? We are ready to move to contract within 2 weeks.
+
+Best regards,
+[Name] | [Phone]`},
+  {name:"Dusit International",logo:"👑",props:"15+ Thailand properties. Key: Dusit Thani Bangkok (post-renovation), dusitD2 Chiang Mai, Dusit Princess Srinakarin",contact:"VP Commercial — India & South Asia: india@dusit.com | +66 2 200 9999",strategy:"Thai-owned chain with strong government connections, actively building Indian market share. Dusit Thani Bangkok just completed a USD 350M renovation and needs Indian volume. Lead with MICE — their ballroom and event spaces are their strongest sell for Indian corporate groups.",template:`Dear [Name] at Dusit International,
+
+I am reaching out from TripFactory/ORN — India's leading B2B travel platform managing 8,000+ travel agents.
+
+India's visa-free Thailand policy is generating unprecedented demand, and we are building Dusit as our anchor Bangkok and MICE partner. The newly renovated Dusit Thani Bangkok is generating strong interest from our corporate clients.
+
+We are looking to place 500+ group room-nights in FY26-27 and would love to discuss:
+• Preferred MICE rates for 20–150 pax groups
+• FIT net rates for our honeymoon and leisure segment
+• Co-marketing opportunity for our India launch
+
+Can we set up a call this week?
+
+Warm regards,
+[Name] | [Phone]`},
+  {name:"Anantara / Minor Hotels",logo:"🌿",props:"20+ Thailand properties. Key: Anantara Siam Bangkok, Anantara Mai Khao Phuket, Anantara Si Kao Krabi, Avani+ properties",contact:"Director of Sales — South Asia: southasia.sales@minorhotels.com | +66 2 365 8000",strategy:"Minor Hotels (parent of Anantara) is one of Thailand's largest operators. Anantara targets the luxury-experiential segment — perfect for Indian honeymoon and wellness. One negotiation with Minor's regional office covers 8 target properties across Anantara and Avani brands.",template:`Dear [Name] at Minor Hotels,
+
+Greetings from TripFactory/ORN, India's top B2B platform with 8,000+ active agents.
+
+We are building a premium Thailand portfolio to capture the post-visa-free India surge, and Anantara is central to our luxury offering. Your properties in Bangkok, Phuket, and Krabi are top requests from our honeymoon segment.
+
+We would like to discuss:
+• Anantara luxury FIT rates (honeymoon focus)
+• Avani group rates (20–80 pax MICE)
+• Combined volume thresholds across the portfolio
+
+We are targeting contract execution within 3 weeks. Available for a call this week?
+
+Best regards,
+[Name] | [Phone]`},
+  {name:"Banyan Tree Group",logo:"🌳",props:"5 Thailand resorts. Key: Banyan Tree Bangkok, Banyan Tree Phuket (pool villas), Banyan Tree Samui",contact:"Global Sales — India: global.sales@banyantree.com | +65 6849 5888 (Singapore HQ)",strategy:"Banyan Tree is the #1 Indian honeymoon brand for Thailand. They have a strong India presence and are willing to offer deep net rates to ORN-scale operators. The Vertigo rooftop restaurant at BT Bangkok is a massive pull for Indian couples. Lead with honeymoon packages and ask for dedicated Indian market allotment.",template:`Dear [Name] at Banyan Tree,
+
+I'm from TripFactory/ORN — we manage India's largest network of travel agents (8,000+) and are building our Thailand portfolio for the visa-free demand boom.
+
+Banyan Tree is our #1 request for honeymoon packages. We are seeing 3x demand for Phuket pool villas and the Bangkok rooftop experience.
+
+We would love to discuss:
+• Honeymoon net rates across Bangkok, Phuket, and Samui
+• Dedicated allotment of 5 pool villas/night in Phuket (Apr–Oct)
+• Complimentary romance add-ons for ORN packages
+
+Our target is 200+ honeymoon room-nights in the next 6 months. Can we speak this week?
+
+Kind regards,
+[Name] | [Phone]`},
+  {name:"Marriott International Thailand",logo:"🔷",props:"30+ Thailand properties. Key: Marriott Marquis Bangkok, JW Marriott Phuket, Four Seasons (managed), Westin Siray Bay Phuket",contact:"Area Director of Sales — South Asia: thailand.sales@marriott.com | Contact via GSO India Mumbai",strategy:"Marriott's scale in Thailand is unmatched. Lead with Marriott Marquis for MICE (2,500-seat ballroom), JW Phuket for luxury FIT, and Courtyard/Moxy for group budget segment. Ask for 'Preferred Operator' status which gives ORN preferred allotment and 2% extra commission.",template:`Dear [Name] at Marriott International,
+
+I'm writing from TripFactory/ORN — India's leading B2B travel platform.
+
+With India's visa-free Thailand access now live, we are targeting 5,000+ Thailand room-nights through our network in FY26-27. Marriott's portfolio is central to our product strategy across all price segments.
+
+We would like to explore:
+• Preferred Operator Agreement covering Marriott International Thailand
+• MICE rates for Marriott Marquis Bangkok (100–2,000 pax)
+• FIT rates for JW Marriott Phuket
+• Group rates for Courtyard/Moxy budget segment
+
+Could you connect us with the Thailand commercial team for a joint call?
+
+Best regards,
+[Name] | [Phone]`},
+];
+
+// ---- RENDER ----
+function renderHotels(data){
+  const tb=document.getElementById('hotel-tbody');
+  tb.innerHTML='';
+  data.forEach(h=>{
+    const stored=getContacts(h.name);
+    const ls=stored.length?stored[stored.length-1].status:h.status;
+    const tc=h.tier==='Tier 1'?'tier1':h.tier==='Tier 2'?'tier2':'tier3';
+    const sc=ls==='Contracted'?'badge-green':ls.includes('Progress')?'badge-yellow':'badge-gray';
+    tb.innerHTML+=`<tr>
+      <td><strong style="font-size:13px">${h.name}</strong><br><span style="font-size:11px;color:#6b7280">${h.chain}</span></td>
+      <td>${h.dest}</td>
+      <td><span class="badge ${tc}">${h.tier}</span></td>
+      <td>${h.stars}★</td>
+      <td style="color:#1a6b3f;font-weight:700">${h.crisis}/night</td>
+      <td style="color:#9ca3af;text-decoration:line-through">${h.normal}</td>
+      <td><span class="badge badge-green">${h.saving} off</span></td>
+      <td>${h.meals==='Yes'?'<span class="badge badge-green">✓ Yes</span>':h.meals==='On Request'?'<span class="badge badge-yellow">On Request</span>':'<span class="badge badge-gray">No</span>'}</td>
+      <td><span class="badge ${sc}">${ls}</span></td>
+      <td><button class="btn btn-outline btn-sm" onclick='openModal(${JSON.stringify(h)})'>📝 Log</button></td>
+    </tr>`;
+  });
+  document.getElementById('hotel-count').textContent=`Showing ${data.length} hotels`;
+  const cc=HOTELS.filter(h=>{const s=getContacts(h.name);return s.length&&s[s.length-1].status==='Contracted';}).length;
+  document.getElementById('contracted-count').textContent=cc;
+}
+
+function filterHotels(){
+  const s=document.getElementById('hotel-search').value.toLowerCase();
+  const d=document.getElementById('filter-dest').value;
+  const t=document.getElementById('filter-tier').value;
+  const st=document.getElementById('filter-status').value;
+  renderHotels(HOTELS.filter(h=>{
+    const ls=(()=>{const c=getContacts(h.name);return c.length?c[c.length-1].status:h.status;})();
+    return(!s||h.name.toLowerCase().includes(s))&&(!d||h.dest===d)&&(!t||h.tier===t)&&(!st||ls.includes(st));
+  }));
+}
+
+function renderFlights(data){
+  const tb=document.getElementById('flight-tbody');
+  tb.innerHTML='';
+  data.forEach(f=>{
+    tb.innerHTML+=`<tr>
+      <td><strong>${f.city}</strong></td>
+      <td>${f.dest}</td>
+      <td style="font-size:12px">${f.airlines}</td>
+      <td>${f.freq}</td>
+      <td style="color:#1a6b3f;font-weight:600">${f.fare}</td>
+      <td>${f.time}</td>
+      <td><span class="badge badge-green">${f.status}</span></td>
+      <td style="font-size:11px;color:#6b7280">${f.notes}</td>
+    </tr>`;
+  });
+}
+
+function filterFlights(){
+  const s=document.getElementById('flight-search').value.toLowerCase();
+  const a=document.getElementById('filter-airline').value;
+  renderFlights(FLIGHTS.filter(f=>(!s||f.city.toLowerCase().includes(s)||f.airlines.toLowerCase().includes(s)||f.dest.toLowerCase().includes(s))&&(!a||f.airlines.includes(a))));
+}
+
+function renderOffers(data){
+  const g=document.getElementById('offers-grid');
+  g.innerHTML=data.length?data.map(o=>`<div class="offer-card">
+    <div class="offer-header"><div class="offer-hotel">${o.hotel}</div><div class="offer-dest">📍 ${o.dest} · ${o.type}</div></div>
+    <div class="offer-body">
+      <div class="offer-row"><span class="offer-label">Net Rate</span><span class="offer-rate">${o.rate}</span></div>
+      <div class="offer-row"><span class="offer-label">Saving vs rack</span><span class="offer-value" style="color:#1a6b3f">${o.saving}</span></div>
+      <div class="offer-row"><span class="offer-label">Valid</span><span class="offer-value" style="font-size:12px">${o.validity}</span></div>
+      <div class="offer-row"><span class="offer-label">Capacity</span><span class="offer-value" style="font-size:12px">${o.capacity}</span></div>
+      <div style="font-size:11px;color:#6b7280;margin:8px 0;border-top:1px solid #f3f4f6;padding-top:8px"><strong>Includes:</strong> ${o.includes}</div>
+      <div class="offer-tags">${o.tags.map(t=>`<span class="badge badge-teal">${t}</span>`).join('')}</div>
+    </div>
+  </div>`).join(''):'<div style="color:#6b7280;padding:20px;grid-column:1/-1">No offers match your filters.</div>';
+}
+
+function filterOffers(){
+  const s=document.getElementById('offer-search').value.toLowerCase();
+  const d=document.getElementById('filter-offer-dest').value;
+  const t=document.getElementById('filter-offer-type').value;
+  renderOffers(OFFERS.filter(o=>(!s||o.hotel.toLowerCase().includes(s)||o.tags.join(' ').toLowerCase().includes(s))&&(!d||o.dest===d)&&(!t||o.type===t)));
+}
+
+function renderGroups(){
+  document.getElementById('groups-container').innerHTML=GROUPS.map(g=>`<div class="chain-card">
+    <div class="chain-name">${g.logo} ${g.name}</div>
+    <div class="chain-properties">${g.props}</div>
+    <div style="font-size:12px;color:#1a6b3f;margin-bottom:10px">📞 ${g.contact}</div>
+    <div class="chain-strategy">${g.strategy}</div>
+    <div style="font-size:12px;font-weight:600;color:#374151;margin-bottom:6px">📧 Opening Message Template:</div>
+    <div class="contact-template">${g.template}</div>
+    <button class="copy-btn" onclick="copyTpl(this)">📋 Copy Template</button>
+  </div>`).join('');
+}
+
+// ---- MODAL ----
+let currentHotel='';
+function openModal(h){
+  currentHotel=h.name;
+  document.getElementById('modal-hotel-name').textContent=h.name;
+  document.getElementById('modal-hotel-dest').textContent=`📍 ${h.dest} · ${h.tier} · ${h.stars}★`;
+  ['contact-name','contact-email','contact-phone','contact-notes'].forEach(id=>document.getElementById(id).value='');
+  loadHistory();
+  document.getElementById('contact-modal').classList.add('open');
+}
+function closeModal(){document.getElementById('contact-modal').classList.remove('open');}
+function saveContact(){
+  const entry={ts:new Date().toLocaleString(),name:document.getElementById('contact-name').value,email:document.getElementById('contact-email').value,phone:document.getElementById('contact-phone').value,status:document.getElementById('contact-status').value,notes:document.getElementById('contact-notes').value};
+  const k='orn_th_'+currentHotel;
+  const arr=JSON.parse(localStorage.getItem(k)||'[]');
+  arr.push(entry);localStorage.setItem(k,JSON.stringify(arr));
+  loadHistory();filterHotels();document.getElementById('contact-notes').value='';
+}
+function loadHistory(){
+  const arr=getContacts(currentHotel);
+  const d=document.getElementById('contact-history');
+  d.innerHTML=arr.length?'<div style="font-size:12px;font-weight:600;color:#374151;margin-bottom:8px">📋 Contact History:</div>'+arr.slice().reverse().map(e=>`<div class="log-entry"><div class="log-date">${e.ts} · <strong>${e.status}</strong>${e.name?' · '+e.name:''}</div>${e.email?`<div class="log-text">✉️ ${e.email}${e.phone?' · 📞 '+e.phone:''}</div>`:''}${e.notes?`<div class="log-text">📝 ${e.notes}</div>`:''}</div>`).join(''):'';
+}
+function getContacts(n){return JSON.parse(localStorage.getItem('orn_th_'+n)||'[]');}
+document.getElementById('contact-modal').addEventListener('click',function(e){if(e.target===this)closeModal();});
+
+// ---- UTILS ----
+function showTab(id,btn){
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  btn.classList.add('active');
+}
+function navigateDest(url){if(url&&url!=='#'&&!url.startsWith('#'))window.open(url,'_blank');}
+function copyTpl(btn){
+  const t=btn.closest('.chain-card').querySelector('.contact-template').textContent;
+  navigator.clipboard.writeText(t).then(()=>{btn.textContent='✅ Copied!';setTimeout(()=>btn.textContent='📋 Copy Template',2000);});
+}
+
+// ---- INIT ----
+renderHotels(HOTELS);
+renderFlights(FLIGHTS);
+renderOffers(OFFERS);
+renderGroups();
+</script>
+</body>
+</html>
