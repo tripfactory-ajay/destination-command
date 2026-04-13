@@ -9,16 +9,14 @@
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Plus Jakarta Sans',sans-serif;background:#0a0c12;color:#fff;min-height:100vh}
 
-/* HEADER */
 .header{background:rgba(10,12,18,0.9);border-bottom:1px solid rgba(255,255,255,0.08);padding:10px 32px;display:flex;align-items:center;gap:14px;position:sticky;top:0;z-index:100;backdrop-filter:blur(12px)}
 .header-logo{height:32px;width:auto}
 .header-divider{width:1px;height:26px;background:rgba(255,255,255,0.12)}
 .header-title h1{font-size:14px;font-weight:700;color:#fff;line-height:1.2}
 .header-title p{font-size:11px;color:#6b7280;margin-top:1px}
 
-/* HERO */
 .hero{position:relative;overflow:hidden;min-height:340px;display:flex;align-items:center;justify-content:center}
-.hero-img{position:absolute;inset:0;background-image:url('https://images.unsplash.com/photo-1488085061387-422e29b40080?w=1800&q=80');background-size:cover;background-position:center 40%;filter:brightness(0.35) saturate(1.2)}
+.hero-img{position:absolute;inset:0;background-image:url('images/hero-bg.jpg');background-size:cover;background-position:center 40%;filter:brightness(0.35) saturate(1.2)}
 .hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,12,18,0.2) 0%,rgba(10,12,18,0.5) 60%,rgba(10,12,18,1) 100%)}
 .hero-glow{position:absolute;inset:0;background:radial-gradient(ellipse 70% 50% at 50% 30%,rgba(217,119,6,0.18) 0%,transparent 70%);pointer-events:none}
 .hero-inner{position:relative;z-index:1;text-align:center;padding:48px 32px 40px;max-width:860px;margin:0 auto}
@@ -33,32 +31,28 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:#0a0c12;color:#fff;mi
 .stat .n{font-size:22px;font-weight:800;color:#fff;line-height:1}
 .stat .l{font-size:9px;color:#6b7280;margin-top:4px;font-weight:600;text-transform:uppercase;letter-spacing:0.8px}
 
-/* SECTION */
 .section{padding:28px 32px 48px;max-width:1440px;margin:0 auto}
 .section-header{display:flex;align-items:center;gap:12px;margin-bottom:20px}
 .section-label{font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:#6b7280}
 .section-line{flex:1;height:1px;background:rgba(255,255,255,0.06)}
 
-/* 4-ACROSS GRID */
 .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
 
-/* CARD */
 .dest-card{border-radius:14px;overflow:hidden;transition:transform 0.22s,box-shadow 0.22s;text-decoration:none;display:block;border:1px solid rgba(255,255,255,0.07);background:#13161f}
 .dest-card:hover{transform:translateY(-4px);box-shadow:0 20px 48px rgba(0,0,0,0.6)}
 .dest-card.is-coming{cursor:default}
 .dest-card.is-coming:hover{transform:none;box-shadow:none}
 
-/* CARD IMAGE */
-.card-img{height:160px;position:relative;overflow:hidden}
+.card-img{height:160px;position:relative;overflow:hidden;background:#1a1d2e}
 .card-img img{width:100%;height:100%;object-fit:cover;transition:transform 0.4s;display:block}
 .dest-card:hover .card-img img{transform:scale(1.06)}
-.card-img-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.55) 100%)}
-.card-img-coming{position:absolute;inset:0;background:rgba(10,12,18,0.65);display:flex;align-items:center;justify-content:center}
+.card-img-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.05) 0%,rgba(0,0,0,0.55) 100%)}
+.card-img-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:48px;opacity:0.15}
+.card-img-coming{position:absolute;inset:0;background:rgba(10,12,18,0.5);display:flex;align-items:center;justify-content:center}
 .coming-label{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);border-radius:6px;padding:5px 12px;font-size:11px;font-weight:700;color:#6b7280;backdrop-filter:blur(4px)}
 .card-flag{position:absolute;top:12px;left:12px;font-size:22px;filter:drop-shadow(0 2px 6px rgba(0,0,0,0.5))}
 .card-badge{position:absolute;top:12px;right:12px;font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;backdrop-filter:blur(4px)}
 
-/* CARD BODY */
 .card-body{padding:14px 16px 16px}
 .card-name{font-size:14px;font-weight:800;color:#fff;margin-bottom:3px;line-height:1.3}
 .card-tagline{font-size:11px;color:#9ca3af;margin-bottom:10px;line-height:1.5}
@@ -68,41 +62,44 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:#0a0c12;color:#fff;mi
 .card-tags{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:12px}
 .tag{font-size:10px;font-weight:600;padding:2px 7px;border-radius:20px}
 .card-footer{display:flex;align-items:center;justify-content:space-between}
-.cta-btn{padding:7px 13px;border-radius:7px;font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;font-weight:700;cursor:pointer;border:none;transition:all 0.2s;letter-spacing:0.2px}
-.status-dot{font-size:10px;font-weight:600}
+.cta-btn{padding:7px 13px;border-radius:7px;font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;font-weight:700;cursor:pointer;border:none;transition:all 0.2s}
+.status-dot{font-size:10px;font-weight:600;color:#6b7280}
 
-/* BRAND COLOURS */
+.c-uae .card-img{background:linear-gradient(135deg,#3d0000,#1a0000)}
 .c-uae .card-badge{background:rgba(204,0,0,0.7);color:#fca5a5}
 .c-uae .meta-item .n{color:#f87171}
 .c-uae .tag{background:rgba(204,0,0,0.18);color:#fca5a5;border:1px solid rgba(204,0,0,0.3)}
 .c-uae .cta-btn{background:#cc0000;color:#fff}
 .c-uae .cta-btn:hover{background:#a80000}
 
+.c-thailand .card-img{background:linear-gradient(135deg,#003d1a,#001a0b)}
 .c-thailand .card-badge{background:rgba(26,107,63,0.7);color:#86efac}
 .c-thailand .meta-item .n{color:#4ade80}
 .c-thailand .tag{background:rgba(26,107,63,0.18);color:#86efac;border:1px solid rgba(26,107,63,0.3)}
 .c-thailand .cta-btn{background:#1a6b3f;color:#fff}
 .c-thailand .cta-btn:hover{background:#0f4a2b}
 
+.c-bali .card-img{background:linear-gradient(135deg,#2e1065,#150724)}
 .c-bali .card-badge{background:rgba(124,58,237,0.7);color:#ddd6fe}
 .c-bali .meta-item .n{color:#c4b5fd}
 .c-bali .tag{background:rgba(124,58,237,0.18);color:#ddd6fe;border:1px solid rgba(124,58,237,0.3)}
 .c-bali .cta-btn{background:#7c3aed;color:#fff}
 .c-bali .cta-btn:hover{background:#5b21b6}
 
+.c-sg .card-img{background:linear-gradient(135deg,#3d2500,#1a1000)}
 .c-sg .card-badge{background:rgba(217,119,6,0.7);color:#fde68a}
 .c-sg .meta-item .n{color:#fcd34d}
 .c-sg .tag{background:rgba(217,119,6,0.18);color:#fde68a;border:1px solid rgba(217,119,6,0.3)}
 .c-sg .cta-btn{background:#d97706;color:#fff}
 .c-sg .cta-btn:hover{background:#b45309}
 
+.c-coming .card-img{background:#0f1117}
 .c-coming .card-name{color:#4b5563}
 .c-coming .card-tagline{color:#374151}
 .c-coming .meta-item .n{color:#374151}
 .c-coming .tag{background:rgba(255,255,255,0.04);color:#4b5563;border:1px solid rgba(255,255,255,0.07)}
 .c-coming .cta-btn{background:#1e2130;color:#4b5563;cursor:default;border:1px solid rgba(255,255,255,0.06)}
 
-/* FOOTER */
 .footer{border-top:1px solid rgba(255,255,255,0.06);padding:20px 32px;display:flex;align-items:center;justify-content:center;gap:16px}
 .footer-logo{height:18px;opacity:0.25}
 .footer p{font-size:11px;color:#374151}
@@ -114,7 +111,6 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:#0a0c12;color:#fff;mi
   .section{padding:20px 16px 36px}
   .grid{grid-template-columns:1fr}
   .header{padding:10px 16px}
-  .stats-row{max-width:100%}
 }
 </style>
 </head>
@@ -153,10 +149,9 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:#0a0c12;color:#fff;mi
   </div>
   <div class="grid">
 
-    <!-- UAE -->
     <a href="uae.html" class="dest-card c-uae">
       <div class="card-img">
-        <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=600&q=80" alt="Dubai skyline" loading="lazy">
+        <img src="images/uae.jpg" alt="UAE" onerror="this.style.display='none'">
         <div class="card-img-overlay"></div>
         <div class="card-flag">🇦🇪</div>
         <div class="card-badge">🔴 Act Now</div>
@@ -172,15 +167,14 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:#0a0c12;color:#fff;mi
         <div class="card-tags"><span class="tag">Crisis Market</span><span class="tag">MICE</span><span class="tag">Luxury FIT</span></div>
         <div class="card-footer">
           <button class="cta-btn">Open Playbook →</button>
-          <span class="status-dot" style="color:#f87171">60 hotels</span>
+          <span class="status-dot">60 hotels</span>
         </div>
       </div>
     </a>
 
-    <!-- Thailand -->
     <a href="thailand.html" class="dest-card c-thailand">
       <div class="card-img">
-        <img src="https://images.unsplash.com/photo-1506665531195-3566af2b4dfa?w=600&q=80" alt="Thailand beach" loading="lazy">
+        <img src="images/thailand.jpg" alt="Thailand" onerror="this.style.display='none'">
         <div class="card-img-overlay"></div>
         <div class="card-flag">🇹🇭</div>
         <div class="card-badge">🟢 High Priority</div>
@@ -196,15 +190,14 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:#0a0c12;color:#fff;mi
         <div class="card-tags"><span class="tag">Visa-Free</span><span class="tag">Honeymoon</span><span class="tag">MICE</span></div>
         <div class="card-footer">
           <button class="cta-btn">Open Playbook →</button>
-          <span class="status-dot" style="color:#4ade80">52 hotels</span>
+          <span class="status-dot">52 hotels</span>
         </div>
       </div>
     </a>
 
-    <!-- Bali -->
     <a href="bali.html" class="dest-card c-bali">
       <div class="card-img">
-        <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=600&q=80" alt="Bali rice terraces" loading="lazy">
+        <img src="images/bali.jpg" alt="Bali" onerror="this.style.display='none'">
         <div class="card-img-overlay"></div>
         <div class="card-flag">🇮🇩</div>
         <div class="card-badge">💜 High Priority</div>
@@ -220,15 +213,14 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:#0a0c12;color:#fff;mi
         <div class="card-tags"><span class="tag">Honeymoon #1</span><span class="tag">Luxury Villas</span><span class="tag">Wellness</span></div>
         <div class="card-footer">
           <button class="cta-btn">Open Playbook →</button>
-          <span class="status-dot" style="color:#c4b5fd">35 hotels</span>
+          <span class="status-dot">35 hotels</span>
         </div>
       </div>
     </a>
 
-    <!-- Singapore -->
     <a href="singapore.html" class="dest-card c-sg">
       <div class="card-img">
-        <img src="https://images.unsplash.com/photo-1565967511849-76a60a516170?w=600&q=80" alt="Singapore Marina Bay Sands" loading="lazy">
+        <img src="images/singapore.jpg" alt="Singapore" onerror="this.style.display='none'">
         <div class="card-img-overlay"></div>
         <div class="card-flag">🇸🇬</div>
         <div class="card-badge">🟡 Building</div>
@@ -244,17 +236,16 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:#0a0c12;color:#fff;mi
         <div class="card-tags"><span class="tag">MICE #1 SEA</span><span class="tag">Family</span><span class="tag">Gateway</span></div>
         <div class="card-footer">
           <button class="cta-btn">Open Playbook →</button>
-          <span class="status-dot" style="color:#fcd34d">40 hotels</span>
+          <span class="status-dot">40 hotels</span>
         </div>
       </div>
     </a>
 
-    <!-- Maldives coming soon -->
     <div class="dest-card c-coming is-coming">
       <div class="card-img">
-        <img src="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=600&q=80" alt="Maldives overwater villas" loading="lazy" style="filter:grayscale(60%) brightness(0.5)">
+        <img src="images/maldives.jpg" alt="Maldives" onerror="this.style.display='none'" style="filter:grayscale(70%) brightness(0.4)">
         <div class="card-img-overlay"></div>
-        <div class="card-flag" style="opacity:0.4">🇲🇻</div>
+        <div class="card-flag" style="opacity:0.35">🇲🇻</div>
         <div class="card-img-coming"><div class="coming-label">⏳ Coming Q3 2026</div></div>
       </div>
       <div class="card-body">
@@ -267,22 +258,21 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:#0a0c12;color:#fff;mi
         <div class="card-tags"><span class="tag">Honeymoon</span><span class="tag">Ultra-Luxury</span><span class="tag">Water Villas</span></div>
         <div class="card-footer">
           <button class="cta-btn">In Pipeline</button>
-          <span class="status-dot" style="color:#374151">Coming soon</span>
+          <span class="status-dot">Coming soon</span>
         </div>
       </div>
     </div>
 
-    <!-- Vietnam coming soon -->
     <div class="dest-card c-coming is-coming">
       <div class="card-img">
-        <img src="https://images.unsplash.com/photo-1557750255-c76072a7aad1?w=600&q=80" alt="Ha Long Bay Vietnam" loading="lazy" style="filter:grayscale(60%) brightness(0.5)">
+        <img src="images/vietnam.jpg" alt="Vietnam" onerror="this.style.display='none'" style="filter:grayscale(70%) brightness(0.4)">
         <div class="card-img-overlay"></div>
-        <div class="card-flag" style="opacity:0.4">🇻🇳</div>
+        <div class="card-flag" style="opacity:0.35">🇻🇳</div>
         <div class="card-img-coming"><div class="coming-label">⏳ Coming Q4 2026</div></div>
       </div>
       <div class="card-body">
         <div class="card-name">Vietnam</div>
-        <div class="card-tagline">Ha Long Bay, Da Nang, Hoi An. Emerging Indian market, strong e-visa access.</div>
+        <div class="card-tagline">Ha Long Bay, Da Nang, Hoi An. Emerging Indian market with strong e-visa access.</div>
         <div class="card-meta">
           <div class="meta-item"><div class="n" style="color:#374151">~30</div><div class="l">Hotels</div></div>
           <div class="meta-item"><div class="n" style="color:#374151">Q4 2026</div><div class="l">Target</div></div>
@@ -290,7 +280,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:#0a0c12;color:#fff;mi
         <div class="card-tags"><span class="tag">Emerging</span><span class="tag">Heritage</span><span class="tag">Beach</span></div>
         <div class="card-footer">
           <button class="cta-btn">In Pipeline</button>
-          <span class="status-dot" style="color:#374151">Coming soon</span>
+          <span class="status-dot">Coming soon</span>
         </div>
       </div>
     </div>
