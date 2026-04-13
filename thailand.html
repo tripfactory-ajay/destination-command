@@ -6,6 +6,8 @@
 <title>Thailand Hotel Contracting Intelligence | TripFactory ORN</title>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
+:root{--c:#1a6b3f}
+
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Plus Jakarta Sans',sans-serif;background:#f0f7f3;color:#1a1a1a;font-size:14px;line-height:1.5}
 a{color:#1a6b3f}
@@ -175,6 +177,130 @@ tbody tr:hover td{background:#1a1a28!important}
 .log-entry .log-date{color:#9ca3af!important}
 .log-entry .log-text{color:#d1d5db!important}
 ul li{color:#d1d5db!important}
+
+/* ══ FULL DARK THEME ══ */
+*{color:inherit}
+body{background:#0d0d12!important;color:#e5e7eb!important}
+
+/* Header */
+.site-header{background:#111118!important;border-bottom:2px solid var(--c,#555)!important;box-shadow:0 2px 16px rgba(0,0,0,0.5)!important}
+.header-title h1{color:#f3f4f6!important}
+.header-title p{color:#6b7280!important}
+
+/* Tab nav */
+.tab-nav{background:#111118!important;border-bottom:1px solid #1e1e2e!important}
+.tab-btn{color:#9ca3af!important;background:transparent!important}
+.tab-btn:hover{color:#e5e7eb!important;background:#1a1a28!important}
+.tab-btn.active{background:transparent!important}
+
+/* Cards */
+.card{background:#16161f!important;border:1px solid #1e1e2e!important;box-shadow:0 1px 4px rgba(0,0,0,0.4)!important}
+.card-title,.card-name{color:#f3f4f6!important}
+.card-subtitle{color:#9ca3af!important}
+.card-header .card-icon{color:#e5e7eb!important}
+
+/* Opportunity banner — keep brand gradient, just ensure text visible */
+.opp-banner{color:#fff!important}
+.opp-banner h2{color:#fff!important}
+.opp-banner p{color:rgba(255,255,255,0.9)!important}
+.opp-stat .n{color:#fff!important}
+.opp-stat .l{color:rgba(255,255,255,0.8)!important}
+
+/* Stat cards */
+.stat-card{background:#16161f!important;border:1px solid #1e1e2e!important}
+.stat-card .lbl{color:#9ca3af!important}
+.stat-card .sub{color:#6b7280!important}
+
+/* Alerts — dark versions */
+.alert{background:#1a1a28!important}
+.alert-brand{background:#1a1a28!important;color:#e5e7eb!important}
+.alert-warning{background:#1a1200!important;border-color:#d97706!important;color:#fcd34d!important}
+.alert-info{background:#071428!important;border-color:#3b82f6!important;color:#93c5fd!important}
+.alert-success{background:#051a10!important;border-color:#10b981!important;color:#6ee7b7!important}
+.alert strong{color:inherit!important}
+
+/* Tables */
+.table-wrap{border:1px solid #1e1e2e!important;border-radius:8px!important}
+table{background:#16161f!important}
+thead th{background:#1e1e2e!important;color:#9ca3af!important;border-bottom:2px solid #252535!important}
+tbody td{border-bottom:1px solid #1a1a28!important;color:#d1d5db!important;background:transparent!important}
+tbody tr:hover td{background:#1a1a28!important}
+tbody tr:last-child td{border-bottom:none!important}
+
+/* Badges */
+.badge-gray{background:#252535!important;color:#d1d5db!important}
+.badge-green{background:#052e16!important;color:#4ade80!important}
+.badge-yellow{background:#1c1200!important;color:#fbbf24!important}
+.badge-brand{color:#fff!important}
+.tier1{background:#2a1f00!important;color:#fcd34d!important;border-color:#d97706!important}
+.tier2{background:#16161f!important;border:1px solid #333!important}
+.tier3{background:#051a10!important;color:#4ade80!important;border-color:#059669!important}
+
+/* Inputs */
+.search-input{background:#0d0d12!important;border:1.5px solid #1e1e2e!important;color:#e5e7eb!important}
+.search-input:focus{border-color:inherit!important;box-shadow:none!important}
+.search-input::placeholder{color:#4b5563!important}
+.filter-select{background:#0d0d12!important;border:1.5px solid #1e1e2e!important;color:#e5e7eb!important}
+.filter-select option{background:#0d0d12!important;color:#e5e7eb!important}
+
+/* Hotel count text */
+#hotel-count,#flight-count{color:#6b7280!important}
+
+/* Offer cards */
+.offer-card{background:#16161f!important;border:1px solid #1e1e2e!important}
+.offer-body{background:#16161f!important}
+.offer-label{color:#9ca3af!important}
+.offer-value{color:#e5e7eb!important}
+.offer-tags .badge{color:#fff!important}
+
+/* Chain cards */
+.chain-card{background:#16161f!important;border:1px solid #1e1e2e!important}
+.chain-name{color:#f3f4f6!important}
+.chain-properties{color:#9ca3af!important}
+.chain-strategy{color:#d1d5db!important}
+.contact-template{background:#0d0d12!important;color:#d1d5db!important;border-left-width:3px!important}
+.copy-btn{background:#1e1e2e!important;border:1px solid #333!important;color:#e5e7eb!important}
+
+/* Timeline */
+.timeline::before{background:#333!important}
+.timeline-item .period{font-weight:700!important}
+.timeline-item .action{color:#f3f4f6!important}
+.timeline-item .detail{color:#9ca3af!important}
+
+/* Modal */
+.modal-overlay{background:rgba(0,0,0,0.7)!important}
+.modal{background:#16161f!important;border:1px solid #1e1e2e!important}
+.modal-title{color:#f3f4f6!important}
+.modal-close{color:#9ca3af!important;background:transparent!important}
+.form-label{color:#9ca3af!important}
+.form-control{background:#0d0d12!important;border:1.5px solid #1e1e2e!important;color:#e5e7eb!important}
+.form-control option{background:#0d0d12!important}
+.log-entry{background:#1a1a28!important}
+.log-entry .log-date{color:#9ca3af!important}
+.log-entry .log-text{color:#d1d5db!important}
+
+/* Grid inner boxes (area guides etc) */
+.grid-2 div[style*="background:#fff"]{background:#16161f!important}
+div[style*="background:#fff0"]{background:#1a1a10!important}
+div[style*="background:#f0fd"]{background:#051a10!important}
+div[style*="background:#eff6"]{background:#071428!important}
+div[style*="background:#fff8"]{background:#1a1200!important}
+
+/* All inline white/light backgrounds → dark */
+[style*="background:#fff;"]{background:#16161f!important}
+[style*="background: #fff"]{background:#16161f!important}
+[style*="background-color:#fff"]{background:#16161f!important}
+[style*="background:#f3f4f6"]{background:#16161f!important}
+
+/* Text in small inline elements */
+[style*="color:#6b7280"]{color:#9ca3af!important}
+[style*="color:#374151"]{color:#d1d5db!important}
+[style*="color:#1a1a1a"]{color:#f3f4f6!important}
+[style*="color:#111"]{color:#f3f4f6!important}
+ul li,ol li{color:#d1d5db!important}
+
+/* Section counters */
+#contracted-count{color:inherit!important}
 </style>
 </head>
 <body>
