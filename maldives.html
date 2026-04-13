@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maldives Hotel Contracting Intelligence | TripFactory ORN</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:#f8f9ff;color:#1a1a1a;font-size:14px;line-height:1.5}
+.site-header{position:sticky;top:0;z-index:100;background:#fff;border-bottom:2px solid #0284c7;box-shadow:0 2px 8px rgba(0,0,0,0.08)}
+.header-inner{max-width:1400px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.logo-badge{background:#0284c7;color:#fff;font-weight:800;font-size:13px;padding:6px 12px;border-radius:6px;letter-spacing:0.5px}
+.header-title{flex:1;min-width:200px}
+.header-title h1{font-size:16px;font-weight:700;color:#1a1a1a;line-height:1.2}
+.header-title p{font-size:12px;color:#6b7280}
+.header-meta{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.dest-dropdown{padding:6px 10px;border:1.5px solid #0284c7;border-radius:6px;font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;font-weight:600;color:#0284c7;background:#fff;cursor:pointer;outline:none;max-width:200px}
+.status-pill{background:#e0f2fe;color:#0369a1;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;border:1px solid #0284c733}
+.urgency-pill{background:#fef3cd;color:#92400e;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;border:1px solid #f59e0b}
+.tab-nav{background:#fff;border-bottom:1px solid #e5e7eb;position:sticky;top:69px;z-index:99}
+.tab-nav-inner{max-width:1400px;margin:0 auto;padding:0 20px;display:flex;overflow-x:auto;scrollbar-width:none;gap:2px}
+.tab-nav-inner::-webkit-scrollbar{display:none}
+.tab-btn{padding:12px 18px;border:none;background:none;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:600;color:#6b7280;cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap;transition:all 0.2s}
+.tab-btn:hover{color:#0284c7;background:#e0f2fe}
+.tab-btn.active{color:#0284c7;border-bottom-color:#0284c7}
+.main{max-width:1400px;margin:0 auto;padding:24px 20px}
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+.card{background:#fff;border-radius:10px;padding:20px;margin-bottom:16px;border:1px solid #e5e7eb;box-shadow:0 1px 3px rgba(0,0,0,0.06)}
+.card-header{display:flex;align-items:flex-start;gap:12px;margin-bottom:16px}
+.card-icon{font-size:24px;line-height:1}
+.card-title{font-size:16px;font-weight:700;color:#1a1a1a}
+.card-subtitle{font-size:12px;color:#6b7280;margin-top:2px}
+.alert{padding:14px 16px;border-radius:8px;margin-bottom:16px;border-left:4px solid}
+.alert-brand{background:#e0f2fe;border-color:#0284c7;color:#0369a1}
+.alert-warning{background:#fffbeb;border-color:#f59e0b;color:#78350f}
+.alert-info{background:#eff6ff;border-color:#3b82f6;color:#1e3a8a}
+.alert-success{background:#f0fdf4;border-color:#16a34a;color:#14532d}
+.alert strong{font-weight:700}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:20px}
+.stat-card{background:#fff;border:1px solid #e5e7eb;border-radius:8px;padding:16px;text-align:center}
+.stat-card .num{font-size:26px;font-weight:800;color:#0284c7;line-height:1}
+.stat-card .lbl{font-size:11px;color:#6b7280;margin-top:4px;font-weight:500}
+.stat-card .sub{font-size:10px;color:#9ca3af;margin-top:2px}
+.table-controls{display:flex;gap:10px;margin-bottom:12px;flex-wrap:wrap;align-items:center}
+.search-input{padding:8px 12px;border:1.5px solid #e5e7eb;border-radius:6px;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;flex:1;min-width:180px;outline:none}
+.search-input:focus{border-color:#0284c7;box-shadow:0 0 0 2px #0284c722}
+.filter-select{padding:8px 10px;border:1.5px solid #e5e7eb;border-radius:6px;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;background:#fff;outline:none;cursor:pointer}
+.filter-select:focus{border-color:#0284c7}
+.table-wrap{overflow-x:auto;border-radius:8px;border:1px solid #e5e7eb}
+table{width:100%;border-collapse:collapse;background:#fff}
+thead th{background:#e0f2fe;padding:10px 12px;text-align:left;font-size:11px;font-weight:700;color:#374151;text-transform:uppercase;letter-spacing:0.5px;border-bottom:2px solid #e5e7eb;white-space:nowrap}
+tbody td{padding:10px 12px;border-bottom:1px solid #f3f4f6;font-size:13px;vertical-align:top}
+tbody tr:hover{background:#e0f2fe}
+tbody tr:last-child td{border-bottom:none}
+.badge{display:inline-block;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:700;white-space:nowrap}
+.badge-brand{background:#e0f2fe;color:#0369a1}
+.badge-green{background:#dcfce7;color:#166534}
+.badge-yellow{background:#fef9c3;color:#854d0e}
+.badge-gray{background:#f3f4f6;color:#374151}
+.tier1{background:#fef3c7;color:#92400e;border:1px solid #f59e0b}
+.tier2{background:#e0f2fe;color:#0369a1;border:1px solid #0284c744}
+.tier3{background:#f0fdf4;color:#166534;border:1px solid #4ade80}
+.modal-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:1000;align-items:center;justify-content:center}
+.modal-overlay.open{display:flex}
+.modal{background:#fff;border-radius:12px;padding:24px;width:90%;max-width:500px;max-height:90vh;overflow-y:auto}
+.modal-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px}
+.modal-title{font-size:16px;font-weight:700}
+.modal-close{background:none;border:none;font-size:20px;cursor:pointer;color:#6b7280;line-height:1;padding:0}
+.form-group{margin-bottom:14px}
+.form-label{display:block;font-size:12px;font-weight:600;color:#374151;margin-bottom:5px}
+.form-control{width:100%;padding:9px 12px;border:1.5px solid #e5e7eb;border-radius:6px;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;outline:none}
+.form-control:focus{border-color:#0284c7;box-shadow:0 0 0 2px #0284c722}
+.btn{padding:9px 18px;border-radius:6px;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;border:none;transition:all 0.2s}
+.btn-primary{background:#0284c7;color:#fff}
+.btn-primary:hover{background:#0369a1}
+.btn-outline{background:#fff;color:#0284c7;border:1.5px solid #0284c7}
+.btn-outline:hover{background:#e0f2fe}
+.btn-sm{padding:5px 12px;font-size:12px}
+.log-entry{background:#e0f2fe;border-radius:6px;padding:10px 12px;margin-top:8px;border-left:3px solid #0284c7}
+.log-entry .log-date{font-size:11px;color:#6b7280;font-weight:600}
+.log-entry .log-text{font-size:12px;color:#374151;margin-top:3px}
+.opp-banner{background:linear-gradient(135deg,#0284c7,#0369a1);color:#fff;border-radius:12px;padding:24px;margin-bottom:24px}
+.opp-banner h2{font-size:20px;font-weight:800;margin-bottom:8px}
+.opp-banner p{font-size:13px;opacity:0.9;line-height:1.6}
+.opp-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:12px;margin-top:16px}
+.opp-stat{text-align:center;background:rgba(255,255,255,0.15);border-radius:8px;padding:12px}
+.opp-stat .n{font-size:22px;font-weight:800}
+.opp-stat .l{font-size:11px;opacity:0.85;margin-top:2px}
+.offers-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.offer-card{background:#fff;border-radius:10px;border:1px solid #e5e7eb;overflow:hidden;transition:box-shadow 0.2s}
+.offer-card:hover{box-shadow:0 4px 16px #0284c722}
+.offer-header{background:#0284c7;color:#fff;padding:14px 16px}
+.offer-hotel{font-size:14px;font-weight:700}
+.offer-dest{font-size:11px;opacity:0.8;margin-top:2px}
+.offer-body{padding:14px 16px}
+.offer-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.offer-label{font-size:11px;color:#6b7280;font-weight:600}
+.offer-value{font-size:13px;font-weight:600;color:#1a1a1a}
+.offer-rate{font-size:20px;font-weight:800;color:#0284c7}
+.offer-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:10px}
+.chain-card{background:#fff;border-radius:10px;border:1px solid #e5e7eb;padding:18px;margin-bottom:14px}
+.chain-name{font-size:15px;font-weight:700;color:#1a1a1a;margin-bottom:4px}
+.chain-properties{font-size:12px;color:#6b7280;margin-bottom:10px}
+.chain-strategy{font-size:13px;color:#374151;line-height:1.6;margin-bottom:10px}
+.contact-template{background:#e0f2fe;border-radius:6px;padding:12px;border-left:3px solid #0284c7;font-size:12px;color:#374151;line-height:1.7;white-space:pre-wrap;font-family:'Plus Jakarta Sans',sans-serif}
+.copy-btn{margin-top:8px;padding:5px 12px;background:#e0f2fe;color:#0284c7;border:1px solid #0284c744;border-radius:4px;font-size:11px;font-weight:600;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif}
+.copy-btn:hover{opacity:0.8}
+.timeline{position:relative;padding-left:28px}
+.timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:#0284c744}
+.timeline-item{position:relative;margin-bottom:20px}
+.timeline-item::before{content:'';position:absolute;left:-24px;top:4px;width:12px;height:12px;border-radius:50%;background:#0284c7;border:2px solid #fff;box-shadow:0 0 0 2px #0284c7}
+.timeline-item.future::before{background:#fff;border-color:#0284c7}
+.timeline-item .period{font-size:11px;font-weight:700;color:#0284c7;text-transform:uppercase;letter-spacing:0.5px}
+.timeline-item .action{font-size:13px;color:#1a1a1a;margin-top:2px;font-weight:500}
+.timeline-item .detail{font-size:12px;color:#6b7280;margin-top:3px}
+.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+@media(max-width:600px){.stats-grid{grid-template-columns:repeat(2,1fr)}.main{padding:16px 12px}}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <span class="logo-badge">ORN</span>
+    <div class="header-title">
+      <h1>🇲🇻 Maldives Hotel Contracting Intelligence</h1>
+      <p>TripFactory Product Team · Internal Use Only · Updated April 2026</p>
+    </div>
+    <div class="header-meta">
+      <select class="dest-dropdown" onchange="navigateDest(this.value)">
+        <option value="">🌍 Switch Destination</option>
+        <option value="index.html">🏠 Command Hub</option>
+        <option value="uae.html">🇦🇪 UAE</option>
+        <option value="thailand.html">🇹🇭 Thailand</option>
+        <option value="bali.html">🇮🇩 Bali</option>
+        <option value="singapore.html">🇸🇬 Singapore</option>
+        <option value="japan.html">🇯🇵 Japan</option>
+        <option value="malaysia.html">🇲🇾 Malaysia</option>
+        <option value="srilanka.html">🇱🇰 Sri Lanka</option>
+        <option value="vietnam.html">🇻🇳 Vietnam</option>
+        <option value="" selected>🇲🇻 Maldives (Current)</option>
+
+      </select>
+      <span class="status-pill">India #1 Source Market</span>
+      <span class="urgency-pill">⚡ Act Now</span>
+    </div>
+  </div>
+</header>
+
+<nav class="tab-nav">
+  <div class="tab-nav-inner">
+    <button class="tab-btn active" onclick="showTab('briefing',this)">📋 Briefing</button>
+    <button class="tab-btn" onclick="showTab('hotels',this)">🏨 Hotels</button>
+    <button class="tab-btn" onclick="showTab('flights',this)">✈️ Flights</button>
+    <button class="tab-btn" onclick="showTab('offers',this)">💰 Live Offers</button>
+    <button class="tab-btn" onclick="showTab('groups',this)">🏢 Hotel Groups</button>
+    <button class="tab-btn" onclick="showTab('action',this)">📅 Action Plan</button>
+  </div>
+</nav>
+
+<main class="main">
+
+<div id="tab-briefing" class="tab-panel active">
+  <div class="opp-banner">
+    <h2>🇲🇻 Maldives: India's #1 Ultra-Luxury Escape</h2>
+    <p>India is the Maldives' #1 source market by arrivals and has been for 3 consecutive years. The combination of overwater bungalows, crystal lagoons, and world-class luxury resonates perfectly with Indian HNI and luxury honeymoon travellers. Direct flights from 5 Indian cities, visa-on-arrival, and a growing number of Indian-food-ready resorts make this the easiest ultra-luxury sell in the portfolio. Hotels are aggressively wooing Indian operators with exceptional net rates and all-inclusive packages.</p>
+    <div class="opp-stats">
+      <div class="opp-stat"><div class="n">#1</div><div class="l">India is top source market</div></div>
+      <div class="opp-stat"><div class="n">3 years</div><div class="l">Consecutive India #1</div></div>
+      <div class="opp-stat"><div class="n">Visa-on-Arrival</div><div class="l">Indian passport</div></div>
+      <div class="opp-stat"><div class="n">28</div><div class="l">Target resorts</div></div>
+      <div class="opp-stat"><div class="n">45–60%</div><div class="l">Off rack rates</div></div>
+    </div>
+  </div>
+  <div class="grid-2">
+    <div>
+      <div class="card">
+        <div class="card-header"><span class="card-icon">🎯</span><div><div class="card-title">Why Maldives, Why Now</div></div></div>
+        <div class="alert alert-brand"><strong>India is #1 source market:</strong> Indian arrivals to Maldives grew 18% in 2024. Every major Maldives resort now has a dedicated India Sales Manager. They will negotiate hard for committed volume operators.</div>
+        <div class="alert alert-warning"><strong>Seaplane slot scarcity:</strong> During Indian peak season (Oct–Apr), seaplane slots to remote atolls become scarce. Pre-block resort + seaplane transfers simultaneously — this is where early contracting gives the biggest advantage.</div>
+        <div class="alert alert-info"><strong>Indian F&B evolution:</strong> Post-COVID, virtually every major Maldives resort now has Indian curry on the menu. Several have full Indian chefs. Jain and vegetarian options have become standard. This removes the last major objection Indian clients had.</div>
+      </div>
+      <div class="card">
+        <div class="card-header"><span class="card-icon">📋</span><div><div class="card-title">Must-Have Contract Terms</div></div></div>
+        <ul style="padding-left:18px;line-height:2.1;font-size:13px;color:#374151">
+          <li><strong>Net rates</strong> — minimum 30% margin (AI packages allow higher margins)</li>
+          <li><strong>All-inclusive package</strong> preferred — Indian clients love all-in pricing</li>
+          <li><strong>Indian cuisine</strong> — daily Indian option at main restaurant minimum</li>
+          <li><strong>Jain meals</strong> — available on 48h advance notice</li>
+          <li><strong>Seaplane transfer</strong> — pre-blocked slots linked to room booking</li>
+          <li><strong>Speedboat alternative</strong> — for shorter transfers where seaplane not needed</li>
+          <li><strong>Honeymoon setup</strong> — overwater villa, flower bath, rose petal path, amenity</li>
+          <li><strong>Free cancellation</strong> — 14 days (more restrictive market, negotiate hard)</li>
+          <li><strong>Complimentary snorkelling gear</strong> — gear included for all villa types</li>
+          <li><strong>House reef access</strong> — direct from villa, no boat needed</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="card">
+        <div class="card-header"><span class="card-icon">✨</span><div><div class="card-title">Value-Adds to Demand</div></div></div>
+        <ul style="padding-left:18px;line-height:2.1;font-size:13px;color:#374151">
+          <li>🌅 Sandbank dinner — private sandbank, candlelight, Indian veg menu</li>
+          <li>🤿 Manta ray or whale shark snorkelling excursion included</li>
+          <li>🛶 Sunset dolphin cruise — standard must-have for all packages</li>
+          <li>📸 Underwater photography session in villa pool or lagoon</li>
+          <li>💆 Overwater spa treatment — couples massage over the lagoon</li>
+          <li>🌙 Stargazing on villa deck with telescope (remote atolls only)</li>
+          <li>🎣 Night fishing + cook your catch dinner — unique experience</li>
+          <li>🏄 Non-motorised water sports — kayak, SUP, pedal boat included</li>
+          <li>🌺 Daily in-villa flower arrangement for honeymoon stays</li>
+          <li>🍾 Sparkling (non-alcoholic) welcome with Indian sweets on arrival</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-header"><span class="card-icon">📍</span><div><div class="card-title">Atoll Guide for Agents</div></div></div>
+        <div style="display:grid;gap:8px">
+          <div style="background:#e0f2fe;border-radius:8px;padding:12px;border-left:3px solid #0284c7"><div style="font-weight:700;font-size:13px;color:#0284c7">✈️ North Male Atoll — Quick Access</div><div style="font-size:12px;color:#374151;margin-top:3px">30min speedboat from airport. Most affordable. Anantara, Centara, Velassaru. Best for shorter stays and budget-luxury.</div></div>
+          <div style="background:#e8f5ee;border-radius:8px;padding:12px;border-left:3px solid #16a34a"><div style="font-weight:700;font-size:13px;color:#16a34a">🛥️ South Male + Ari Atoll — Mid-Range Luxury</div><div style="font-size:12px;color:#374151;margin-top:3px">45–60min speedboat or 15–20min seaplane. Four Seasons Kuda Huraa, COMO Maalifushi, W Maldives. Most popular Indian market choice.</div></div>
+          <div style="background:#fdf4ff;border-radius:8px;padding:12px;border-left:3px solid #a855f7"><div style="font-weight:700;font-size:13px;color:#6b21a8">🛩️ Remote Atolls — Ultra-Luxury</div><div style="font-size:12px;color:#374151;margin-top:3px">30–45min seaplane. Soneva Fushi, Gili Lankanfushi, Cheval Blanc. For HNI only. Total privacy, best reefs, highest prices.</div></div>
+          <div style="background:#fff7ed;border-radius:8px;padding:12px;border-left:3px solid #f97316"><div style="font-weight:700;font-size:13px;color:#9a3412">🏝️ Baa Atoll — UNESCO Biosphere</div><div style="font-size:12px;color:#374151;margin-top:3px">UNESCO Biosphere Reserve. Manta ray season Aug–Nov. Four Seasons Landaa Giraavaru. Best for marine enthusiasts.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="tab-hotels" class="tab-panel">
+  <div class="stats-grid">
+    <div class="stat-card"><div class="num">28</div><div class="lbl">Target Resorts</div><div class="sub">5 atolls</div></div>
+    <div class="stat-card"><div class="num">8</div><div class="lbl">North Male</div><div class="sub">Quick access</div></div>
+    <div class="stat-card"><div class="num">8</div><div class="lbl">Ari Atoll</div><div class="sub">Most popular</div></div>
+    <div class="stat-card"><div class="num">6</div><div class="lbl">Remote Atolls</div><div class="sub">Ultra-luxury</div></div>
+    <div class="stat-card"><div class="num">6</div><div class="lbl">Other Atolls</div><div class="sub">Niche</div></div>
+    <div class="stat-card"><div class="num" id="contracted-count">0</div><div class="lbl">Contracted</div><div class="sub" style="color:#dc2626">Start now!</div></div>
+  </div>
+  <div class="card" style="padding:16px">
+    <div class="table-controls">
+      <input type="text" class="search-input" id="hotel-search" placeholder="🔍 Search resort..." oninput="filterHotels()">
+      <select class="filter-select" id="filter-dest" onchange="filterHotels()">
+        <option value="">All Atolls</option>
+        <option value="North Male Atoll">North Male Atoll</option>
+        <option value="South Male Atoll">South Male Atoll</option>
+        <option value="Ari Atoll">Ari Atoll</option>
+        <option value="Baa Atoll">Baa Atoll</option>
+        <option value="Remote Atolls">Remote Atolls</option>
+      </select>
+      <select class="filter-select" id="filter-tier" onchange="filterHotels()">
+        <option value="">All Tiers</option>
+        <option value="Tier 1">Tier 1</option>
+        <option value="Tier 2">Tier 2</option>
+        <option value="Tier 3">Tier 3</option>
+      </select>
+      <select class="filter-select" id="filter-status" onchange="filterHotels()">
+        <option value="">All Status</option>
+        <option value="Not Started">Not Started</option>
+        <option value="In Progress">In Progress</option>
+        <option value="Contracted">Contracted</option>
+      </select>
+      <span id="hotel-count" style="font-size:12px;color:#6b7280">Showing 28 resorts</span>
+    </div>
+    <div class="table-wrap">
+      <table><thead><tr><th>Resort</th><th>Atoll</th><th>Tier</th><th>Transfer</th><th>Crisis Rate (AI)</th><th>Normal Rate</th><th>Saving</th><th>Indian Meals</th><th>Status</th><th>Action</th></tr></thead>
+      <tbody id="hotel-tbody"></tbody></table>
+    </div>
+  </div>
+</div>
+
+<div id="tab-flights" class="tab-panel">
+  <div class="alert alert-success"><strong>✈️ Excellent connectivity from India:</strong> Direct flights from Delhi, Mumbai, Bengaluru, Chennai, and Kochi to Malé (MLE). IndiGo, Air India, and Maldivian operate the busiest routes. Peak season (Oct–Apr) books out 90 days ahead.</div>
+  <div class="stats-grid">
+    <div class="stat-card"><div class="num">5</div><div class="lbl">Indian Cities</div><div class="sub">Direct to Malé</div></div>
+    <div class="stat-card"><div class="num">~3.5h</div><div class="lbl">Mumbai–Malé</div><div class="sub">Shortest route</div></div>
+    <div class="stat-card"><div class="num">₹18,000</div><div class="lbl">From Fare (OW)</div><div class="sub">Mumbai–Malé avg</div></div>
+    <div class="stat-card"><div class="num">+Seaplane</div><div class="lbl">Resort transfer</div><div class="sub">$300–600 return</div></div>
+  </div>
+  <div class="card" style="margin-top:16px">
+    <div class="table-controls">
+      <input type="text" class="search-input" id="flight-search" placeholder="🔍 Search..." oninput="filterFlights()">
+      <select class="filter-select" id="filter-airline" onchange="filterFlights()">
+        <option value="">All Airlines</option>
+        <option value="IndiGo">IndiGo</option>
+        <option value="Air India">Air India</option>
+        <option value="Maldivian">Maldivian</option>
+        <option value="SriLankan Airlines">SriLankan Airlines</option>
+      </select>
+    </div>
+    <div class="table-wrap"><table><thead><tr><th>City</th><th>Destination</th><th>Airlines</th><th>Frequency</th><th>Avg Fare (OW)</th><th>Flight Time</th><th>Status</th><th>Notes</th></tr></thead><tbody id="flight-tbody"></tbody></table></div>
+  </div>
+</div>
+
+<div id="tab-offers" class="tab-panel">
+  <div class="alert alert-warning"><strong>⏰ Shoulder season rates — May–Sep 2026.</strong> Maldives low season (May–Oct) offers 45–55% off peak rack rates. Best time to contract and pre-block peak (Oct–Apr) allotments at discounted rates.</div>
+  <div class="table-controls">
+    <input type="text" class="search-input" id="offer-search" placeholder="🔍 Search offers..." oninput="filterOffers()">
+    <select class="filter-select" id="filter-offer-dest" onchange="filterOffers()">
+      <option value="">All Atolls</option>
+      <option value="North Male Atoll">North Male Atoll</option>
+      <option value="Ari Atoll">Ari Atoll</option>
+      <option value="Remote Atolls">Remote Atolls</option>
+      <option value="Baa Atoll">Baa Atoll</option>
+    </select>
+    <select class="filter-select" id="filter-offer-type" onchange="filterOffers()">
+      <option value="">All Types</option>
+      <option value="Honeymoon">Honeymoon</option>
+      <option value="FIT">FIT</option>
+      <option value="Ultra-Luxury">Ultra-Luxury</option>
+    </select>
+  </div>
+  <div class="offers-grid" id="offers-grid" style="margin-top:16px"></div>
+</div>
+
+<div id="tab-groups" class="tab-panel">
+  <div class="alert alert-info"><strong>Strategy:</strong> Every major Maldives resort has an India Sales Manager now. Go direct to each resort for the best rates — chain relationships matter less here than in other markets. Focus on the 8 highest-volume Indian-market properties first.</div>
+  <div id="groups-container"></div>
+</div>
+
+<div id="tab-action" class="tab-panel">
+  <div class="opp-banner" style="margin-bottom:24px">
+    <h2>📅 18-Month Maldives Contracting Roadmap</h2>
+    <p>Maldives is a year-round destination but Indian peak (Oct–Apr) requires allotments 6 months ahead. Seaplane slot pre-booking is as important as room allotment — both must be secured simultaneously.</p>
+  </div>
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title" style="margin-bottom:16px;font-size:15px">🚀 Phase 1: Rapid Contracting (Now → Aug 2026)</div>
+      <div class="timeline">
+        <div class="timeline-item"><div class="period">Week 1–2 · April 2026</div><div class="action">Top 8 Indian-market resorts — direct outreach</div><div class="detail">Anantara Dhigu, W Maldives, COMO Maalifushi, Centara Grand, Conrad Maldives, Baros, Kuramathi, Sun Siyam Iru Veli. Each has India Sales Manager.</div></div>
+        <div class="timeline-item"><div class="period">Week 3–4 · April 2026</div><div class="action">Ultra-luxury tier — HNI Indian market</div><div class="detail">Soneva Fushi, Gili Lankanfushi, Cheval Blanc Randheli, Velaa Private Island. For ORN's top 1% clients. Higher margins, smaller volume.</div></div>
+        <div class="timeline-item"><div class="period">May 2026</div><div class="action">TMA (Trans Maldivian Airways) seaplane pre-block</div><div class="detail">Contact TMA directly to pre-block seaplane slots for Oct–Apr 2026–27 peak. This is critical — seaplanes are the bottleneck, not rooms.</div></div>
+        <div class="timeline-item"><div class="period">June–August 2026</div><div class="action">Package build + Maldives agent training</div><div class="detail">Build 6 Maldives packages: Overwater Honeymoon, Luxury FIT 5N, HNI Escape, Family Reef, Budget Overwater, All-Inclusive Supreme. Train 40 agents.</div></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title" style="margin-bottom:16px;font-size:15px">📈 Phase 2: Scale (Sep 2026 → Sep 2027)</div>
+      <div class="timeline">
+        <div class="timeline-item future"><div class="period">Sep–Oct 2026</div><div class="action">Peak season activation — pre-booked allotment</div><div class="detail">Sell out pre-blocked Oct–Dec rooms for Indian honeymoon and Diwali season. Target 100 villa-nights in first 30 days of launch.</div></div>
+        <div class="timeline-item future"><div class="period">Nov–Dec 2026</div><div class="action">Christmas + NYE premium packages</div><div class="detail">Overwater villa NYE packages at 2.5x standard rate. Indian families willing to pay ₹5–10L for this experience. Sell out fast.</div></div>
+        <div class="timeline-item future"><div class="period">Jan–Apr 2027</div><div class="action">Peak season scale + renegotiation</div><div class="detail">Renegotiate top 8 resorts with volume data. Add Baa Atoll manta ray packages for Apr–Sep season. Target 200+ villa-nights in peak quarter.</div></div>
+        <div class="timeline-item future"><div class="period">May–Sep 2027</div><div class="action">Low season value packages + new openings</div><div class="detail">Build low-season Indian value packages (20–30% cheaper). Add new resort openings to portfolio. Target 5-star properties opening 2026–27.</div></div>
+      </div>
+      <div style="background:#e0f2fe;border-radius:8px;padding:16px;margin-top:16px">
+        <div style="font-weight:700;font-size:14px;margin-bottom:12px">🎯 KPIs</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:12px">
+          <div style="background:#fff;padding:10px;border-radius:6px;text-align:center"><div style="font-size:18px;font-weight:800;color:#0284c7">28</div><div style="color:#6b7280">Resorts to contract</div></div>
+          <div style="background:#fff;padding:10px;border-radius:6px;text-align:center"><div style="font-size:18px;font-weight:800;color:#0284c7">₹2.5Cr</div><div style="color:#6b7280">Month 1 target</div></div>
+          <div style="background:#fff;padding:10px;border-radius:6px;text-align:center"><div style="font-size:18px;font-weight:800;color:#0284c7">30%+</div><div style="color:#6b7280">Min net margin</div></div>
+          <div style="background:#fff;padding:10px;border-radius:6px;text-align:center"><div style="font-size:18px;font-weight:800;color:#0284c7">6</div><div style="color:#6b7280">Signature packages</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<div class="modal-overlay" id="contact-modal">
+  <div class="modal">
+    <div class="modal-header">
+      <div><div class="modal-title" id="modal-hotel-name">Log Contact</div><div style="font-size:12px;color:#6b7280;margin-top:2px" id="modal-hotel-dest"></div></div>
+      <button class="modal-close" onclick="closeModal()">×</button>
+    </div>
+    <div class="form-group"><label class="form-label">Contact Name</label><input type="text" class="form-control" id="contact-name" placeholder="Name — Title"></div>
+    <div class="form-group"><label class="form-label">Email</label><input type="email" class="form-control" id="contact-email" placeholder="sales@hotel.com"></div>
+    <div class="form-group"><label class="form-label">Phone / WhatsApp</label><input type="text" class="form-control" id="contact-phone" placeholder="+XX XX XXXX XXXX"></div>
+    <div class="form-group"><label class="form-label">Status</label>
+      <select class="form-control" id="contact-status">
+        <option value="Not Started">Not Started</option>
+        <option value="In Progress">In Progress — First Contact Made</option>
+        <option value="In Progress">In Progress — Rates Requested</option>
+        <option value="In Progress">In Progress — Contract Under Review</option>
+        <option value="Contracted">Contracted ✅</option>
+      </select>
+    </div>
+    <div class="form-group"><label class="form-label">Notes</label><textarea class="form-control" id="contact-notes" rows="3" placeholder="What was discussed? Next steps?"></textarea></div>
+    <div style="display:flex;gap:10px;justify-content:flex-end">
+      <button class="btn btn-outline" onclick="closeModal()">Cancel</button>
+      <button class="btn btn-primary" onclick="saveContact()">💾 Save Log</button>
+    </div>
+    <div id="contact-history" style="margin-top:16px"></div>
+  </div>
+</div>
+
+<script>
+const DEST_KEY = 'maldives';
+
+const HOTELS=[
+  {name:"Gili Lankanfushi",dest:"North Male Atoll",area:"North Male Atoll",tier:"Tier 1",stars:"5",crisis:"$550/AI",normal:"$1,200",saving:"54%",meals:"Yes",status:"Not Started",chain:"Independent"},
+  {name:"Anantara Dhigu Maldives",dest:"South Male Atoll",area:"South Male Atoll",tier:"Tier 1",stars:"5",crisis:"$380/AI",normal:"$840",saving:"55%",meals:"Yes",status:"Not Started",chain:"Anantara"},
+  {name:"COMO Cocoa Island",dest:"South Male Atoll",area:"South Male Atoll",tier:"Tier 1",stars:"5",crisis:"$490/AI",normal:"$1,080",saving:"55%",meals:"Yes",status:"Not Started",chain:"COMO"},
+  {name:"Centara Grand Island",dest:"Ari Atoll",area:"Ari Atoll",tier:"Tier 1",stars:"5",crisis:"$280/AI",normal:"$620",saving:"55%",meals:"Yes",status:"Not Started",chain:"Centara"},
+  {name:"W Maldives",dest:"Ari Atoll",area:"Ari Atoll",tier:"Tier 1",stars:"5",crisis:"$420/AI",normal:"$930",saving:"55%",meals:"Yes",status:"Not Started",chain:"Marriott"},
+  {name:"COMO Maalifushi",dest:"Ari Atoll",area:"Ari Atoll",tier:"Tier 1",stars:"5",crisis:"$460/AI",normal:"$1,020",saving:"55%",meals:"Yes",status:"Not Started",chain:"COMO"},
+  {name:"Constance Moofushi",dest:"Ari Atoll",area:"Ari Atoll",tier:"Tier 1",stars:"5",crisis:"$380/AI",normal:"$845",saving:"55%",meals:"Yes",status:"Not Started",chain:"Constance"},
+  {name:"Kuramathi Maldives",dest:"Ari Atoll",area:"Ari Atoll",tier:"Tier 2",stars:"4",crisis:"$220/AI",normal:"$490",saving:"55%",meals:"Yes",status:"Not Started",chain:"Universal Resorts"},
+  {name:"Baros Maldives",dest:"North Male Atoll",area:"North Male Atoll",tier:"Tier 1",stars:"5",crisis:"$350/AI",normal:"$780",saving:"55%",meals:"Yes",status:"Not Started",chain:"Independent"},
+  {name:"Conrad Maldives Rangali",dest:"Ari Atoll",area:"Ari Atoll",tier:"Tier 1",stars:"5",crisis:"$480/AI",normal:"$1,065",saving:"55%",meals:"Yes",status:"Not Started",chain:"Hilton"},
+  {name:"Velassaru Maldives",dest:"South Male Atoll",area:"South Male Atoll",tier:"Tier 2",stars:"5",crisis:"$280/AI",normal:"$622",saving:"55%",meals:"Yes",status:"Not Started",chain:"Universal Resorts"},
+  {name:"Sun Siyam Iru Veli",dest:"Ari Atoll",area:"Ari Atoll",tier:"Tier 2",stars:"5",crisis:"$260/AI",normal:"$578",saving:"55%",meals:"Yes",status:"Not Started",chain:"Sun Siyam"},
+  {name:"Soneva Fushi",dest:"Remote Atolls",area:"Remote Atolls",tier:"Tier 1",stars:"5",crisis:"$780/AI",normal:"$1,720",saving:"55%",meals:"Yes",status:"Not Started",chain:"Soneva"},
+  {name:"Cheval Blanc Randheli",dest:"Remote Atolls",area:"Remote Atolls",tier:"Tier 1",stars:"5",crisis:"$1,100/AI",normal:"$2,440",saving:"55%",meals:"Yes",status:"Not Started",chain:"LVMH"},
+  {name:"Velaa Private Island",dest:"Remote Atolls",area:"Remote Atolls",tier:"Tier 1",stars:"5",crisis:"$1,200/AI",normal:"$2,665",saving:"55%",meals:"Yes",status:"Not Started",chain:"Independent"},
+  {name:"Joali Maldives",dest:"Remote Atolls",area:"Remote Atolls",tier:"Tier 1",stars:"5",crisis:"$680/AI",normal:"$1,510",saving:"55%",meals:"Yes",status:"Not Started",chain:"Independent"},
+  {name:"Four Seasons Landaa Giraavaru",dest:"Baa Atoll",area:"Baa Atoll",tier:"Tier 1",stars:"5",crisis:"$680/AI",normal:"$1,510",saving:"55%",meals:"Yes",status:"Not Started",chain:"Four Seasons"},
+  {name:"Amilla Maldives",dest:"Baa Atoll",area:"Baa Atoll",tier:"Tier 1",stars:"5",crisis:"$460/AI",normal:"$1,020",saving:"55%",meals:"Yes",status:"Not Started",chain:"Independent"},
+  {name:"Vakkaru Maldives",dest:"Baa Atoll",area:"Baa Atoll",tier:"Tier 1",stars:"5",crisis:"$520/AI",normal:"$1,155",saving:"55%",meals:"Yes",status:"Not Started",chain:"Independent"},
+  {name:"Fairmont Maldives",dest:"South Male Atoll",area:"South Male Atoll",tier:"Tier 1",stars:"5",crisis:"$420/AI",normal:"$933",saving:"55%",meals:"Yes",status:"Not Started",chain:"Accor"},
+  {name:"Raffles Maldives",dest:"Remote Atolls",area:"Remote Atolls",tier:"Tier 1",stars:"5",crisis:"$680/AI",normal:"$1,510",saving:"55%",meals:"Yes",status:"Not Started",chain:"Accor"},
+  {name:"Six Senses Laamu",dest:"Remote Atolls",area:"Remote Atolls",tier:"Tier 1",stars:"5",crisis:"$560/AI",normal:"$1,244",saving:"55%",meals:"Yes",status:"Not Started",chain:"Six Senses"},
+  {name:"Waldorf Astoria Maldives",dest:"North Male Atoll",area:"North Male Atoll",tier:"Tier 1",stars:"5",crisis:"$620/AI",normal:"$1,377",saving:"55%",meals:"Yes",status:"Not Started",chain:"Hilton"},
+  {name:"Patina Maldives",dest:"North Male Atoll",area:"North Male Atoll",tier:"Tier 1",stars:"5",crisis:"$480/AI",normal:"$1,066",saving:"55%",meals:"Yes",status:"Not Started",chain:"Independent"},
+  {name:"SAii Lagoon Maldives",dest:"South Male Atoll",area:"South Male Atoll",tier:"Tier 2",stars:"5",crisis:"$280/AI",normal:"$622",saving:"55%",meals:"Yes",status:"Not Started",chain:"Minor Hotels"},
+  {name:"Hard Rock Hotel Maldives",dest:"South Male Atoll",area:"South Male Atoll",tier:"Tier 2",stars:"5",crisis:"$240/AI",normal:"$533",saving:"55%",meals:"Yes",status:"Not Started",chain:"Hard Rock"},
+  {name:"Nova Maldives",dest:"South Male Atoll",area:"South Male Atoll",tier:"Tier 2",stars:"4",crisis:"$180/AI",normal:"$400",saving:"55%",meals:"Yes",status:"Not Started",chain:"Independent"},
+  {name:"Oblu Select Lobigili",dest:"North Male Atoll",area:"North Male Atoll",tier:"Tier 2",stars:"5",crisis:"$220/AI",normal:"$489",saving:"55%",meals:"Yes",status:"Not Started",chain:"Oblu"},
+];
+const FLIGHTS=[
+  {city:"Mumbai",dest:"Malé (MLE)",airlines:"IndiGo, Air India, Maldivian",freq:"Daily",fare:"₹18,000–35,000",time:"3h 30m",status:"Active",notes:"Busiest India–Maldives route. Multiple daily options."},
+  {city:"Delhi",dest:"Malé (MLE)",airlines:"IndiGo, Air India",freq:"Daily",fare:"₹20,000–40,000",time:"5h",status:"Active",notes:"Growing demand from North India HNI and corporate clients."},
+  {city:"Bengaluru",dest:"Malé (MLE)",airlines:"IndiGo, Air India",freq:"Daily",fare:"₹17,000–33,000",time:"3h 45m",status:"Active",notes:"Strong IT sector + honeymoon demand from Bengaluru."},
+  {city:"Chennai",dest:"Malé (MLE)",airlines:"IndiGo, SriLankan (via CMB)",freq:"Daily",fare:"₹16,000–30,000",time:"2h 30m",status:"Active",notes:"Shortest India–Maldives route. South India demand very strong."},
+  {city:"Kochi",dest:"Malé (MLE)",airlines:"IndiGo, Air India",freq:"5x weekly",fare:"₹15,000–28,000",time:"2h",status:"Active",notes:"Shortest overall. NRI and HNI segment from Kochi/Kerala."},
+];
+const OFFERS=[
+  {hotel:"Anantara Dhigu Maldives",dest:"South Male Atoll",type:"Honeymoon",rate:"$350/night AI",saving:"58% off rack",validity:"May–Sep 2026",capacity:"2 pax",includes:"All meals, overwater villa, sandbank dinner, spa, dolphin cruise, snorkelling",tags:["Honeymoon","Luxury","Anantara"]},
+  {hotel:"W Maldives",dest:"Ari Atoll",type:"Honeymoon",rate:"$388/night AI",saving:"58% off rack",validity:"May–Sep 2026",capacity:"2 pax",includes:"All meals, overwater villa, water sports, whale shark snorkel, romance setup",tags:["Honeymoon","Luxury","Ari Atoll"]},
+  {hotel:"Conrad Maldives Rangali",dest:"Ari Atoll",type:"FIT",rate:"$443/night AI",saving:"58% off rack",validity:"May–Sep 2026",capacity:"2–6 pax",includes:"All meals, underwater restaurant, water sports, spa credit $200, seaplane",tags:["FIT","Iconic","Ari Atoll"]},
+  {hotel:"Centara Grand Island",dest:"Ari Atoll",type:"FIT",rate:"$258/night AI",saving:"58% off rack",validity:"Apr–Sep 2026",capacity:"2–6 pax",includes:"All inclusive, water sports, spa, diving try-dive, Indian food daily",tags:["FIT","Ari Atoll","Value"]},
+  {hotel:"Soneva Fushi",dest:"Remote Atolls",type:"Ultra-Luxury",rate:"$720/night AI",saving:"58% off rack",validity:"May–Sep 2026",capacity:"2–4 pax",includes:"All meals, house reef, stargazing, private chef dinner, seaplane, unlimited water sports",tags:["Ultra-Luxury","Remote","Soneva"]},
+  {hotel:"Four Seasons Landaa Giraavaru",dest:"Baa Atoll",type:"FIT",rate:"$628/night AI",saving:"58% off rack",validity:"May–Oct 2026",capacity:"2–4 pax",includes:"All meals, manta ray snorkel, marine biology programme, spa, seaplane",tags:["FIT","Baa Atoll","Manta Rays"]},
+  {hotel:"Fairmont Maldives",dest:"South Male Atoll",type:"Honeymoon",rate:"$388/night AI",saving:"58% off rack",validity:"May–Sep 2026",capacity:"2 pax",includes:"All meals, overwater villa, floating breakfast, spa, dolphin cruise",tags:["Honeymoon","Luxury","Accor"]},
+];
+const GROUPS=[
+  {name:"Anantara Resorts Maldives (Minor Hotels)",logo:"🌺",props:"Maldives: 4 resorts. Key: Anantara Dhigu (South Male), Anantara Veli (South Male), Naladhu Private Island, Anantara Kihavah (Baa Atoll).",contact:"Director of Sales — India & South Asia: maldives.india@minorhotels.com | Male: +960 664 1100",strategy:"Anantara is the most India-familiar luxury brand in Maldives — Indian clients already know and trust the name from UAE, Thailand, and Sri Lanka. One Minor Hotels India relationship covers 4 Maldives resorts at different price points. Anantara Dhigu is the most popular with Indian honeymooners (seaplane not required — speedboat access). Lead with the brand trust angle and cross-destination volume (ORN contracts Anantara in 3 other markets already).",template:`Dear [Name] at Minor Hotels Maldives,
+
+I'm writing from TripFactory/ORN — India's leading B2B platform.
+
+We already have preferred operator relationships with Anantara properties in UAE, Thailand, and Sri Lanka. We would like to extend this to your Maldives portfolio, where Indian demand for Anantara Dhigu in particular is extremely strong.
+
+We would like to discuss:
+• Preferred India operator rates across all 4 Anantara Maldives resorts
+• Anantara Dhigu — honeymoon FIT packages (speedboat access ideal for Indian clients)
+• Anantara Kihavah Baa Atoll — manta ray and underwater restaurant packages for HNI
+• Combined cross-destination volume threshold across UAE + Thailand + Maldives
+
+Volume target: 300+ villa-nights in Maldives Year 1. Can we speak this week?
+
+Best regards,
+[Name] | [Phone]`},
+  {name:"Soneva (Maldives)",logo:"🌿",props:"Maldives: 3 resorts. Key: Soneva Fushi (Baa Atoll — flagship), Soneva Jani (Noonu Atoll), Soneva Secret (Haa Alifu Atoll).",contact:"India Sales Director: india@soneva.com | Male: +960 660 0304",strategy:"Soneva is the apex of Maldives luxury and increasingly popular with ultra-HNI Indian clients who want the most exclusive, eco-conscious experience available. Soneva Fushi was voted world's best resort multiple times. Their no-shoes policy and barefoot luxury philosophy resonates with Indian wellness travellers. Soneva has a dedicated India team and offers bespoke Indian cuisine programming. Lead with the India-exclusive programming angle — Diwali celebrations at Soneva, for example.",template:`Dear [Name] at Soneva,
+
+Greetings from TripFactory/ORN — India's leading premium travel platform managing India's top HNI travellers.
+
+Soneva Fushi and Soneva Jani are the most aspirational Maldives addresses for our ultra-HNI Indian clients. We are seeing growing demand from Indian families and couples willing to invest ₹5–10L+ for a Soneva stay, and we would like to formalise a preferred operator relationship.
+
+We would like to discuss:
+• Preferred Indian HNI operator rates across Soneva Fushi, Jani, and Secret
+• Bespoke Indian programming: Diwali private celebration, Holi event, Indian chef residency
+• Pre-block for peak Indian season (Oct–Jan) — 3 villas across properties
+• Potential for exclusive ORN client evenings at Soneva (minimum 10 villas)
+
+Can we meet in Male or London/Mumbai at your next India market visit?
+
+Best regards,
+[Name] | [Phone]`},
+];
+
+
+function renderHotels(data){
+  const tb=document.getElementById('hotel-tbody');
+  if(!tb) return;
+  tb.innerHTML='';
+  data.forEach(h=>{
+    const stored=getContacts(h.name);
+    const ls=stored.length?stored[stored.length-1].status:h.status;
+    const tc=h.tier==='Tier 1'?'tier1':h.tier==='Tier 2'?'tier2':'tier3';
+    const sc=ls==='Contracted'?'badge-green':ls.includes('Progress')?'badge-yellow':'badge-gray';
+    tb.innerHTML+=`<tr>
+      <td><strong style="font-size:13px">${h.name}</strong><br><span style="font-size:11px;color:#6b7280">${h.chain}</span></td>
+      <td style="font-size:12px">${h.area||h.dest}</td>
+      <td><span class="badge ${tc}">${h.tier}</span></td>
+      <td>${h.stars}★</td>
+      <td style="color:#0284c7;font-weight:700">${h.crisis}/night</td>
+      <td style="color:#9ca3af;text-decoration:line-through">${h.normal}</td>
+      <td><span class="badge badge-green">${h.saving} off</span></td>
+      <td>${h.meals==='Yes'?'<span class="badge badge-green">✓ Yes</span>':h.meals==='On Request'?'<span class="badge badge-yellow">On Request</span>':'<span class="badge badge-gray">No</span>'}</td>
+      <td><span class="badge ${sc}">${ls}</span></td>
+      <td><button class="btn btn-outline btn-sm" onclick='openModal(${JSON.stringify(h)})'>📝 Log</button></td>
+    </tr>`;
+  });
+  const hc=document.getElementById('hotel-count');
+  if(hc) hc.textContent=`Showing ${data.length} hotels`;
+  const cc=HOTELS.filter(h=>{const s=getContacts(h.name);return s.length&&s[s.length-1].status==='Contracted';}).length;
+  const el=document.getElementById('contracted-count');
+  if(el) el.textContent=cc;
+}
+function filterHotels(){
+  const s=(document.getElementById('hotel-search')||{}).value?.toLowerCase()||'';
+  const d=(document.getElementById('filter-dest')||{}).value||'';
+  const t=(document.getElementById('filter-tier')||{}).value||'';
+  const st=(document.getElementById('filter-status')||{}).value||'';
+  renderHotels(HOTELS.filter(h=>{
+    const ls=(()=>{const c=getContacts(h.name);return c.length?c[c.length-1].status:h.status;})();
+    return(!s||(h.name+' '+(h.area||h.dest)).toLowerCase().includes(s))&&(!d||h.dest===d||h.area===d)&&(!t||h.tier===t)&&(!st||ls.includes(st));
+  }));
+}
+function renderFlights(data){
+  const tb=document.getElementById('flight-tbody');
+  if(!tb) return;
+  tb.innerHTML='';
+  data.forEach(f=>{
+    tb.innerHTML+=`<tr><td><strong>${f.city}</strong></td><td>${f.dest}</td><td style="font-size:12px">${f.airlines}</td><td>${f.freq}</td><td style="color:#0284c7;font-weight:600">${f.fare}</td><td>${f.time}</td><td><span class="badge badge-green">${f.status}</span></td><td style="font-size:11px;color:#6b7280">${f.notes}</td></tr>`;
+  });
+}
+function filterFlights(){
+  const s=(document.getElementById('flight-search')||{}).value?.toLowerCase()||'';
+  const a=(document.getElementById('filter-airline')||{}).value||'';
+  renderFlights(FLIGHTS.filter(f=>(!s||f.city.toLowerCase().includes(s)||f.airlines.toLowerCase().includes(s))&&(!a||f.airlines.includes(a))));
+}
+function renderOffers(data){
+  const g=document.getElementById('offers-grid');
+  if(!g) return;
+  g.innerHTML=data.length?data.map(o=>`<div class="offer-card"><div class="offer-header"><div class="offer-hotel">${o.hotel}</div><div class="offer-dest">📍 ${o.dest} · ${o.type}</div></div><div class="offer-body"><div class="offer-row"><span class="offer-label">Net Rate</span><span class="offer-rate">${o.rate}</span></div><div class="offer-row"><span class="offer-label">Saving</span><span class="offer-value" style="color:#0284c7">${o.saving}</span></div><div class="offer-row"><span class="offer-label">Valid</span><span class="offer-value" style="font-size:12px">${o.validity}</span></div><div class="offer-row"><span class="offer-label">Capacity</span><span class="offer-value" style="font-size:12px">${o.capacity}</span></div><div style="font-size:11px;color:#6b7280;margin:8px 0;border-top:1px solid #f3f4f6;padding-top:8px"><strong>Includes:</strong> ${o.includes}</div><div class="offer-tags">${o.tags.map(t=>`<span class="badge badge-brand">${t}</span>`).join('')}</div></div></div>`).join(''):'<div style="color:#6b7280;padding:20px;grid-column:1/-1">No offers match.</div>';
+}
+function filterOffers(){
+  const s=(document.getElementById('offer-search')||{}).value?.toLowerCase()||'';
+  const d=(document.getElementById('filter-offer-dest')||{}).value||'';
+  const t=(document.getElementById('filter-offer-type')||{}).value||'';
+  renderOffers(OFFERS.filter(o=>(!s||o.hotel.toLowerCase().includes(s)||o.tags.join(' ').toLowerCase().includes(s))&&(!d||o.dest===d)&&(!t||o.type===t)));
+}
+function renderGroups(){
+  const c=document.getElementById('groups-container');
+  if(!c) return;
+  c.innerHTML=GROUPS.map(g=>`<div class="chain-card"><div class="chain-name">${g.logo} ${g.name}</div><div class="chain-properties">${g.props}</div><div style="font-size:12px;color:#0284c7;margin-bottom:10px">📞 ${g.contact}</div><div class="chain-strategy">${g.strategy}</div><div style="font-size:12px;font-weight:600;color:#374151;margin-bottom:6px">📧 Opening Template:</div><div class="contact-template">${g.template}</div><button class="copy-btn" onclick="copyTpl(this)">📋 Copy Template</button></div>`).join('');
+}
+let currentHotel='';
+function openModal(h){currentHotel=h.name;document.getElementById('modal-hotel-name').textContent=h.name;document.getElementById('modal-hotel-dest').textContent=`📍 ${h.area||h.dest} · ${h.tier}`;['contact-name','contact-email','contact-phone','contact-notes'].forEach(id=>document.getElementById(id).value='');loadHistory();document.getElementById('contact-modal').classList.add('open');}
+function closeModal(){document.getElementById('contact-modal').classList.remove('open');}
+function saveContact(){const entry={ts:new Date().toLocaleString(),name:document.getElementById('contact-name').value,email:document.getElementById('contact-email').value,phone:document.getElementById('contact-phone').value,status:document.getElementById('contact-status').value,notes:document.getElementById('contact-notes').value};const k='orn_'+DEST_KEY+'_'+currentHotel;const arr=JSON.parse(localStorage.getItem(k)||'[]');arr.push(entry);localStorage.setItem(k,JSON.stringify(arr));loadHistory();filterHotels();document.getElementById('contact-notes').value='';}
+function loadHistory(){const arr=getContacts(currentHotel);const d=document.getElementById('contact-history');d.innerHTML=arr.length?'<div style="font-size:12px;font-weight:600;color:#374151;margin-bottom:8px">📋 Contact History:</div>'+arr.slice().reverse().map(e=>`<div class="log-entry"><div class="log-date">${e.ts} · <strong>${e.status}</strong>${e.name?' · '+e.name:''}</div>${e.email?`<div class="log-text">✉️ ${e.email}${e.phone?' · 📞 '+e.phone:''}</div>`:''}${e.notes?`<div class="log-text">📝 ${e.notes}</div>`:''}</div>`).join(''):''}
+function getContacts(n){return JSON.parse(localStorage.getItem('orn_'+DEST_KEY+'_'+n)||'[]');}
+document.getElementById('contact-modal').addEventListener('click',function(e){if(e.target===this)closeModal();});
+function showTab(id,btn){document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));document.getElementById('tab-'+id).classList.add('active');btn.classList.add('active');}
+function navigateDest(url){if(url&&!url.startsWith('#'))window.location.href=url;}
+function copyTpl(btn){const t=btn.closest('.chain-card').querySelector('.contact-template').textContent;navigator.clipboard.writeText(t).then(()=>{btn.textContent='✅ Copied!';setTimeout(()=>btn.textContent='📋 Copy Template',2000);});}
+renderHotels(HOTELS);renderFlights(FLIGHTS);renderOffers(OFFERS);renderGroups();
+</script>
+</body>
+</html>

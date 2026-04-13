@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sri Lanka Hotel Contracting Intelligence | TripFactory ORN</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:#f8f9ff;color:#1a1a1a;font-size:14px;line-height:1.5}
+.site-header{position:sticky;top:0;z-index:100;background:#fff;border-bottom:2px solid #0d9488;box-shadow:0 2px 8px rgba(0,0,0,0.08)}
+.header-inner{max-width:1400px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.logo-badge{background:#0d9488;color:#fff;font-weight:800;font-size:13px;padding:6px 12px;border-radius:6px;letter-spacing:0.5px}
+.header-title{flex:1;min-width:200px}
+.header-title h1{font-size:16px;font-weight:700;color:#1a1a1a;line-height:1.2}
+.header-title p{font-size:12px;color:#6b7280}
+.header-meta{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.dest-dropdown{padding:6px 10px;border:1.5px solid #0d9488;border-radius:6px;font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;font-weight:600;color:#0d9488;background:#fff;cursor:pointer;outline:none;max-width:200px}
+.status-pill{background:#e8f5ee;color:#0f766e;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;border:1px solid #0d948833}
+.urgency-pill{background:#fef3cd;color:#92400e;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;border:1px solid #f59e0b}
+.tab-nav{background:#fff;border-bottom:1px solid #e5e7eb;position:sticky;top:69px;z-index:99}
+.tab-nav-inner{max-width:1400px;margin:0 auto;padding:0 20px;display:flex;overflow-x:auto;scrollbar-width:none;gap:2px}
+.tab-nav-inner::-webkit-scrollbar{display:none}
+.tab-btn{padding:12px 18px;border:none;background:none;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:600;color:#6b7280;cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap;transition:all 0.2s}
+.tab-btn:hover{color:#0d9488;background:#e8f5ee}
+.tab-btn.active{color:#0d9488;border-bottom-color:#0d9488}
+.main{max-width:1400px;margin:0 auto;padding:24px 20px}
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+.card{background:#fff;border-radius:10px;padding:20px;margin-bottom:16px;border:1px solid #e5e7eb;box-shadow:0 1px 3px rgba(0,0,0,0.06)}
+.card-header{display:flex;align-items:flex-start;gap:12px;margin-bottom:16px}
+.card-icon{font-size:24px;line-height:1}
+.card-title{font-size:16px;font-weight:700;color:#1a1a1a}
+.card-subtitle{font-size:12px;color:#6b7280;margin-top:2px}
+.alert{padding:14px 16px;border-radius:8px;margin-bottom:16px;border-left:4px solid}
+.alert-brand{background:#e8f5ee;border-color:#0d9488;color:#0f766e}
+.alert-warning{background:#fffbeb;border-color:#f59e0b;color:#78350f}
+.alert-info{background:#eff6ff;border-color:#3b82f6;color:#1e3a8a}
+.alert-success{background:#f0fdf4;border-color:#16a34a;color:#14532d}
+.alert strong{font-weight:700}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:20px}
+.stat-card{background:#fff;border:1px solid #e5e7eb;border-radius:8px;padding:16px;text-align:center}
+.stat-card .num{font-size:26px;font-weight:800;color:#0d9488;line-height:1}
+.stat-card .lbl{font-size:11px;color:#6b7280;margin-top:4px;font-weight:500}
+.stat-card .sub{font-size:10px;color:#9ca3af;margin-top:2px}
+.table-controls{display:flex;gap:10px;margin-bottom:12px;flex-wrap:wrap;align-items:center}
+.search-input{padding:8px 12px;border:1.5px solid #e5e7eb;border-radius:6px;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;flex:1;min-width:180px;outline:none}
+.search-input:focus{border-color:#0d9488;box-shadow:0 0 0 2px #0d948822}
+.filter-select{padding:8px 10px;border:1.5px solid #e5e7eb;border-radius:6px;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;background:#fff;outline:none;cursor:pointer}
+.filter-select:focus{border-color:#0d9488}
+.table-wrap{overflow-x:auto;border-radius:8px;border:1px solid #e5e7eb}
+table{width:100%;border-collapse:collapse;background:#fff}
+thead th{background:#e8f5ee;padding:10px 12px;text-align:left;font-size:11px;font-weight:700;color:#374151;text-transform:uppercase;letter-spacing:0.5px;border-bottom:2px solid #e5e7eb;white-space:nowrap}
+tbody td{padding:10px 12px;border-bottom:1px solid #f3f4f6;font-size:13px;vertical-align:top}
+tbody tr:hover{background:#e8f5ee}
+tbody tr:last-child td{border-bottom:none}
+.badge{display:inline-block;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:700;white-space:nowrap}
+.badge-brand{background:#e8f5ee;color:#0f766e}
+.badge-green{background:#dcfce7;color:#166534}
+.badge-yellow{background:#fef9c3;color:#854d0e}
+.badge-gray{background:#f3f4f6;color:#374151}
+.tier1{background:#fef3c7;color:#92400e;border:1px solid #f59e0b}
+.tier2{background:#e8f5ee;color:#0f766e;border:1px solid #0d948844}
+.tier3{background:#f0fdf4;color:#166534;border:1px solid #4ade80}
+.modal-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:1000;align-items:center;justify-content:center}
+.modal-overlay.open{display:flex}
+.modal{background:#fff;border-radius:12px;padding:24px;width:90%;max-width:500px;max-height:90vh;overflow-y:auto}
+.modal-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px}
+.modal-title{font-size:16px;font-weight:700}
+.modal-close{background:none;border:none;font-size:20px;cursor:pointer;color:#6b7280;line-height:1;padding:0}
+.form-group{margin-bottom:14px}
+.form-label{display:block;font-size:12px;font-weight:600;color:#374151;margin-bottom:5px}
+.form-control{width:100%;padding:9px 12px;border:1.5px solid #e5e7eb;border-radius:6px;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;outline:none}
+.form-control:focus{border-color:#0d9488;box-shadow:0 0 0 2px #0d948822}
+.btn{padding:9px 18px;border-radius:6px;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;border:none;transition:all 0.2s}
+.btn-primary{background:#0d9488;color:#fff}
+.btn-primary:hover{background:#0f766e}
+.btn-outline{background:#fff;color:#0d9488;border:1.5px solid #0d9488}
+.btn-outline:hover{background:#e8f5ee}
+.btn-sm{padding:5px 12px;font-size:12px}
+.log-entry{background:#e8f5ee;border-radius:6px;padding:10px 12px;margin-top:8px;border-left:3px solid #0d9488}
+.log-entry .log-date{font-size:11px;color:#6b7280;font-weight:600}
+.log-entry .log-text{font-size:12px;color:#374151;margin-top:3px}
+.opp-banner{background:linear-gradient(135deg,#0d9488,#0f766e);color:#fff;border-radius:12px;padding:24px;margin-bottom:24px}
+.opp-banner h2{font-size:20px;font-weight:800;margin-bottom:8px}
+.opp-banner p{font-size:13px;opacity:0.9;line-height:1.6}
+.opp-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:12px;margin-top:16px}
+.opp-stat{text-align:center;background:rgba(255,255,255,0.15);border-radius:8px;padding:12px}
+.opp-stat .n{font-size:22px;font-weight:800}
+.opp-stat .l{font-size:11px;opacity:0.85;margin-top:2px}
+.offers-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.offer-card{background:#fff;border-radius:10px;border:1px solid #e5e7eb;overflow:hidden;transition:box-shadow 0.2s}
+.offer-card:hover{box-shadow:0 4px 16px #0d948822}
+.offer-header{background:#0d9488;color:#fff;padding:14px 16px}
+.offer-hotel{font-size:14px;font-weight:700}
+.offer-dest{font-size:11px;opacity:0.8;margin-top:2px}
+.offer-body{padding:14px 16px}
+.offer-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.offer-label{font-size:11px;color:#6b7280;font-weight:600}
+.offer-value{font-size:13px;font-weight:600;color:#1a1a1a}
+.offer-rate{font-size:20px;font-weight:800;color:#0d9488}
+.offer-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:10px}
+.chain-card{background:#fff;border-radius:10px;border:1px solid #e5e7eb;padding:18px;margin-bottom:14px}
+.chain-name{font-size:15px;font-weight:700;color:#1a1a1a;margin-bottom:4px}
+.chain-properties{font-size:12px;color:#6b7280;margin-bottom:10px}
+.chain-strategy{font-size:13px;color:#374151;line-height:1.6;margin-bottom:10px}
+.contact-template{background:#e8f5ee;border-radius:6px;padding:12px;border-left:3px solid #0d9488;font-size:12px;color:#374151;line-height:1.7;white-space:pre-wrap;font-family:'Plus Jakarta Sans',sans-serif}
+.copy-btn{margin-top:8px;padding:5px 12px;background:#e8f5ee;color:#0d9488;border:1px solid #0d948844;border-radius:4px;font-size:11px;font-weight:600;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif}
+.copy-btn:hover{opacity:0.8}
+.timeline{position:relative;padding-left:28px}
+.timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:#0d948844}
+.timeline-item{position:relative;margin-bottom:20px}
+.timeline-item::before{content:'';position:absolute;left:-24px;top:4px;width:12px;height:12px;border-radius:50%;background:#0d9488;border:2px solid #fff;box-shadow:0 0 0 2px #0d9488}
+.timeline-item.future::before{background:#fff;border-color:#0d9488}
+.timeline-item .period{font-size:11px;font-weight:700;color:#0d9488;text-transform:uppercase;letter-spacing:0.5px}
+.timeline-item .action{font-size:13px;color:#1a1a1a;margin-top:2px;font-weight:500}
+.timeline-item .detail{font-size:12px;color:#6b7280;margin-top:3px}
+.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+@media(max-width:600px){.stats-grid{grid-template-columns:repeat(2,1fr)}.main{padding:16px 12px}}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <span class="logo-badge">ORN</span>
+    <div class="header-title">
+      <h1>🇱🇰 Sri Lanka Hotel Contracting Intelligence</h1>
+      <p>TripFactory Product Team · Internal Use Only · Updated April 2026</p>
+    </div>
+    <div class="header-meta">
+      <select class="dest-dropdown" onchange="navigateDest(this.value)">
+        <option value="">🌍 Switch Destination</option>
+        <option value="index.html">🏠 Command Hub</option>
+        <option value="uae.html">🇦🇪 UAE</option>
+        <option value="thailand.html">🇹🇭 Thailand</option>
+        <option value="bali.html">🇮🇩 Bali</option>
+        <option value="singapore.html">🇸🇬 Singapore</option>
+        <option value="japan.html">🇯🇵 Japan</option>
+        <option value="malaysia.html">🇲🇾 Malaysia</option>
+        <option value="" selected>🇱🇰 Sri Lanka (Current)</option>
+        <option value="vietnam.html">🇻🇳 Vietnam</option>
+        <option value="maldives.html">🇲🇻 Maldives</option>
+
+      </select>
+      <span class="status-pill">Post-Crisis · Best Value</span>
+      <span class="urgency-pill">⚡ Act Now</span>
+    </div>
+  </div>
+</header>
+
+<nav class="tab-nav">
+  <div class="tab-nav-inner">
+    <button class="tab-btn active" onclick="showTab('briefing',this)">📋 Briefing</button>
+    <button class="tab-btn" onclick="showTab('hotels',this)">🏨 Hotels</button>
+    <button class="tab-btn" onclick="showTab('flights',this)">✈️ Flights</button>
+    <button class="tab-btn" onclick="showTab('offers',this)">💰 Live Offers</button>
+    <button class="tab-btn" onclick="showTab('groups',this)">🏢 Hotel Groups</button>
+    <button class="tab-btn" onclick="showTab('action',this)">📅 Action Plan</button>
+  </div>
+</nav>
+
+<main class="main">
+
+<div id="tab-briefing" class="tab-panel active">
+  <div class="opp-banner">
+    <h2>🇱🇰 Sri Lanka: India's Closest Exotic Escape</h2>
+    <p>Sri Lanka sits just 80km off India's southern tip, yet feels like a world away — ancient temples, lush tea plantations, pristine beaches, and warm hospitality make it a compelling sell. Post-economic crisis recovery is complete: hotels have reopened, prices are exceptional, and the government is actively courting Indian tourists. With direct flights from multiple Indian cities and visa-on-arrival, Sri Lanka offers the best value-per-experience ratio of any destination in this portfolio.</p>
+    <div class="opp-stats">
+      <div class="opp-stat"><div class="n">80km</div><div class="l">From South India</div></div>
+      <div class="opp-stat"><div class="n">Post-crisis</div><div class="l">Exceptional value</div></div>
+      <div class="opp-stat"><div class="n">Visa-on-Arrival</div><div class="l">Indian passport</div></div>
+      <div class="opp-stat"><div class="n">32</div><div class="l">Target hotels</div></div>
+      <div class="opp-stat"><div class="n">55–65%</div><div class="l">Off rack rates</div></div>
+    </div>
+  </div>
+  <div class="grid-2">
+    <div>
+      <div class="card">
+        <div class="card-header"><span class="card-icon">🎯</span><div><div class="card-title">Why Sri Lanka, Why Now</div></div></div>
+        <div class="alert alert-brand"><strong>Post-crisis pricing:</strong> Sri Lanka's 2022 economic crisis forced hotels to slash rates. Recovery is underway but pricing has not normalised — this is the golden window to contract. Properties that were $200/night are now available at $70–80/night net.</div>
+        <div class="alert alert-warning"><strong>Indian government support:</strong> India–Sri Lanka bilateral tourism is a government priority. Air India and IndiGo have added direct routes. India is now Sri Lanka's #1 source market.</div>
+        <div class="alert alert-info"><strong>Cultural connection:</strong> Sri Lanka's Buddhist, Hindu, and Tamil heritage resonates deeply with South Indian travellers. Sigiriya, Temple of the Tooth, and Adam's Peak are on every Indian traveller's bucket list.</div>
+      </div>
+      <div class="card">
+        <div class="card-header"><span class="card-icon">📋</span><div><div class="card-title">Must-Have Contract Terms</div></div></div>
+        <ul style="padding-left:18px;line-height:2.1;font-size:13px;color:#374151">
+          <li><strong>Net rates</strong> — minimum 30% margin (post-crisis pricing allows this)</li>
+          <li><strong>Indian/South Indian vegetarian</strong> meals — daily, no extra charge</li>
+          <li><strong>Tamil-speaking</strong> staff at beach/south coast properties</li>
+          <li><strong>Free cancellation</strong> — 7 days FIT (be firm — Sri Lankan hotels very flexible)</li>
+          <li><strong>Airport transfer</strong> — Colombo airport is 30km from city (include at net)</li>
+          <li><strong>Driver + guide</strong> — include at net rate for cultural circuit packages</li>
+          <li><strong>Safari jeep</strong> — Yala/Udawalawe wildlife included for family packages</li>
+          <li><strong>Ayurveda spa</strong> — minimum 1 complimentary treatment per stay for wellness</li>
+          <li><strong>Group rates</strong> — 1 FOC per 10 (more generous than other markets)</li>
+          <li><strong>Whale watching</strong> — Mirissa, included Nov–April season for beach packages</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="card">
+        <div class="card-header"><span class="card-icon">✨</span><div><div class="card-title">Value-Adds to Demand</div></div></div>
+        <ul style="padding-left:18px;line-height:2.1;font-size:13px;color:#374151">
+          <li>🐘 Elephant orphanage visit (Pinnawala) — iconic Sri Lanka experience</li>
+          <li>🍃 Tea plantation tour and high tea with planter — unique to Sri Lanka</li>
+          <li>🏯 Sigiriya rock fortress guided private tour at sunrise</li>
+          <li>🌊 Whale watching boat trip from Mirissa (Nov–April)</li>
+          <li>🦁 Yala National Park private jeep safari — leopard and elephant viewing</li>
+          <li>🛶 Lagoon sunset canoe tour for honeymoon packages</li>
+          <li>🍛 Traditional Sri Lankan cooking class (rice & curry, hoppers)</li>
+          <li>🌸 Ayurveda consultation + treatment at hotel spa</li>
+          <li>🚂 Scenic train from Kandy to Ella — one of the world's great rail journeys</li>
+          <li>🏖️ Stilt fishermen photography at sunrise (Galle coast)</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-header"><span class="card-icon">📍</span><div><div class="card-title">Circuit Guide for Agents</div></div></div>
+        <div style="display:grid;gap:8px">
+          <div style="background:#f0fdf4;border-radius:8px;padding:12px;border-left:3px solid #16a34a"><div style="font-weight:700;font-size:13px;color:#16a34a">🏙️ Colombo — Entry & City</div><div style="font-size:12px;color:#374151;margin-top:3px">City tour, shopping (Odel, House of Fashions), Fort district. 1–2 nights. Gateway to all circuits.</div></div>
+          <div style="background:#fffbeb;border-radius:8px;padding:12px;border-left:3px solid #d97706"><div style="font-weight:700;font-size:13px;color:#d97706">🏯 Cultural Triangle — Heritage</div><div style="font-size:12px;color:#374151;margin-top:3px">Sigiriya, Polonnaruwa, Anuradhapura, Dambulla cave temples. 2–3 nights. UNESCO sites. Best for history lovers.</div></div>
+          <div style="background:#fff0f5;border-radius:8px;padding:12px;border-left:3px solid #e11d48"><div style="font-weight:700;font-size:13px;color:#e11d48">🌿 Kandy + Hill Country — Tea</div><div style="font-size:12px;color:#374151;margin-top:3px">Temple of the Tooth, tea estates, Ella, scenic train. 2–3 nights. Unique mountain landscape.</div></div>
+          <div style="background:#eff6ff;border-radius:8px;padding:12px;border-left:3px solid #3b82f6"><div style="font-weight:700;font-size:13px;color:#1e40af">🏖️ South Coast — Beach + Whale</div><div style="font-size:12px;color:#374151;margin-top:3px">Bentota, Hikkaduwa, Mirissa, Galle. 2–3 nights. Whale watching Nov–April. Best beaches. Galle Dutch fort.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="tab-hotels" class="tab-panel">
+  <div class="stats-grid">
+    <div class="stat-card"><div class="num">32</div><div class="lbl">Target Hotels</div><div class="sub">5 areas</div></div>
+    <div class="stat-card"><div class="num">8</div><div class="lbl">Colombo</div><div class="sub">City + MICE</div></div>
+    <div class="stat-card"><div class="num">8</div><div class="lbl">Cultural Triangle</div><div class="sub">Heritage</div></div>
+    <div class="stat-card"><div class="num">6</div><div class="lbl">Kandy + Hills</div><div class="sub">Tea + nature</div></div>
+    <div class="stat-card"><div class="num">10</div><div class="lbl">South Coast</div><div class="sub">Beach</div></div>
+    <div class="stat-card"><div class="num" id="contracted-count">0</div><div class="lbl">Contracted</div><div class="sub" style="color:#dc2626">Start now!</div></div>
+  </div>
+  <div class="card" style="padding:16px">
+    <div class="table-controls">
+      <input type="text" class="search-input" id="hotel-search" placeholder="🔍 Search hotel..." oninput="filterHotels()">
+      <select class="filter-select" id="filter-dest" onchange="filterHotels()">
+        <option value="">All Areas</option>
+        <option value="Colombo">Colombo</option>
+        <option value="Cultural Triangle">Cultural Triangle</option>
+        <option value="Kandy / Hill Country">Kandy / Hill Country</option>
+        <option value="South Coast">South Coast</option>
+      </select>
+      <select class="filter-select" id="filter-tier" onchange="filterHotels()">
+        <option value="">All Tiers</option>
+        <option value="Tier 1">Tier 1</option>
+        <option value="Tier 2">Tier 2</option>
+        <option value="Tier 3">Tier 3</option>
+      </select>
+      <select class="filter-select" id="filter-status" onchange="filterHotels()">
+        <option value="">All Status</option>
+        <option value="Not Started">Not Started</option>
+        <option value="In Progress">In Progress</option>
+        <option value="Contracted">Contracted</option>
+      </select>
+      <span id="hotel-count" style="font-size:12px;color:#6b7280">Showing 32 hotels</span>
+    </div>
+    <div class="table-wrap">
+      <table><thead><tr><th>Hotel</th><th>Area</th><th>Tier</th><th>Stars</th><th>Crisis Rate</th><th>Normal Rate</th><th>Saving</th><th>Veg Meals</th><th>Status</th><th>Action</th></tr></thead>
+      <tbody id="hotel-tbody"></tbody></table>
+    </div>
+  </div>
+</div>
+
+<div id="tab-flights" class="tab-panel">
+  <div class="alert alert-success"><strong>✈️ Close and well-connected:</strong> Colombo (CMB) has daily direct flights from Chennai, Mumbai, Delhi, and Bengaluru. Flight time from Chennai is just 1h 15m — shorter than many domestic Indian routes.</div>
+  <div class="stats-grid">
+    <div class="stat-card"><div class="num">1h 15m</div><div class="lbl">Chennai–Colombo</div><div class="sub">Shortest route</div></div>
+    <div class="stat-card"><div class="num">5+</div><div class="lbl">Indian Cities</div><div class="sub">Direct flights</div></div>
+    <div class="stat-card"><div class="num">₹6,000</div><div class="lbl">From Fare (OW)</div><div class="sub">Chennai–Colombo</div></div>
+    <div class="stat-card"><div class="num">Daily</div><div class="lbl">Chennai flights</div><div class="sub">Multiple per day</div></div>
+  </div>
+  <div class="card" style="margin-top:16px">
+    <div class="table-controls">
+      <input type="text" class="search-input" id="flight-search" placeholder="🔍 Search..." oninput="filterFlights()">
+      <select class="filter-select" id="filter-airline" onchange="filterFlights()">
+        <option value="">All Airlines</option>
+        <option value="Air India">Air India</option>
+        <option value="IndiGo">IndiGo</option>
+        <option value="SriLankan Airlines">SriLankan Airlines</option>
+        <option value="GoAir">GoAir</option>
+      </select>
+    </div>
+    <div class="table-wrap"><table><thead><tr><th>City</th><th>Destination</th><th>Airlines</th><th>Frequency</th><th>Avg Fare (OW)</th><th>Flight Time</th><th>Status</th><th>Notes</th></tr></thead><tbody id="flight-tbody"></tbody></table></div>
+  </div>
+</div>
+
+<div id="tab-offers" class="tab-panel">
+  <div class="alert alert-warning"><strong>⏰ Post-crisis exceptional rates — valid throughout 2026.</strong> Sri Lanka's hotel market has not fully recovered — these rates reflect genuine distress pricing. Lock in multi-year contracts now while hotels need volume.</div>
+  <div class="table-controls">
+    <input type="text" class="search-input" id="offer-search" placeholder="🔍 Search offers..." oninput="filterOffers()">
+    <select class="filter-select" id="filter-offer-dest" onchange="filterOffers()">
+      <option value="">All Areas</option>
+      <option value="Colombo">Colombo</option>
+      <option value="Cultural Triangle">Cultural Triangle</option>
+      <option value="South Coast">South Coast</option>
+    </select>
+    <select class="filter-select" id="filter-offer-type" onchange="filterOffers()">
+      <option value="">All Types</option>
+      <option value="Circuit">Circuit</option>
+      <option value="Beach">Beach</option>
+      <option value="Honeymoon">Honeymoon</option>
+      <option value="Group">Group</option>
+    </select>
+  </div>
+  <div class="offers-grid" id="offers-grid" style="margin-top:16px"></div>
+</div>
+
+<div id="tab-groups" class="tab-panel">
+  <div class="alert alert-info"><strong>Strategy:</strong> Sri Lanka is dominated by Aitken Spence Hotels (local luxury chain) and Jetwing Hotels — both actively seeking Indian volume. International chains are secondary here. Go local for the best rates and most flexible terms.</div>
+  <div id="groups-container"></div>
+</div>
+
+<div id="tab-action" class="tab-panel">
+  <div class="opp-banner" style="margin-bottom:24px">
+    <h2>📅 18-Month Sri Lanka Contracting Roadmap</h2>
+    <p>Sri Lanka needs a circuit-based approach — one itinerary covers multiple hotels (Colombo → Cultural Triangle → Kandy → South Coast). Contract the circuit, not individual properties.</p>
+  </div>
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title" style="margin-bottom:16px;font-size:15px">🚀 Phase 1: Contracting (Now → Jul 2026)</div>
+      <div class="timeline">
+        <div class="timeline-item"><div class="period">Week 1–2 · April 2026</div><div class="action">Aitken Spence + Jetwing chain calls</div><div class="detail">These 2 local chains cover 20 of our 32 target properties. One call each unlocks the full circuit. They have India sales teams ready.</div></div>
+        <div class="timeline-item"><div class="period">Week 3–4 · April 2026</div><div class="action">Colombo luxury + MICE anchor hotels</div><div class="detail">Shangri-La Colombo, Cinnamon Grand, Taj Samudra, Hilton Colombo. Essential for MICE and group arrival/departure nights.</div></div>
+        <div class="timeline-item"><div class="period">May 2026</div><div class="action">South coast beach resorts + circuit hotels</div><div class="detail">Anantara Peace Haven Tangalle, Amanwella, Cape Weligama, Jetwing Lighthouse Galle. Anchor beach properties.</div></div>
+        <div class="timeline-item"><div class="period">June–July 2026</div><div class="action">Package build — circuit itineraries</div><div class="detail">Build 6 circuit packages: 5N Classic, 7N Grand Tour, 10N Premium, 3N Beach Escape, Honeymoon, Family. Load into system.</div></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title" style="margin-bottom:16px;font-size:15px">📈 Phase 2: Scale (Aug 2026 → Sep 2027)</div>
+      <div class="timeline">
+        <div class="timeline-item future"><div class="period">Aug–Sep 2026</div><div class="action">Sri Lanka campaign launch</div><div class="detail">Target South Indian travellers (Chennai, Bengaluru, Kochi). Lead with proximity angle — "2 hours from Chennai, another world." Train 50 agents.</div></div>
+        <div class="timeline-item future"><div class="period">Oct–Dec 2026</div><div class="action">Whale watching season packages</div><div class="detail">Nov–April is whale season in Mirissa. Premium add-on for beach packages. Target 100 room-nights in south coast for whale season.</div></div>
+        <div class="timeline-item future"><div class="period">Jan–Apr 2027</div><div class="action">Peak season + Sinhala New Year packages</div><div class="detail">April is Sri Lanka's Sinhala New Year — cultural festival packages. Also peak whale season and best beach weather. Target 200 room-nights.</div></div>
+        <div class="timeline-item future"><div class="period">May–Sep 2027</div><div class="action">Add Yala safari + Arugam Bay east coast</div><div class="detail">East coast (Arugam Bay) best May–Oct. Yala National Park for wildlife packages. Differentiate from competitor Sri Lanka product.</div></div>
+      </div>
+      <div style="background:#e8f5ee;border-radius:8px;padding:16px;margin-top:16px">
+        <div style="font-weight:700;font-size:14px;margin-bottom:12px">🎯 KPIs</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:12px">
+          <div style="background:#fff;padding:10px;border-radius:6px;text-align:center"><div style="font-size:18px;font-weight:800;color:#0d9488">32</div><div style="color:#6b7280">Hotels to contract</div></div>
+          <div style="background:#fff;padding:10px;border-radius:6px;text-align:center"><div style="font-size:18px;font-weight:800;color:#0d9488">₹1.5Cr</div><div style="color:#6b7280">Month 1 target</div></div>
+          <div style="background:#fff;padding:10px;border-radius:6px;text-align:center"><div style="font-size:18px;font-weight:800;color:#0d9488">30%+</div><div style="color:#6b7280">Min net margin</div></div>
+          <div style="background:#fff;padding:10px;border-radius:6px;text-align:center"><div style="font-size:18px;font-weight:800;color:#0d9488">6</div><div style="color:#6b7280">Circuit packages</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<div class="modal-overlay" id="contact-modal">
+  <div class="modal">
+    <div class="modal-header">
+      <div><div class="modal-title" id="modal-hotel-name">Log Contact</div><div style="font-size:12px;color:#6b7280;margin-top:2px" id="modal-hotel-dest"></div></div>
+      <button class="modal-close" onclick="closeModal()">×</button>
+    </div>
+    <div class="form-group"><label class="form-label">Contact Name</label><input type="text" class="form-control" id="contact-name" placeholder="Name — Title"></div>
+    <div class="form-group"><label class="form-label">Email</label><input type="email" class="form-control" id="contact-email" placeholder="sales@hotel.com"></div>
+    <div class="form-group"><label class="form-label">Phone / WhatsApp</label><input type="text" class="form-control" id="contact-phone" placeholder="+XX XX XXXX XXXX"></div>
+    <div class="form-group"><label class="form-label">Status</label>
+      <select class="form-control" id="contact-status">
+        <option value="Not Started">Not Started</option>
+        <option value="In Progress">In Progress — First Contact Made</option>
+        <option value="In Progress">In Progress — Rates Requested</option>
+        <option value="In Progress">In Progress — Contract Under Review</option>
+        <option value="Contracted">Contracted ✅</option>
+      </select>
+    </div>
+    <div class="form-group"><label class="form-label">Notes</label><textarea class="form-control" id="contact-notes" rows="3" placeholder="What was discussed? Next steps?"></textarea></div>
+    <div style="display:flex;gap:10px;justify-content:flex-end">
+      <button class="btn btn-outline" onclick="closeModal()">Cancel</button>
+      <button class="btn btn-primary" onclick="saveContact()">💾 Save Log</button>
+    </div>
+    <div id="contact-history" style="margin-top:16px"></div>
+  </div>
+</div>
+
+<script>
+const DEST_KEY = 'srilanka';
+
+const HOTELS=[
+  {name:"Shangri-La Colombo",dest:"Colombo",area:"Colombo",tier:"Tier 1",stars:"5",crisis:"$110",normal:"$260",saving:"58%",meals:"Yes",status:"Not Started",chain:"Shangri-La"},
+  {name:"Cinnamon Grand Colombo",dest:"Colombo",area:"Colombo",tier:"Tier 1",stars:"5",crisis:"$90",normal:"$210",saving:"57%",meals:"Yes",status:"Not Started",chain:"John Keells"},
+  {name:"Taj Samudra Colombo",dest:"Colombo",area:"Colombo",tier:"Tier 1",stars:"5",crisis:"$95",normal:"$225",saving:"58%",meals:"Yes",status:"Not Started",chain:"Taj Hotels"},
+  {name:"Hilton Colombo",dest:"Colombo",area:"Colombo",tier:"Tier 1",stars:"5",crisis:"$85",normal:"$200",saving:"58%",meals:"Yes",status:"Not Started",chain:"Hilton"},
+  {name:"Movenpick Hotel Colombo",dest:"Colombo",area:"Colombo",tier:"Tier 2",stars:"5",crisis:"$70",normal:"$160",saving:"56%",meals:"Yes",status:"Not Started",chain:"Accor"},
+  {name:"Ramada Colombo",dest:"Colombo",area:"Colombo",tier:"Tier 2",stars:"4",crisis:"$55",normal:"$125",saving:"56%",meals:"Yes",status:"Not Started",chain:"Wyndham"},
+  {name:"Cinnamon Lakeside Colombo",dest:"Colombo",area:"Colombo",tier:"Tier 2",stars:"5",crisis:"$65",normal:"$150",saving:"57%",meals:"Yes",status:"Not Started",chain:"John Keells"},
+  {name:"Galadari Hotel Colombo",dest:"Colombo",area:"Colombo",tier:"Tier 2",stars:"4",crisis:"$50",normal:"$115",saving:"57%",meals:"Yes",status:"Not Started",chain:"Independent"},
+  {name:"Jetwing Vil Uyana",dest:"Cultural Triangle",area:"Cultural Triangle",tier:"Tier 1",stars:"5",crisis:"$180",normal:"$420",saving:"57%",meals:"Yes",status:"Not Started",chain:"Jetwing"},
+  {name:"Sigiriya Village Hotel",dest:"Cultural Triangle",area:"Cultural Triangle",tier:"Tier 2",stars:"4",crisis:"$80",normal:"$185",saving:"57%",meals:"Yes",status:"Not Started",chain:"Aitken Spence"},
+  {name:"Cinnamon Lodge Habarana",dest:"Cultural Triangle",area:"Cultural Triangle",tier:"Tier 2",stars:"4",crisis:"$75",normal:"$175",saving:"57%",meals:"Yes",status:"Not Started",chain:"John Keells"},
+  {name:"Heritance Kandalama",dest:"Cultural Triangle",area:"Cultural Triangle",tier:"Tier 1",stars:"5",crisis:"$120",normal:"$280",saving:"57%",meals:"Yes",status:"Not Started",chain:"Aitken Spence"},
+  {name:"The Water Garden Sigiriya",dest:"Cultural Triangle",area:"Cultural Triangle",tier:"Tier 1",stars:"5",crisis:"$140",normal:"$330",saving:"58%",meals:"Yes",status:"Not Started",chain:"Teardrop Hotels"},
+  {name:"Aliya Resort & Spa",dest:"Cultural Triangle",area:"Cultural Triangle",tier:"Tier 2",stars:"4",crisis:"$85",normal:"$195",saving:"56%",meals:"Yes",status:"Not Started",chain:"Independent"},
+  {name:"Jetwing Kaduruketha",dest:"Cultural Triangle",area:"Cultural Triangle",tier:"Tier 2",stars:"4",crisis:"$90",normal:"$210",saving:"57%",meals:"Yes",status:"Not Started",chain:"Jetwing"},
+  {name:"Kandy House",dest:"Kandy / Hill Country",area:"Kandy / Hill Country",tier:"Tier 1",stars:"5",crisis:"$160",normal:"$370",saving:"57%",meals:"Yes",status:"Not Started",chain:"Independent"},
+  {name:"Mahaweli Reach Hotel Kandy",dest:"Kandy / Hill Country",area:"Kandy / Hill Country",tier:"Tier 2",stars:"4",crisis:"$75",normal:"$175",saving:"57%",meals:"Yes",status:"Not Started",chain:"Aitken Spence"},
+  {name:"Amaya Hills Kandy",dest:"Kandy / Hill Country",area:"Kandy / Hill Country",tier:"Tier 2",stars:"4",crisis:"$65",normal:"$150",saving:"57%",meals:"Yes",status:"Not Started",chain:"Amaya Resorts"},
+  {name:"98 Acres Resort Ella",dest:"Kandy / Hill Country",area:"Kandy / Hill Country",tier:"Tier 2",stars:"4",crisis:"$80",normal:"$185",saving:"57%",meals:"Yes",status:"Not Started",chain:"Independent"},
+  {name:"Heritance Tea Factory",dest:"Kandy / Hill Country",area:"Kandy / Hill Country",tier:"Tier 1",stars:"5",crisis:"$110",normal:"$255",saving:"57%",meals:"Yes",status:"Not Started",chain:"Aitken Spence"},
+  {name:"Jetwing Yala",dest:"Kandy / Hill Country",area:"Kandy / Hill Country",tier:"Tier 2",stars:"4",crisis:"$90",normal:"$210",saving:"57%",meals:"Yes",status:"Not Started",chain:"Jetwing"},
+  {name:"Anantara Peace Haven Tangalle",dest:"South Coast",area:"South Coast",tier:"Tier 1",stars:"5",crisis:"$160",normal:"$375",saving:"57%",meals:"Yes",status:"Not Started",chain:"Anantara"},
+  {name:"Amanwella Tangalle",dest:"South Coast",area:"South Coast",tier:"Tier 1",stars:"5",crisis:"$280",normal:"$650",saving:"57%",meals:"On Request",status:"Not Started",chain:"Aman"},
+  {name:"Cape Weligama",dest:"South Coast",area:"South Coast",tier:"Tier 1",stars:"5",crisis:"$190",normal:"$440",saving:"57%",meals:"Yes",status:"Not Started",chain:"Independent"},
+  {name:"Jetwing Lighthouse Galle",dest:"South Coast",area:"South Coast",tier:"Tier 2",stars:"5",crisis:"$110",normal:"$255",saving:"57%",meals:"Yes",status:"Not Started",chain:"Jetwing"},
+  {name:"Cinnamon Bentota Beach",dest:"South Coast",area:"South Coast",tier:"Tier 2",stars:"4",crisis:"$80",normal:"$185",saving:"57%",meals:"Yes",status:"Not Started",chain:"John Keells"},
+  {name:"Heritance Ahungalla",dest:"South Coast",area:"South Coast",tier:"Tier 1",stars:"5",crisis:"$120",normal:"$280",saving:"57%",meals:"Yes",status:"Not Started",chain:"Aitken Spence"},
+  {name:"Jetwing Beach Negombo",dest:"South Coast",area:"South Coast",tier:"Tier 2",stars:"5",crisis:"$90",normal:"$210",saving:"57%",meals:"Yes",status:"Not Started",chain:"Jetwing"},
+  {name:"Paradise Beach Club Mirissa",dest:"South Coast",area:"South Coast",tier:"Tier 2",stars:"4",crisis:"$70",normal:"$160",saving:"56%",meals:"Yes",status:"Not Started",chain:"Independent"},
+  {name:"Amaya Beach Passikudah",dest:"South Coast",area:"South Coast",tier:"Tier 2",stars:"4",crisis:"$75",normal:"$175",saving:"57%",meals:"Yes",status:"Not Started",chain:"Amaya Resorts"},
+  {name:"Club Hotel Dolphin Negombo",dest:"South Coast",area:"South Coast",tier:"Tier 3",stars:"4",crisis:"$45",normal:"$105",saving:"57%",meals:"Yes",status:"Not Started",chain:"Aitken Spence"},
+  {name:"Hikka Tranz Hikkaduwa",dest:"South Coast",area:"South Coast",tier:"Tier 2",stars:"4",crisis:"$65",normal:"$150",saving:"57%",meals:"Yes",status:"Not Started",chain:"Cinnamon"},
+];
+const FLIGHTS=[
+  {city:"Chennai",dest:"Colombo (CMB)",airlines:"SriLankan Airlines, IndiGo, Air India",freq:"3–4x daily",fare:"₹6,000–12,000",time:"1h 15m",status:"Active",notes:"Shortest international route from India. Feels like a domestic flight."},
+  {city:"Mumbai",dest:"Colombo (CMB)",airlines:"SriLankan Airlines, Air India, IndiGo",freq:"2x daily",fare:"₹8,000–15,000",time:"2h 45m",status:"Active",notes:"Strong business and leisure demand from Mumbai."},
+  {city:"Delhi",dest:"Colombo (CMB)",airlines:"Air India, SriLankan Airlines",freq:"Daily",fare:"₹9,000–18,000",time:"3h 45m",status:"Active",notes:"Mostly business travellers and cultural tourists."},
+  {city:"Bengaluru",dest:"Colombo (CMB)",airlines:"IndiGo, Air India, SriLankan Airlines",freq:"2x daily",fare:"₹7,500–14,000",time:"1h 45m",status:"Active",notes:"Very short flight — great for weekend packages from Bengaluru."},
+  {city:"Kochi",dest:"Colombo (CMB)",airlines:"SriLankan Airlines, Air India",freq:"Daily",fare:"₹7,000–13,000",time:"1h 30m",status:"Active",notes:"NRI and cultural tourism. Kerala-Sri Lanka cultural ties are strong."},
+  {city:"Hyderabad",dest:"Colombo (CMB)",airlines:"SriLankan Airlines, Air India",freq:"4x weekly",fare:"₹8,500–16,000",time:"2h 30m",status:"Active",notes:"Growing market — package alongside Maldives for 10N itineraries."},
+];
+const OFFERS=[
+  {hotel:"Heritance Kandalama",dest:"Cultural Triangle",type:"Circuit",rate:"$110/night",saving:"61% off rack",validity:"Apr–Sep 2026",capacity:"2–40 pax",includes:"Full board, safari excursion, cultural tour, Indian veg meals, driver guide",tags:["Circuit","Heritage","Sri Lanka"]},
+  {hotel:"Anantara Peace Haven Tangalle",dest:"South Coast",type:"Honeymoon",rate:"$145/night",saving:"61% off rack",validity:"Apr–Sep 2026",capacity:"2 pax",includes:"Breakfast, sunset cruise, spa, whale watching (seasonal), romance setup",tags:["Honeymoon","Luxury","Beach"]},
+  {hotel:"Amanwella",dest:"South Coast",type:"Honeymoon",rate:"$255/night",saving:"61% off rack",validity:"May–Sep 2026",capacity:"2 pax",includes:"All meals, butler, private pool villa, whale watching, yoga",tags:["Honeymoon","Ultra-Luxury","Aman"]},
+  {hotel:"Shangri-La Colombo",dest:"Colombo",type:"Group",rate:"$100/night",saving:"62% off rack",validity:"Apr–Sep 2026",capacity:"20–100 pax",includes:"Breakfast, 1 FOC per 10, Indian meals, ocean views, airport transfer",tags:["Group","Colombo","Luxury"]},
+  {hotel:"Cinnamon Grand Colombo",dest:"Colombo",type:"MICE",rate:"$82/night",saving:"61% off rack",validity:"Apr–Sep 2026",capacity:"20–500 pax",includes:"Breakfast, meeting room, Indian buffet, gala dinner discount",tags:["MICE","Colombo","Group"]},
+  {hotel:"Cape Weligama",dest:"South Coast",type:"Beach",rate:"$173/night",saving:"61% off rack",validity:"May–Sep 2026",capacity:"2–10 pax",includes:"Breakfast, infinity pool, snorkelling, cooking class, veg menu",tags:["Beach","Luxury","South Coast"]},
+  {hotel:"Jetwing Vil Uyana",dest:"Cultural Triangle",type:"Circuit",rate:"$163/night",saving:"61% off rack",validity:"Apr–Sep 2026",capacity:"2–20 pax",includes:"Full board, Sigiriya tour, bird watching, Ayurveda, elephant safari",tags:["Circuit","Eco-Luxury","Heritage"]},
+  {hotel:"98 Acres Ella",dest:"Kandy / Hill Country",type:"Circuit",rate:"$73/night",saving:"61% off rack",validity:"Apr–Sep 2026",capacity:"2–15 pax",includes:"Breakfast, scenic train tickets, tea tour, Ella Rock hike, veg meals",tags:["Circuit","Hills","Nature"]},
+];
+const GROUPS=[
+  {name:"Aitken Spence Hotels",logo:"🏝️",props:"Sri Lanka: 14 properties. Key: Heritance Kandalama, Heritance Ahungalla, Heritance Tea Factory, Heritance Negombo, Sigiriya Village, Club Hotel Dolphin.",contact:"Director of Sales — India: india@aitkenspencehotels.com | Colombo: +94 11 230 8308",strategy:"Aitken Spence is Sri Lanka's largest hotel company and the most India-ready chain on the island. Their Heritance brand covers every circuit stop — kandalama (cultural triangle), Tea Factory (hills), Ahungalla (south coast), Negombo (arrival/departure). One agreement covers the full classic Sri Lanka circuit. They have a dedicated India team in their Colombo office and offer the most flexible terms in the market.",template:`Dear [Name] at Aitken Spence Hotels,
+
+I'm reaching out from TripFactory/ORN — India's leading B2B travel platform with 8,000+ active agents.
+
+Sri Lanka is our fastest-growing emerging destination and Aitken Spence's Heritance portfolio is the perfect foundation for our circuit packages — covering every stop from Kandalama through the hills to the south coast.
+
+We would like to explore a Preferred India Operator Agreement covering:
+• Full circuit packages: Heritance Kandalama + Tea Factory + Ahungalla
+• Beach packages: Heritance Negombo (arrivals) + Ahungalla (beach nights)
+• Indian meal plans and Tamil-speaking staff at key properties
+
+Volume target: 1,500+ room-nights in Year 1. Circuit agreement preferred over individual properties. Can we speak this week?
+
+Best regards,
+[Name] | [Phone]`},
+  {name:"Jetwing Hotels",logo:"🦋",props:"Sri Lanka: 20+ properties. Key: Jetwing Vil Uyana, Jetwing Lighthouse Galle, Jetwing Beach Negombo, Jetwing Yala, Jetwing Kaduruketha, Jetwing Surf.",contact:"Director of Sales — India: sales@jetwinghotels.com | Colombo: +94 11 234 5700",strategy:"Jetwing is the most authentic Sri Lankan luxury chain — all properties are locally owned, architecturally distinctive, and deeply embedded in their natural and cultural settings. Jetwing Vil Uyana (cultural triangle) and Jetwing Lighthouse (Galle, Geoffrey Bawa architecture) are aspirational for design-conscious Indian travellers. Jetwing is extremely flexible on Indian meal plans and has worked with Indian operators before. Lead with the circuit package angle.",template:`Dear [Name] at Jetwing Hotels,
+
+Greetings from TripFactory/ORN — India's top B2B platform.
+
+Jetwing's portfolio is unique in Sri Lanka — architecturally distinctive, locally rooted, and covering every circuit stop that Indian travellers want. Vil Uyana and the Lighthouse Galle are two of the most photographable hotels in Asia, and Indian travellers on social media are driving demand for exactly these properties.
+
+We would like to build a circuit partnership across Jetwing properties:
+• Cultural Triangle: Jetwing Vil Uyana — premium cultural circuit anchor
+• Galle: Jetwing Lighthouse — south coast luxury with Geoffrey Bawa architecture
+• Negombo: Jetwing Beach — arrival/departure hotel for India fly-in packages
+• Wildlife: Jetwing Yala — safari package add-on
+
+Can we speak this week to discuss circuit rates and Indian meal plan options?
+
+Best regards,
+[Name] | [Phone]`},
+];
+
+
+function renderHotels(data){
+  const tb=document.getElementById('hotel-tbody');
+  if(!tb) return;
+  tb.innerHTML='';
+  data.forEach(h=>{
+    const stored=getContacts(h.name);
+    const ls=stored.length?stored[stored.length-1].status:h.status;
+    const tc=h.tier==='Tier 1'?'tier1':h.tier==='Tier 2'?'tier2':'tier3';
+    const sc=ls==='Contracted'?'badge-green':ls.includes('Progress')?'badge-yellow':'badge-gray';
+    tb.innerHTML+=`<tr>
+      <td><strong style="font-size:13px">${h.name}</strong><br><span style="font-size:11px;color:#6b7280">${h.chain}</span></td>
+      <td style="font-size:12px">${h.area||h.dest}</td>
+      <td><span class="badge ${tc}">${h.tier}</span></td>
+      <td>${h.stars}★</td>
+      <td style="color:#0d9488;font-weight:700">${h.crisis}/night</td>
+      <td style="color:#9ca3af;text-decoration:line-through">${h.normal}</td>
+      <td><span class="badge badge-green">${h.saving} off</span></td>
+      <td>${h.meals==='Yes'?'<span class="badge badge-green">✓ Yes</span>':h.meals==='On Request'?'<span class="badge badge-yellow">On Request</span>':'<span class="badge badge-gray">No</span>'}</td>
+      <td><span class="badge ${sc}">${ls}</span></td>
+      <td><button class="btn btn-outline btn-sm" onclick='openModal(${JSON.stringify(h)})'>📝 Log</button></td>
+    </tr>`;
+  });
+  const hc=document.getElementById('hotel-count');
+  if(hc) hc.textContent=`Showing ${data.length} hotels`;
+  const cc=HOTELS.filter(h=>{const s=getContacts(h.name);return s.length&&s[s.length-1].status==='Contracted';}).length;
+  const el=document.getElementById('contracted-count');
+  if(el) el.textContent=cc;
+}
+function filterHotels(){
+  const s=(document.getElementById('hotel-search')||{}).value?.toLowerCase()||'';
+  const d=(document.getElementById('filter-dest')||{}).value||'';
+  const t=(document.getElementById('filter-tier')||{}).value||'';
+  const st=(document.getElementById('filter-status')||{}).value||'';
+  renderHotels(HOTELS.filter(h=>{
+    const ls=(()=>{const c=getContacts(h.name);return c.length?c[c.length-1].status:h.status;})();
+    return(!s||(h.name+' '+(h.area||h.dest)).toLowerCase().includes(s))&&(!d||h.dest===d||h.area===d)&&(!t||h.tier===t)&&(!st||ls.includes(st));
+  }));
+}
+function renderFlights(data){
+  const tb=document.getElementById('flight-tbody');
+  if(!tb) return;
+  tb.innerHTML='';
+  data.forEach(f=>{
+    tb.innerHTML+=`<tr><td><strong>${f.city}</strong></td><td>${f.dest}</td><td style="font-size:12px">${f.airlines}</td><td>${f.freq}</td><td style="color:#0d9488;font-weight:600">${f.fare}</td><td>${f.time}</td><td><span class="badge badge-green">${f.status}</span></td><td style="font-size:11px;color:#6b7280">${f.notes}</td></tr>`;
+  });
+}
+function filterFlights(){
+  const s=(document.getElementById('flight-search')||{}).value?.toLowerCase()||'';
+  const a=(document.getElementById('filter-airline')||{}).value||'';
+  renderFlights(FLIGHTS.filter(f=>(!s||f.city.toLowerCase().includes(s)||f.airlines.toLowerCase().includes(s))&&(!a||f.airlines.includes(a))));
+}
+function renderOffers(data){
+  const g=document.getElementById('offers-grid');
+  if(!g) return;
+  g.innerHTML=data.length?data.map(o=>`<div class="offer-card"><div class="offer-header"><div class="offer-hotel">${o.hotel}</div><div class="offer-dest">📍 ${o.dest} · ${o.type}</div></div><div class="offer-body"><div class="offer-row"><span class="offer-label">Net Rate</span><span class="offer-rate">${o.rate}</span></div><div class="offer-row"><span class="offer-label">Saving</span><span class="offer-value" style="color:#0d9488">${o.saving}</span></div><div class="offer-row"><span class="offer-label">Valid</span><span class="offer-value" style="font-size:12px">${o.validity}</span></div><div class="offer-row"><span class="offer-label">Capacity</span><span class="offer-value" style="font-size:12px">${o.capacity}</span></div><div style="font-size:11px;color:#6b7280;margin:8px 0;border-top:1px solid #f3f4f6;padding-top:8px"><strong>Includes:</strong> ${o.includes}</div><div class="offer-tags">${o.tags.map(t=>`<span class="badge badge-brand">${t}</span>`).join('')}</div></div></div>`).join(''):'<div style="color:#6b7280;padding:20px;grid-column:1/-1">No offers match.</div>';
+}
+function filterOffers(){
+  const s=(document.getElementById('offer-search')||{}).value?.toLowerCase()||'';
+  const d=(document.getElementById('filter-offer-dest')||{}).value||'';
+  const t=(document.getElementById('filter-offer-type')||{}).value||'';
+  renderOffers(OFFERS.filter(o=>(!s||o.hotel.toLowerCase().includes(s)||o.tags.join(' ').toLowerCase().includes(s))&&(!d||o.dest===d)&&(!t||o.type===t)));
+}
+function renderGroups(){
+  const c=document.getElementById('groups-container');
+  if(!c) return;
+  c.innerHTML=GROUPS.map(g=>`<div class="chain-card"><div class="chain-name">${g.logo} ${g.name}</div><div class="chain-properties">${g.props}</div><div style="font-size:12px;color:#0d9488;margin-bottom:10px">📞 ${g.contact}</div><div class="chain-strategy">${g.strategy}</div><div style="font-size:12px;font-weight:600;color:#374151;margin-bottom:6px">📧 Opening Template:</div><div class="contact-template">${g.template}</div><button class="copy-btn" onclick="copyTpl(this)">📋 Copy Template</button></div>`).join('');
+}
+let currentHotel='';
+function openModal(h){currentHotel=h.name;document.getElementById('modal-hotel-name').textContent=h.name;document.getElementById('modal-hotel-dest').textContent=`📍 ${h.area||h.dest} · ${h.tier}`;['contact-name','contact-email','contact-phone','contact-notes'].forEach(id=>document.getElementById(id).value='');loadHistory();document.getElementById('contact-modal').classList.add('open');}
+function closeModal(){document.getElementById('contact-modal').classList.remove('open');}
+function saveContact(){const entry={ts:new Date().toLocaleString(),name:document.getElementById('contact-name').value,email:document.getElementById('contact-email').value,phone:document.getElementById('contact-phone').value,status:document.getElementById('contact-status').value,notes:document.getElementById('contact-notes').value};const k='orn_'+DEST_KEY+'_'+currentHotel;const arr=JSON.parse(localStorage.getItem(k)||'[]');arr.push(entry);localStorage.setItem(k,JSON.stringify(arr));loadHistory();filterHotels();document.getElementById('contact-notes').value='';}
+function loadHistory(){const arr=getContacts(currentHotel);const d=document.getElementById('contact-history');d.innerHTML=arr.length?'<div style="font-size:12px;font-weight:600;color:#374151;margin-bottom:8px">📋 Contact History:</div>'+arr.slice().reverse().map(e=>`<div class="log-entry"><div class="log-date">${e.ts} · <strong>${e.status}</strong>${e.name?' · '+e.name:''}</div>${e.email?`<div class="log-text">✉️ ${e.email}${e.phone?' · 📞 '+e.phone:''}</div>`:''}${e.notes?`<div class="log-text">📝 ${e.notes}</div>`:''}</div>`).join(''):''}
+function getContacts(n){return JSON.parse(localStorage.getItem('orn_'+DEST_KEY+'_'+n)||'[]');}
+document.getElementById('contact-modal').addEventListener('click',function(e){if(e.target===this)closeModal();});
+function showTab(id,btn){document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));document.getElementById('tab-'+id).classList.add('active');btn.classList.add('active');}
+function navigateDest(url){if(url&&!url.startsWith('#'))window.location.href=url;}
+function copyTpl(btn){const t=btn.closest('.chain-card').querySelector('.contact-template').textContent;navigator.clipboard.writeText(t).then(()=>{btn.textContent='✅ Copied!';setTimeout(()=>btn.textContent='📋 Copy Template',2000);});}
+renderHotels(HOTELS);renderFlights(FLIGHTS);renderOffers(OFFERS);renderGroups();
+</script>
+</body>
+</html>

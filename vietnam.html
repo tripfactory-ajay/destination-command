@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vietnam Hotel Contracting Intelligence | TripFactory ORN</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:#f8f9ff;color:#1a1a1a;font-size:14px;line-height:1.5}
+.site-header{position:sticky;top:0;z-index:100;background:#fff;border-bottom:2px solid #dc2626;box-shadow:0 2px 8px rgba(0,0,0,0.08)}
+.header-inner{max-width:1400px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.logo-badge{background:#dc2626;color:#fff;font-weight:800;font-size:13px;padding:6px 12px;border-radius:6px;letter-spacing:0.5px}
+.header-title{flex:1;min-width:200px}
+.header-title h1{font-size:16px;font-weight:700;color:#1a1a1a;line-height:1.2}
+.header-title p{font-size:12px;color:#6b7280}
+.header-meta{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.dest-dropdown{padding:6px 10px;border:1.5px solid #dc2626;border-radius:6px;font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;font-weight:600;color:#dc2626;background:#fff;cursor:pointer;outline:none;max-width:200px}
+.status-pill{background:#fff0f0;color:#991b1b;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;border:1px solid #dc262633}
+.urgency-pill{background:#fef3cd;color:#92400e;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;border:1px solid #f59e0b}
+.tab-nav{background:#fff;border-bottom:1px solid #e5e7eb;position:sticky;top:69px;z-index:99}
+.tab-nav-inner{max-width:1400px;margin:0 auto;padding:0 20px;display:flex;overflow-x:auto;scrollbar-width:none;gap:2px}
+.tab-nav-inner::-webkit-scrollbar{display:none}
+.tab-btn{padding:12px 18px;border:none;background:none;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:600;color:#6b7280;cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap;transition:all 0.2s}
+.tab-btn:hover{color:#dc2626;background:#fff0f0}
+.tab-btn.active{color:#dc2626;border-bottom-color:#dc2626}
+.main{max-width:1400px;margin:0 auto;padding:24px 20px}
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+.card{background:#fff;border-radius:10px;padding:20px;margin-bottom:16px;border:1px solid #e5e7eb;box-shadow:0 1px 3px rgba(0,0,0,0.06)}
+.card-header{display:flex;align-items:flex-start;gap:12px;margin-bottom:16px}
+.card-icon{font-size:24px;line-height:1}
+.card-title{font-size:16px;font-weight:700;color:#1a1a1a}
+.card-subtitle{font-size:12px;color:#6b7280;margin-top:2px}
+.alert{padding:14px 16px;border-radius:8px;margin-bottom:16px;border-left:4px solid}
+.alert-brand{background:#fff0f0;border-color:#dc2626;color:#991b1b}
+.alert-warning{background:#fffbeb;border-color:#f59e0b;color:#78350f}
+.alert-info{background:#eff6ff;border-color:#3b82f6;color:#1e3a8a}
+.alert-success{background:#f0fdf4;border-color:#16a34a;color:#14532d}
+.alert strong{font-weight:700}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:20px}
+.stat-card{background:#fff;border:1px solid #e5e7eb;border-radius:8px;padding:16px;text-align:center}
+.stat-card .num{font-size:26px;font-weight:800;color:#dc2626;line-height:1}
+.stat-card .lbl{font-size:11px;color:#6b7280;margin-top:4px;font-weight:500}
+.stat-card .sub{font-size:10px;color:#9ca3af;margin-top:2px}
+.table-controls{display:flex;gap:10px;margin-bottom:12px;flex-wrap:wrap;align-items:center}
+.search-input{padding:8px 12px;border:1.5px solid #e5e7eb;border-radius:6px;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;flex:1;min-width:180px;outline:none}
+.search-input:focus{border-color:#dc2626;box-shadow:0 0 0 2px #dc262622}
+.filter-select{padding:8px 10px;border:1.5px solid #e5e7eb;border-radius:6px;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;background:#fff;outline:none;cursor:pointer}
+.filter-select:focus{border-color:#dc2626}
+.table-wrap{overflow-x:auto;border-radius:8px;border:1px solid #e5e7eb}
+table{width:100%;border-collapse:collapse;background:#fff}
+thead th{background:#fff0f0;padding:10px 12px;text-align:left;font-size:11px;font-weight:700;color:#374151;text-transform:uppercase;letter-spacing:0.5px;border-bottom:2px solid #e5e7eb;white-space:nowrap}
+tbody td{padding:10px 12px;border-bottom:1px solid #f3f4f6;font-size:13px;vertical-align:top}
+tbody tr:hover{background:#fff0f0}
+tbody tr:last-child td{border-bottom:none}
+.badge{display:inline-block;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:700;white-space:nowrap}
+.badge-brand{background:#fff0f0;color:#991b1b}
+.badge-green{background:#dcfce7;color:#166534}
+.badge-yellow{background:#fef9c3;color:#854d0e}
+.badge-gray{background:#f3f4f6;color:#374151}
+.tier1{background:#fef3c7;color:#92400e;border:1px solid #f59e0b}
+.tier2{background:#fff0f0;color:#991b1b;border:1px solid #dc262644}
+.tier3{background:#f0fdf4;color:#166534;border:1px solid #4ade80}
+.modal-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:1000;align-items:center;justify-content:center}
+.modal-overlay.open{display:flex}
+.modal{background:#fff;border-radius:12px;padding:24px;width:90%;max-width:500px;max-height:90vh;overflow-y:auto}
+.modal-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px}
+.modal-title{font-size:16px;font-weight:700}
+.modal-close{background:none;border:none;font-size:20px;cursor:pointer;color:#6b7280;line-height:1;padding:0}
+.form-group{margin-bottom:14px}
+.form-label{display:block;font-size:12px;font-weight:600;color:#374151;margin-bottom:5px}
+.form-control{width:100%;padding:9px 12px;border:1.5px solid #e5e7eb;border-radius:6px;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;outline:none}
+.form-control:focus{border-color:#dc2626;box-shadow:0 0 0 2px #dc262622}
+.btn{padding:9px 18px;border-radius:6px;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;border:none;transition:all 0.2s}
+.btn-primary{background:#dc2626;color:#fff}
+.btn-primary:hover{background:#991b1b}
+.btn-outline{background:#fff;color:#dc2626;border:1.5px solid #dc2626}
+.btn-outline:hover{background:#fff0f0}
+.btn-sm{padding:5px 12px;font-size:12px}
+.log-entry{background:#fff0f0;border-radius:6px;padding:10px 12px;margin-top:8px;border-left:3px solid #dc2626}
+.log-entry .log-date{font-size:11px;color:#6b7280;font-weight:600}
+.log-entry .log-text{font-size:12px;color:#374151;margin-top:3px}
+.opp-banner{background:linear-gradient(135deg,#dc2626,#991b1b);color:#fff;border-radius:12px;padding:24px;margin-bottom:24px}
+.opp-banner h2{font-size:20px;font-weight:800;margin-bottom:8px}
+.opp-banner p{font-size:13px;opacity:0.9;line-height:1.6}
+.opp-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:12px;margin-top:16px}
+.opp-stat{text-align:center;background:rgba(255,255,255,0.15);border-radius:8px;padding:12px}
+.opp-stat .n{font-size:22px;font-weight:800}
+.opp-stat .l{font-size:11px;opacity:0.85;margin-top:2px}
+.offers-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.offer-card{background:#fff;border-radius:10px;border:1px solid #e5e7eb;overflow:hidden;transition:box-shadow 0.2s}
+.offer-card:hover{box-shadow:0 4px 16px #dc262622}
+.offer-header{background:#dc2626;color:#fff;padding:14px 16px}
+.offer-hotel{font-size:14px;font-weight:700}
+.offer-dest{font-size:11px;opacity:0.8;margin-top:2px}
+.offer-body{padding:14px 16px}
+.offer-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.offer-label{font-size:11px;color:#6b7280;font-weight:600}
+.offer-value{font-size:13px;font-weight:600;color:#1a1a1a}
+.offer-rate{font-size:20px;font-weight:800;color:#dc2626}
+.offer-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:10px}
+.chain-card{background:#fff;border-radius:10px;border:1px solid #e5e7eb;padding:18px;margin-bottom:14px}
+.chain-name{font-size:15px;font-weight:700;color:#1a1a1a;margin-bottom:4px}
+.chain-properties{font-size:12px;color:#6b7280;margin-bottom:10px}
+.chain-strategy{font-size:13px;color:#374151;line-height:1.6;margin-bottom:10px}
+.contact-template{background:#fff0f0;border-radius:6px;padding:12px;border-left:3px solid #dc2626;font-size:12px;color:#374151;line-height:1.7;white-space:pre-wrap;font-family:'Plus Jakarta Sans',sans-serif}
+.copy-btn{margin-top:8px;padding:5px 12px;background:#fff0f0;color:#dc2626;border:1px solid #dc262644;border-radius:4px;font-size:11px;font-weight:600;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif}
+.copy-btn:hover{opacity:0.8}
+.timeline{position:relative;padding-left:28px}
+.timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:#dc262644}
+.timeline-item{position:relative;margin-bottom:20px}
+.timeline-item::before{content:'';position:absolute;left:-24px;top:4px;width:12px;height:12px;border-radius:50%;background:#dc2626;border:2px solid #fff;box-shadow:0 0 0 2px #dc2626}
+.timeline-item.future::before{background:#fff;border-color:#dc2626}
+.timeline-item .period{font-size:11px;font-weight:700;color:#dc2626;text-transform:uppercase;letter-spacing:0.5px}
+.timeline-item .action{font-size:13px;color:#1a1a1a;margin-top:2px;font-weight:500}
+.timeline-item .detail{font-size:12px;color:#6b7280;margin-top:3px}
+.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+@media(max-width:600px){.stats-grid{grid-template-columns:repeat(2,1fr)}.main{padding:16px 12px}}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <span class="logo-badge">ORN</span>
+    <div class="header-title">
+      <h1>🇻🇳 Vietnam Hotel Contracting Intelligence</h1>
+      <p>TripFactory Product Team · Internal Use Only · Updated April 2026</p>
+    </div>
+    <div class="header-meta">
+      <select class="dest-dropdown" onchange="navigateDest(this.value)">
+        <option value="">🌍 Switch Destination</option>
+        <option value="index.html">🏠 Command Hub</option>
+        <option value="uae.html">🇦🇪 UAE</option>
+        <option value="thailand.html">🇹🇭 Thailand</option>
+        <option value="bali.html">🇮🇩 Bali</option>
+        <option value="singapore.html">🇸🇬 Singapore</option>
+        <option value="japan.html">🇯🇵 Japan</option>
+        <option value="malaysia.html">🇲🇾 Malaysia</option>
+        <option value="srilanka.html">🇱🇰 Sri Lanka</option>
+        <option value="" selected>🇻🇳 Vietnam (Current)</option>
+        <option value="maldives.html">🇲🇻 Maldives</option>
+
+      </select>
+      <span class="status-pill">Emerging · E-Visa Ready</span>
+      <span class="urgency-pill">⚡ Act Now</span>
+    </div>
+  </div>
+</header>
+
+<nav class="tab-nav">
+  <div class="tab-nav-inner">
+    <button class="tab-btn active" onclick="showTab('briefing',this)">📋 Briefing</button>
+    <button class="tab-btn" onclick="showTab('hotels',this)">🏨 Hotels</button>
+    <button class="tab-btn" onclick="showTab('flights',this)">✈️ Flights</button>
+    <button class="tab-btn" onclick="showTab('offers',this)">💰 Live Offers</button>
+    <button class="tab-btn" onclick="showTab('groups',this)">🏢 Hotel Groups</button>
+    <button class="tab-btn" onclick="showTab('action',this)">📅 Action Plan</button>
+  </div>
+</nav>
+
+<main class="main">
+
+<div id="tab-briefing" class="tab-panel active">
+  <div class="opp-banner">
+    <h2>🇻🇳 Vietnam: Southeast Asia's Emerging Indian Market</h2>
+    <p>Vietnam is the fastest-emerging Southeast Asian destination for Indian travellers — e-visa in 3 minutes, direct flights from Delhi and Mumbai, and a country packed with UNESCO heritage, pristine beaches, and world-class cuisine at exceptional prices. Hanoi, Ho Chi Minh City, Ha Long Bay, Da Nang, and Hoi An together offer a 10-day itinerary that competes with any destination in Asia. Hotels are offering aggressive operator rates to build Indian market share from the ground up.</p>
+    <div class="opp-stats">
+      <div class="opp-stat"><div class="n">3-min</div><div class="l">E-visa processing</div></div>
+      <div class="opp-stat"><div class="n">+85%</div><div class="l">Indian arrivals YoY</div></div>
+      <div class="opp-stat"><div class="n">Direct</div><div class="l">Flights Delhi + Mumbai</div></div>
+      <div class="opp-stat"><div class="n">35</div><div class="l">Target hotels</div></div>
+      <div class="opp-stat"><div class="n">50–60%</div><div class="l">Off rack rates</div></div>
+    </div>
+  </div>
+  <div class="grid-2">
+    <div>
+      <div class="card">
+        <div class="card-header"><span class="card-icon">🎯</span><div><div class="card-title">Why Vietnam, Why Now</div></div></div>
+        <div class="alert alert-brand"><strong>E-visa breakthrough:</strong> Vietnam's 3-minute online e-visa (90 days) has removed all friction. Combined with falling flight prices, India to Vietnam is now as frictionless as Thailand.</div>
+        <div class="alert alert-warning"><strong>Ground floor opportunity:</strong> Indian operators have barely scratched Vietnam's potential. The market is 3–4 years behind Thailand in Indian penetration — first movers get the best rates and chain relationships.</div>
+        <div class="alert alert-info"><strong>Vegetarian-friendly:</strong> Vietnam's Buddhist food culture means vegetarian options are genuinely available at most restaurants. Da Nang and Hoi An in particular have excellent Indian-run restaurants catering to the growing market.</div>
+      </div>
+      <div class="card">
+        <div class="card-header"><span class="card-icon">📋</span><div><div class="card-title">Must-Have Contract Terms</div></div></div>
+        <ul style="padding-left:18px;line-height:2.1;font-size:13px;color:#374151">
+          <li><strong>Net rates</strong> — minimum 25% FIT, 28% groups</li>
+          <li><strong>Vegetarian breakfast</strong> — available daily (easy in Vietnam)</li>
+          <li><strong>E-visa assistance</strong> — hotel sends invitation letter if needed</li>
+          <li><strong>Airport transfer</strong> — Vietnam airports far from city centres (include in net)</li>
+          <li><strong>Free cancellation</strong> — 7 days FIT, 14 days groups</li>
+          <li><strong>Ha Long Bay cruise</strong> — partner junk boat at preferred rate</li>
+          <li><strong>Driver and guide</strong> — English-speaking for all circuit packages</li>
+          <li><strong>Group rates</strong> — 1 FOC per 15 pax minimum</li>
+          <li><strong>Hoi An lantern boat</strong> — evening experience included for honeymoon</li>
+          <li><strong>Rate parity</strong> — ORN rates not undercut on OTAs</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="card">
+        <div class="card-header"><span class="card-icon">✨</span><div><div class="card-title">Value-Adds to Demand</div></div></div>
+        <ul style="padding-left:18px;line-height:2.1;font-size:13px;color:#374151">
+          <li>🛶 Ha Long Bay overnight junk cruise — unmissable Vietnam icon</li>
+          <li>🏮 Hoi An lantern boat and Ancient Town evening walk for honeymooners</li>
+          <li>🍜 Vietnamese cooking class — spring rolls, pho, bánh mì (veg versions)</li>
+          <li>🚲 Hoi An bicycle tour through rice paddies and countryside</li>
+          <li>🌅 Mỹ Sơn Cham ruins sunrise private tour (Hindu temple — massive Indian connection)</li>
+          <li>🏄 Da Nang surf lesson and beach club access for family/young groups</li>
+          <li>🌿 Mekong Delta speedboat tour for Ho Chi Minh City packages</li>
+          <li>🎭 Water puppet theatre tickets — Hanoi cultural experience</li>
+          <li>🏔️ Sa Pa trekking and hill tribe village visit for adventure seekers</li>
+          <li>📸 White sand dunes Mui Ne sunset photography tour</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-header"><span class="card-icon">📍</span><div><div class="card-title">Circuit Guide</div></div></div>
+        <div style="display:grid;gap:8px">
+          <div style="background:#fff0f5;border-radius:8px;padding:12px;border-left:3px solid #dc2626"><div style="font-weight:700;font-size:13px;color:#dc2626">🏯 Hanoi + Ha Long — North</div><div style="font-size:12px;color:#374151;margin-top:3px">Capital city culture, Ha Long Bay cruise. 4–5 nights. Classic Vietnam opening. UNESCO World Heritage.</div></div>
+          <div style="background:#fffbeb;border-radius:8px;padding:12px;border-left:3px solid #d97706"><div style="font-weight:700;font-size:13px;color:#d97706">🏖️ Da Nang + Hoi An — Centre</div><div style="font-size:12px;color:#374151;margin-top:3px">Beach, My Son Hindu ruins, UNESCO town, lanterns. 3–4 nights. Best for honeymoon and families.</div></div>
+          <div style="background:#f0fdf4;border-radius:8px;padding:12px;border-left:3px solid #16a34a"><div style="font-weight:700;font-size:13px;color:#16a34a">🌆 Ho Chi Minh City — South</div><div style="font-size:12px;color:#374151;margin-top:3px">War history, Mekong Delta, shopping, food scene. 2–3 nights. MICE-friendly and business hub.</div></div>
+          <div style="background:#eff6ff;border-radius:8px;padding:12px;border-left:3px solid #3b82f6"><div style="font-weight:700;font-size:13px;color:#1e40af">🏝️ Phu Quoc — Island</div><div style="font-size:12px;color:#374151;margin-top:3px">Vietnam's island paradise. Luxury resorts, clear water, cable car. Best for beach extension after circuit.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="tab-hotels" class="tab-panel">
+  <div class="stats-grid">
+    <div class="stat-card"><div class="num">35</div><div class="lbl">Target Hotels</div><div class="sub">5 destinations</div></div>
+    <div class="stat-card"><div class="num">8</div><div class="lbl">Hanoi</div><div class="sub">Heritage + MICE</div></div>
+    <div class="stat-card"><div class="num">5</div><div class="lbl">Ha Long Bay</div><div class="sub">Cruises + resort</div></div>
+    <div class="stat-card"><div class="num">10</div><div class="lbl">Da Nang + Hoi An</div><div class="sub">Beach + heritage</div></div>
+    <div class="stat-card"><div class="num">7</div><div class="lbl">Ho Chi Minh City</div><div class="sub">MICE + city</div></div>
+    <div class="stat-card"><div class="num" id="contracted-count">0</div><div class="lbl">Contracted</div><div class="sub" style="color:#dc2626">Start now!</div></div>
+  </div>
+  <div class="card" style="padding:16px">
+    <div class="table-controls">
+      <input type="text" class="search-input" id="hotel-search" placeholder="🔍 Search hotel..." oninput="filterHotels()">
+      <select class="filter-select" id="filter-dest" onchange="filterHotels()">
+        <option value="">All Areas</option>
+        <option value="Hanoi">Hanoi</option>
+        <option value="Ha Long Bay">Ha Long Bay</option>
+        <option value="Da Nang">Da Nang</option>
+        <option value="Hoi An">Hoi An</option>
+        <option value="Ho Chi Minh City">Ho Chi Minh City</option>
+        <option value="Phu Quoc">Phu Quoc</option>
+      </select>
+      <select class="filter-select" id="filter-tier" onchange="filterHotels()">
+        <option value="">All Tiers</option>
+        <option value="Tier 1">Tier 1</option>
+        <option value="Tier 2">Tier 2</option>
+        <option value="Tier 3">Tier 3</option>
+      </select>
+      <select class="filter-select" id="filter-status" onchange="filterHotels()">
+        <option value="">All Status</option>
+        <option value="Not Started">Not Started</option>
+        <option value="In Progress">In Progress</option>
+        <option value="Contracted">Contracted</option>
+      </select>
+      <span id="hotel-count" style="font-size:12px;color:#6b7280">Showing 35 hotels</span>
+    </div>
+    <div class="table-wrap">
+      <table><thead><tr><th>Hotel</th><th>Area</th><th>Tier</th><th>Stars</th><th>Crisis Rate</th><th>Normal Rate</th><th>Saving</th><th>Veg Meals</th><th>Status</th><th>Action</th></tr></thead>
+      <tbody id="hotel-tbody"></tbody></table>
+    </div>
+  </div>
+</div>
+
+<div id="tab-flights" class="tab-panel">
+  <div class="alert alert-success"><strong>✈️ Direct flights now available:</strong> IndiGo operates Delhi–Hanoi direct. Vietjet and VietnamAirlines connect multiple Indian cities. Vietnam is now genuinely accessible without an inconvenient layover.</div>
+  <div class="stats-grid">
+    <div class="stat-card"><div class="num">4+</div><div class="lbl">Indian Cities</div><div class="sub">With Vietnam routes</div></div>
+    <div class="stat-card"><div class="num">~5h</div><div class="lbl">Delhi–Hanoi</div><div class="sub">IndiGo direct</div></div>
+    <div class="stat-card"><div class="num">₹14,000</div><div class="lbl">From Fare (OW)</div><div class="sub">Delhi–Hanoi avg</div></div>
+    <div class="stat-card"><div class="num">Open-jaw</div><div class="lbl">Fly in/out different cities</div><div class="sub">Best for circuits</div></div>
+  </div>
+  <div class="card" style="margin-top:16px">
+    <div class="table-controls">
+      <input type="text" class="search-input" id="flight-search" placeholder="🔍 Search..." oninput="filterFlights()">
+      <select class="filter-select" id="filter-airline" onchange="filterFlights()">
+        <option value="">All Airlines</option>
+        <option value="IndiGo">IndiGo</option>
+        <option value="Vietjet">Vietjet</option>
+        <option value="Vietnam Airlines">Vietnam Airlines</option>
+        <option value="Air India">Air India</option>
+      </select>
+    </div>
+    <div class="table-wrap"><table><thead><tr><th>City</th><th>Destination</th><th>Airlines</th><th>Frequency</th><th>Avg Fare (OW)</th><th>Flight Time</th><th>Status</th><th>Notes</th></tr></thead><tbody id="flight-tbody"></tbody></table></div>
+  </div>
+</div>
+
+<div id="tab-offers" class="tab-panel">
+  <div class="alert alert-warning"><strong>⏰ Ground-floor operator rates — valid throughout 2026.</strong> Vietnam hotels are building their India programmes from scratch and offering exceptional entry-level operator rates. Lock in now before the market matures.</div>
+  <div class="table-controls">
+    <input type="text" class="search-input" id="offer-search" placeholder="🔍 Search offers..." oninput="filterOffers()">
+    <select class="filter-select" id="filter-offer-dest" onchange="filterOffers()">
+      <option value="">All Areas</option>
+      <option value="Hanoi">Hanoi</option>
+      <option value="Ha Long Bay">Ha Long Bay</option>
+      <option value="Da Nang">Da Nang</option>
+      <option value="Hoi An">Hoi An</option>
+      <option value="Ho Chi Minh City">Ho Chi Minh City</option>
+    </select>
+    <select class="filter-select" id="filter-offer-type" onchange="filterOffers()">
+      <option value="">All Types</option>
+      <option value="Circuit">Circuit</option>
+      <option value="Honeymoon">Honeymoon</option>
+      <option value="Group">Group</option>
+      <option value="MICE">MICE</option>
+    </select>
+  </div>
+  <div class="offers-grid" id="offers-grid" style="margin-top:16px"></div>
+</div>
+
+<div id="tab-groups" class="tab-panel">
+  <div class="alert alert-info"><strong>Strategy:</strong> Vietnam is a mix of international chains (Marriott, Accor) in cities and independent luxury resorts on beaches. Start with chain relationships in Hanoi and HCMC, then contract boutique properties in Hoi An and Ha Long directly.</div>
+  <div id="groups-container"></div>
+</div>
+
+<div id="tab-action" class="tab-panel">
+  <div class="opp-banner" style="margin-bottom:24px">
+    <h2>📅 18-Month Vietnam Contracting Roadmap</h2>
+    <p>Vietnam requires a circuit-based approach with open-jaw flights (fly into Hanoi, out of HCMC). The classic 8–10 night circuit is the most popular Indian sell. Build the circuit package first, then expand to beach extensions.</p>
+  </div>
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title" style="margin-bottom:16px;font-size:15px">🚀 Phase 1: Circuit Build (Now → Aug 2026)</div>
+      <div class="timeline">
+        <div class="timeline-item"><div class="period">April–May 2026</div><div class="action">Marriott Vietnam + Accor Vietnam chain calls</div><div class="detail">Covers Sofitel Legend Metropole Hanoi, Park Hyatt Saigon, Pullman Da Nang, Novotel Hoi An, Renaissance Saigon — 12 key properties in 2 calls.</div></div>
+        <div class="timeline-item"><div class="period">May 2026</div><div class="action">Ha Long Bay cruise companies</div><div class="detail">Paradise Cruises, Indochina Sails, Seaplane + cruise combos. Ha Long Bay requires cruise operator contracts, not hotel. Target 3 cruise operators.</div></div>
+        <div class="timeline-item"><div class="period">June 2026</div><div class="action">Hoi An + Da Nang boutique luxury</div><div class="detail">Four Seasons The Nam Hai, Anantara Hoi An, InterContinental Da Nang. Best honeymoon properties — these are the ones clients request by name.</div></div>
+        <div class="timeline-item"><div class="period">July–August 2026</div><div class="action">Circuit package build + agent training</div><div class="detail">Build 6 Vietnam circuit packages: Classic 8N, Grand 12N, Honeymoon Central, Family North, MICE HCMC, Phu Quoc Beach. Train 60 agents.</div></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title" style="margin-bottom:16px;font-size:15px">📈 Phase 2: Scale (Sep 2026 → Sep 2027)</div>
+      <div class="timeline">
+        <div class="timeline-item future"><div class="period">Sep–Oct 2026</div><div class="action">Vietnam campaign launch</div><div class="detail">Target North and West India (markets where Vietnam is less known). Lead with Mỹ Sơn Hindu temple angle for South India. Target 150 room-nights month 1.</div></div>
+        <div class="timeline-item future"><div class="period">Nov 2026–Feb 2027</div><div class="action">Peak season — best weather Central Vietnam</div><div class="detail">Da Nang and Hoi An peak weather Nov–Feb. Pre-block beach resorts. Package with Hanoi + Ha Long circuit for 10N tours.</div></div>
+        <div class="timeline-item future"><div class="period">Mar–May 2027</div><div class="action">Phu Quoc island expansion</div><div class="detail">Add 5 Phu Quoc beach resorts (JW Marriott, InterContinental, Radisson Blu) for island extension packages. Best weather Mar–Sep.</div></div>
+        <div class="timeline-item future"><div class="period">Jun–Sep 2027</div><div class="action">Sa Pa + Ninh Binh — north Vietnam expansion</div><div class="detail">Sa Pa trekking, Ninh Binh (Halong Bay on land). Adventure and cultural packages for repeat Indian visitors seeking something different.</div></div>
+      </div>
+      <div style="background:#fff0f0;border-radius:8px;padding:16px;margin-top:16px">
+        <div style="font-weight:700;font-size:14px;margin-bottom:12px">🎯 KPIs</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:12px">
+          <div style="background:#fff;padding:10px;border-radius:6px;text-align:center"><div style="font-size:18px;font-weight:800;color:#dc2626">35</div><div style="color:#6b7280">Hotels to contract</div></div>
+          <div style="background:#fff;padding:10px;border-radius:6px;text-align:center"><div style="font-size:18px;font-weight:800;color:#dc2626">₹1.5Cr</div><div style="color:#6b7280">Month 1 target</div></div>
+          <div style="background:#fff;padding:10px;border-radius:6px;text-align:center"><div style="font-size:18px;font-weight:800;color:#dc2626">25%+</div><div style="color:#6b7280">Min net margin</div></div>
+          <div style="background:#fff;padding:10px;border-radius:6px;text-align:center"><div style="font-size:18px;font-weight:800;color:#dc2626">6</div><div style="color:#6b7280">Circuit packages</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<div class="modal-overlay" id="contact-modal">
+  <div class="modal">
+    <div class="modal-header">
+      <div><div class="modal-title" id="modal-hotel-name">Log Contact</div><div style="font-size:12px;color:#6b7280;margin-top:2px" id="modal-hotel-dest"></div></div>
+      <button class="modal-close" onclick="closeModal()">×</button>
+    </div>
+    <div class="form-group"><label class="form-label">Contact Name</label><input type="text" class="form-control" id="contact-name" placeholder="Name — Title"></div>
+    <div class="form-group"><label class="form-label">Email</label><input type="email" class="form-control" id="contact-email" placeholder="sales@hotel.com"></div>
+    <div class="form-group"><label class="form-label">Phone / WhatsApp</label><input type="text" class="form-control" id="contact-phone" placeholder="+XX XX XXXX XXXX"></div>
+    <div class="form-group"><label class="form-label">Status</label>
+      <select class="form-control" id="contact-status">
+        <option value="Not Started">Not Started</option>
+        <option value="In Progress">In Progress — First Contact Made</option>
+        <option value="In Progress">In Progress — Rates Requested</option>
+        <option value="In Progress">In Progress — Contract Under Review</option>
+        <option value="Contracted">Contracted ✅</option>
+      </select>
+    </div>
+    <div class="form-group"><label class="form-label">Notes</label><textarea class="form-control" id="contact-notes" rows="3" placeholder="What was discussed? Next steps?"></textarea></div>
+    <div style="display:flex;gap:10px;justify-content:flex-end">
+      <button class="btn btn-outline" onclick="closeModal()">Cancel</button>
+      <button class="btn btn-primary" onclick="saveContact()">💾 Save Log</button>
+    </div>
+    <div id="contact-history" style="margin-top:16px"></div>
+  </div>
+</div>
+
+<script>
+const DEST_KEY = 'vietnam';
+
+const HOTELS=[
+  {name:"Sofitel Legend Metropole Hanoi",dest:"Hanoi",area:"Hanoi",tier:"Tier 1",stars:"5",crisis:"$160",normal:"$360",saving:"56%",meals:"Yes",status:"Not Started",chain:"Accor"},
+  {name:"JW Marriott Hotel Hanoi",dest:"Hanoi",area:"Hanoi",tier:"Tier 1",stars:"5",crisis:"$140",normal:"$315",saving:"56%",meals:"Yes",status:"Not Started",chain:"Marriott"},
+  {name:"Lotte Hotel Hanoi",dest:"Hanoi",area:"Hanoi",tier:"Tier 1",stars:"5",crisis:"$120",normal:"$270",saving:"56%",meals:"Yes",status:"Not Started",chain:"Lotte"},
+  {name:"Hilton Hanoi Opera",dest:"Hanoi",area:"Hanoi",tier:"Tier 2",stars:"5",crisis:"$95",normal:"$210",saving:"55%",meals:"Yes",status:"Not Started",chain:"Hilton"},
+  {name:"Pan Pacific Hanoi",dest:"Hanoi",area:"Hanoi",tier:"Tier 2",stars:"5",crisis:"$90",normal:"$200",saving:"55%",meals:"Yes",status:"Not Started",chain:"Pan Pacific"},
+  {name:"Melia Hanoi",dest:"Hanoi",area:"Hanoi",tier:"Tier 2",stars:"5",crisis:"$85",normal:"$190",saving:"55%",meals:"Yes",status:"Not Started",chain:"Melia"},
+  {name:"Hanoi La Siesta Hotel",dest:"Hanoi",area:"Hanoi",tier:"Tier 2",stars:"4",crisis:"$65",normal:"$145",saving:"55%",meals:"Yes",status:"Not Started",chain:"La Siesta"},
+  {name:"Tirant Hotel Hanoi",dest:"Hanoi",area:"Hanoi",tier:"Tier 3",stars:"4",crisis:"$45",normal:"$100",saving:"55%",meals:"Yes",status:"Not Started",chain:"Independent"},
+  {name:"Paradise Elegance Cruise",dest:"Ha Long Bay",area:"Ha Long Bay",tier:"Tier 1",stars:"5",crisis:"$220",normal:"$490",saving:"55%",meals:"Yes",status:"Not Started",chain:"Paradise Cruises"},
+  {name:"Au Co Cruise Ha Long",dest:"Ha Long Bay",area:"Ha Long Bay",tier:"Tier 1",stars:"5",crisis:"$190",normal:"$425",saving:"55%",meals:"Yes",status:"Not Started",chain:"Indochina Sails"},
+  {name:"L'Azalee Cruise Ha Long",dest:"Ha Long Bay",area:"Ha Long Bay",tier:"Tier 2",stars:"4",crisis:"$130",normal:"$290",saving:"55%",meals:"Yes",status:"Not Started",chain:"Independent"},
+  {name:"Vinpearl Resort Ha Long",dest:"Ha Long Bay",area:"Ha Long Bay",tier:"Tier 2",stars:"5",crisis:"$110",normal:"$245",saving:"55%",meals:"Yes",status:"Not Started",chain:"Vinpearl"},
+  {name:"FLC Halong Bay Golf Club",dest:"Ha Long Bay",area:"Ha Long Bay",tier:"Tier 2",stars:"5",crisis:"$95",normal:"$210",saving:"55%",meals:"Yes",status:"Not Started",chain:"FLC Group"},
+  {name:"Four Seasons The Nam Hai",dest:"Hoi An",area:"Hoi An",tier:"Tier 1",stars:"5",crisis:"$280",normal:"$620",saving:"55%",meals:"Yes",status:"Not Started",chain:"Four Seasons"},
+  {name:"Anantara Hoi An Resort",dest:"Hoi An",area:"Hoi An",tier:"Tier 1",stars:"5",crisis:"$160",normal:"$355",saving:"55%",meals:"Yes",status:"Not Started",chain:"Anantara"},
+  {name:"Almanity Hoi An Wellness Resort",dest:"Hoi An",area:"Hoi An",tier:"Tier 2",stars:"5",crisis:"$110",normal:"$245",saving:"55%",meals:"Yes",status:"Not Started",chain:"Independent"},
+  {name:"Hoi An Beach Resort",dest:"Hoi An",area:"Hoi An",tier:"Tier 2",stars:"4",crisis:"$75",normal:"$165",saving:"55%",meals:"Yes",status:"Not Started",chain:"Independent"},
+  {name:"Victoria Hoi An Beach",dest:"Hoi An",area:"Hoi An",tier:"Tier 2",stars:"4",crisis:"$80",normal:"$178",saving:"55%",meals:"Yes",status:"Not Started",chain:"Victoria Hotels"},
+  {name:"InterContinental Da Nang",dest:"Da Nang",area:"Da Nang",tier:"Tier 1",stars:"5",crisis:"$180",normal:"$400",saving:"55%",meals:"Yes",status:"Not Started",chain:"IHG"},
+  {name:"Pullman Da Nang Beach Resort",dest:"Da Nang",area:"Da Nang",tier:"Tier 1",stars:"5",crisis:"$150",normal:"$335",saving:"55%",meals:"Yes",status:"Not Started",chain:"Accor"},
+  {name:"Hyatt Regency Da Nang",dest:"Da Nang",area:"Da Nang",tier:"Tier 1",stars:"5",crisis:"$140",normal:"$310",saving:"55%",meals:"Yes",status:"Not Started",chain:"Hyatt"},
+  {name:"Crowne Plaza Da Nang",dest:"Da Nang",area:"Da Nang",tier:"Tier 2",stars:"5",crisis:"$100",normal:"$222",saving:"55%",meals:"Yes",status:"Not Started",chain:"IHG"},
+  {name:"Furama Resort Da Nang",dest:"Da Nang",area:"Da Nang",tier:"Tier 2",stars:"5",crisis:"$90",normal:"$200",saving:"55%",meals:"Yes",status:"Not Started",chain:"Independent"},
+  {name:"Park Hyatt Saigon",dest:"Ho Chi Minh City",area:"Ho Chi Minh City",tier:"Tier 1",stars:"5",crisis:"$180",normal:"$400",saving:"55%",meals:"Yes",status:"Not Started",chain:"Hyatt"},
+  {name:"Caravelle Hotel Saigon",dest:"Ho Chi Minh City",area:"Ho Chi Minh City",tier:"Tier 1",stars:"5",crisis:"$150",normal:"$335",saving:"55%",meals:"Yes",status:"Not Started",chain:"Independent"},
+  {name:"Sofitel Saigon Plaza",dest:"Ho Chi Minh City",area:"Ho Chi Minh City",tier:"Tier 1",stars:"5",crisis:"$140",normal:"$310",saving:"55%",meals:"Yes",status:"Not Started",chain:"Accor"},
+  {name:"Sheraton Saigon Grand Opera",dest:"Ho Chi Minh City",area:"Ho Chi Minh City",tier:"Tier 2",stars:"5",crisis:"$110",normal:"$245",saving:"55%",meals:"Yes",status:"Not Started",chain:"Marriott"},
+  {name:"Novotel Saigon Centre",dest:"Ho Chi Minh City",area:"Ho Chi Minh City",tier:"Tier 2",stars:"4",crisis:"$85",normal:"$190",saving:"55%",meals:"Yes",status:"Not Started",chain:"Accor"},
+  {name:"Liberty Central Saigon",dest:"Ho Chi Minh City",area:"Ho Chi Minh City",tier:"Tier 2",stars:"4",crisis:"$65",normal:"$145",saving:"55%",meals:"Yes",status:"Not Started",chain:"Liberty Hotels"},
+  {name:"Ibis Saigon South",dest:"Ho Chi Minh City",area:"Ho Chi Minh City",tier:"Tier 3",stars:"3",crisis:"$45",normal:"$100",saving:"55%",meals:"No",status:"Not Started",chain:"Accor"},
+  {name:"JW Marriott Phu Quoc",dest:"Phu Quoc",area:"Phu Quoc",tier:"Tier 1",stars:"5",crisis:"$180",normal:"$400",saving:"55%",meals:"Yes",status:"Not Started",chain:"Marriott"},
+  {name:"InterContinental Phu Quoc",dest:"Phu Quoc",area:"Phu Quoc",tier:"Tier 1",stars:"5",crisis:"$160",normal:"$355",saving:"55%",meals:"Yes",status:"Not Started",chain:"IHG"},
+  {name:"Radisson Blu Phu Quoc",dest:"Phu Quoc",area:"Phu Quoc",tier:"Tier 2",stars:"5",crisis:"$120",normal:"$267",saving:"55%",meals:"Yes",status:"Not Started",chain:"Radisson"},
+  {name:"Salinda Resort Phu Quoc",dest:"Phu Quoc",area:"Phu Quoc",tier:"Tier 2",stars:"5",crisis:"$100",normal:"$222",saving:"55%",meals:"Yes",status:"Not Started",chain:"Independent"},
+  {name:"Vinpearl Phu Quoc",dest:"Phu Quoc",area:"Phu Quoc",tier:"Tier 2",stars:"5",crisis:"$85",normal:"$190",saving:"55%",meals:"Yes",status:"Not Started",chain:"Vinpearl"},
+];
+const FLIGHTS=[
+  {city:"Delhi",dest:"Hanoi (HAN)",airlines:"IndiGo (direct), Vietnam Airlines (via HAN)",freq:"5x weekly direct",fare:"₹14,000–26,000",time:"5h",status:"Active",notes:"IndiGo direct is game-changer. Best value on the route."},
+  {city:"Mumbai",dest:"Ho Chi Minh City (SGN)",airlines:"Vietnam Airlines, Air India (via Delhi)",freq:"4x weekly",fare:"₹16,000–30,000",time:"5h 30m",status:"Active",notes:"Strong business travel from Mumbai to HCMC."},
+  {city:"Delhi",dest:"Da Nang (DAD)",airlines:"IndiGo (via Hanoi), Vietjet (via HAN)",freq:"Via connections",fare:"₹16,000–28,000",time:"7h+",status:"Active",notes:"Best for central Vietnam packages — open-jaw in Hanoi, out Da Nang."},
+  {city:"Bengaluru",dest:"Ho Chi Minh City (SGN)",airlines:"Vietnam Airlines (via HAN), Vietjet",freq:"Via connections",fare:"₹14,000–26,000",time:"6h+",status:"Active",notes:"Connect via Hanoi. Good for south Vietnam + south India market."},
+  {city:"Chennai",dest:"Hanoi (HAN)",airlines:"Vietnam Airlines, IndiGo (via Delhi)",freq:"Via connections",fare:"₹12,000–22,000",time:"5h 30m+",status:"Active",notes:"Mỹ Sơn Hindu temple connection resonates strongly with Tamil travellers."},
+  {city:"Kolkata",dest:"Hanoi (HAN)",airlines:"Vietnam Airlines (direct, seasonal)",freq:"4x weekly (seasonal)",fare:"₹12,000–21,000",time:"3h 45m",status:"Active",notes:"Shortest India–Vietnam route. Seasonal direct from Kolkata."},
+];
+const OFFERS=[
+  {hotel:"Sofitel Legend Metropole Hanoi",dest:"Hanoi",type:"MICE",rate:"$148/night",saving:"59% off rack",validity:"Apr–Sep 2026",capacity:"20–300 pax",includes:"Breakfast, AV, Indian veg menu, French Quarter heritage tour",tags:["MICE","Heritage","Hanoi"]},
+  {hotel:"Four Seasons The Nam Hai",dest:"Hoi An",type:"Honeymoon",rate:"$258/night",saving:"58% off rack",validity:"Apr–Sep 2026",capacity:"2 pax",includes:"Breakfast, villa pool, lantern boat evening, spa, romance setup",tags:["Honeymoon","Ultra-Luxury","Hoi An"]},
+  {hotel:"InterContinental Da Nang",dest:"Da Nang",type:"Group",rate:"$162/night",saving:"60% off rack",validity:"May–Sep 2026",capacity:"20–100 pax",includes:"Breakfast, beach access, 1 FOC per 15, Indian veg options",tags:["Group","Beach","Da Nang"]},
+  {hotel:"Paradise Elegance Cruise",dest:"Ha Long Bay",type:"Circuit",rate:"$198/night",saving:"60% off rack",validity:"Apr–Sep 2026",capacity:"2–24 pax",includes:"All meals, kayaking, cave tour, cooking class, veg menu, sunset cocktails",tags:["Circuit","Iconic","Ha Long"]},
+  {hotel:"Park Hyatt Saigon",dest:"Ho Chi Minh City",type:"MICE",rate:"$162/night",saving:"59% off rack",validity:"Apr–Aug 2026",capacity:"20–200 pax",includes:"Breakfast, AV, Indian veg menu, Mekong Delta tour",tags:["MICE","Luxury","HCMC"]},
+  {hotel:"Anantara Hoi An",dest:"Hoi An",type:"Honeymoon",rate:"$144/night",saving:"59% off rack",validity:"Apr–Sep 2026",capacity:"2 pax",includes:"Breakfast, lantern boat, cooking class, bicycle tour, river view room",tags:["Honeymoon","Hoi An","Anantara"]},
+  {hotel:"JW Marriott Phu Quoc",dest:"Phu Quoc",type:"Group",rate:"$162/night",saving:"60% off rack",validity:"May–Sep 2026",capacity:"20–80 pax",includes:"Breakfast, beach, 1 FOC per 15, Indian food, cable car tickets",tags:["Group","Beach","Phu Quoc"]},
+];
+const GROUPS=[
+  {name:"Accor Vietnam",logo:"🟡",props:"Vietnam: 25+ properties. Key: Sofitel Legend Metropole Hanoi, Sofitel Saigon Plaza, Pullman Da Nang, Pullman Hanoi, Novotel Saigon, Mercure Hoi An.",contact:"VP Commercial — India & South Asia: vietnam.india.sales@accor.com | Hanoi: +84 24 XXXX XXXX",strategy:"Accor Vietnam is the most comprehensive chain for Indian circuit packages — their properties anchor every major stop: Sofitel Metropole in Hanoi (iconic heritage), Pullman Da Nang (beach midpoint), and Sofitel Saigon (HCMC exit). One Accor Vietnam agreement covers the full classic circuit. They have an existing India programme and understand vegetarian requirements. Lead with the full circuit package angle.",template:`Dear [Name] at Accor Vietnam,
+
+I'm writing from TripFactory/ORN — India's leading B2B platform with 8,000+ active agents.
+
+Vietnam is our highest-growth emerging market and Accor's Vietnam portfolio is uniquely positioned to anchor our circuit packages — Sofitel Metropole for Hanoi, Pullman Da Nang for the central beach stop, and Sofitel Saigon for the HCMC exit.
+
+We would like to explore a Vietnam Circuit Operator Agreement:
+• Hanoi: Sofitel Legend Metropole — heritage circuit anchor
+• Da Nang: Pullman Beach Resort — central beach midpoint
+• HCMC: Sofitel Saigon Plaza — south circuit exit
+
+Volume target: 1,000+ room-nights in Year 1 across the Vietnam circuit. Can we speak this week?
+
+Best regards,
+[Name] | [Phone]`},
+  {name:"Marriott International Vietnam",logo:"🔷",props:"Vietnam: 15+ properties. Key: JW Marriott Hanoi, JW Marriott Phu Quoc, Four Seasons Nam Hai Hoi An (managed), Sheraton Saigon, Renaissance Saigon, Westin Da Nang.",contact:"Director of Sales — South Asia: vietnam.india@marriott.com | Ho Chi Minh City: +84 28 XXXX XXXX",strategy:"Marriott Vietnam covers both the business and luxury segments perfectly. JW Marriott Hanoi is the best MICE hotel in Vietnam. Four Seasons Nam Hai is the most aspirational honeymoon hotel on the central coast. JW Marriott Phu Quoc is the best island luxury option. One agreement covers the luxury end of the full Vietnam circuit.",template:`Dear [Name] at Marriott International Vietnam,
+
+Greetings from TripFactory/ORN — India's top B2B platform.
+
+Vietnam is our fastest-growing emerging destination and Marriott's portfolio anchors the luxury end of our circuit packages perfectly. JW Marriott Hanoi for MICE, Four Seasons Nam Hai for honeymoon, and JW Marriott Phu Quoc for beach extension.
+
+We would like to build a Vietnam Preferred Operator Agreement:
+• MICE: JW Marriott Hanoi for 20–200 pax Indian corporate groups
+• Honeymoon: Four Seasons Nam Hai — our most-requested Vietnam honeymoon property
+• Beach extension: JW Marriott Phu Quoc — island luxury finish to circuit packages
+
+Can we speak this week?
+
+Best regards,
+[Name] | [Phone]`},
+];
+
+
+function renderHotels(data){
+  const tb=document.getElementById('hotel-tbody');
+  if(!tb) return;
+  tb.innerHTML='';
+  data.forEach(h=>{
+    const stored=getContacts(h.name);
+    const ls=stored.length?stored[stored.length-1].status:h.status;
+    const tc=h.tier==='Tier 1'?'tier1':h.tier==='Tier 2'?'tier2':'tier3';
+    const sc=ls==='Contracted'?'badge-green':ls.includes('Progress')?'badge-yellow':'badge-gray';
+    tb.innerHTML+=`<tr>
+      <td><strong style="font-size:13px">${h.name}</strong><br><span style="font-size:11px;color:#6b7280">${h.chain}</span></td>
+      <td style="font-size:12px">${h.area||h.dest}</td>
+      <td><span class="badge ${tc}">${h.tier}</span></td>
+      <td>${h.stars}★</td>
+      <td style="color:#dc2626;font-weight:700">${h.crisis}/night</td>
+      <td style="color:#9ca3af;text-decoration:line-through">${h.normal}</td>
+      <td><span class="badge badge-green">${h.saving} off</span></td>
+      <td>${h.meals==='Yes'?'<span class="badge badge-green">✓ Yes</span>':h.meals==='On Request'?'<span class="badge badge-yellow">On Request</span>':'<span class="badge badge-gray">No</span>'}</td>
+      <td><span class="badge ${sc}">${ls}</span></td>
+      <td><button class="btn btn-outline btn-sm" onclick='openModal(${JSON.stringify(h)})'>📝 Log</button></td>
+    </tr>`;
+  });
+  const hc=document.getElementById('hotel-count');
+  if(hc) hc.textContent=`Showing ${data.length} hotels`;
+  const cc=HOTELS.filter(h=>{const s=getContacts(h.name);return s.length&&s[s.length-1].status==='Contracted';}).length;
+  const el=document.getElementById('contracted-count');
+  if(el) el.textContent=cc;
+}
+function filterHotels(){
+  const s=(document.getElementById('hotel-search')||{}).value?.toLowerCase()||'';
+  const d=(document.getElementById('filter-dest')||{}).value||'';
+  const t=(document.getElementById('filter-tier')||{}).value||'';
+  const st=(document.getElementById('filter-status')||{}).value||'';
+  renderHotels(HOTELS.filter(h=>{
+    const ls=(()=>{const c=getContacts(h.name);return c.length?c[c.length-1].status:h.status;})();
+    return(!s||(h.name+' '+(h.area||h.dest)).toLowerCase().includes(s))&&(!d||h.dest===d||h.area===d)&&(!t||h.tier===t)&&(!st||ls.includes(st));
+  }));
+}
+function renderFlights(data){
+  const tb=document.getElementById('flight-tbody');
+  if(!tb) return;
+  tb.innerHTML='';
+  data.forEach(f=>{
+    tb.innerHTML+=`<tr><td><strong>${f.city}</strong></td><td>${f.dest}</td><td style="font-size:12px">${f.airlines}</td><td>${f.freq}</td><td style="color:#dc2626;font-weight:600">${f.fare}</td><td>${f.time}</td><td><span class="badge badge-green">${f.status}</span></td><td style="font-size:11px;color:#6b7280">${f.notes}</td></tr>`;
+  });
+}
+function filterFlights(){
+  const s=(document.getElementById('flight-search')||{}).value?.toLowerCase()||'';
+  const a=(document.getElementById('filter-airline')||{}).value||'';
+  renderFlights(FLIGHTS.filter(f=>(!s||f.city.toLowerCase().includes(s)||f.airlines.toLowerCase().includes(s))&&(!a||f.airlines.includes(a))));
+}
+function renderOffers(data){
+  const g=document.getElementById('offers-grid');
+  if(!g) return;
+  g.innerHTML=data.length?data.map(o=>`<div class="offer-card"><div class="offer-header"><div class="offer-hotel">${o.hotel}</div><div class="offer-dest">📍 ${o.dest} · ${o.type}</div></div><div class="offer-body"><div class="offer-row"><span class="offer-label">Net Rate</span><span class="offer-rate">${o.rate}</span></div><div class="offer-row"><span class="offer-label">Saving</span><span class="offer-value" style="color:#dc2626">${o.saving}</span></div><div class="offer-row"><span class="offer-label">Valid</span><span class="offer-value" style="font-size:12px">${o.validity}</span></div><div class="offer-row"><span class="offer-label">Capacity</span><span class="offer-value" style="font-size:12px">${o.capacity}</span></div><div style="font-size:11px;color:#6b7280;margin:8px 0;border-top:1px solid #f3f4f6;padding-top:8px"><strong>Includes:</strong> ${o.includes}</div><div class="offer-tags">${o.tags.map(t=>`<span class="badge badge-brand">${t}</span>`).join('')}</div></div></div>`).join(''):'<div style="color:#6b7280;padding:20px;grid-column:1/-1">No offers match.</div>';
+}
+function filterOffers(){
+  const s=(document.getElementById('offer-search')||{}).value?.toLowerCase()||'';
+  const d=(document.getElementById('filter-offer-dest')||{}).value||'';
+  const t=(document.getElementById('filter-offer-type')||{}).value||'';
+  renderOffers(OFFERS.filter(o=>(!s||o.hotel.toLowerCase().includes(s)||o.tags.join(' ').toLowerCase().includes(s))&&(!d||o.dest===d)&&(!t||o.type===t)));
+}
+function renderGroups(){
+  const c=document.getElementById('groups-container');
+  if(!c) return;
+  c.innerHTML=GROUPS.map(g=>`<div class="chain-card"><div class="chain-name">${g.logo} ${g.name}</div><div class="chain-properties">${g.props}</div><div style="font-size:12px;color:#dc2626;margin-bottom:10px">📞 ${g.contact}</div><div class="chain-strategy">${g.strategy}</div><div style="font-size:12px;font-weight:600;color:#374151;margin-bottom:6px">📧 Opening Template:</div><div class="contact-template">${g.template}</div><button class="copy-btn" onclick="copyTpl(this)">📋 Copy Template</button></div>`).join('');
+}
+let currentHotel='';
+function openModal(h){currentHotel=h.name;document.getElementById('modal-hotel-name').textContent=h.name;document.getElementById('modal-hotel-dest').textContent=`📍 ${h.area||h.dest} · ${h.tier}`;['contact-name','contact-email','contact-phone','contact-notes'].forEach(id=>document.getElementById(id).value='');loadHistory();document.getElementById('contact-modal').classList.add('open');}
+function closeModal(){document.getElementById('contact-modal').classList.remove('open');}
+function saveContact(){const entry={ts:new Date().toLocaleString(),name:document.getElementById('contact-name').value,email:document.getElementById('contact-email').value,phone:document.getElementById('contact-phone').value,status:document.getElementById('contact-status').value,notes:document.getElementById('contact-notes').value};const k='orn_'+DEST_KEY+'_'+currentHotel;const arr=JSON.parse(localStorage.getItem(k)||'[]');arr.push(entry);localStorage.setItem(k,JSON.stringify(arr));loadHistory();filterHotels();document.getElementById('contact-notes').value='';}
+function loadHistory(){const arr=getContacts(currentHotel);const d=document.getElementById('contact-history');d.innerHTML=arr.length?'<div style="font-size:12px;font-weight:600;color:#374151;margin-bottom:8px">📋 Contact History:</div>'+arr.slice().reverse().map(e=>`<div class="log-entry"><div class="log-date">${e.ts} · <strong>${e.status}</strong>${e.name?' · '+e.name:''}</div>${e.email?`<div class="log-text">✉️ ${e.email}${e.phone?' · 📞 '+e.phone:''}</div>`:''}${e.notes?`<div class="log-text">📝 ${e.notes}</div>`:''}</div>`).join(''):''}
+function getContacts(n){return JSON.parse(localStorage.getItem('orn_'+DEST_KEY+'_'+n)||'[]');}
+document.getElementById('contact-modal').addEventListener('click',function(e){if(e.target===this)closeModal();});
+function showTab(id,btn){document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));document.getElementById('tab-'+id).classList.add('active');btn.classList.add('active');}
+function navigateDest(url){if(url&&!url.startsWith('#'))window.location.href=url;}
+function copyTpl(btn){const t=btn.closest('.chain-card').querySelector('.contact-template').textContent;navigator.clipboard.writeText(t).then(()=>{btn.textContent='✅ Copied!';setTimeout(()=>btn.textContent='📋 Copy Template',2000);});}
+renderHotels(HOTELS);renderFlights(FLIGHTS);renderOffers(OFFERS);renderGroups();
+</script>
+</body>
+</html>

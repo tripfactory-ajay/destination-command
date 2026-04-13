@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Japan Hotel Contracting Intelligence | TripFactory ORN</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:#f8f9ff;color:#1a1a1a;font-size:14px;line-height:1.5}
+.site-header{position:sticky;top:0;z-index:100;background:#fff;border-bottom:2px solid #e11d48;box-shadow:0 2px 8px rgba(0,0,0,0.08)}
+.header-inner{max-width:1400px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.logo-badge{background:#e11d48;color:#fff;font-weight:800;font-size:13px;padding:6px 12px;border-radius:6px;letter-spacing:0.5px}
+.header-title{flex:1;min-width:200px}
+.header-title h1{font-size:16px;font-weight:700;color:#1a1a1a;line-height:1.2}
+.header-title p{font-size:12px;color:#6b7280}
+.header-meta{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.dest-dropdown{padding:6px 10px;border:1.5px solid #e11d48;border-radius:6px;font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;font-weight:600;color:#e11d48;background:#fff;cursor:pointer;outline:none;max-width:200px}
+.status-pill{background:#fff0f5;color:#9f1239;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;border:1px solid #e11d4833}
+.urgency-pill{background:#fef3cd;color:#92400e;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;border:1px solid #f59e0b}
+.tab-nav{background:#fff;border-bottom:1px solid #e5e7eb;position:sticky;top:69px;z-index:99}
+.tab-nav-inner{max-width:1400px;margin:0 auto;padding:0 20px;display:flex;overflow-x:auto;scrollbar-width:none;gap:2px}
+.tab-nav-inner::-webkit-scrollbar{display:none}
+.tab-btn{padding:12px 18px;border:none;background:none;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:600;color:#6b7280;cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap;transition:all 0.2s}
+.tab-btn:hover{color:#e11d48;background:#fff0f5}
+.tab-btn.active{color:#e11d48;border-bottom-color:#e11d48}
+.main{max-width:1400px;margin:0 auto;padding:24px 20px}
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+.card{background:#fff;border-radius:10px;padding:20px;margin-bottom:16px;border:1px solid #e5e7eb;box-shadow:0 1px 3px rgba(0,0,0,0.06)}
+.card-header{display:flex;align-items:flex-start;gap:12px;margin-bottom:16px}
+.card-icon{font-size:24px;line-height:1}
+.card-title{font-size:16px;font-weight:700;color:#1a1a1a}
+.card-subtitle{font-size:12px;color:#6b7280;margin-top:2px}
+.alert{padding:14px 16px;border-radius:8px;margin-bottom:16px;border-left:4px solid}
+.alert-brand{background:#fff0f5;border-color:#e11d48;color:#9f1239}
+.alert-warning{background:#fffbeb;border-color:#f59e0b;color:#78350f}
+.alert-info{background:#eff6ff;border-color:#3b82f6;color:#1e3a8a}
+.alert-success{background:#f0fdf4;border-color:#16a34a;color:#14532d}
+.alert strong{font-weight:700}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:20px}
+.stat-card{background:#fff;border:1px solid #e5e7eb;border-radius:8px;padding:16px;text-align:center}
+.stat-card .num{font-size:26px;font-weight:800;color:#e11d48;line-height:1}
+.stat-card .lbl{font-size:11px;color:#6b7280;margin-top:4px;font-weight:500}
+.stat-card .sub{font-size:10px;color:#9ca3af;margin-top:2px}
+.table-controls{display:flex;gap:10px;margin-bottom:12px;flex-wrap:wrap;align-items:center}
+.search-input{padding:8px 12px;border:1.5px solid #e5e7eb;border-radius:6px;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;flex:1;min-width:180px;outline:none}
+.search-input:focus{border-color:#e11d48;box-shadow:0 0 0 2px #e11d4822}
+.filter-select{padding:8px 10px;border:1.5px solid #e5e7eb;border-radius:6px;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;background:#fff;outline:none;cursor:pointer}
+.filter-select:focus{border-color:#e11d48}
+.table-wrap{overflow-x:auto;border-radius:8px;border:1px solid #e5e7eb}
+table{width:100%;border-collapse:collapse;background:#fff}
+thead th{background:#fff0f5;padding:10px 12px;text-align:left;font-size:11px;font-weight:700;color:#374151;text-transform:uppercase;letter-spacing:0.5px;border-bottom:2px solid #e5e7eb;white-space:nowrap}
+tbody td{padding:10px 12px;border-bottom:1px solid #f3f4f6;font-size:13px;vertical-align:top}
+tbody tr:hover{background:#fff0f5}
+tbody tr:last-child td{border-bottom:none}
+.badge{display:inline-block;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:700;white-space:nowrap}
+.badge-brand{background:#fff0f5;color:#9f1239}
+.badge-green{background:#dcfce7;color:#166534}
+.badge-yellow{background:#fef9c3;color:#854d0e}
+.badge-gray{background:#f3f4f6;color:#374151}
+.tier1{background:#fef3c7;color:#92400e;border:1px solid #f59e0b}
+.tier2{background:#fff0f5;color:#9f1239;border:1px solid #e11d4844}
+.tier3{background:#f0fdf4;color:#166534;border:1px solid #4ade80}
+.modal-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:1000;align-items:center;justify-content:center}
+.modal-overlay.open{display:flex}
+.modal{background:#fff;border-radius:12px;padding:24px;width:90%;max-width:500px;max-height:90vh;overflow-y:auto}
+.modal-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px}
+.modal-title{font-size:16px;font-weight:700}
+.modal-close{background:none;border:none;font-size:20px;cursor:pointer;color:#6b7280;line-height:1;padding:0}
+.form-group{margin-bottom:14px}
+.form-label{display:block;font-size:12px;font-weight:600;color:#374151;margin-bottom:5px}
+.form-control{width:100%;padding:9px 12px;border:1.5px solid #e5e7eb;border-radius:6px;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;outline:none}
+.form-control:focus{border-color:#e11d48;box-shadow:0 0 0 2px #e11d4822}
+.btn{padding:9px 18px;border-radius:6px;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;border:none;transition:all 0.2s}
+.btn-primary{background:#e11d48;color:#fff}
+.btn-primary:hover{background:#9f1239}
+.btn-outline{background:#fff;color:#e11d48;border:1.5px solid #e11d48}
+.btn-outline:hover{background:#fff0f5}
+.btn-sm{padding:5px 12px;font-size:12px}
+.log-entry{background:#fff0f5;border-radius:6px;padding:10px 12px;margin-top:8px;border-left:3px solid #e11d48}
+.log-entry .log-date{font-size:11px;color:#6b7280;font-weight:600}
+.log-entry .log-text{font-size:12px;color:#374151;margin-top:3px}
+.opp-banner{background:linear-gradient(135deg,#e11d48,#9f1239);color:#fff;border-radius:12px;padding:24px;margin-bottom:24px}
+.opp-banner h2{font-size:20px;font-weight:800;margin-bottom:8px}
+.opp-banner p{font-size:13px;opacity:0.9;line-height:1.6}
+.opp-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:12px;margin-top:16px}
+.opp-stat{text-align:center;background:rgba(255,255,255,0.15);border-radius:8px;padding:12px}
+.opp-stat .n{font-size:22px;font-weight:800}
+.opp-stat .l{font-size:11px;opacity:0.85;margin-top:2px}
+.offers-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.offer-card{background:#fff;border-radius:10px;border:1px solid #e5e7eb;overflow:hidden;transition:box-shadow 0.2s}
+.offer-card:hover{box-shadow:0 4px 16px #e11d4822}
+.offer-header{background:#e11d48;color:#fff;padding:14px 16px}
+.offer-hotel{font-size:14px;font-weight:700}
+.offer-dest{font-size:11px;opacity:0.8;margin-top:2px}
+.offer-body{padding:14px 16px}
+.offer-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.offer-label{font-size:11px;color:#6b7280;font-weight:600}
+.offer-value{font-size:13px;font-weight:600;color:#1a1a1a}
+.offer-rate{font-size:20px;font-weight:800;color:#e11d48}
+.offer-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:10px}
+.chain-card{background:#fff;border-radius:10px;border:1px solid #e5e7eb;padding:18px;margin-bottom:14px}
+.chain-name{font-size:15px;font-weight:700;color:#1a1a1a;margin-bottom:4px}
+.chain-properties{font-size:12px;color:#6b7280;margin-bottom:10px}
+.chain-strategy{font-size:13px;color:#374151;line-height:1.6;margin-bottom:10px}
+.contact-template{background:#fff0f5;border-radius:6px;padding:12px;border-left:3px solid #e11d48;font-size:12px;color:#374151;line-height:1.7;white-space:pre-wrap;font-family:'Plus Jakarta Sans',sans-serif}
+.copy-btn{margin-top:8px;padding:5px 12px;background:#fff0f5;color:#e11d48;border:1px solid #e11d4844;border-radius:4px;font-size:11px;font-weight:600;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif}
+.copy-btn:hover{opacity:0.8}
+.timeline{position:relative;padding-left:28px}
+.timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:#e11d4844}
+.timeline-item{position:relative;margin-bottom:20px}
+.timeline-item::before{content:'';position:absolute;left:-24px;top:4px;width:12px;height:12px;border-radius:50%;background:#e11d48;border:2px solid #fff;box-shadow:0 0 0 2px #e11d48}
+.timeline-item.future::before{background:#fff;border-color:#e11d48}
+.timeline-item .period{font-size:11px;font-weight:700;color:#e11d48;text-transform:uppercase;letter-spacing:0.5px}
+.timeline-item .action{font-size:13px;color:#1a1a1a;margin-top:2px;font-weight:500}
+.timeline-item .detail{font-size:12px;color:#6b7280;margin-top:3px}
+.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+@media(max-width:600px){.stats-grid{grid-template-columns:repeat(2,1fr)}.main{padding:16px 12px}}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <span class="logo-badge">ORN</span>
+    <div class="header-title">
+      <h1>🇯🇵 Japan Hotel Contracting Intelligence</h1>
+      <p>TripFactory Product Team · Internal Use Only · Updated April 2026</p>
+    </div>
+    <div class="header-meta">
+      <select class="dest-dropdown" onchange="navigateDest(this.value)">
+        <option value="">🌍 Switch Destination</option>
+        <option value="index.html">🏠 Command Hub</option>
+        <option value="uae.html">🇦🇪 UAE</option>
+        <option value="thailand.html">🇹🇭 Thailand</option>
+        <option value="bali.html">🇮🇩 Bali</option>
+        <option value="singapore.html">🇸🇬 Singapore</option>
+        <option value="" selected>🇯🇵 Japan (Current)</option>
+        <option value="malaysia.html">🇲🇾 Malaysia</option>
+        <option value="srilanka.html">🇱🇰 Sri Lanka</option>
+        <option value="vietnam.html">🇻🇳 Vietnam</option>
+        <option value="maldives.html">🇲🇻 Maldives</option>
+
+      </select>
+      <span class="status-pill">New Market · High Growth</span>
+      <span class="urgency-pill">⚡ Act Now</span>
+    </div>
+  </div>
+</header>
+
+<nav class="tab-nav">
+  <div class="tab-nav-inner">
+    <button class="tab-btn active" onclick="showTab('briefing',this)">📋 Briefing</button>
+    <button class="tab-btn" onclick="showTab('hotels',this)">🏨 Hotels</button>
+    <button class="tab-btn" onclick="showTab('flights',this)">✈️ Flights</button>
+    <button class="tab-btn" onclick="showTab('offers',this)">💰 Live Offers</button>
+    <button class="tab-btn" onclick="showTab('groups',this)">🏢 Hotel Groups</button>
+    <button class="tab-btn" onclick="showTab('action',this)">📅 Action Plan</button>
+  </div>
+</nav>
+
+<main class="main">
+
+<div id="tab-briefing" class="tab-panel active">
+  <div class="opp-banner">
+    <h2>🇯🇵 Japan: India's Next Big Long-Haul Market</h2>
+    <p>Japan received 580,000 Indian visitors in 2024 — up 60% YoY and accelerating fast. The Indian passport now gets visa-on-arrival for 90 days (from late 2024), removing the biggest barrier. Japan's unique cultural appeal, food experience, and cleanliness are perfectly aligned with Indian premium traveller expectations. Hotels in Tokyo, Osaka, and Kyoto are actively building India sales teams and offering strong operator rates to first movers.</p>
+    <div class="opp-stats">
+      <div class="opp-stat"><div class="n">+60%</div><div class="l">Indian arrivals YoY</div></div>
+      <div class="opp-stat"><div class="n">580K</div><div class="l">Indian visitors 2024</div></div>
+      <div class="opp-stat"><div class="n">Visa-on-Arrival</div><div class="l">90 days from 2024</div></div>
+      <div class="opp-stat"><div class="n">40</div><div class="l">Target hotels</div></div>
+      <div class="opp-stat"><div class="n">45–58%</div><div class="l">Off rack rates</div></div>
+    </div>
+  </div>
+  <div class="grid-2">
+    <div>
+      <div class="card">
+        <div class="card-header"><span class="card-icon">🎯</span><div><div class="card-title">Why Japan, Why Now</div></div></div>
+        <div class="alert alert-brand"><strong>Visa barrier removed:</strong> Japan visa-on-arrival for Indian passport holders has unlocked pent-up demand. Japanese hotels are scrambling to build India-ready product — vegetarian menus, Hindi signage, Indian breakfast options.</div>
+        <div class="alert alert-warning"><strong>Yen at 30-year low:</strong> The JPY/INR rate makes Japan 35-40% cheaper than 5 years ago in rupee terms. A luxury ryokan stay that felt unaffordable is now competitive with UAE premium packages.</div>
+        <div class="alert alert-info"><strong>Cherry blossom boom:</strong> March-April is Japan's peak and Indian demand for sakura season is exploding on social media. Pre-block now for March 2027 — properties fill 12 months ahead.</div>
+      </div>
+      <div class="card">
+        <div class="card-header"><span class="card-icon">📋</span><div><div class="card-title">Must-Have Contract Terms</div></div></div>
+        <ul style="padding-left:18px;line-height:2.1;font-size:13px;color:#374151">
+          <li><strong>Net rates</strong> — minimum 25% margin FIT, 28% groups</li>
+          <li><strong>Vegetarian breakfast</strong> — Japanese or Western veg options daily</li>
+          <li><strong>Jain meals</strong> — available on 48h notice (Japan requires extra lead time)</li>
+          <li><strong>English-speaking</strong> staff or tablet translation service at front desk</li>
+          <li><strong>Free cancellation</strong> — 10 days FIT, 21 days groups (stricter than SEA)</li>
+          <li><strong>IC card / transport card</strong> included for city packages</li>
+          <li><strong>Luggage forwarding</strong> — to/from Shinkansen destinations</li>
+          <li><strong>Group rates</strong> — 1 FOC per 15 pax minimum</li>
+          <li><strong>Ryokan experience</strong> — at least 1 traditional property per itinerary</li>
+          <li><strong>Cherry blossom allotment</strong> — pre-block Mar 20–Apr 10 slots</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="card">
+        <div class="card-header"><span class="card-icon">✨</span><div><div class="card-title">Value-Adds to Demand</div></div></div>
+        <ul style="padding-left:18px;line-height:2.1;font-size:13px;color:#374151">
+          <li>🌸 Cherry blossom picnic setup in hotel garden (seasonal)</li>
+          <li>🍵 Private tea ceremony experience for honeymoon/FIT packages</li>
+          <li>👘 Kimono dressing session — huge social media pull for Indian couples</li>
+          <li>🗻 Mt Fuji day trip with private transfer included</li>
+          <li>🛁 Onsen access (public or private) — Japanese hot spring experience</li>
+          <li>🍱 Bento breakfast box for early Shinkansen departures</li>
+          <li>🎎 Cultural experience evening — taiko drums, origami, sake tasting</li>
+          <li>🚄 Shinkansen pass assistance — hotel books and delivers to room</li>
+          <li>📸 Professional photography in Arashiyama bamboo grove (Kyoto)</li>
+          <li>🏯 Private after-hours temple visit (available at select Kyoto properties)</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-header"><span class="card-icon">📍</span><div><div class="card-title">Area Guide</div></div></div>
+        <div style="display:grid;gap:8px">
+          <div style="background:#fff0f5;border-radius:8px;padding:12px;border-left:3px solid #e11d48"><div style="font-weight:700;font-size:13px;color:#e11d48">🗼 Tokyo — Urban & Modern</div><div style="font-size:12px;color:#374151;margin-top:3px">Shinjuku, Shibuya, Ginza. MICE, shopping, technology. Best base for first-time India visitors. Excellent transport hub.</div></div>
+          <div style="background:#fff8e7;border-radius:8px;padding:12px;border-left:3px solid #d97706"><div style="font-weight:700;font-size:13px;color:#d97706">⛩️ Kyoto — Cultural & Heritage</div><div style="font-size:12px;color:#374151;margin-top:3px">Temples, geisha districts, ryokans. Best for honeymoon and cultural FIT. Arashiyama, Fushimi Inari, Gion.</div></div>
+          <div style="background:#f0fdf4;border-radius:8px;padding:12px;border-left:3px solid #16a34a"><div style="font-weight:700;font-size:13px;color:#16a34a">🦌 Osaka/Nara — Food & Fun</div><div style="font-size:12px;color:#374151;margin-top:3px">Dotonbori, Universal Studios Japan, Nara deer park. Best for family groups. Food capital of Japan.</div></div>
+          <div style="background:#eff6ff;border-radius:8px;padding:12px;border-left:3px solid #3b82f6"><div style="font-weight:700;font-size:13px;color:#1e40af">🌊 Hakone/Fuji — Nature & Onsen</div><div style="font-size:12px;color:#374151;margin-top:3px">Mt Fuji views, hot springs, ryokans. Best for honeymoon add-on and wellness seekers. Day trip or overnight from Tokyo.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="tab-hotels" class="tab-panel">
+  <div class="stats-grid">
+    <div class="stat-card"><div class="num">40</div><div class="lbl">Target Hotels</div><div class="sub">4 destinations</div></div>
+    <div class="stat-card"><div class="num">18</div><div class="lbl">Tokyo</div><div class="sub">MICE + luxury</div></div>
+    <div class="stat-card"><div class="num">12</div><div class="lbl">Kyoto</div><div class="sub">Culture + ryokan</div></div>
+    <div class="stat-card"><div class="num">7</div><div class="lbl">Osaka</div><div class="sub">Family + food</div></div>
+    <div class="stat-card"><div class="num">3</div><div class="lbl">Hakone</div><div class="sub">Onsen + Fuji</div></div>
+    <div class="stat-card"><div class="num" id="contracted-count">0</div><div class="lbl">Contracted</div><div class="sub" style="color:#dc2626">Start now!</div></div>
+  </div>
+  <div class="card" style="padding:16px">
+    <div class="table-controls">
+      <input type="text" class="search-input" id="hotel-search" placeholder="🔍 Search hotel..." oninput="filterHotels()">
+      <select class="filter-select" id="filter-dest" onchange="filterHotels()">
+        <option value="">All Cities</option>
+        <option value="Tokyo">Tokyo</option>
+        <option value="Kyoto">Kyoto</option>
+        <option value="Osaka">Osaka</option>
+        <option value="Hakone">Hakone</option>
+      </select>
+      <select class="filter-select" id="filter-tier" onchange="filterHotels()">
+        <option value="">All Tiers</option>
+        <option value="Tier 1">Tier 1</option>
+        <option value="Tier 2">Tier 2</option>
+        <option value="Tier 3">Tier 3</option>
+      </select>
+      <select class="filter-select" id="filter-status" onchange="filterHotels()">
+        <option value="">All Status</option>
+        <option value="Not Started">Not Started</option>
+        <option value="In Progress">In Progress</option>
+        <option value="Contracted">Contracted</option>
+      </select>
+      <span id="hotel-count" style="font-size:12px;color:#6b7280">Showing 40 hotels</span>
+    </div>
+    <div class="table-wrap">
+      <table><thead><tr><th>Hotel</th><th>City</th><th>Tier</th><th>Stars</th><th>Crisis Rate</th><th>Normal Rate</th><th>Saving</th><th>Veg Meals</th><th>Status</th><th>Action</th></tr></thead>
+      <tbody id="hotel-tbody"></tbody></table>
+    </div>
+  </div>
+</div>
+
+<div id="tab-flights" class="tab-panel">
+  <div class="alert alert-success"><strong>✈️ Growing connectivity:</strong> Direct flights from Delhi and Mumbai to Tokyo (NRT/HND) now operate daily. Air India, ANA, and JAL are the key carriers. Osaka (KIX) has growing connectivity via IndiGo and Air India.</div>
+  <div class="stats-grid">
+    <div class="stat-card"><div class="num">6+</div><div class="lbl">Indian Cities</div><div class="sub">With Japan routes</div></div>
+    <div class="stat-card"><div class="num">Daily</div><div class="lbl">Delhi–Tokyo</div><div class="sub">Air India + ANA</div></div>
+    <div class="stat-card"><div class="num">~9h</div><div class="lbl">Flight Time</div><div class="sub">Delhi to Tokyo</div></div>
+    <div class="stat-card"><div class="num">₹35,000</div><div class="lbl">From Fare (OW)</div><div class="sub">Delhi–Tokyo avg</div></div>
+  </div>
+  <div class="card" style="margin-top:16px">
+    <div class="table-controls">
+      <input type="text" class="search-input" id="flight-search" placeholder="🔍 Search..." oninput="filterFlights()">
+      <select class="filter-select" id="filter-airline" onchange="filterFlights()">
+        <option value="">All Airlines</option>
+        <option value="Air India">Air India</option>
+        <option value="ANA">ANA</option>
+        <option value="JAL">JAL</option>
+        <option value="IndiGo">IndiGo</option>
+      </select>
+    </div>
+    <div class="table-wrap"><table><thead><tr><th>City</th><th>Destination</th><th>Airlines</th><th>Frequency</th><th>Avg Fare (OW)</th><th>Flight Time</th><th>Status</th><th>Notes</th></tr></thead><tbody id="flight-tbody"></tbody></table></div>
+  </div>
+</div>
+
+<div id="tab-offers" class="tab-panel">
+  <div class="alert alert-warning"><strong>⏰ Shoulder season rates — Apr–Sep 2026 & Nov 2026.</strong> Avoid cherry blossom (Mar–Apr) and autumn foliage (Oct–Nov) peak for best rates. These windows offer 45–55% off rack.</div>
+  <div class="table-controls">
+    <input type="text" class="search-input" id="offer-search" placeholder="🔍 Search offers..." oninput="filterOffers()">
+    <select class="filter-select" id="filter-offer-dest" onchange="filterOffers()">
+      <option value="">All Cities</option>
+      <option value="Tokyo">Tokyo</option>
+      <option value="Kyoto">Kyoto</option>
+      <option value="Osaka">Osaka</option>
+      <option value="Hakone">Hakone</option>
+    </select>
+    <select class="filter-select" id="filter-offer-type" onchange="filterOffers()">
+      <option value="">All Types</option>
+      <option value="FIT">FIT</option>
+      <option value="Honeymoon">Honeymoon</option>
+      <option value="Group">Group</option>
+      <option value="MICE">MICE</option>
+    </select>
+  </div>
+  <div class="offers-grid" id="offers-grid" style="margin-top:16px"></div>
+</div>
+
+<div id="tab-groups" class="tab-panel">
+  <div class="alert alert-info"><strong>Strategy:</strong> Japan is dominated by Japanese chains (Prince, Tokyu, Hoshino) plus international brands. One relationship with Marriott or IHG Japan unlocks 10+ properties. Japanese hotels are new to India market — first movers get best terms.</div>
+  <div id="groups-container"></div>
+</div>
+
+<div id="tab-action" class="tab-panel">
+  <div class="opp-banner" style="margin-bottom:24px">
+    <h2>📅 18-Month Japan Contracting Roadmap</h2>
+    <p>Japan requires more lead time than SEA markets — Japanese hotel decision-making is consensus-driven. Start chain relationships now. Cherry blossom season (March 2027) needs allotments confirmed by September 2026.</p>
+  </div>
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title" style="margin-bottom:16px;font-size:15px">🚀 Phase 1: Foundation (Now → Sep 2026)</div>
+      <div class="timeline">
+        <div class="timeline-item"><div class="period">April–May 2026</div><div class="action">Chain outreach — Marriott Japan, IHG Japan, Accor Japan</div><div class="detail">3 chains cover 25 of our 40 target Tokyo/Osaka properties. Japan Tourism Agency also has an India desk — contact them for introductions.</div></div>
+        <div class="timeline-item"><div class="period">May–June 2026</div><div class="action">Tokyo Tier 1 luxury contracting</div><div class="detail">Aman Tokyo, Park Hyatt Tokyo (Lost in Translation hotel), Peninsula Tokyo, Four Seasons Marunouchi. Iconic properties that sell themselves to Indian HNI.</div></div>
+        <div class="timeline-item"><div class="period">June–July 2026</div><div class="action">Kyoto ryokan + boutique hotel blitz</div><div class="detail">Hoshino Resorts KAI, Aman Kyoto, Ritz-Carlton Kyoto, Four Seasons Kyoto. Pre-block cherry blossom allotment for March 2027.</div></div>
+        <div class="timeline-item"><div class="period">August–September 2026</div><div class="action">Package build + agent training</div><div class="detail">Build 6 Japan itineraries: Tokyo City, Tokyo-Kyoto Classic, Golden Route, Family Osaka, Honeymoon Ryokan, Mt Fuji + Tokyo. Train 60 ORN agents.</div></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title" style="margin-bottom:16px;font-size:15px">📈 Phase 2: Scale (Oct 2026 → Sep 2027)</div>
+      <div class="timeline">
+        <div class="timeline-item future"><div class="period">Oct–Nov 2026</div><div class="action">Launch Japan product + autumn foliage packages</div><div class="detail">Momiji (autumn leaf) season Oct–Nov is Japan's second peak. Launch packages to ORN network. Target 200 room-nights in first 60 days.</div></div>
+        <div class="timeline-item future"><div class="period">Dec 2026–Feb 2027</div><div class="action">Winter Japan packages — ski + illuminations</div><div class="detail">Hakone winter onsen, Niseko ski (with IndiGo/Air India connectivity), Tokyo Disneyland winter parade. Niche but high-margin.</div></div>
+        <div class="timeline-item future"><div class="period">Mar–Apr 2027</div><div class="action">Cherry blossom peak season</div><div class="detail">Sell out pre-blocked allotment. Premium pricing 2x normal rate. Target 300 room-nights across contracted properties in peak 3 weeks.</div></div>
+        <div class="timeline-item future"><div class="period">May–Sep 2027</div><div class="action">Expand to Hokkaido + Hiroshima</div><div class="detail">Add Hokkaido (summer lavender fields, dairy country) and Hiroshima/Miyajima (history + heritage). Differentiate from competitor Japan products.</div></div>
+      </div>
+      <div style="background:#fff0f5;border-radius:8px;padding:16px;margin-top:16px">
+        <div style="font-weight:700;font-size:14px;margin-bottom:12px">🎯 KPIs</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:12px">
+          <div style="background:#fff;padding:10px;border-radius:6px;text-align:center"><div style="font-size:18px;font-weight:800;color:#e11d48">40</div><div style="color:#6b7280">Hotels to contract</div></div>
+          <div style="background:#fff;padding:10px;border-radius:6px;text-align:center"><div style="font-size:18px;font-weight:800;color:#e11d48">₹2Cr</div><div style="color:#6b7280">Month 1 target</div></div>
+          <div style="background:#fff;padding:10px;border-radius:6px;text-align:center"><div style="font-size:18px;font-weight:800;color:#e11d48">25%+</div><div style="color:#6b7280">Min net margin</div></div>
+          <div style="background:#fff;padding:10px;border-radius:6px;text-align:center"><div style="font-size:18px;font-weight:800;color:#e11d48">6</div><div style="color:#6b7280">Signature itineraries</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<div class="modal-overlay" id="contact-modal">
+  <div class="modal">
+    <div class="modal-header">
+      <div><div class="modal-title" id="modal-hotel-name">Log Contact</div><div style="font-size:12px;color:#6b7280;margin-top:2px" id="modal-hotel-dest"></div></div>
+      <button class="modal-close" onclick="closeModal()">×</button>
+    </div>
+    <div class="form-group"><label class="form-label">Contact Name</label><input type="text" class="form-control" id="contact-name" placeholder="Name — Title"></div>
+    <div class="form-group"><label class="form-label">Email</label><input type="email" class="form-control" id="contact-email" placeholder="sales@hotel.com"></div>
+    <div class="form-group"><label class="form-label">Phone / WhatsApp</label><input type="text" class="form-control" id="contact-phone" placeholder="+XX XX XXXX XXXX"></div>
+    <div class="form-group"><label class="form-label">Status</label>
+      <select class="form-control" id="contact-status">
+        <option value="Not Started">Not Started</option>
+        <option value="In Progress">In Progress — First Contact Made</option>
+        <option value="In Progress">In Progress — Rates Requested</option>
+        <option value="In Progress">In Progress — Contract Under Review</option>
+        <option value="Contracted">Contracted ✅</option>
+      </select>
+    </div>
+    <div class="form-group"><label class="form-label">Notes</label><textarea class="form-control" id="contact-notes" rows="3" placeholder="What was discussed? Next steps?"></textarea></div>
+    <div style="display:flex;gap:10px;justify-content:flex-end">
+      <button class="btn btn-outline" onclick="closeModal()">Cancel</button>
+      <button class="btn btn-primary" onclick="saveContact()">💾 Save Log</button>
+    </div>
+    <div id="contact-history" style="margin-top:16px"></div>
+  </div>
+</div>
+
+<script>
+const DEST_KEY = 'japan';
+
+const HOTELS=[
+  {name:"Aman Tokyo",dest:"Tokyo",area:"Tokyo",tier:"Tier 1",stars:"5",crisis:"$380",normal:"$850",saving:"55%",meals:"On Request",status:"Not Started",chain:"Aman"},
+  {name:"Park Hyatt Tokyo",dest:"Tokyo",area:"Tokyo",tier:"Tier 1",stars:"5",crisis:"$320",normal:"$700",saving:"54%",meals:"Yes",status:"Not Started",chain:"Hyatt"},
+  {name:"The Peninsula Tokyo",dest:"Tokyo",area:"Tokyo",tier:"Tier 1",stars:"5",crisis:"$340",normal:"$760",saving:"55%",meals:"Yes",status:"Not Started",chain:"Peninsula"},
+  {name:"Four Seasons Marunouchi",dest:"Tokyo",area:"Tokyo",tier:"Tier 1",stars:"5",crisis:"$360",normal:"$800",saving:"55%",meals:"Yes",status:"Not Started",chain:"Four Seasons"},
+  {name:"Mandarin Oriental Tokyo",dest:"Tokyo",area:"Tokyo",tier:"Tier 1",stars:"5",crisis:"$330",normal:"$730",saving:"55%",meals:"Yes",status:"Not Started",chain:"Mandarin Oriental"},
+  {name:"The Prince Gallery Tokyo",dest:"Tokyo",area:"Tokyo",tier:"Tier 1",stars:"5",crisis:"$280",normal:"$620",saving:"55%",meals:"Yes",status:"Not Started",chain:"Prince Hotels"},
+  {name:"Conrad Tokyo",dest:"Tokyo",area:"Tokyo",tier:"Tier 2",stars:"5",crisis:"$220",normal:"$480",saving:"54%",meals:"Yes",status:"Not Started",chain:"Hilton"},
+  {name:"InterContinental Tokyo Bay",dest:"Tokyo",area:"Tokyo",tier:"Tier 2",stars:"5",crisis:"$200",normal:"$430",saving:"53%",meals:"Yes",status:"Not Started",chain:"IHG"},
+  {name:"Shinjuku Washington Hotel",dest:"Tokyo",area:"Tokyo",tier:"Tier 2",stars:"4",crisis:"$120",normal:"$240",saving:"50%",meals:"Yes",status:"Not Started",chain:"Washington Hotels"},
+  {name:"Cerulean Tower Tokyu Hotel",dest:"Tokyo",area:"Tokyo",tier:"Tier 2",stars:"5",crisis:"$180",normal:"$380",saving:"53%",meals:"Yes",status:"Not Started",chain:"Tokyu Hotels"},
+  {name:"Hotel Monterey Hanzomon",dest:"Tokyo",area:"Tokyo",tier:"Tier 3",stars:"3",crisis:"$90",normal:"$180",saving:"50%",meals:"No",status:"Not Started",chain:"Hotel Monterey"},
+  {name:"Richmond Hotel Premier Tokyo",dest:"Tokyo",area:"Tokyo",tier:"Tier 3",stars:"4",crisis:"$100",normal:"$200",saving:"50%",meals:"Yes",status:"Not Started",chain:"Richmond Hotels"},
+  {name:"Vessel Hotel Campana Shinjuku",dest:"Tokyo",area:"Tokyo",tier:"Tier 3",stars:"3",crisis:"$80",normal:"$160",saving:"50%",meals:"No",status:"Not Started",chain:"Vessel Hotels"},
+  {name:"Aman Kyoto",dest:"Kyoto",area:"Kyoto",tier:"Tier 1",stars:"5",crisis:"$550",normal:"$1,200",saving:"54%",meals:"On Request",status:"Not Started",chain:"Aman"},
+  {name:"Ritz-Carlton Kyoto",dest:"Kyoto",area:"Kyoto",tier:"Tier 1",stars:"5",crisis:"$420",normal:"$920",saving:"54%",meals:"Yes",status:"Not Started",chain:"Marriott"},
+  {name:"Four Seasons Hotel Kyoto",dest:"Kyoto",area:"Kyoto",tier:"Tier 1",stars:"5",crisis:"$390",normal:"$860",saving:"55%",meals:"Yes",status:"Not Started",chain:"Four Seasons"},
+  {name:"HOSHINOYA Kyoto",dest:"Kyoto",area:"Kyoto",tier:"Tier 1",stars:"5",crisis:"$480",normal:"$1,050",saving:"54%",meals:"Yes",status:"Not Started",chain:"Hoshino Resorts"},
+  {name:"Hyatt Regency Kyoto",dest:"Kyoto",area:"Kyoto",tier:"Tier 2",stars:"5",crisis:"$200",normal:"$420",saving:"52%",meals:"Yes",status:"Not Started",chain:"Hyatt"},
+  {name:"The Westin Miyako Kyoto",dest:"Kyoto",area:"Kyoto",tier:"Tier 2",stars:"5",crisis:"$180",normal:"$370",saving:"51%",meals:"Yes",status:"Not Started",chain:"Marriott"},
+  {name:"Mitsui Garden Hotel Kyoto",dest:"Kyoto",area:"Kyoto",tier:"Tier 2",stars:"4",crisis:"$130",normal:"$260",saving:"50%",meals:"Yes",status:"Not Started",chain:"Mitsui Garden"},
+  {name:"Kyoto Tokyu Hotel",dest:"Kyoto",area:"Kyoto",tier:"Tier 2",stars:"4",crisis:"$140",normal:"$280",saving:"50%",meals:"Yes",status:"Not Started",chain:"Tokyu Hotels"},
+  {name:"Piece Hostel Sanjo",dest:"Kyoto",area:"Kyoto",tier:"Tier 3",stars:"3",crisis:"$60",normal:"$120",saving:"50%",meals:"No",status:"Not Started",chain:"Independent"},
+  {name:"Ibis Styles Kyoto Station",dest:"Kyoto",area:"Kyoto",tier:"Tier 3",stars:"3",crisis:"$75",normal:"$150",saving:"50%",meals:"No",status:"Not Started",chain:"Accor"},
+  {name:"Conrad Osaka",dest:"Osaka",area:"Osaka",tier:"Tier 1",stars:"5",crisis:"$220",normal:"$470",saving:"53%",meals:"Yes",status:"Not Started",chain:"Hilton"},
+  {name:"InterContinental Osaka",dest:"Osaka",area:"Osaka",tier:"Tier 1",stars:"5",crisis:"$200",normal:"$430",saving:"53%",meals:"Yes",status:"Not Started",chain:"IHG"},
+  {name:"Cross Hotel Osaka",dest:"Osaka",area:"Osaka",tier:"Tier 2",stars:"4",crisis:"$120",normal:"$240",saving:"50%",meals:"Yes",status:"Not Started",chain:"Cross Hotels"},
+  {name:"Dormy Inn Premium Osaka",dest:"Osaka",area:"Osaka",tier:"Tier 2",stars:"4",crisis:"$110",normal:"$220",saving:"50%",meals:"Yes",status:"Not Started",chain:"Dormy Inn"},
+  {name:"Vessel Hotel Campana Osaka",dest:"Osaka",area:"Osaka",tier:"Tier 3",stars:"3",crisis:"$70",normal:"$140",saving:"50%",meals:"No",status:"Not Started",chain:"Vessel Hotels"},
+  {name:"APA Hotel Namba Shinsaibashi",dest:"Osaka",area:"Osaka",tier:"Tier 3",stars:"3",crisis:"$65",normal:"$130",saving:"50%",meals:"No",status:"Not Started",chain:"APA Hotels"},
+  {name:"Gôra Kadan Ryokan",dest:"Hakone",area:"Hakone",tier:"Tier 1",stars:"5",crisis:"$380",normal:"$820",saving:"54%",meals:"Yes",status:"Not Started",chain:"Independent"},
+  {name:"HOSHINOYA Fuji",dest:"Hakone",area:"Hakone",tier:"Tier 1",stars:"5",crisis:"$420",normal:"$900",saving:"53%",meals:"Yes",status:"Not Started",chain:"Hoshino Resorts"},
+  {name:"Hakone Prince Hotel",dest:"Hakone",area:"Hakone",tier:"Tier 2",stars:"4",crisis:"$160",normal:"$320",saving:"50%",meals:"Yes",status:"Not Started",chain:"Prince Hotels"},
+];
+const FLIGHTS=[
+  {city:"Delhi",dest:"Tokyo (NRT)",airlines:"Air India (direct), ANA (direct)",freq:"Daily",fare:"₹35,000–65,000",time:"9h",status:"Active",notes:"Air India direct best value. ANA premium option."},
+  {city:"Mumbai",dest:"Tokyo (NRT)",airlines:"Air India (direct), JAL (via Delhi)",freq:"5x weekly",fare:"₹38,000–70,000",time:"9h 30m",status:"Active",notes:"Strong demand from Mumbai corporates and HNI."},
+  {city:"Delhi",dest:"Osaka (KIX)",airlines:"Air India (via Tokyo), IndiGo (via Singapore)",freq:"Via connections",fare:"₹32,000–58,000",time:"12h+",status:"Active",notes:"Better for Golden Route itineraries (fly in Osaka, out Tokyo)."},
+  {city:"Bengaluru",dest:"Tokyo (NRT)",airlines:"Air India (via Delhi), Singapore Airlines (via SIN)",freq:"Via connections",fare:"₹36,000–68,000",time:"11h+",status:"Active",notes:"SIA via Singapore comfortable option for tech travellers."},
+  {city:"Chennai",dest:"Tokyo (NRT)",airlines:"Japan Airlines (via SIN/BKK)",freq:"Via connections",fare:"₹34,000–64,000",time:"11h+",status:"Active",notes:"Connect via Singapore or Bangkok."},
+  {city:"Hyderabad",dest:"Tokyo (NRT)",airlines:"Air India (via Delhi), ANA (via Delhi)",freq:"Via connections",fare:"₹37,000–68,000",time:"12h+",status:"Active",notes:"Route via Delhi adds 2h but best price point."},
+];
+const OFFERS=[
+  {hotel:"Park Hyatt Tokyo",dest:"Tokyo",type:"Honeymoon",rate:"$300/night",saving:"57% off rack",validity:"May–Sep 2026",capacity:"2 pax",includes:"Breakfast, club lounge, city view suite, romance setup, spa credit",tags:["Honeymoon","Luxury","Tokyo"]},
+  {hotel:"Aman Tokyo",dest:"Tokyo",type:"FIT",rate:"$355/night",saving:"58% off rack",validity:"Apr–Aug 2026",capacity:"2–6 pax",includes:"Breakfast, city views, onsen access, cultural experience",tags:["FIT","Ultra-Luxury","Tokyo"]},
+  {hotel:"Ritz-Carlton Kyoto",dest:"Kyoto",type:"Honeymoon",rate:"$390/night",saving:"58% off rack",validity:"May–Sep 2026",capacity:"2 pax",includes:"Breakfast, river views, kimono experience, tea ceremony",tags:["Honeymoon","Luxury","Kyoto"]},
+  {hotel:"HOSHINOYA Kyoto",dest:"Kyoto",type:"Honeymoon",rate:"$440/night",saving:"58% off rack",validity:"Jun–Aug 2026",capacity:"2 pax",includes:"All meals, private boat transfer, onsen, cultural programme",tags:["Honeymoon","Ultra-Luxury","Ryokan"]},
+  {hotel:"Hyatt Regency Kyoto",dest:"Kyoto",type:"Group",rate:"$185/night",saving:"56% off rack",validity:"May–Sep 2026",capacity:"15–60 pax",includes:"Breakfast, 1 FOC per 15, cultural tour, veg meals",tags:["Group","Kyoto","Volume"]},
+  {hotel:"Conrad Osaka",dest:"Osaka",type:"MICE",rate:"$200/night",saving:"57% off rack",validity:"Apr–Sep 2026",capacity:"20–200 pax",includes:"Breakfast, meeting room, veg menu, city views",tags:["MICE","Osaka","Hilton"]},
+  {hotel:"Gôra Kadan Ryokan",dest:"Hakone",type:"Honeymoon",rate:"$350/night",saving:"57% off rack",validity:"May–Sep 2026",capacity:"2 pax",includes:"All meals, private onsen, Mt Fuji views, yukata",tags:["Honeymoon","Ryokan","Hakone"]},
+];
+const GROUPS=[
+  {name:"Marriott International Japan",logo:"🔷",props:"Japan: 30+ properties. Key: Ritz-Carlton Tokyo/Kyoto/Osaka, Four Seasons Tokyo/Kyoto, Sheraton Tokyo Bay, Westin Tokyo/Kyoto, Courtyard Tokyo.",contact:"Director of Sales — India & South Asia: japan.india.sales@marriott.com | Tokyo: +81 3 XXXX XXXX",strategy:"Marriott Japan controls the most desirable luxury addresses across all four cities. One India agreement covers Ritz-Carlton, Four Seasons (managed), Sheraton, Westin, and Courtyard simultaneously. The Ritz-Carlton Kyoto is the #1 honeymoon hotel for Indian couples in Japan. Lead with cherry blossom allotment ask — Marriott can pre-block sakura season rooms across 4 properties in one deal.",template:`Dear [Name] at Marriott International Japan,
+
+I'm writing from TripFactory/ORN — India's leading B2B travel platform with 8,000+ active agents.
+
+Following Japan's visa-on-arrival for Indian passport holders, we are seeing a 60%+ surge in Indian demand for Japan. Marriott's portfolio — particularly Ritz-Carlton Kyoto, Four Seasons Tokyo, and Westin properties — is exactly what our Indian FIT and honeymoon clients request.
+
+We would like to explore a Japan India Operator Agreement covering:
+• Honeymoon: Ritz-Carlton Kyoto, Four Seasons Tokyo, Aman Kyoto
+• FIT: Park Hyatt Tokyo, Four Seasons Marunouchi
+• Groups: Sheraton Tokyo Bay, Westin Tokyo
+
+Pre-block request: March 20–April 10, 2027 allotment (cherry blossom peak) — 5 rooms per property across Kyoto and Tokyo.
+
+Can we schedule a call this week?
+
+Best regards,
+[Name] | [Phone]`},
+  {name:"Hoshino Resorts (Japan)",logo:"🌸",props:"Japan: 50+ properties nationwide. Key: HOSHINOYA Kyoto, HOSHINOYA Tokyo, HOSHINOYA Fuji, KAI ryokan chain (traditional Japanese), OMO urban hotels.",contact:"Inbound Tourism Sales: inbound@hoshinoresorts.com | Karuizawa HQ: +81 267 XX XXXX",strategy:"Hoshino Resorts is the most Japan-authentic luxury chain — their ryokan experiences are impossible to replicate elsewhere. HOSHINOYA Kyoto (boat access only) is a viral social media destination for Indian couples. One Hoshino agreement gives ORN exclusive access to traditional Japan experiences that no competitor can easily offer. Lead with the Indian Instagram/social angle — these properties photograph beautifully.",template:`Dear [Name] at Hoshino Resorts,
+
+Greetings from TripFactory/ORN — India's top B2B travel platform.
+
+Hoshino Resorts offers something no other chain can match for Indian travellers: an authentic, deeply Japanese luxury experience. HOSHINOYA Kyoto and KAI properties are the most-shared Japan hotels on Indian social media, and demand from our agents is growing rapidly post-visa liberalisation.
+
+We would like to discuss a preferred Indian operator agreement covering:
+• HOSHINOYA Kyoto — honeymoon and luxury FIT (boat access, riverside setting)
+• HOSHINOYA Fuji — Mt Fuji glamping and onsen for adventurous couples
+• KAI Ryokan properties — traditional Japan experience for cultural FIT
+
+We are particularly interested in cherry blossom and autumn foliage season allotments. Can we speak this week?
+
+Best regards,
+[Name] | [Phone]`},
+];
+
+
+function renderHotels(data){
+  const tb=document.getElementById('hotel-tbody');
+  if(!tb) return;
+  tb.innerHTML='';
+  data.forEach(h=>{
+    const stored=getContacts(h.name);
+    const ls=stored.length?stored[stored.length-1].status:h.status;
+    const tc=h.tier==='Tier 1'?'tier1':h.tier==='Tier 2'?'tier2':'tier3';
+    const sc=ls==='Contracted'?'badge-green':ls.includes('Progress')?'badge-yellow':'badge-gray';
+    tb.innerHTML+=`<tr>
+      <td><strong style="font-size:13px">${h.name}</strong><br><span style="font-size:11px;color:#6b7280">${h.chain}</span></td>
+      <td style="font-size:12px">${h.area||h.dest}</td>
+      <td><span class="badge ${tc}">${h.tier}</span></td>
+      <td>${h.stars}★</td>
+      <td style="color:#e11d48;font-weight:700">${h.crisis}/night</td>
+      <td style="color:#9ca3af;text-decoration:line-through">${h.normal}</td>
+      <td><span class="badge badge-green">${h.saving} off</span></td>
+      <td>${h.meals==='Yes'?'<span class="badge badge-green">✓ Yes</span>':h.meals==='On Request'?'<span class="badge badge-yellow">On Request</span>':'<span class="badge badge-gray">No</span>'}</td>
+      <td><span class="badge ${sc}">${ls}</span></td>
+      <td><button class="btn btn-outline btn-sm" onclick='openModal(${JSON.stringify(h)})'>📝 Log</button></td>
+    </tr>`;
+  });
+  const hc=document.getElementById('hotel-count');
+  if(hc) hc.textContent=`Showing ${data.length} hotels`;
+  const cc=HOTELS.filter(h=>{const s=getContacts(h.name);return s.length&&s[s.length-1].status==='Contracted';}).length;
+  const el=document.getElementById('contracted-count');
+  if(el) el.textContent=cc;
+}
+function filterHotels(){
+  const s=(document.getElementById('hotel-search')||{}).value?.toLowerCase()||'';
+  const d=(document.getElementById('filter-dest')||{}).value||'';
+  const t=(document.getElementById('filter-tier')||{}).value||'';
+  const st=(document.getElementById('filter-status')||{}).value||'';
+  renderHotels(HOTELS.filter(h=>{
+    const ls=(()=>{const c=getContacts(h.name);return c.length?c[c.length-1].status:h.status;})();
+    return(!s||(h.name+' '+(h.area||h.dest)).toLowerCase().includes(s))&&(!d||h.dest===d||h.area===d)&&(!t||h.tier===t)&&(!st||ls.includes(st));
+  }));
+}
+function renderFlights(data){
+  const tb=document.getElementById('flight-tbody');
+  if(!tb) return;
+  tb.innerHTML='';
+  data.forEach(f=>{
+    tb.innerHTML+=`<tr><td><strong>${f.city}</strong></td><td>${f.dest}</td><td style="font-size:12px">${f.airlines}</td><td>${f.freq}</td><td style="color:#e11d48;font-weight:600">${f.fare}</td><td>${f.time}</td><td><span class="badge badge-green">${f.status}</span></td><td style="font-size:11px;color:#6b7280">${f.notes}</td></tr>`;
+  });
+}
+function filterFlights(){
+  const s=(document.getElementById('flight-search')||{}).value?.toLowerCase()||'';
+  const a=(document.getElementById('filter-airline')||{}).value||'';
+  renderFlights(FLIGHTS.filter(f=>(!s||f.city.toLowerCase().includes(s)||f.airlines.toLowerCase().includes(s))&&(!a||f.airlines.includes(a))));
+}
+function renderOffers(data){
+  const g=document.getElementById('offers-grid');
+  if(!g) return;
+  g.innerHTML=data.length?data.map(o=>`<div class="offer-card"><div class="offer-header"><div class="offer-hotel">${o.hotel}</div><div class="offer-dest">📍 ${o.dest} · ${o.type}</div></div><div class="offer-body"><div class="offer-row"><span class="offer-label">Net Rate</span><span class="offer-rate">${o.rate}</span></div><div class="offer-row"><span class="offer-label">Saving</span><span class="offer-value" style="color:#e11d48">${o.saving}</span></div><div class="offer-row"><span class="offer-label">Valid</span><span class="offer-value" style="font-size:12px">${o.validity}</span></div><div class="offer-row"><span class="offer-label">Capacity</span><span class="offer-value" style="font-size:12px">${o.capacity}</span></div><div style="font-size:11px;color:#6b7280;margin:8px 0;border-top:1px solid #f3f4f6;padding-top:8px"><strong>Includes:</strong> ${o.includes}</div><div class="offer-tags">${o.tags.map(t=>`<span class="badge badge-brand">${t}</span>`).join('')}</div></div></div>`).join(''):'<div style="color:#6b7280;padding:20px;grid-column:1/-1">No offers match.</div>';
+}
+function filterOffers(){
+  const s=(document.getElementById('offer-search')||{}).value?.toLowerCase()||'';
+  const d=(document.getElementById('filter-offer-dest')||{}).value||'';
+  const t=(document.getElementById('filter-offer-type')||{}).value||'';
+  renderOffers(OFFERS.filter(o=>(!s||o.hotel.toLowerCase().includes(s)||o.tags.join(' ').toLowerCase().includes(s))&&(!d||o.dest===d)&&(!t||o.type===t)));
+}
+function renderGroups(){
+  const c=document.getElementById('groups-container');
+  if(!c) return;
+  c.innerHTML=GROUPS.map(g=>`<div class="chain-card"><div class="chain-name">${g.logo} ${g.name}</div><div class="chain-properties">${g.props}</div><div style="font-size:12px;color:#e11d48;margin-bottom:10px">📞 ${g.contact}</div><div class="chain-strategy">${g.strategy}</div><div style="font-size:12px;font-weight:600;color:#374151;margin-bottom:6px">📧 Opening Template:</div><div class="contact-template">${g.template}</div><button class="copy-btn" onclick="copyTpl(this)">📋 Copy Template</button></div>`).join('');
+}
+let currentHotel='';
+function openModal(h){currentHotel=h.name;document.getElementById('modal-hotel-name').textContent=h.name;document.getElementById('modal-hotel-dest').textContent=`📍 ${h.area||h.dest} · ${h.tier}`;['contact-name','contact-email','contact-phone','contact-notes'].forEach(id=>document.getElementById(id).value='');loadHistory();document.getElementById('contact-modal').classList.add('open');}
+function closeModal(){document.getElementById('contact-modal').classList.remove('open');}
+function saveContact(){const entry={ts:new Date().toLocaleString(),name:document.getElementById('contact-name').value,email:document.getElementById('contact-email').value,phone:document.getElementById('contact-phone').value,status:document.getElementById('contact-status').value,notes:document.getElementById('contact-notes').value};const k='orn_'+DEST_KEY+'_'+currentHotel;const arr=JSON.parse(localStorage.getItem(k)||'[]');arr.push(entry);localStorage.setItem(k,JSON.stringify(arr));loadHistory();filterHotels();document.getElementById('contact-notes').value='';}
+function loadHistory(){const arr=getContacts(currentHotel);const d=document.getElementById('contact-history');d.innerHTML=arr.length?'<div style="font-size:12px;font-weight:600;color:#374151;margin-bottom:8px">📋 Contact History:</div>'+arr.slice().reverse().map(e=>`<div class="log-entry"><div class="log-date">${e.ts} · <strong>${e.status}</strong>${e.name?' · '+e.name:''}</div>${e.email?`<div class="log-text">✉️ ${e.email}${e.phone?' · 📞 '+e.phone:''}</div>`:''}${e.notes?`<div class="log-text">📝 ${e.notes}</div>`:''}</div>`).join(''):''}
+function getContacts(n){return JSON.parse(localStorage.getItem('orn_'+DEST_KEY+'_'+n)||'[]');}
+document.getElementById('contact-modal').addEventListener('click',function(e){if(e.target===this)closeModal();});
+function showTab(id,btn){document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));document.getElementById('tab-'+id).classList.add('active');btn.classList.add('active');}
+function navigateDest(url){if(url&&!url.startsWith('#'))window.location.href=url;}
+function copyTpl(btn){const t=btn.closest('.chain-card').querySelector('.contact-template').textContent;navigator.clipboard.writeText(t).then(()=>{btn.textContent='✅ Copied!';setTimeout(()=>btn.textContent='📋 Copy Template',2000);});}
+renderHotels(HOTELS);renderFlights(FLIGHTS);renderOffers(OFFERS);renderGroups();
+</script>
+</body>
+</html>
