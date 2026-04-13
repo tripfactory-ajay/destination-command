@@ -10,97 +10,111 @@
 body{font-family:'Plus Jakarta Sans',sans-serif;background:#0a0c12;color:#fff;min-height:100vh}
 
 /* HEADER */
-.header{background:rgba(10,12,18,0.95);border-bottom:1px solid #1e2130;padding:12px 32px;display:flex;align-items:center;gap:14px;position:sticky;top:0;z-index:100;backdrop-filter:blur(8px)}
-.header-logo{height:36px;width:auto}
-.header-divider{width:1px;height:28px;background:#2a2d3e}
-.header-title h1{font-size:15px;font-weight:700;color:#fff;line-height:1.2}
+.header{background:rgba(10,12,18,0.9);border-bottom:1px solid rgba(255,255,255,0.08);padding:10px 32px;display:flex;align-items:center;gap:14px;position:sticky;top:0;z-index:100;backdrop-filter:blur(12px)}
+.header-logo{height:32px;width:auto}
+.header-divider{width:1px;height:26px;background:rgba(255,255,255,0.12)}
+.header-title h1{font-size:14px;font-weight:700;color:#fff;line-height:1.2}
 .header-title p{font-size:11px;color:#6b7280;margin-top:1px}
 
 /* HERO */
-.hero{position:relative;overflow:hidden;padding:48px 32px 36px;text-align:center}
-.hero-bg{position:absolute;inset:0;background:
-  radial-gradient(ellipse 80% 60% at 50% 0%, rgba(217,119,6,0.12) 0%, transparent 70%),
-  radial-gradient(ellipse 60% 40% at 20% 100%, rgba(26,107,63,0.08) 0%, transparent 60%),
-  radial-gradient(ellipse 60% 40% at 80% 100%, rgba(124,58,237,0.08) 0%, transparent 60%);
-  pointer-events:none}
-.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.03) 1px,transparent 1px);background-size:40px 40px;pointer-events:none}
-.hero-inner{position:relative;z-index:1;max-width:780px;margin:0 auto}
-.eyebrow{font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:#d97706;margin-bottom:12px}
-.hero h2{font-size:36px;font-weight:800;line-height:1.15;color:#fff;margin-bottom:10px}
-.hero h2 .grad{background:linear-gradient(90deg,#f59e0b,#ef4444,#a855f7,#1a6b3f);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.hero p{font-size:13px;color:#9ca3af;line-height:1.7;max-width:520px;margin:0 auto 24px}
-.stats-row{display:flex;justify-content:center;gap:32px;flex-wrap:wrap}
-.stat .n{font-size:24px;font-weight:800;color:#fff}
-.stat .l{font-size:10px;color:#6b7280;margin-top:2px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px}
+.hero{position:relative;overflow:hidden;min-height:340px;display:flex;align-items:center;justify-content:center}
+.hero-img{position:absolute;inset:0;background-image:url('https://images.unsplash.com/photo-1488085061387-422e29b40080?w=1800&q=80');background-size:cover;background-position:center 40%;filter:brightness(0.35) saturate(1.2)}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,12,18,0.2) 0%,rgba(10,12,18,0.5) 60%,rgba(10,12,18,1) 100%)}
+.hero-glow{position:absolute;inset:0;background:radial-gradient(ellipse 70% 50% at 50% 30%,rgba(217,119,6,0.18) 0%,transparent 70%);pointer-events:none}
+.hero-inner{position:relative;z-index:1;text-align:center;padding:48px 32px 40px;max-width:860px;margin:0 auto}
+.eyebrow{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#d97706;margin-bottom:12px;display:flex;align-items:center;justify-content:center;gap:8px}
+.eyebrow::before,.eyebrow::after{content:'';display:inline-block;width:32px;height:1px;background:#d97706;opacity:0.5}
+.hero h2{font-size:42px;font-weight:800;line-height:1.1;color:#fff;margin-bottom:10px;letter-spacing:-0.5px}
+.hero h2 .grad{background:linear-gradient(90deg,#f59e0b 0%,#ef4444 35%,#a855f7 65%,#1a6b3f 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p{font-size:14px;color:rgba(255,255,255,0.65);line-height:1.7;max-width:520px;margin:0 auto 28px}
+.stats-row{display:flex;justify-content:center;gap:0;flex-wrap:wrap;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:12px;overflow:hidden;max-width:580px;margin:0 auto}
+.stat{flex:1;min-width:100px;padding:14px 16px;text-align:center;border-right:1px solid rgba(255,255,255,0.08)}
+.stat:last-child{border-right:none}
+.stat .n{font-size:22px;font-weight:800;color:#fff;line-height:1}
+.stat .l{font-size:9px;color:#6b7280;margin-top:4px;font-weight:600;text-transform:uppercase;letter-spacing:0.8px}
 
 /* SECTION */
-.section{padding:0 32px 48px;max-width:1300px;margin:0 auto}
-.section-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#6b7280;margin-bottom:16px;padding-top:4px}
+.section{padding:28px 32px 48px;max-width:1440px;margin:0 auto}
+.section-header{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+.section-label{font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:#6b7280}
+.section-line{flex:1;height:1px;background:rgba(255,255,255,0.06)}
 
-/* CARDS GRID */
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
-.dest-card{border-radius:14px;overflow:hidden;cursor:pointer;transition:transform 0.2s,box-shadow 0.2s;text-decoration:none;display:block;border:1px solid #1e2130}
-.dest-card:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(0,0,0,0.5)}
-.card-thumb{height:140px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
-.card-flag{font-size:48px;filter:drop-shadow(0 4px 12px rgba(0,0,0,0.4))}
-.card-emoji{position:absolute;bottom:12px;right:14px;font-size:22px;opacity:0.6}
-.card-body{padding:16px;background:#13161f;border-top:1px solid #1e2130}
-.card-name{font-size:15px;font-weight:800;color:#fff;margin-bottom:3px}
-.card-tagline{font-size:11px;color:#9ca3af;margin-bottom:12px;line-height:1.5}
-.card-meta{display:flex;gap:14px;margin-bottom:12px}
-.meta-item .n{font-size:14px;font-weight:700}
-.meta-item .l{font-size:9px;color:#6b7280;font-weight:600;text-transform:uppercase;letter-spacing:0.3px}
-.card-tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:12px}
-.tag{font-size:10px;font-weight:600;padding:2px 8px;border-radius:20px}
+/* 4-ACROSS GRID */
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+
+/* CARD */
+.dest-card{border-radius:14px;overflow:hidden;transition:transform 0.22s,box-shadow 0.22s;text-decoration:none;display:block;border:1px solid rgba(255,255,255,0.07);background:#13161f}
+.dest-card:hover{transform:translateY(-4px);box-shadow:0 20px 48px rgba(0,0,0,0.6)}
+.dest-card.is-coming{cursor:default}
+.dest-card.is-coming:hover{transform:none;box-shadow:none}
+
+/* CARD IMAGE */
+.card-img{height:160px;position:relative;overflow:hidden}
+.card-img img{width:100%;height:100%;object-fit:cover;transition:transform 0.4s;display:block}
+.dest-card:hover .card-img img{transform:scale(1.06)}
+.card-img-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.55) 100%)}
+.card-img-coming{position:absolute;inset:0;background:rgba(10,12,18,0.65);display:flex;align-items:center;justify-content:center}
+.coming-label{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);border-radius:6px;padding:5px 12px;font-size:11px;font-weight:700;color:#6b7280;backdrop-filter:blur(4px)}
+.card-flag{position:absolute;top:12px;left:12px;font-size:22px;filter:drop-shadow(0 2px 6px rgba(0,0,0,0.5))}
+.card-badge{position:absolute;top:12px;right:12px;font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;backdrop-filter:blur(4px)}
+
+/* CARD BODY */
+.card-body{padding:14px 16px 16px}
+.card-name{font-size:14px;font-weight:800;color:#fff;margin-bottom:3px;line-height:1.3}
+.card-tagline{font-size:11px;color:#9ca3af;margin-bottom:10px;line-height:1.5}
+.card-meta{display:flex;gap:12px;margin-bottom:10px}
+.meta-item .n{font-size:13px;font-weight:700;line-height:1}
+.meta-item .l{font-size:9px;color:#6b7280;font-weight:600;text-transform:uppercase;letter-spacing:0.3px;margin-top:2px}
+.card-tags{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:12px}
+.tag{font-size:10px;font-weight:600;padding:2px 7px;border-radius:20px}
 .card-footer{display:flex;align-items:center;justify-content:space-between}
-.cta-btn{padding:7px 14px;border-radius:7px;font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;font-weight:700;cursor:pointer;border:none;transition:all 0.2s}
-.status-dot{font-size:11px;font-weight:600}
+.cta-btn{padding:7px 13px;border-radius:7px;font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;font-weight:700;cursor:pointer;border:none;transition:all 0.2s;letter-spacing:0.2px}
+.status-dot{font-size:10px;font-weight:600}
 
 /* BRAND COLOURS */
-.c-uae .card-thumb{background:linear-gradient(135deg,#cc0000 0%,#7f1d1d 100%)}
+.c-uae .card-badge{background:rgba(204,0,0,0.7);color:#fca5a5}
 .c-uae .meta-item .n{color:#f87171}
-.c-uae .tag{background:rgba(204,0,0,0.2);color:#fca5a5;border:1px solid rgba(204,0,0,0.3)}
+.c-uae .tag{background:rgba(204,0,0,0.18);color:#fca5a5;border:1px solid rgba(204,0,0,0.3)}
 .c-uae .cta-btn{background:#cc0000;color:#fff}
 .c-uae .cta-btn:hover{background:#a80000}
 
-.c-thailand .card-thumb{background:linear-gradient(135deg,#1a6b3f 0%,#0f4a2b 100%)}
+.c-thailand .card-badge{background:rgba(26,107,63,0.7);color:#86efac}
 .c-thailand .meta-item .n{color:#4ade80}
-.c-thailand .tag{background:rgba(26,107,63,0.2);color:#86efac;border:1px solid rgba(26,107,63,0.3)}
+.c-thailand .tag{background:rgba(26,107,63,0.18);color:#86efac;border:1px solid rgba(26,107,63,0.3)}
 .c-thailand .cta-btn{background:#1a6b3f;color:#fff}
 .c-thailand .cta-btn:hover{background:#0f4a2b}
 
-.c-bali .card-thumb{background:linear-gradient(135deg,#7c3aed 0%,#4c1d95 100%)}
+.c-bali .card-badge{background:rgba(124,58,237,0.7);color:#ddd6fe}
 .c-bali .meta-item .n{color:#c4b5fd}
-.c-bali .tag{background:rgba(124,58,237,0.2);color:#ddd6fe;border:1px solid rgba(124,58,237,0.3)}
+.c-bali .tag{background:rgba(124,58,237,0.18);color:#ddd6fe;border:1px solid rgba(124,58,237,0.3)}
 .c-bali .cta-btn{background:#7c3aed;color:#fff}
 .c-bali .cta-btn:hover{background:#5b21b6}
 
-.c-sg .card-thumb{background:linear-gradient(135deg,#d97706 0%,#92400e 100%)}
+.c-sg .card-badge{background:rgba(217,119,6,0.7);color:#fde68a}
 .c-sg .meta-item .n{color:#fcd34d}
-.c-sg .tag{background:rgba(217,119,6,0.2);color:#fde68a;border:1px solid rgba(217,119,6,0.3)}
+.c-sg .tag{background:rgba(217,119,6,0.18);color:#fde68a;border:1px solid rgba(217,119,6,0.3)}
 .c-sg .cta-btn{background:#d97706;color:#fff}
 .c-sg .cta-btn:hover{background:#b45309}
 
-.c-coming .card-thumb{background:linear-gradient(135deg,#1e2130 0%,#13161f 100%)}
-.c-coming .meta-item .n{color:#4b5563}
-.c-coming .tag{background:rgba(255,255,255,0.04);color:#6b7280;border:1px solid rgba(255,255,255,0.08)}
-.c-coming .cta-btn{background:#1e2130;color:#4b5563;cursor:default}
-.c-coming .card-name{color:#6b7280}
+.c-coming .card-name{color:#4b5563}
 .c-coming .card-tagline{color:#374151}
-.coming-pill{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:4px 10px;font-size:10px;font-weight:700;color:#6b7280;backdrop-filter:blur(4px)}
+.c-coming .meta-item .n{color:#374151}
+.c-coming .tag{background:rgba(255,255,255,0.04);color:#4b5563;border:1px solid rgba(255,255,255,0.07)}
+.c-coming .cta-btn{background:#1e2130;color:#4b5563;cursor:default;border:1px solid rgba(255,255,255,0.06)}
 
 /* FOOTER */
-.footer{border-top:1px solid #1e2130;padding:16px 32px;text-align:center}
+.footer{border-top:1px solid rgba(255,255,255,0.06);padding:20px 32px;display:flex;align-items:center;justify-content:center;gap:16px}
+.footer-logo{height:18px;opacity:0.25}
 .footer p{font-size:11px;color:#374151}
-.footer-logo{height:20px;opacity:0.3;margin-bottom:6px}
 
+@media(max-width:1100px){.grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:600px){
-  .hero{padding:32px 20px 24px}
-  .hero h2{font-size:26px}
-  .section{padding:0 20px 32px}
-  .header{padding:10px 16px}
-  .stats-row{gap:20px}
+  .hero h2{font-size:28px}
+  .hero-inner{padding:36px 20px 32px}
+  .section{padding:20px 16px 36px}
   .grid{grid-template-columns:1fr}
+  .header{padding:10px 16px}
+  .stats-row{max-width:100%}
 }
 </style>
 </head>
@@ -111,20 +125,21 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:#0a0c12;color:#fff;mi
   <div class="header-divider"></div>
   <div class="header-title">
     <h1>Destination Command</h1>
-    <p>TripFactory Product Team · Hotel Contracting Intelligence · Internal Use Only</p>
+    <p>TripFactory / ORN Product Team · Hotel Contracting Intelligence · Internal Use Only</p>
   </div>
 </header>
 
 <div class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-grid"></div>
+  <div class="hero-img"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-glow"></div>
   <div class="hero-inner">
     <div class="eyebrow">Hotel Contracting Intelligence Platform</div>
     <h2>Contract smarter.<br><span class="grad">Close faster.</span></h2>
-    <p>Crisis rates, contact logs, flight intelligence, hotel groups and action plans — one platform for every destination ORN targets.</p>
+    <p>Crisis rates, contact logs, flight intelligence, chain strategies and 18-month action plans — one platform for every destination ORN targets.</p>
     <div class="stats-row">
       <div class="stat"><div class="n">162+</div><div class="l">Target Hotels</div></div>
-      <div class="stat"><div class="n">4</div><div class="l">Active Markets</div></div>
+      <div class="stat"><div class="n">4</div><div class="l">Live Markets</div></div>
       <div class="stat"><div class="n">50–65%</div><div class="l">Avg Rate Saving</div></div>
       <div class="stat"><div class="n">8,000+</div><div class="l">ORN Agents</div></div>
     </div>
@@ -132,143 +147,150 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:#0a0c12;color:#fff;mi
 </div>
 
 <div class="section">
-  <div class="section-label">Active Destinations</div>
+  <div class="section-header">
+    <span class="section-label">Active Destinations</span>
+    <div class="section-line"></div>
+  </div>
   <div class="grid">
 
     <!-- UAE -->
     <a href="uae.html" class="dest-card c-uae">
-      <div class="card-thumb">
+      <div class="card-img">
+        <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=600&q=80" alt="Dubai skyline" loading="lazy">
+        <div class="card-img-overlay"></div>
         <div class="card-flag">🇦🇪</div>
-        <div class="card-emoji">🏙️</div>
+        <div class="card-badge">🔴 Act Now</div>
       </div>
       <div class="card-body">
         <div class="card-name">UAE — Dubai & Abu Dhabi</div>
-        <div class="card-tagline">Crisis market. Multi-year occupancy lows. Deep discounts now for Indian operators who move fast.</div>
+        <div class="card-tagline">Crisis market. Multi-year occupancy lows. Deep discounts available now.</div>
         <div class="card-meta">
           <div class="meta-item"><div class="n">60</div><div class="l">Hotels</div></div>
           <div class="meta-item"><div class="n">55–65%</div><div class="l">Rate saving</div></div>
           <div class="meta-item"><div class="n">2</div><div class="l">Emirates</div></div>
         </div>
-        <div class="card-tags">
-          <span class="tag">Crisis Market</span><span class="tag">MICE</span><span class="tag">Luxury FIT</span>
-        </div>
+        <div class="card-tags"><span class="tag">Crisis Market</span><span class="tag">MICE</span><span class="tag">Luxury FIT</span></div>
         <div class="card-footer">
           <button class="cta-btn">Open Playbook →</button>
-          <span class="status-dot" style="color:#f87171">🔴 Act Now</span>
+          <span class="status-dot" style="color:#f87171">60 hotels</span>
         </div>
       </div>
     </a>
 
     <!-- Thailand -->
     <a href="thailand.html" class="dest-card c-thailand">
-      <div class="card-thumb">
+      <div class="card-img">
+        <img src="https://images.unsplash.com/photo-1506665531195-3566af2b4dfa?w=600&q=80" alt="Thailand beach" loading="lazy">
+        <div class="card-img-overlay"></div>
         <div class="card-flag">🇹🇭</div>
-        <div class="card-emoji">🏖️</div>
+        <div class="card-badge">🟢 High Priority</div>
       </div>
       <div class="card-body">
         <div class="card-name">Thailand — 4 Destinations</div>
-        <div class="card-tagline">Visa-free since Nov 2024. +40% Indian arrivals. Bangkok, Phuket, Krabi, Koh Samui.</div>
+        <div class="card-tagline">Visa-free since Nov 2024. +40% Indian arrivals. Bangkok to Koh Samui.</div>
         <div class="card-meta">
           <div class="meta-item"><div class="n">52</div><div class="l">Hotels</div></div>
           <div class="meta-item"><div class="n">49–62%</div><div class="l">Rate saving</div></div>
           <div class="meta-item"><div class="n">4</div><div class="l">Cities</div></div>
         </div>
-        <div class="card-tags">
-          <span class="tag">Visa-Free</span><span class="tag">Honeymoon</span><span class="tag">MICE</span>
-        </div>
+        <div class="card-tags"><span class="tag">Visa-Free</span><span class="tag">Honeymoon</span><span class="tag">MICE</span></div>
         <div class="card-footer">
           <button class="cta-btn">Open Playbook →</button>
-          <span class="status-dot" style="color:#4ade80">🟢 High Priority</span>
+          <span class="status-dot" style="color:#4ade80">52 hotels</span>
         </div>
       </div>
     </a>
 
     <!-- Bali -->
     <a href="bali.html" class="dest-card c-bali">
-      <div class="card-thumb">
+      <div class="card-img">
+        <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=600&q=80" alt="Bali rice terraces" loading="lazy">
+        <div class="card-img-overlay"></div>
         <div class="card-flag">🇮🇩</div>
-        <div class="card-emoji">🌿</div>
+        <div class="card-badge">💜 High Priority</div>
       </div>
       <div class="card-body">
         <div class="card-name">Bali — 4 Areas</div>
-        <div class="card-tagline">India's #1 long-haul honeymoon destination. Direct flights from Mumbai, Delhi, Bengaluru.</div>
+        <div class="card-tagline">India's #1 long-haul honeymoon destination. Direct flights from 3 cities.</div>
         <div class="card-meta">
           <div class="meta-item"><div class="n">35</div><div class="l">Hotels</div></div>
           <div class="meta-item"><div class="n">50–63%</div><div class="l">Rate saving</div></div>
           <div class="meta-item"><div class="n">4</div><div class="l">Areas</div></div>
         </div>
-        <div class="card-tags">
-          <span class="tag">Honeymoon #1</span><span class="tag">Luxury Villas</span><span class="tag">Wellness</span>
-        </div>
+        <div class="card-tags"><span class="tag">Honeymoon #1</span><span class="tag">Luxury Villas</span><span class="tag">Wellness</span></div>
         <div class="card-footer">
           <button class="cta-btn">Open Playbook →</button>
-          <span class="status-dot" style="color:#c4b5fd">💜 High Priority</span>
+          <span class="status-dot" style="color:#c4b5fd">35 hotels</span>
         </div>
       </div>
     </a>
 
     <!-- Singapore -->
     <a href="singapore.html" class="dest-card c-sg">
-      <div class="card-thumb">
+      <div class="card-img">
+        <img src="https://images.unsplash.com/photo-1565967511849-76a60a516170?w=600&q=80" alt="Singapore Marina Bay Sands" loading="lazy">
+        <div class="card-img-overlay"></div>
         <div class="card-flag">🇸🇬</div>
-        <div class="card-emoji">🦁</div>
+        <div class="card-badge">🟡 Building</div>
       </div>
       <div class="card-body">
         <div class="card-name">Singapore — Gateway City</div>
-        <div class="card-tagline">India's #1 MICE destination in SEA. Universal Studios, Marina Bay Sands, world-class F&B.</div>
+        <div class="card-tagline">India's #1 MICE destination in SEA. Universal Studios, MBS, world-class F&B.</div>
         <div class="card-meta">
           <div class="meta-item"><div class="n">40</div><div class="l">Hotels</div></div>
           <div class="meta-item"><div class="n">45–58%</div><div class="l">Rate saving</div></div>
           <div class="meta-item"><div class="n">5</div><div class="l">Areas</div></div>
         </div>
-        <div class="card-tags">
-          <span class="tag">MICE #1 SEA</span><span class="tag">Family</span><span class="tag">Gateway</span>
-        </div>
+        <div class="card-tags"><span class="tag">MICE #1 SEA</span><span class="tag">Family</span><span class="tag">Gateway</span></div>
         <div class="card-footer">
           <button class="cta-btn">Open Playbook →</button>
-          <span class="status-dot" style="color:#fcd34d">🟡 Building</span>
+          <span class="status-dot" style="color:#fcd34d">40 hotels</span>
         </div>
       </div>
     </a>
 
     <!-- Maldives coming soon -->
-    <div class="dest-card c-coming" style="cursor:default">
-      <div class="card-thumb">
-        <div class="card-flag" style="opacity:0.25">🇲🇻</div>
-        <div class="card-emoji" style="opacity:0.25">🐠</div>
+    <div class="dest-card c-coming is-coming">
+      <div class="card-img">
+        <img src="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=600&q=80" alt="Maldives overwater villas" loading="lazy" style="filter:grayscale(60%) brightness(0.5)">
+        <div class="card-img-overlay"></div>
+        <div class="card-flag" style="opacity:0.4">🇲🇻</div>
+        <div class="card-img-coming"><div class="coming-label">⏳ Coming Q3 2026</div></div>
       </div>
       <div class="card-body">
         <div class="card-name">Maldives</div>
-        <div class="card-tagline">Water villas, overwater bungalows. Indian luxury honeymoon market. Next in pipeline.</div>
+        <div class="card-tagline">Water villas, overwater bungalows. Indian ultra-luxury honeymoon market.</div>
         <div class="card-meta">
           <div class="meta-item"><div class="n" style="color:#374151">~25</div><div class="l">Resorts</div></div>
           <div class="meta-item"><div class="n" style="color:#374151">Q3 2026</div><div class="l">Target</div></div>
         </div>
-        <div class="card-tags"><span class="tag">Honeymoon</span><span class="tag">Ultra-Luxury</span></div>
+        <div class="card-tags"><span class="tag">Honeymoon</span><span class="tag">Ultra-Luxury</span><span class="tag">Water Villas</span></div>
         <div class="card-footer">
           <button class="cta-btn">In Pipeline</button>
-          <span class="coming-pill">⏳ Coming Soon</span>
+          <span class="status-dot" style="color:#374151">Coming soon</span>
         </div>
       </div>
     </div>
 
     <!-- Vietnam coming soon -->
-    <div class="dest-card c-coming" style="cursor:default">
-      <div class="card-thumb">
-        <div class="card-flag" style="opacity:0.25">🇻🇳</div>
-        <div class="card-emoji" style="opacity:0.25">🏮</div>
+    <div class="dest-card c-coming is-coming">
+      <div class="card-img">
+        <img src="https://images.unsplash.com/photo-1557750255-c76072a7aad1?w=600&q=80" alt="Ha Long Bay Vietnam" loading="lazy" style="filter:grayscale(60%) brightness(0.5)">
+        <div class="card-img-overlay"></div>
+        <div class="card-flag" style="opacity:0.4">🇻🇳</div>
+        <div class="card-img-coming"><div class="coming-label">⏳ Coming Q4 2026</div></div>
       </div>
       <div class="card-body">
         <div class="card-name">Vietnam</div>
-        <div class="card-tagline">Ha Long Bay, Da Nang, Hoi An. Emerging Indian market with strong e-visa access.</div>
+        <div class="card-tagline">Ha Long Bay, Da Nang, Hoi An. Emerging Indian market, strong e-visa access.</div>
         <div class="card-meta">
           <div class="meta-item"><div class="n" style="color:#374151">~30</div><div class="l">Hotels</div></div>
           <div class="meta-item"><div class="n" style="color:#374151">Q4 2026</div><div class="l">Target</div></div>
         </div>
-        <div class="card-tags"><span class="tag">Emerging</span><span class="tag">Heritage</span></div>
+        <div class="card-tags"><span class="tag">Emerging</span><span class="tag">Heritage</span><span class="tag">Beach</span></div>
         <div class="card-footer">
           <button class="cta-btn">In Pipeline</button>
-          <span class="coming-pill">⏳ Coming Soon</span>
+          <span class="status-dot" style="color:#374151">Coming soon</span>
         </div>
       </div>
     </div>
