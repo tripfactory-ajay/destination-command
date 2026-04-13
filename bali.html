@@ -1,1 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bali Hotel Contracting Intelligence | TripFactory ORN</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:#f5f0ff;color:#1a1a1a;font-size:14px;line-height:1.5}
+.site-header{position:sticky;top:0;z-index:100;background:#fff;border-bottom:2px solid #7c3aed;box-shadow:0 2px 8px rgba(0,0,0,0.08)}
+.header-inner{max-width:1400px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.logo-badge{background:#7c3aed;color:#fff;font-weight:800;font-size:13px;padding:6px 12px;border-radius:6px;letter-spacing:0.5px}
+.header-title{flex:1;min-width:200px}
+.header-title h1{font-size:16px;font-weight:700;color:#1a1a1a;line-height:1.2}
+.header-title p{font-size:12px;color:#6b7280}
+.header-meta{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.dest-dropdown{padding:6px 10px;border:1.5px solid #7c3aed;border-radius:6px;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:600;color:#7c3aed;background:#fff;cursor:pointer;outline:none}
+.status-pill{background:#ede9fe;color:#7c3aed;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;border:1px solid #c4b5fd}
+.urgency-pill{background:#fef3cd;color:#92400e;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;border:1px solid #f59e0b}
+.tab-nav{background:#fff;border-bottom:1px solid #e5e7eb;position:sticky;top:69px;z-index:99}
+.tab-nav-inner{max-width:1400px;margin:0 auto;padding:0 20px;display:flex;overflow-x:auto;scrollbar-width:none;gap:2px}
+.tab-nav-inner::-webkit-scrollbar{display:none}
+.tab-btn{padding:12px 18px;border:none;background:none;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:600;color:#6b7280;cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap;transition:all 0.2s}
+.tab-btn:hover{color:#7c3aed;background:#f5f0ff}
+.tab-btn.active{color:#7c3aed;border-bottom-color:#7c3aed}
+.main{max-width:1400px;margin:0 auto;padding:24px 20px}
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+.card{background:#fff;border-radius:10px;padding:20px;margin-bottom:16px;border:1px solid #e5e7eb;box-shadow:0 1px 3px rgba(0,0,0,0.06)}
+.card-header{display:flex;align-items:flex-start;gap:12px;margin-bottom:16px}
+.card-icon{font-size:24px;line-height:1}
+.card-title{font-size:16px;font-weight:700;color:#1a1a1a}
+.card-subtitle{font-size:12px;color:#6b7280;margin-top:2px}
+.alert{padding:14px 16px;border-radius:8px;margin-bottom:16px;border-left:4px solid}
+.alert-purple{background:#ede9fe;border-color:#7c3aed;color:#3b0764}
+.alert-warning{background:#fffbeb;border-color:#f59e0b;color:#78350f}
+.alert-info{background:#eff6ff;border-color:#3b82f6;color:#1e3a8a}
+.alert strong{font-weight:700}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:20px}
+.stat-card{background:#fff;border:1px solid #e5e7eb;border-radius:8px;padding:16px;text-align:center}
+.stat-card .num{font-size:26px;font-weight:800;color:#7c3aed;line-height:1}
+.stat-card .lbl{font-size:11px;color:#6b7280;margin-top:4px;font-weight:500}
+.stat-card .sub{font-size:10px;color:#9ca3af;margin-top:2px}
+.table-controls{display:flex;gap:10px;margin-bottom:12px;flex-wrap:wrap;align-items:center}
+.search-input{padding:8px 12px;border:1.5px solid #e5e7eb;border-radius:6px;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;flex:1;min-width:180px;outline:none}
+.search-input:focus{border-color:#7c3aed;box-shadow:0 0 0 2px rgba(124,58,237,0.15)}
+.filter-select{padding:8px 10px;border:1.5px solid #e5e7eb;border-radius:6px;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;background:#fff;outline:none;cursor:pointer}
+.filter-select:focus{border-color:#7c3aed}
+.table-wrap{overflow-x:auto;border-radius:8px;border:1px solid #e5e7eb}
+table{width:100%;border-collapse:collapse;background:#fff}
+thead th{background:#faf8ff;padding:10px 12px;text-align:left;font-size:11px;font-weight:700;color:#374151;text-transform:uppercase;letter-spacing:0.5px;border-bottom:2px solid #e5e7eb;white-space:nowrap}
+tbody td{padding:10px 12px;border-bottom:1px solid #f3f4f6;font-size:13px;vertical-align:top}
+tbody tr:hover{background:#faf8ff}
+tbody tr:last-child td{border-bottom:none}
+.badge{display:inline-block;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:700;white-space:nowrap}
+.badge-purple{background:#ede9fe;color:#5b21b6}
+.badge-green{background:#dcfce7;color:#166534}
+.badge-yellow{background:#fef9c3;color:#854d0e}
+.badge-gray{background:#f3f4f6;color:#374151}
+.badge-pink{background:#fce7f3;color:#9d174d}
+.tier1{background:#fef3c7;color:#92400e;border:1px solid #f59e0b}
+.tier2{background:#ede9fe;color:#5b21b6;border:1px solid #a78bfa}
+.tier3{background:#f0fdf4;color:#166534;border:1px solid #4ade80}
+.modal-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:1000;align-items:center;justify-content:center}
+.modal-overlay.open{display:flex}
+.modal{background:#fff;border-radius:12px;padding:24px;width:90%;max-width:500px;max-height:90vh;overflow-y:auto}
+.modal-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px}
+.modal-title{font-size:16px;font-weight:700}
+.modal-close{background:none;border:none;font-size:20px;cursor:pointer;color:#6b7280;line-height:1;padding:0}
+.form-group{margin-bottom:14px}
+.form-label{display:block;font-size:12px;font-weight:600;color:#374151;margin-bottom:5px}
+.form-control{width:100%;padding:9px 12px;border:1.5px solid #e5e7eb;border-radius:6px;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;outline:none}
+.form-control:focus{border-color:#7c3aed;box-shadow:0 0 0 2px rgba(124,58,237,0.15)}
+.btn{padding:9px 18px;border-radius:6px;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;border:none;transition:all 0.2s}
+.btn-primary{background:#7c3aed;color:#fff}
+.btn-primary:hover{background:#5b21b6}
+.btn-outline{background:#fff;color:#7c3aed;border:1.5px solid #7c3aed}
+.btn-outline:hover{background:#ede9fe}
+.btn-sm{padding:5px 12px;font-size:12px}
+.log-entry{background:#faf8ff;border-radius:6px;padding:10px 12px;margin-top:8px;border-left:3px solid #7c3aed}
+.log-entry .log-date{font-size:11px;color:#6b7280;font-weight:600}
+.log-entry .log-text{font-size:12px;color:#374151;margin-top:3px}
+.opp-banner{background:linear-gradient(135deg,#7c3aed,#9d5ff5);color:#fff;border-radius:12px;padding:24px;margin-bottom:24px}
+.opp-banner h2{font-size:20px;font-weight:800;margin-bottom:8px}
+.opp-banner p{font-size:13px;opacity:0.9;line-height:1.6}
+.opp-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:12px;margin-top:16px}
+.opp-stat{text-align:center;background:rgba(255,255,255,0.15);border-radius:8px;padding:12px}
+.opp-stat .n{font-size:22px;font-weight:800}
+.opp-stat .l{font-size:11px;opacity:0.85;margin-top:2px}
+.offers-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.offer-card{background:#fff;border-radius:10px;border:1px solid #e5e7eb;overflow:hidden;transition:box-shadow 0.2s}
+.offer-card:hover{box-shadow:0 4px 16px rgba(124,58,237,0.15)}
+.offer-header{background:#7c3aed;color:#fff;padding:14px 16px}
+.offer-hotel{font-size:14px;font-weight:700}
+.offer-dest{font-size:11px;opacity:0.8;margin-top:2px}
+.offer-body{padding:14px 16px}
+.offer-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.offer-label{font-size:11px;color:#6b7280;font-weight:600}
+.offer-value{font-size:13px;font-weight:600;color:#1a1a1a}
+.offer-rate{font-size:20px;font-weight:800;color:#7c3aed}
+.offer-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:10px}
+.chain-card{background:#fff;border-radius:10px;border:1px solid #e5e7eb;padding:18px;margin-bottom:14px}
+.chain-name{font-size:15px;font-weight:700;color:#1a1a1a;margin-bottom:4px}
+.chain-properties{font-size:12px;color:#6b7280;margin-bottom:10px}
+.chain-strategy{font-size:13px;color:#374151;line-height:1.6;margin-bottom:10px}
+.contact-template{background:#faf8ff;border-radius:6px;padding:12px;border-left:3px solid #7c3aed;font-size:12px;color:#374151;line-height:1.7;white-space:pre-wrap;font-family:'Plus Jakarta Sans',sans-serif}
+.copy-btn{margin-top:8px;padding:5px 12px;background:#ede9fe;color:#7c3aed;border:1px solid #c4b5fd;border-radius:4px;font-size:11px;font-weight:600;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif}
+.copy-btn:hover{background:#ddd6fe}
+.timeline{position:relative;padding-left:28px}
+.timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:#ddd6fe}
+.timeline-item{position:relative;margin-bottom:20px}
+.timeline-item::before{content:'';position:absolute;left:-24px;top:4px;width:12px;height:12px;border-radius:50%;background:#7c3aed;border:2px solid #fff;box-shadow:0 0 0 2px #7c3aed}
+.timeline-item.future::before{background:#fff;border-color:#7c3aed}
+.timeline-item .period{font-size:11px;font-weight:700;color:#7c3aed;text-transform:uppercase;letter-spacing:0.5px}
+.timeline-item .action{font-size:13px;color:#1a1a1a;margin-top:2px;font-weight:500}
+.timeline-item .detail{font-size:12px;color:#6b7280;margin-top:3px}
+.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+@media(max-width:600px){.stats-grid{grid-template-columns:repeat(2,1fr)}.main{padding:16px 12px}}
+</style>
+</head>
+<body>
 
+<header class="site-header">
+  <div class="header-inner">
+    <span class="logo-badge">ORN</span>
+    <div class="header-title">
+      <h1>🇮🇩 Bali Hotel Contracting Intelligence</h1>
+      <p>TripFactory Product Team · Internal Use Only · Updated April 2026</p>
+    </div>
+    <div class="header-meta">
+      <select class="dest-dropdown" onchange="navigateDest(this.value)">
+        <option value="">🌍 Switch Destination</option>
+        <option value="https://tripfactory-ajay.github.io/destination-uae/">🇦🇪 UAE</option>
+        <option value="thailand-contracting.html">🇹🇭 Thailand</option>
+        <option value="" selected>🇮🇩 Bali (Current)</option>
+      </select>
+      <span class="status-pill">💍 Honeymoon #1</span>
+      <span class="urgency-pill">⚡ Peak Season Approaching</span>
+    </div>
+  </div>
+</header>
+
+<nav class="tab-nav">
+  <div class="tab-nav-inner">
+    <button class="tab-btn active" onclick="showTab('briefing',this)">📋 Briefing</button>
+    <button class="tab-btn" onclick="showTab('hotels',this)">🏨 Hotels (35)</button>
+    <button class="tab-btn" onclick="showTab('flights',this)">✈️ Flights</button>
+    <button class="tab-btn" onclick="showTab('offers',this)">💰 Live Offers</button>
+    <button class="tab-btn" onclick="showTab('groups',this)">🏢 Hotel Groups</button>
+    <button class="tab-btn" onclick="showTab('action',this)">📅 Action Plan</button>
+  </div>
+</nav>
+
+<main class="main">
+
+<!-- TAB: BRIEFING -->
+<div id="tab-briefing" class="tab-panel active">
+  <div class="opp-banner">
+    <h2>🇮🇩 Bali: India's #1 Long-Haul Honeymoon Destination</h2>
+    <p>Bali receives more Indian honeymooners than any other long-haul destination. With direct flights operating from Mumbai, Delhi, and Bengaluru, and the rupiah at a historic low against the rupee, Bali is a standout opportunity for 2026. Luxury villas and resorts are offering exceptional net rates to Indian operators who can deliver consistent honeymoon and FIT volume — this is the moment to build our Bali portfolio.</p>
+    <div class="opp-stats">
+      <div class="opp-stat"><div class="n">#1</div><div class="l">Indian honeymoon destination</div></div>
+      <div class="opp-stat"><div class="n">3x</div><div class="l">YoY Indian demand growth</div></div>
+      <div class="opp-stat"><div class="n">Direct</div><div class="l">Flights from 3 Indian cities</div></div>
+      <div class="opp-stat"><div class="n">IDR low</div><div class="l">Best-ever rupee value</div></div>
+      <div class="opp-stat"><div class="n">35</div><div class="l">Target hotels to contract</div></div>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div>
+      <div class="card">
+        <div class="card-header"><span class="card-icon">🎯</span><div><div class="card-title">Why Bali, Why Now</div><div class="card-subtitle">The opportunity is structural and growing</div></div></div>
+        <div class="alert alert-purple"><strong>Indian honeymoon demand</strong> for Bali has grown 3x in 3 years. Bali's mystical-romantic image is deeply embedded in Indian popular culture via Bollywood and social media.</div>
+        <div class="alert alert-warning" style="margin-bottom:10px"><strong>Direct flights</strong> from Mumbai (Air India), Delhi (IndiGo), and Bengaluru (AirAsia) have removed the connectivity barrier. Bali is now as accessible as Phuket for Indian travellers.</div>
+        <div class="alert alert-info"><strong>IDR at historic lows:</strong> The Indonesian rupiah has weakened significantly vs the Indian rupee, making Bali packages 20–30% cheaper in rupee terms than 3 years ago. A premium villa honeymoon for 2 is now under ₹2L all-in.</div>
+      </div>
+      <div class="card">
+        <div class="card-header"><span class="card-icon">📋</span><div><div class="card-title">Must-Have Contract Terms</div><div class="card-subtitle">Non-negotiables for every Bali hotel contract</div></div></div>
+        <ul style="padding-left:18px;line-height:2.1;font-size:13px;color:#374151">
+          <li><strong>Net rates</strong> — minimum 30% margin honeymoon FIT, 25% groups</li>
+          <li><strong>Private pool villa allotment</strong> — min 2 villas reserved for ORN honeymoon</li>
+          <li><strong>Free cancellation</strong> — 14 days FIT honeymoon, 21 days groups</li>
+          <li><strong>Vegetarian/Jain meals</strong> — daily, available on 24h notice</li>
+          <li><strong>Romance setup</strong> — flower bath, candles, welcome drink at net rate</li>
+          <li><strong>Airport transfer</strong> — included or fixed ORN net rate</li>
+          <li><strong>Hindi/English-speaking</strong> designated host or concierge</li>
+          <li><strong>In-villa dining</strong> — Indian/veg options available in villa</li>
+          <li><strong>Spa credit</strong> — minimum USD 50 per couple for Tier 1 packages</li>
+          <li><strong>FOC policy</strong> — 1 FOC per 10 for groups, applicable to group leader</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="card">
+        <div class="card-header"><span class="card-icon">✨</span><div><div class="card-title">Value-Adds to Demand</div><div class="card-subtitle">What to negotiate in every Bali contract</div></div></div>
+        <ul style="padding-left:18px;line-height:2.1;font-size:13px;color:#374151">
+          <li>🛁 Floral bath setup in private pool villa (signature Bali experience)</li>
+          <li>🌅 Sunset dinner on private beach or villa deck (non-alcoholic option)</li>
+          <li>📸 Professional photography session (1 hour) — rice terraces, temple backdrop</li>
+          <li>🧘 Couples spa treatment (60 min) included in honeymoon package</li>
+          <li>🌹 Daily flower arrangement and room decoration throughout stay</li>
+          <li>🚗 Private driver (full day) — rice terrace, Tanah Lot, Uluwatu temple</li>
+          <li>🍽️ Welcome dinner — Indian/vegetarian menu, candles, ocean/jungle view</li>
+          <li>🏊 Private pool villa upgrade at net rate (from garden room)</li>
+          <li>🎁 Personalised welcome note in Hindi — small but powerful touch</li>
+          <li>🌙 Moonlight dinner setup on private villa terrace</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-header"><span class="card-icon">📍</span><div><div class="card-title">Area Guide for Agents</div><div class="card-subtitle">What to sell and where in Bali</div></div></div>
+        <div style="display:grid;gap:8px">
+          <div style="background:#f5f0ff;border-radius:8px;padding:12px;border-left:3px solid #7c3aed"><div style="font-weight:700;font-size:13px;color:#7c3aed">💍 Seminyak — Honeymoon Glamour</div><div style="font-size:12px;color:#374151;margin-top:3px">Trendy beachfront, luxury villas, rooftop bars, sunset at Ku De Ta. Best for couples wanting chic + beach.</div></div>
+          <div style="background:#fdf4ff;border-radius:8px;padding:12px;border-left:3px solid #a855f7"><div style="font-weight:700;font-size:13px;color:#6b21a8">🌿 Ubud — Spiritual & Wellness</div><div style="font-size:12px;color:#374151;margin-top:3px">Rice terraces, jungle villas, yoga retreats. Best for wellness seekers and offbeat romantic couples.</div></div>
+          <div style="background:#eff6ff;border-radius:8px;padding:12px;border-left:3px solid #3b82f6"><div style="font-weight:700;font-size:13px;color:#1e40af">🏖️ Nusa Dua — Luxury Beach Resort</div><div style="font-size:12px;color:#374151;margin-top:3px">Gated resort area, calm beaches, international chains. Best for families and group travel. Safe, clean, premium.</div></div>
+          <div style="background:#fff7ed;border-radius:8px;padding:12px;border-left:3px solid #f97316"><div style="font-weight:700;font-size:13px;color:#9a3412">🌊 Uluwatu — Cliffside Drama</div><div style="font-size:12px;color:#374151;margin-top:3px">Clifftop infinity pools, dramatic ocean views, Kecak dance at sunset. Best for luxury seekers wanting the iconic Bali shot.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TAB: HOTELS -->
+<div id="tab-hotels" class="tab-panel">
+  <div class="stats-grid">
+    <div class="stat-card"><div class="num">35</div><div class="lbl">Target Hotels</div><div class="sub">4 areas</div></div>
+    <div class="stat-card"><div class="num">10</div><div class="lbl">Seminyak</div><div class="sub">Honeymoon + beach</div></div>
+    <div class="stat-card"><div class="num">9</div><div class="lbl">Ubud</div><div class="sub">Wellness + jungle</div></div>
+    <div class="stat-card"><div class="num">9</div><div class="lbl">Nusa Dua</div><div class="sub">Luxury + family</div></div>
+    <div class="stat-card"><div class="num">7</div><div class="lbl">Uluwatu</div><div class="sub">Cliffside + drama</div></div>
+    <div class="stat-card"><div class="num" id="contracted-count">0</div><div class="lbl">Contracted</div><div class="sub" style="color:#dc2626">Start now!</div></div>
+  </div>
+  <div class="card" style="padding:16px">
+    <div class="table-controls">
+      <input type="text" class="search-input" id="hotel-search" placeholder="🔍 Search hotel name..." oninput="filterHotels()">
+      <select class="filter-select" id="filter-dest" onchange="filterHotels()">
+        <option value="">All Areas</option>
+        <option value="Seminyak">Seminyak</option>
+        <option value="Ubud">Ubud</option>
+        <option value="Nusa Dua">Nusa Dua</option>
+        <option value="Uluwatu">Uluwatu</option>
+      </select>
+      <select class="filter-select" id="filter-tier" onchange="filterHotels()">
+        <option value="">All Tiers</option>
+        <option value="Tier 1">Tier 1 (Luxury)</option>
+        <option value="Tier 2">Tier 2 (Upscale)</option>
+        <option value="Tier 3">Tier 3 (Mid)</option>
+      </select>
+      <select class="filter-select" id="filter-status" onchange="filterHotels()">
+        <option value="">All Status</option>
+        <option value="Not Started">Not Started</option>
+        <option value="In Progress">In Progress</option>
+        <option value="Contracted">Contracted</option>
+      </select>
+      <span id="hotel-count" style="font-size:12px;color:#6b7280;white-space:nowrap">Showing 35 hotels</span>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Hotel / Villa</th><th>Area</th><th>Tier</th><th>Stars</th><th>Crisis Rate</th><th>Normal Rate</th><th>Saving</th><th>Veg/Jain Meals</th><th>Pool Villa</th><th>Status</th><th>Action</th></tr></thead>
+        <tbody id="hotel-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- TAB: FLIGHTS -->
+<div id="tab-flights" class="tab-panel">
+  <div class="alert alert-purple"><strong>✈️ Direct flights now operating</strong> from Mumbai, Delhi, and Bengaluru to Bali (DPS). The connectivity gap that held back Indian Bali demand has closed — flight time is now comparable to Maldives.</div>
+  <div class="stats-grid">
+    <div class="stat-card"><div class="num">3</div><div class="lbl">Direct Routes</div><div class="sub">India to Bali</div></div>
+    <div class="stat-card"><div class="num">5</div><div class="lbl">Airlines</div><div class="sub">Serving India–Bali</div></div>
+    <div class="stat-card"><div class="num">~5.5h</div><div class="lbl">Direct Flight</div><div class="sub">Mumbai/Delhi to DPS</div></div>
+    <div class="stat-card"><div class="num">₹20,000</div><div class="lbl">From Fare (OW)</div><div class="sub">Average low season</div></div>
+  </div>
+  <div class="card" style="margin-top:16px">
+    <div class="table-controls">
+      <input type="text" class="search-input" id="flight-search" placeholder="🔍 Search city or airline..." oninput="filterFlights()">
+      <select class="filter-select" id="filter-airline" onchange="filterFlights()">
+        <option value="">All Airlines</option>
+        <option value="Air India">Air India</option>
+        <option value="IndiGo">IndiGo</option>
+        <option value="AirAsia">AirAsia</option>
+        <option value="Singapore Airlines">Singapore Airlines</option>
+        <option value="Garuda">Garuda Indonesia</option>
+      </select>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Indian City</th><th>Destination</th><th>Airlines</th><th>Frequency</th><th>Avg Fare (OW)</th><th>Flight Time</th><th>Status</th><th>Notes</th></tr></thead>
+        <tbody id="flight-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+  <div class="grid-2" style="margin-top:16px">
+    <div class="alert alert-info"><strong>Honeymoon packages</strong> — Lead with direct Mumbai/Delhi routes on Air India and IndiGo. Build "flight + pool villa" packages with airport transfer included for a seamless, premium experience.</div>
+    <div class="alert alert-warning"><strong>Connecting via Singapore or KL</strong> adds 2–4 hours but opens lower price points. AirAsia via KL is the budget option. Always factor layover time into itinerary planning and package pricing.</div>
+  </div>
+</div>
+
+<!-- TAB: OFFERS -->
+<div id="tab-offers" class="tab-panel">
+  <div class="alert alert-warning"><strong>⏰ Low-season crisis rates valid Apr–Sep 2026</strong> — Bali hotels offer 55–65% off rack to fill shoulder season rooms. Lock in allotments now for Indian peak (Oct–Dec 2026).</div>
+  <div class="table-controls">
+    <input type="text" class="search-input" id="offer-search" placeholder="🔍 Search offers..." oninput="filterOffers()">
+    <select class="filter-select" id="filter-offer-dest" onchange="filterOffers()">
+      <option value="">All Areas</option>
+      <option value="Seminyak">Seminyak</option>
+      <option value="Ubud">Ubud</option>
+      <option value="Nusa Dua">Nusa Dua</option>
+      <option value="Uluwatu">Uluwatu</option>
+    </select>
+    <select class="filter-select" id="filter-offer-type" onchange="filterOffers()">
+      <option value="">All Types</option>
+      <option value="Honeymoon">Honeymoon</option>
+      <option value="FIT">FIT</option>
+      <option value="Group">Group</option>
+      <option value="Wellness">Wellness</option>
+    </select>
+  </div>
+  <div class="offers-grid" id="offers-grid" style="margin-top:16px"></div>
+</div>
+
+<!-- TAB: HOTEL GROUPS -->
+<div id="tab-groups" class="tab-panel">
+  <div class="alert alert-info"><strong>Strategy:</strong> Bali has a mix of independent luxury villas and international chains. Unlike UAE/Thailand, the best Bali properties often need direct relationships. However, chains like Aman, Four Seasons, and Alila have regional offices that unlock multiple Bali properties in one deal.</div>
+  <div id="groups-container"></div>
+</div>
+
+<!-- TAB: ACTION PLAN -->
+<div id="tab-action" class="tab-panel">
+  <div class="opp-banner" style="margin-bottom:24px">
+    <h2>📅 18-Month Bali Contracting Roadmap</h2>
+    <p>Bali is year-round but Indian peak (Oct–Dec, coinciding with Diwali and wedding season) requires allotments booked by July 2026. Luxury villas sell out 6 months ahead for peak dates — relationships must be built now.</p>
+  </div>
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title" style="margin-bottom:16px;font-size:15px">🚀 Phase 1: Rapid Contracting (Now → Aug 2026)</div>
+      <div class="timeline">
+        <div class="timeline-item"><div class="period">Week 1–2 · April 2026</div><div class="action">Outreach to Aman, Four Seasons, Alila regional teams</div><div class="detail">These three chains control 8 of our top target properties. One regional call unlocks multiple Bali hotels. Target: 3 chain calls confirmed.</div></div>
+        <div class="timeline-item"><div class="period">Week 3–4 · April 2026</div><div class="action">Seminyak luxury villas — top 6 properties</div><div class="detail">The Layar, COMO Uma Seminyak, W Bali, Katamama, The Legian, Alaya Resort. These are hotels Indian honeymooners request by name.</div></div>
+        <div class="timeline-item"><div class="period">Week 5–6 · May 2026</div><div class="action">Ubud jungle resorts — 5 key properties</div><div class="detail">Four Seasons Bali at Sayan, Capella Ubud, Komaneka at Bisma, Alila Ubud, COMO Shambhala. Wellness and spiritual segment.</div></div>
+        <div class="timeline-item"><div class="period">Week 7–8 · May 2026</div><div class="action">Uluwatu cliff resorts + Nusa Dua luxury</div><div class="detail">Bulgari Resort, Alila Villas Uluwatu, Anantara Uluwatu. Plus Grand Hyatt Bali, St Regis Bali, Mulia Bali for groups.</div></div>
+        <div class="timeline-item future"><div class="period">June–July 2026</div><div class="action">Package build + allotment pre-block for peak</div><div class="detail">Build 6 signature Bali honeymoon packages. Pre-block 50 villa-nights across top properties for Oct–Dec 2026 Indian peak.</div></div>
+        <div class="timeline-item future"><div class="period">August 2026</div><div class="action">Bali honeymoon campaign launch</div><div class="detail">Target newly-engaged Indian couples via Instagram and wedding platforms. Target ₹1.5Cr bookings in first 30 days.</div></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title" style="margin-bottom:16px;font-size:15px">📈 Phase 2: Scale & Specialise (Sep 2026 → Sep 2027)</div>
+      <div class="timeline">
+        <div class="timeline-item future"><div class="period">Sep–Dec 2026</div><div class="action">Indian peak activation — Diwali + wedding season</div><div class="detail">Honeymoon packages for Oct–Dec 2026. Target post-wedding travel from Indian metro markets. Sell out 150+ villa-nights across portfolio.</div></div>
+        <div class="timeline-item future"><div class="period">Jan–Mar 2027</div><div class="action">Wellness retreat packages — off-peak premium</div><div class="detail">Bali's Jan–Mar low season is ideal for wellness tourism. Build COMO Shambhala and Kayon Resort packages for Indian wellness seekers.</div></div>
+        <div class="timeline-item future"><div class="period">Apr–Jun 2027</div><div class="action">Group travel expansion — family and corporate</div><div class="detail">Add Nusa Dua properties for family groups (Westin, Grand Hyatt). Build corporate retreat packages for Bengaluru/Mumbai tech companies.</div></div>
+        <div class="timeline-item future"><div class="period">Jul–Sep 2027</div><div class="action">Lombok + Nusa Penida extension</div><div class="detail">Add Lombok (The Oberoi Beach Resort) and Nusa Penida day trips to differentiate Bali packages from competitor offerings.</div></div>
+      </div>
+      <div style="background:#f5f0ff;border-radius:8px;padding:16px;margin-top:16px">
+        <div style="font-weight:700;font-size:14px;margin-bottom:12px;color:#1a1a1a">🎯 KPIs to Track</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:12px">
+          <div style="background:#fff;padding:10px;border-radius:6px;text-align:center"><div style="font-size:18px;font-weight:800;color:#7c3aed">35</div><div style="color:#6b7280">Hotels to contract</div></div>
+          <div style="background:#fff;padding:10px;border-radius:6px;text-align:center"><div style="font-size:18px;font-weight:800;color:#7c3aed">₹1.5Cr</div><div style="color:#6b7280">Month 1 booking target</div></div>
+          <div style="background:#fff;padding:10px;border-radius:6px;text-align:center"><div style="font-size:18px;font-weight:800;color:#7c3aed">30%+</div><div style="color:#6b7280">Min net margin honeymoon</div></div>
+          <div style="background:#fff;padding:10px;border-radius:6px;text-align:center"><div style="font-size:18px;font-weight:800;color:#7c3aed">6</div><div style="color:#6b7280">Signature packages</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<!-- CONTACT MODAL -->
+<div class="modal-overlay" id="contact-modal">
+  <div class="modal">
+    <div class="modal-header">
+      <div><div class="modal-title" id="modal-hotel-name">Log Contact</div><div style="font-size:12px;color:#6b7280;margin-top:2px" id="modal-hotel-dest"></div></div>
+      <button class="modal-close" onclick="closeModal()">×</button>
+    </div>
+    <div class="form-group"><label class="form-label">Contact Person Name</label><input type="text" class="form-control" id="contact-name" placeholder="e.g. I Wayan Sujana — Sales Manager"></div>
+    <div class="form-group"><label class="form-label">Email Address</label><input type="email" class="form-control" id="contact-email" placeholder="sales@resort.com"></div>
+    <div class="form-group"><label class="form-label">Phone / WhatsApp</label><input type="text" class="form-control" id="contact-phone" placeholder="+62 361 XXX XXX"></div>
+    <div class="form-group"><label class="form-label">Status</label>
+      <select class="form-control" id="contact-status">
+        <option value="Not Started">Not Started</option>
+        <option value="In Progress">In Progress — First Contact Made</option>
+        <option value="In Progress">In Progress — Rates Requested</option>
+        <option value="In Progress">In Progress — Contract Under Review</option>
+        <option value="Contracted">Contracted ✅</option>
+      </select>
+    </div>
+    <div class="form-group"><label class="form-label">Notes / Log Entry</label><textarea class="form-control" id="contact-notes" rows="3" placeholder="What was discussed? Next steps?"></textarea></div>
+    <div style="display:flex;gap:10px;justify-content:flex-end">
+      <button class="btn btn-outline" onclick="closeModal()">Cancel</button>
+      <button class="btn btn-primary" onclick="saveContact()">💾 Save Log</button>
+    </div>
+    <div id="contact-history" style="margin-top:16px"></div>
+  </div>
+</div>
+
+<script>
+const HOTELS=[
+  // SEMINYAK (10)
+  {name:"The Layar Private Villas",dest:"Seminyak",tier:"Tier 1",stars:"5",crisis:"$280",normal:"$680",saving:"59%",meals:"Yes",villa:"Private Pool",status:"Not Started",chain:"Independent"},
+  {name:"COMO Uma Seminyak",dest:"Seminyak",tier:"Tier 1",stars:"5",crisis:"$250",normal:"$600",saving:"58%",meals:"Yes",villa:"Pool Suite",status:"Not Started",chain:"COMO"},
+  {name:"W Bali Seminyak",dest:"Seminyak",tier:"Tier 1",stars:"5",crisis:"$220",normal:"$520",saving:"58%",meals:"Yes",villa:"Wow Villa",status:"Not Started",chain:"Marriott"},
+  {name:"Katamama Seminyak",dest:"Seminyak",tier:"Tier 1",stars:"5",crisis:"$300",normal:"$720",saving:"58%",meals:"Yes",villa:"Private Pool",status:"Not Started",chain:"Independent"},
+  {name:"The Legian Seminyak",dest:"Seminyak",tier:"Tier 1",stars:"5",crisis:"$240",normal:"$580",saving:"59%",meals:"Yes",villa:"Suite",status:"Not Started",chain:"Independent"},
+  {name:"Alaya Resort Seminyak",dest:"Seminyak",tier:"Tier 2",stars:"5",crisis:"$160",normal:"$360",saving:"56%",meals:"Yes",villa:"Pool Villa",status:"Not Started",chain:"Independent"},
+  {name:"Anantara Seminyak Bali",dest:"Seminyak",tier:"Tier 2",stars:"5",crisis:"$170",normal:"$380",saving:"55%",meals:"Yes",villa:"Pool Suite",status:"Not Started",chain:"Anantara"},
+  {name:"The Oberoi Beach Resort Seminyak",dest:"Seminyak",tier:"Tier 2",stars:"5",crisis:"$180",normal:"$400",saving:"55%",meals:"Yes",villa:"Villa",status:"Not Started",chain:"Oberoi"},
+  {name:"Seminyak Beach Resort",dest:"Seminyak",tier:"Tier 3",stars:"4",crisis:"$90",normal:"$185",saving:"51%",meals:"On Request",villa:"No",status:"Not Started",chain:"Independent"},
+  {name:"The Layar Studio Villas",dest:"Seminyak",tier:"Tier 3",stars:"4",crisis:"$110",normal:"$220",saving:"50%",meals:"Yes",villa:"Pool",status:"Not Started",chain:"Independent"},
+  // UBUD (9)
+  {name:"Four Seasons Bali at Sayan",dest:"Ubud",tier:"Tier 1",stars:"5",crisis:"$380",normal:"$900",saving:"58%",meals:"Yes",villa:"River Suite",status:"Not Started",chain:"Four Seasons"},
+  {name:"Capella Ubud",dest:"Ubud",tier:"Tier 1",stars:"5",crisis:"$420",normal:"$1,000",saving:"58%",meals:"Yes",villa:"Tent Villa",status:"Not Started",chain:"Capella"},
+  {name:"Komaneka at Bisma",dest:"Ubud",tier:"Tier 1",stars:"5",crisis:"$280",normal:"$660",saving:"58%",meals:"Yes",villa:"Pool Villa",status:"Not Started",chain:"Komaneka"},
+  {name:"COMO Shambhala Estate",dest:"Ubud",tier:"Tier 1",stars:"5",crisis:"$350",normal:"$820",saving:"57%",meals:"Yes",villa:"Retreat Villa",status:"Not Started",chain:"COMO"},
+  {name:"Alila Ubud",dest:"Ubud",tier:"Tier 2",stars:"5",crisis:"$200",normal:"$460",saving:"57%",meals:"Yes",villa:"Pool Villa",status:"Not Started",chain:"Alila"},
+  {name:"Komaneka at Tanggayuda",dest:"Ubud",tier:"Tier 2",stars:"5",crisis:"$220",normal:"$500",saving:"56%",meals:"Yes",villa:"Pool Villa",status:"Not Started",chain:"Komaneka"},
+  {name:"Kayon Jungle Resort",dest:"Ubud",tier:"Tier 2",stars:"5",crisis:"$180",normal:"$400",saving:"55%",meals:"Yes",villa:"Pool Villa",status:"Not Started",chain:"Independent"},
+  {name:"Bisma Eight Ubud",dest:"Ubud",tier:"Tier 2",stars:"5",crisis:"$160",normal:"$350",saving:"54%",meals:"Yes",villa:"Pool Suite",status:"Not Started",chain:"Independent"},
+  {name:"Ubud Village Resort",dest:"Ubud",tier:"Tier 3",stars:"4",crisis:"$85",normal:"$175",saving:"51%",meals:"Yes",villa:"No",status:"Not Started",chain:"Independent"},
+  // NUSA DUA (9)
+  {name:"St Regis Bali Resort",dest:"Nusa Dua",tier:"Tier 1",stars:"5",crisis:"$280",normal:"$660",saving:"58%",meals:"Yes",villa:"Pool Villa",status:"Not Started",chain:"Marriott"},
+  {name:"Mulia Resort Nusa Dua",dest:"Nusa Dua",tier:"Tier 1",stars:"5",crisis:"$260",normal:"$600",saving:"57%",meals:"Yes",villa:"The Mulia Villa",status:"Not Started",chain:"Independent"},
+  {name:"The Ritz-Carlton Bali",dest:"Nusa Dua",tier:"Tier 1",stars:"5",crisis:"$240",normal:"$560",saving:"57%",meals:"Yes",villa:"Ocean Villa",status:"Not Started",chain:"Marriott"},
+  {name:"Sofitel Bali Nusa Dua",dest:"Nusa Dua",tier:"Tier 2",stars:"5",crisis:"$160",normal:"$350",saving:"54%",meals:"Yes",villa:"Pool Villa",status:"Not Started",chain:"Accor"},
+  {name:"Grand Hyatt Bali",dest:"Nusa Dua",tier:"Tier 2",stars:"5",crisis:"$150",normal:"$330",saving:"55%",meals:"Yes",villa:"No",status:"Not Started",chain:"Hyatt"},
+  {name:"Westin Resort Nusa Dua",dest:"Nusa Dua",tier:"Tier 2",stars:"5",crisis:"$140",normal:"$300",saving:"53%",meals:"Yes",villa:"No",status:"Not Started",chain:"Marriott"},
+  {name:"Ayodya Resort Bali",dest:"Nusa Dua",tier:"Tier 2",stars:"5",crisis:"$120",normal:"$260",saving:"54%",meals:"Yes",villa:"No",status:"Not Started",chain:"Independent"},
+  {name:"Novotel Bali Nusa Dua",dest:"Nusa Dua",tier:"Tier 3",stars:"4",crisis:"$80",normal:"$165",saving:"52%",meals:"Yes",villa:"No",status:"Not Started",chain:"Accor"},
+  {name:"Courtyard Bali Nusa Dua",dest:"Nusa Dua",tier:"Tier 3",stars:"4",crisis:"$75",normal:"$155",saving:"52%",meals:"Yes",villa:"No",status:"Not Started",chain:"Marriott"},
+  // ULUWATU (7)
+  {name:"Bulgari Resort Bali",dest:"Uluwatu",tier:"Tier 1",stars:"5",crisis:"$600",normal:"$1,500",saving:"60%",meals:"Yes",villa:"Ocean Villa",status:"Not Started",chain:"Bulgari"},
+  {name:"Alila Villas Uluwatu",dest:"Uluwatu",tier:"Tier 1",stars:"5",crisis:"$420",normal:"$1,000",saving:"58%",meals:"Yes",villa:"Pool Villa",status:"Not Started",chain:"Alila"},
+  {name:"Anantara Uluwatu Bali",dest:"Uluwatu",tier:"Tier 1",stars:"5",crisis:"$320",normal:"$760",saving:"58%",meals:"Yes",villa:"Cliff Villa",status:"Not Started",chain:"Anantara"},
+  {name:"Kempinski Ungasan Bali",dest:"Uluwatu",tier:"Tier 1",stars:"5",crisis:"$280",normal:"$660",saving:"58%",meals:"Yes",villa:"Pool Villa",status:"Not Started",chain:"Kempinski"},
+  {name:"Six Senses Uluwatu",dest:"Uluwatu",tier:"Tier 1",stars:"5",crisis:"$380",normal:"$900",saving:"58%",meals:"Yes",villa:"Ocean Villa",status:"Not Started",chain:"Six Senses"},
+  {name:"Banyan Tree Ungasan",dest:"Uluwatu",tier:"Tier 2",stars:"5",crisis:"$220",normal:"$500",saving:"56%",meals:"Yes",villa:"Pool Villa",status:"Not Started",chain:"Banyan Tree"},
+  {name:"Jumana Bali Ungasan",dest:"Uluwatu",tier:"Tier 2",stars:"5",crisis:"$180",normal:"$400",saving:"55%",meals:"Yes",villa:"Villa",status:"Not Started",chain:"Independent"},
+];
+
+const FLIGHTS=[
+  {city:"Mumbai",dest:"Bali (DPS)",airlines:"Air India (direct), AirAsia (via KL)",freq:"5x weekly direct",fare:"₹20,000–38,000",time:"5h 30m direct",status:"Active",notes:"Best route for honeymoon packages — direct, premium carrier"},
+  {city:"Delhi",dest:"Bali (DPS)",airlines:"IndiGo (direct, seasonal), Air India (via Singapore)",freq:"3–4x weekly",fare:"₹22,000–42,000",time:"6h direct",status:"Active",notes:"Strong demand from North Indian couples"},
+  {city:"Bengaluru",dest:"Bali (DPS)",airlines:"AirAsia (via KL), Singapore Airlines (via SIN)",freq:"Daily via connections",fare:"₹18,000–35,000",time:"7h 30m via KL",status:"Active",notes:"IT professional and young couple market — price sensitive"},
+  {city:"Chennai",dest:"Bali (DPS)",airlines:"Singapore Airlines (via SIN), AirAsia (via KL)",freq:"Daily via connections",fare:"₹17,000–32,000",time:"7h via SIN",status:"Active",notes:"Connecting via Singapore preferred for comfort"},
+  {city:"Hyderabad",dest:"Bali (DPS)",airlines:"AirAsia (via KL), Singapore Airlines (via SIN)",freq:"Daily via connections",fare:"₹19,000–36,000",time:"7h 30m",status:"Active",notes:"Growing IT sector demand for Bali"},
+  {city:"Kolkata",dest:"Bali (DPS)",airlines:"Garuda Indonesia (via Jakarta), AirAsia (via KL)",freq:"4x weekly",fare:"₹18,000–33,000",time:"6h via Jakarta",status:"Active",notes:"Garuda via Jakarta is the most direct eastern India routing"},
+  {city:"Ahmedabad",dest:"Bali (DPS)",airlines:"Air India (via Mumbai), AirAsia (via KL)",freq:"Via connections",fare:"₹24,000–44,000",time:"8h+",status:"Active",notes:"High honeymooner demand from Gujarat — often book via Mumbai"},
+];
+
+const OFFERS=[
+  {hotel:"Bulgari Resort Bali",dest:"Uluwatu",type:"Honeymoon",rate:"$560/night",saving:"63% off rack",validity:"Apr–Sep 2026",capacity:"2 pax",includes:"All meals, spa, butler, photography session, floral bath",tags:["Honeymoon","Ultra-Luxury","Uluwatu"]},
+  {hotel:"Capella Ubud",dest:"Ubud",type:"Honeymoon",rate:"$390/night",saving:"61% off rack",validity:"Apr–Sep 2026",capacity:"2 pax",includes:"All meals, jungle trek, spa, river views, romantic setup",tags:["Honeymoon","Ultra-Luxury","Ubud"]},
+  {hotel:"Four Seasons Sayan",dest:"Ubud",type:"Honeymoon",rate:"$350/night",saving:"61% off rack",validity:"May–Sep 2026",capacity:"2 pax",includes:"Breakfast, yoga class, spa credit $100, river suite",tags:["Honeymoon","Luxury","Ubud"]},
+  {hotel:"The Layar Private Villas",dest:"Seminyak",type:"Honeymoon",rate:"$260/night",saving:"62% off rack",validity:"Apr–Sep 2026",capacity:"2 pax",includes:"Breakfast, private pool villa, butler, floral bath, sunset dinner",tags:["Honeymoon","Luxury","Seminyak"]},
+  {hotel:"Alila Villas Uluwatu",dest:"Uluwatu",type:"Honeymoon",rate:"$390/night",saving:"61% off rack",validity:"May–Sep 2026",capacity:"2 pax",includes:"Breakfast, pool villa, Kecak dance access, couples spa",tags:["Honeymoon","Luxury","Uluwatu"]},
+  {hotel:"COMO Shambhala Estate",dest:"Ubud",type:"Wellness",rate:"$320/night",saving:"61% off rack",validity:"Apr–Aug 2026",capacity:"2–4 pax",includes:"3 meals, wellness programme, yoga, spa treatments, detox menu",tags:["Wellness","Luxury","Ubud"]},
+  {hotel:"Anantara Seminyak",dest:"Seminyak",type:"FIT",rate:"$155/night",saving:"59% off rack",validity:"Apr–Sep 2026",capacity:"2–10 pax",includes:"Breakfast, pool suite, Indian veg menu, airport transfer",tags:["FIT","Seminyak","Indian Food"]},
+  {hotel:"Anantara Uluwatu",dest:"Uluwatu",type:"Honeymoon",rate:"$295/night",saving:"61% off rack",validity:"May–Sep 2026",capacity:"2 pax",includes:"Breakfast, cliff villa, sunset cocktail, photography, spa",tags:["Honeymoon","Luxury","Uluwatu"]},
+  {hotel:"St Regis Bali",dest:"Nusa Dua",type:"Group",rate:"$250/night",saving:"62% off rack",validity:"May–Sep 2026",capacity:"20–80 pax",includes:"Breakfast, butler service, Indian food, group transfers",tags:["Group","Nusa Dua","Luxury"]},
+  {hotel:"Grand Hyatt Bali",dest:"Nusa Dua",type:"Group",rate:"$135/night",saving:"59% off rack",validity:"Apr–Sep 2026",capacity:"20–150 pax",includes:"Breakfast, 5 pools, meeting room, Indian buffet on request",tags:["Group","Nusa Dua","MICE"]},
+  {hotel:"Sofitel Bali Nusa Dua",dest:"Nusa Dua",type:"FIT",rate:"$145/night",saving:"59% off rack",validity:"May–Sep 2026",capacity:"2–20 pax",includes:"Breakfast, beach club, pool villa upgrade, veg meals",tags:["FIT","Nusa Dua","Accor"]},
+  {hotel:"Banyan Tree Ungasan",dest:"Uluwatu",type:"Honeymoon",rate:"$200/night",saving:"60% off rack",validity:"Apr–Sep 2026",capacity:"2 pax",includes:"Breakfast, infinity pool villa, spa treatment, sunset dinner",tags:["Honeymoon","Luxury","Uluwatu"]},
+  {hotel:"Komaneka at Bisma",dest:"Ubud",type:"Wellness",rate:"$255/night",saving:"61% off rack",validity:"May–Sep 2026",capacity:"2–8 pax",includes:"Breakfast, rice terrace views, yoga, spa, jungle walk",tags:["Wellness","Ubud","Luxury"]},
+];
+
+const GROUPS=[
+  {name:"Aman Resorts (Bali)",logo:"🏛️",props:"2 Bali properties: Amandari (Ubud), Amanusa (Nusa Dua). Ultra-luxury, ultra-private.",contact:"Global Sales — India & South Asia: reservations@aman.com | Singapore HQ: +65 6887 3338",strategy:"Aman is the pinnacle of Bali luxury — aspirational for top-end Indian honeymooners and ultra-HNI FIT. They are selective about operator relationships but value consistent premium volume. Lead with the top 0.1% Indian couple segment. Position ORN as the gateway to India's ultra-premium outbound market. Do not lead with rates — lead with vision and client profile.",template:`Dear [Name] at Aman,
+
+I'm reaching out from TripFactory/ORN — India's leading premium travel platform managing curated experiences for India's top outbound travellers.
+
+We are seeing unprecedented demand from Indian HNI and honeymooner clients for ultra-luxury Bali experiences, and Aman is the only name our premium clients request. We believe there is a significant opportunity to build a dedicated India programme across Amandari and Amanusa.
+
+We would like to discuss:
+• A preferred operator arrangement for ORN's premium India segment
+• Dedicated allotment for peak Indian honeymoon season (Oct–Dec 2026)
+• Co-curated package for Indian HNI couples (butler, private dining, photography)
+
+We are happy to fly to Singapore or Bali for a meeting at your convenience.
+
+Warm regards,
+[Name] | [Phone]`},
+  {name:"Four Seasons / Alila (IHG)",logo:"🌿",props:"Bali: Four Seasons at Sayan (Ubud), Four Seasons at Jimbaran Bay. Alila Ubud, Alila Villas Uluwatu, Alila Seminyak.",contact:"Director of Sales South Asia — IHG Luxury & Lifestyle: luxury.india@ihg.com | Mumbai GSO: +91 22 XXXX XXXX",strategy:"IHG's luxury brands (Four Seasons managed + Alila owned) give you 5 of the most requested Bali properties in one relationship. Four Seasons Sayan is the #1 Ubud honeymoon hotel for Indian couples. One IHG Luxury & Lifestyle South Asia deal covers all 5. Ask for a combined India Market Agreement with volume thresholds across the portfolio.",template:`Dear [Name] at IHG Luxury & Lifestyle,
+
+I'm writing from TripFactory/ORN — India's top B2B platform with 8,000+ agents and growing HNI direct clientele.
+
+Four Seasons Bali at Sayan and the Alila collection are consistently our most-requested Bali properties. With direct flights from Mumbai and Delhi to Bali now operating and Indian demand up 3x, we are ready to build a serious India programme.
+
+We'd like to discuss a combined India Market Agreement covering:
+• Four Seasons at Sayan + Jimbaran Bay — honeymoon and wellness FIT
+• Alila Ubud, Uluwatu, Seminyak — across all tiers of the honeymoon market
+• Group rates for Alila Villas Uluwatu — MICE and incentive travel
+
+Target: 500 room-nights across the portfolio in the first year. Can we speak this week?
+
+Best regards,
+[Name] | [Phone]`},
+  {name:"Anantara / Minor Hotels (Bali)",logo:"🌺",props:"Bali: Anantara Seminyak Bali Resort, Anantara Uluwatu Bali Resort. Plus Avani and NH brands on the island.",contact:"Director of Sales — South Asia: southasia.sales@minorhotels.com | +66 2 365 8000",strategy:"Minor Hotels' Anantara brand is well-recognised by Indian travellers from their UAE and Thailand presence — a significant advantage. Indian agents already trust the brand. Position this as extending the India–Anantara relationship from UAE/Thailand into Bali. Ask for a multi-destination preferred operator agreement across all three markets.",template:`Dear [Name] at Minor Hotels,
+
+Greetings from TripFactory/ORN — we are already working with Anantara properties in UAE and Thailand and are now building our Bali portfolio.
+
+The Anantara brand is trusted and recognised by our Indian agent network — we want to extend this relationship to Bali. Indian demand for Bali is up 3x and both Seminyak and Uluwatu are top searches from our platform.
+
+We would like to explore:
+• A multi-destination preferred operator agreement (UAE + Thailand + Bali)
+• Honeymoon net rates for Anantara Seminyak and Uluwatu
+• Combined volume thresholds across all Anantara destinations for better terms
+
+This is a natural extension of our existing relationship. Can we schedule a call this week?
+
+Best regards,
+[Name] | [Phone]`},
+  {name:"Marriott International (Bali)",logo:"🔷",props:"Bali: St Regis Bali, W Bali Seminyak, The Ritz-Carlton Bali, Westin Nusa Dua, Sheraton Bali, Courtyard Bali, Marriott Bali Nusa Dua.",contact:"Area Director of Sales — South Asia (Bali): Contact via GSO India Mumbai office",strategy:"Marriott controls 7 Bali properties across all price points — from Courtyard for groups to St Regis for ultra-luxury honeymooners. One preferred operator agreement covers the full range. Lead with W Bali for young couples, St Regis for luxury honeymoon, Westin for family groups, and Courtyard for MICE budget. Ask for Bonvoy points inclusion in packages as a differentiator.",template:`Dear [Name] at Marriott International,
+
+I'm writing from TripFactory/ORN — India's leading B2B platform.
+
+With Indian demand for Bali growing 3x and direct flights now operating, we are building our Bali portfolio urgently. Marriott's properties in Bali cover every segment of our Indian clientele — from young couples at W Bali to luxury honeymooners at St Regis and family groups at Westin Nusa Dua.
+
+We would like to explore a Preferred Operator Agreement covering Marriott International Bali properties, targeting:
+• 1,000+ room-nights in Year 1 across all brands
+• FIT honeymoon rates — St Regis, Ritz-Carlton, W Bali
+• Group rates — Westin, Sheraton, Courtyard for MICE and family travel
+
+Can your India GSO team connect us with the Bali commercial director for a joint call?
+
+Best regards,
+[Name] | [Phone]`},
+  {name:"COMO Hotels (Bali)",logo:"🧘",props:"Bali: COMO Uma Seminyak, COMO Shambhala Estate (Ubud). Wellness-focused luxury.",contact:"Global Sales — India: sales@comohotels.com | Singapore HQ: +65 6593 8888",strategy:"COMO is the #1 wellness brand in Bali and globally. Indian wellness and honeymoon travellers are increasingly seeking COMO properties. COMO Shambhala is unique in the world — nothing else like it. One relationship covers both Bali properties. Lead with the wellness angle — Ayurveda-adjacent appeal, Indian vegetarian menus, holistic programming that resonates with Indian buyers.",template:`Dear [Name] at COMO Hotels,
+
+I'm reaching out from TripFactory/ORN — India's top travel platform.
+
+COMO Shambhala Estate is in a category of its own for the Indian wellness traveller — and demand from Indian clients for both Shambhala and Uma Seminyak has grown significantly with Bali's increased accessibility from India.
+
+We would like to discuss a preferred operator arrangement covering:
+• COMO Shambhala — wellness retreat packages for Indian guests (vegetarian menus, holistic programmes)
+• COMO Uma Seminyak — honeymoon and luxury FIT packages
+• Combined India market allotment for peak Oct–Dec 2026 season
+
+We believe COMO and ORN have a natural alignment around wellness and conscious luxury. Can we speak this week?
+
+With warm regards,
+[Name] | [Phone]`},
+];
+
+// ---- RENDER ----
+function renderHotels(data){
+  const tb=document.getElementById('hotel-tbody');
+  tb.innerHTML='';
+  data.forEach(h=>{
+    const stored=getContacts(h.name);
+    const ls=stored.length?stored[stored.length-1].status:h.status;
+    const tc=h.tier==='Tier 1'?'tier1':h.tier==='Tier 2'?'tier2':'tier3';
+    const sc=ls==='Contracted'?'badge-green':ls.includes('Progress')?'badge-yellow':'badge-gray';
+    const villaB=h.villa&&h.villa!=='No'?`<span class="badge badge-purple">✓ ${h.villa}</span>`:'<span class="badge badge-gray">No</span>';
+    tb.innerHTML+=`<tr>
+      <td><strong style="font-size:13px">${h.name}</strong><br><span style="font-size:11px;color:#6b7280">${h.chain}</span></td>
+      <td>${h.dest}</td>
+      <td><span class="badge ${tc}">${h.tier}</span></td>
+      <td>${h.stars}★</td>
+      <td style="color:#7c3aed;font-weight:700">${h.crisis}/night</td>
+      <td style="color:#9ca3af;text-decoration:line-through">${h.normal}</td>
+      <td><span class="badge badge-green">${h.saving} off</span></td>
+      <td>${h.meals==='Yes'?'<span class="badge badge-green">✓ Yes</span>':h.meals==='On Request'?'<span class="badge badge-yellow">On Request</span>':'<span class="badge badge-gray">No</span>'}</td>
+      <td>${villaB}</td>
+      <td><span class="badge ${sc}">${ls}</span></td>
+      <td><button class="btn btn-outline btn-sm" onclick='openModal(${JSON.stringify(h)})'>📝 Log</button></td>
+    </tr>`;
+  });
+  document.getElementById('hotel-count').textContent=`Showing ${data.length} hotels`;
+  const cc=HOTELS.filter(h=>{const s=getContacts(h.name);return s.length&&s[s.length-1].status==='Contracted';}).length;
+  document.getElementById('contracted-count').textContent=cc;
+}
+
+function filterHotels(){
+  const s=document.getElementById('hotel-search').value.toLowerCase();
+  const d=document.getElementById('filter-dest').value;
+  const t=document.getElementById('filter-tier').value;
+  const st=document.getElementById('filter-status').value;
+  renderHotels(HOTELS.filter(h=>{
+    const ls=(()=>{const c=getContacts(h.name);return c.length?c[c.length-1].status:h.status;})();
+    return(!s||h.name.toLowerCase().includes(s))&&(!d||h.dest===d)&&(!t||h.tier===t)&&(!st||ls.includes(st));
+  }));
+}
+
+function renderFlights(data){
+  const tb=document.getElementById('flight-tbody');
+  tb.innerHTML='';
+  data.forEach(f=>{
+    tb.innerHTML+=`<tr>
+      <td><strong>${f.city}</strong></td>
+      <td>${f.dest}</td>
+      <td style="font-size:12px">${f.airlines}</td>
+      <td>${f.freq}</td>
+      <td style="color:#7c3aed;font-weight:600">${f.fare}</td>
+      <td>${f.time}</td>
+      <td><span class="badge badge-green">${f.status}</span></td>
+      <td style="font-size:11px;color:#6b7280">${f.notes}</td>
+    </tr>`;
+  });
+}
+
+function filterFlights(){
+  const s=document.getElementById('flight-search').value.toLowerCase();
+  const a=document.getElementById('filter-airline').value;
+  renderFlights(FLIGHTS.filter(f=>(!s||f.city.toLowerCase().includes(s)||f.airlines.toLowerCase().includes(s))&&(!a||f.airlines.includes(a))));
+}
+
+function renderOffers(data){
+  const g=document.getElementById('offers-grid');
+  g.innerHTML=data.length?data.map(o=>`<div class="offer-card">
+    <div class="offer-header"><div class="offer-hotel">${o.hotel}</div><div class="offer-dest">📍 ${o.dest} · ${o.type}</div></div>
+    <div class="offer-body">
+      <div class="offer-row"><span class="offer-label">Net Rate</span><span class="offer-rate">${o.rate}</span></div>
+      <div class="offer-row"><span class="offer-label">Saving vs rack</span><span class="offer-value" style="color:#7c3aed">${o.saving}</span></div>
+      <div class="offer-row"><span class="offer-label">Valid</span><span class="offer-value" style="font-size:12px">${o.validity}</span></div>
+      <div class="offer-row"><span class="offer-label">Capacity</span><span class="offer-value" style="font-size:12px">${o.capacity}</span></div>
+      <div style="font-size:11px;color:#6b7280;margin:8px 0;border-top:1px solid #f3f4f6;padding-top:8px"><strong>Includes:</strong> ${o.includes}</div>
+      <div class="offer-tags">${o.tags.map(t=>`<span class="badge badge-purple">${t}</span>`).join('')}</div>
+    </div>
+  </div>`).join(''):'<div style="color:#6b7280;padding:20px;grid-column:1/-1">No offers match your filters.</div>';
+}
+
+function filterOffers(){
+  const s=document.getElementById('offer-search').value.toLowerCase();
+  const d=document.getElementById('filter-offer-dest').value;
+  const t=document.getElementById('filter-offer-type').value;
+  renderOffers(OFFERS.filter(o=>(!s||o.hotel.toLowerCase().includes(s)||o.tags.join(' ').toLowerCase().includes(s))&&(!d||o.dest===d)&&(!t||o.type===t)));
+}
+
+function renderGroups(){
+  document.getElementById('groups-container').innerHTML=GROUPS.map(g=>`<div class="chain-card">
+    <div class="chain-name">${g.logo} ${g.name}</div>
+    <div class="chain-properties">${g.props}</div>
+    <div style="font-size:12px;color:#7c3aed;margin-bottom:10px">📞 ${g.contact}</div>
+    <div class="chain-strategy">${g.strategy}</div>
+    <div style="font-size:12px;font-weight:600;color:#374151;margin-bottom:6px">📧 Opening Message Template:</div>
+    <div class="contact-template">${g.template}</div>
+    <button class="copy-btn" onclick="copyTpl(this)">📋 Copy Template</button>
+  </div>`).join('');
+}
+
+// ---- MODAL ----
+let currentHotel='';
+function openModal(h){
+  currentHotel=h.name;
+  document.getElementById('modal-hotel-name').textContent=h.name;
+  document.getElementById('modal-hotel-dest').textContent=`📍 ${h.dest} · ${h.tier} · ${h.stars}★`;
+  ['contact-name','contact-email','contact-phone','contact-notes'].forEach(id=>document.getElementById(id).value='');
+  loadHistory();
+  document.getElementById('contact-modal').classList.add('open');
+}
+function closeModal(){document.getElementById('contact-modal').classList.remove('open');}
+function saveContact(){
+  const entry={ts:new Date().toLocaleString(),name:document.getElementById('contact-name').value,email:document.getElementById('contact-email').value,phone:document.getElementById('contact-phone').value,status:document.getElementById('contact-status').value,notes:document.getElementById('contact-notes').value};
+  const k='orn_bali_'+currentHotel;
+  const arr=JSON.parse(localStorage.getItem(k)||'[]');
+  arr.push(entry);localStorage.setItem(k,JSON.stringify(arr));
+  loadHistory();filterHotels();document.getElementById('contact-notes').value='';
+}
+function loadHistory(){
+  const arr=getContacts(currentHotel);
+  const d=document.getElementById('contact-history');
+  d.innerHTML=arr.length?'<div style="font-size:12px;font-weight:600;color:#374151;margin-bottom:8px">📋 Contact History:</div>'+arr.slice().reverse().map(e=>`<div class="log-entry"><div class="log-date">${e.ts} · <strong>${e.status}</strong>${e.name?' · '+e.name:''}</div>${e.email?`<div class="log-text">✉️ ${e.email}${e.phone?' · 📞 '+e.phone:''}</div>`:''}${e.notes?`<div class="log-text">📝 ${e.notes}</div>`:''}</div>`).join(''):'';
+}
+function getContacts(n){return JSON.parse(localStorage.getItem('orn_bali_'+n)||'[]');}
+document.getElementById('contact-modal').addEventListener('click',function(e){if(e.target===this)closeModal();});
+
+// ---- UTILS ----
+function showTab(id,btn){
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  btn.classList.add('active');
+}
+function navigateDest(url){if(url&&url!=='#'&&!url.startsWith('#'))window.open(url,'_blank');}
+function copyTpl(btn){
+  const t=btn.closest('.chain-card').querySelector('.contact-template').textContent;
+  navigator.clipboard.writeText(t).then(()=>{btn.textContent='✅ Copied!';setTimeout(()=>btn.textContent='📋 Copy Template',2000);});
+}
+
+// ---- INIT ----
+renderHotels(HOTELS);
+renderFlights(FLIGHTS);
+renderOffers(OFFERS);
+renderGroups();
+</script>
+</body>
+</html>
